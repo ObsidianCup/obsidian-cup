@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiences — Obsidian Cup</title>
+  <meta name="description" content="Real words from real players. Experiences from the courts of Obsidian Cup." />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Page Hero -->
+  <div class="experiences-hero">
+    <p class="section-label reveal">Real words, real people</p>
+    <h1 class="page-title reveal">From the Courts</h1>
+    <p class="page-subtitle reveal">Players, spectators, referees, visitors, if you were there, your voice belongs here.</p>
+  </div>
+
+  <!-- Experiences Grid -->
+  <div class="experiences-grid" style="padding-bottom: 2rem;">
+
+    <div class="experience-card reveal">
+      <div class="experience-quote-mark">"</div>
+      <p class="experience-text">Playing at the National Stadium was something I never thought would happen at this level. The organisation, the atmosphere — it felt like a real tournament. Obsidian Cup is different.</p>
+      <p class="experience-author">Anonymous Player</p>
+      <p class="experience-tourney">OVASC Season 1</p>
+    </div>
+
+    <div class="experience-card reveal">
+      <div class="experience-quote-mark">"</div>
+      <p class="experience-text">We came in as underdogs and left as champions. The competition was fierce, the court was perfect, and the whole event had a vibe that most professional tournaments don't even achieve.</p>
+      <p class="experience-author">Anonymous Player</p>
+      <p class="experience-tourney">OVC Season 1</p>
+    </div>
+
+    <div class="experience-card reveal">
+      <div class="experience-quote-mark">"</div>
+      <p class="experience-text">It's rare to see someone care this much about getting everything right — the scheduling, the referees, the venue. You can feel the passion behind it. We'll be back next season.</p>
+      <p class="experience-author">Anonymous Player</p>
+      <p class="experience-tourney">OVC Season 1</p>
+    </div>
+
+  </div>
+
+  <div class="divider reveal" style="margin-top:5rem;"><div class="divider-diamond"></div></div>
+
+  <!-- Submit Section -->
+  <section class="submit-experience-section">
+    <p class="section-label reveal">Share yours</p>
+    <h2 class="section-title reveal">Your Experience</h2>
+    <p class="reveal-fade" style="color: var(--silver-dim); font-size: 0.85rem; margin-bottom: 3rem; letter-spacing: 0.05em;">
+      Were you a player, a spectator, a ref, or just someone who came through? We want to hear it.
+    </p>
+    <button class="btn-ghost submit-exp-btn reveal">Share Your Experience</button>
+  </section>
+
+  <!-- Experience Submission Modal -->
+  <div class="modal-overlay" id="experienceModal">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close">×</button>
+      <p class="modal-season">Share Your Experience</p>
+      <h2 class="modal-title" style="font-size:1.6rem; margin-bottom: 2.5rem;">Tell us about your time at Obsidian Cup</h2>
+
+      <form id="expForm" class="exp-modal-form" novalidate>
+
+        <div class="form-group">
+          <label class="form-label" for="expName">Your Name</label>
+          <input type="text" id="expName" class="form-input" placeholder="Full name" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="expEmail">Email Address</label>
+          <input type="email" id="expEmail" class="form-input" placeholder="your@email.com" autocomplete="off" />
+          <span class="form-error" id="expEmailErr"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="expTourney">Tournament</label>
+          <select id="expTourney" class="form-select">
+            <option value="" disabled selected>Which tournament were you at?</option>
+            <option value="ovc_s1">Obsidian Volleyball Cup — Season 1</option>
+            <option value="ovasc_s1">Obsidian Volleyball All Stars Cup — Season 1</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="expMessage">Your Experience</label>
+          <textarea id="expMessage" class="form-textarea" rows="4" placeholder="Tell us about your experience..."></textarea>
+          <div class="char-count" id="charCount">0 / 20 minimum</div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; margin-top:1rem;">
+          <button type="submit" class="btn-ghost">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const textarea = document.getElementById('expMessage');
+      const charCount = document.getElementById('charCount');
+      if (textarea && charCount) {
+        textarea.addEventListener('input', () => {
+          const len = textarea.value.trim().length;
+          charCount.textContent = `${len} / 20 minimum`;
+          charCount.classList.toggle('enough', len >= 20);
+        });
+      }
+    });
+  </script>
+</html>

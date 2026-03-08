@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — Obsidian Cup</title>
+  <meta name="description" content="Register your team for the Obsidian Cup volleyball tournament." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .reg-iframe-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 4rem 10rem;
+    }
+    .reg-iframe-wrap iframe {
+      width: 100%;
+      min-height: 800px;
+      border: none;
+      background: transparent;
+    }
+    .reg-placeholder {
+      border: 1px dashed rgba(192,192,192,0.15);
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+    .reg-placeholder p {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      line-height: 2;
+    }
+    .reg-placeholder code {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: rgba(192,192,192,0.4);
+      letter-spacing: 0.05em;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="registerContent"></div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('registerContent');
+
+      if (!SITE_CONFIG.registrationOpen) {
+        container.innerHTML = `
+          <div class="closed-section">
+            <p class="section-label reveal">Team registration</p>
+            <h1 class="closed-title reveal">Registration Closed</h1>
+            <div class="divider reveal"><div class="divider-diamond"></div></div>
+            <p class="closed-sub reveal-fade">
+              Registration for the next season hasn't opened yet.<br/>
+              Follow <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" style="color:var(--cream); text-decoration:underline;">@obsidiancup</a> to be the first to know when it does.
+            </p>
+            <div style="margin-top:3rem; display:flex; flex-direction:column; align-items:center; gap:1.5rem;" class="reveal">
+              <div class="notify-form" style="justify-content:center;">
+                <div class="notify-input-wrap">
+                  <input type="email" class="notify-input" placeholder="Get notified by email" />
+                </div>
+                <button class="btn-ghost">Notify Me</button>
+                <p class="notify-success">✓ &nbsp;You're on the list.</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="tournaments-hero">
+            <p class="section-label reveal">${SITE_CONFIG.currentSeasonName} — Registration</p>
+            <h1 class="page-title reveal">Register Your Team</h1>
+            <p class="page-subtitle reveal">${SITE_CONFIG.currentSeasonDates}</p>
+          </div>
+          <div class="reg-iframe-wrap reveal">
+            ${SITE_CONFIG.registrationFormUrl
+              ? `<iframe src="${SITE_CONFIG.registrationFormUrl}" title="Registration Form" allowfullscreen></iframe>`
+              : `<div class="reg-placeholder">
+                  <p>Registration form will appear here.</p>
+                  <code>
+                    To activate: open js/config.js and paste your<br/>
+                    Tally or Fillout embed URL into registrationFormUrl
+                  </code>
+                </div>`
+            }
+          </div>
+        `;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal, .reveal-fade').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

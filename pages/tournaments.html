@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournaments — Obsidian Cup</title>
+  <meta name="description" content="Every season of the Obsidian Cup — results, champions, and tournament history." />
+  <meta name="keywords" content="Obsidian Cup tournaments, OVC, OVASC, volleyball Dhaka, Bangladesh volleyball results" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Page Hero -->
+  <div class="tournaments-hero">
+    <p class="section-label reveal">Every battle carved in history</p>
+    <h1 class="page-title reveal">The Seasons</h1>
+    <div class="divider reveal" style="margin-top: 3rem;"><div class="divider-diamond"></div></div>
+  </div>
+
+  <!-- Tournaments Grid -->
+  <div class="tournaments-grid">
+
+    <!-- OVC S1 -->
+    <div class="tournament-card reveal" data-tournament="ovc_s1">
+      <p class="tournament-season">OVC — Season 1 &nbsp;·&nbsp; Interschool</p>
+      <h2 class="tournament-name">Obsidian Volleyball Cup</h2>
+      <div class="tournament-meta">
+        <span><span class="meta-label">Date</span>11th & 12th January 2026</span>
+        <span><span class="meta-label">Venue</span>DBox Sports Complex, Mirpur 12</span>
+        <span><span class="meta-label">Format</span>Boys Interschool &amp; Girls Open Age</span>
+      </div>
+      <div class="tournament-results">
+        <div class="result-row">
+          <span class="result-category">Boys — Champion</span>
+          <span class="result-winner">Galactic Ganjas</span>
+          <span class="result-runner">Runner-up: Nexhai</span>
+        </div>
+        <div class="result-row" style="margin-top:1.2rem;">
+          <span class="result-category">Girls — Champion</span>
+          <span class="result-winner">Pythons</span>
+          <span class="result-runner">Runner-up: Panthers</span>
+        </div>
+      </div>
+      <span class="view-details">View details <span>→</span></span>
+    </div>
+
+    <!-- OVASC S1 -->
+    <div class="tournament-card reveal" data-tournament="ovasc_s1">
+      <p class="tournament-season">OVASC — Season 1 &nbsp;·&nbsp; All Stars</p>
+      <h2 class="tournament-name">Obsidian Volleyball All Stars Cup</h2>
+      <div class="tournament-meta">
+        <span><span class="meta-label">Date</span>6th & 7th February 2026</span>
+        <span><span class="meta-label">Venue</span>Shaheed Noor Hossain National Volleyball Stadium</span>
+        <span><span class="meta-label">Format</span>Boys Open Age</span>
+      </div>
+      <div class="tournament-results">
+        <div class="result-row">
+          <span class="result-category">Boys — Champion</span>
+          <span class="result-winner">Fearless Flyers</span>
+          <span class="result-runner">Runner-up: Dhaka Colonisers</span>
+        </div>
+      </div>
+      <span class="view-details">View details <span>→</span></span>
+    </div>
+
+  </div>
+
+  <!-- Tournament Detail Modal -->
+  <div class="modal-overlay" id="tournamentModal">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close">×</button>
+      <p class="modal-season"></p>
+      <h2 class="modal-title"></h2>
+      <div class="modal-info-block"></div>
+      <div class="modal-divider"></div>
+      <p class="modal-section-title">About this tournament</p>
+      <p class="modal-description modal-info"></p>
+      <div class="modal-divider"></div>
+      <p class="modal-section-title">Results</p>
+      <div class="modal-results-block"></div>
+      <div class="modal-gallery-note">
+        <p>[ Gallery — Photos will be added here ]</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

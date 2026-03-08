@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournament Rules — Obsidian Cup</title>
+  <meta name="description" content="Official tournament rules for Obsidian Cup. Read carefully before registering." />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Page Hero -->
+  <div class="tournaments-hero" style="padding-bottom: 4rem;">
+    <p class="section-label reveal">Read carefully</p>
+    <h1 class="page-title reveal">Tournament Rules</h1>
+    <p class="page-subtitle reveal">You must read and acknowledge the rules before registering</p>
+  </div>
+
+  <!-- Rules Content -->
+  <div class="rules-section">
+
+    <div class="reveal-fade">
+      <h3>1. Eligibility</h3>
+      <p>All participating players must meet the eligibility criteria specified for the tournament category (interschool age restrictions for OVC, open age for OVASC). Team managers or captains are responsible for ensuring all players are eligible.</p>
+
+      <h3>2. Team Composition</h3>
+      <p>Teams must register a minimum of 10 and a maximum of 12 players. A valid team roster must be submitted during registration with identification documents for each player.</p>
+
+      <h3>3. Identification</h3>
+      <p>Each player must provide a valid scanned copy of one of the following: National ID Card, Passport, or current institution Student ID. Failure to provide valid identification will result in disqualification of the player or team.</p>
+
+      <h3>4. Match Rules</h3>
+      <p>All matches will follow standard FIVB volleyball rules unless otherwise specified. The tournament committee reserves the right to modify rules for specific rounds and will communicate any changes in advance.</p>
+
+      <h3>5. Conduct</h3>
+      <p>All players, coaches, and team representatives must conduct themselves with respect and sportsmanship at all times. Any form of unsportsmanlike conduct, verbal abuse, or physical altercation will result in immediate disqualification.</p>
+
+      <h3>6. Punctuality</h3>
+      <p>Teams must be present at the venue at least 30 minutes before their scheduled match. Failure to appear within 15 minutes of the scheduled match time will result in a forfeit.</p>
+
+      <h3>7. Registration & Payment</h3>
+      <p>Registration is only confirmed upon successful payment via bKash and verification by the tournament committee. Slots are allocated on a first-come, first-served basis. Payment not confirmed within 48 hours of submission will result in the slot being released.</p>
+
+      <h3>8. Photography & Media</h3>
+      <p>By participating in Obsidian Cup, players and teams consent to being photographed and filmed during the tournament. Media may be used for promotional purposes on official Obsidian Cup channels.</p>
+
+      <h3>9. Committee Decision</h3>
+      <p>The tournament committee's decisions on all matters are final. Any disputes must be raised formally through the official team representative and will be addressed by the committee.</p>
+
+      <h3>10. Changes & Updates</h3>
+      <p>Obsidian Cup reserves the right to make changes to the schedule, venue, or rules. All registered teams will be notified via their registered contact information and through the official Instagram @obsidiancup.</p>
+    </div>
+
+    <div class="divider reveal" style="margin: 3rem 0;"><div class="divider-diamond"></div></div>
+
+    <!-- PDF Placeholder -->
+    <div class="rules-pdf-box reveal">
+      <p>[ Official Rules PDF — Upload your PDF here ]</p>
+      <p style="margin-top: 0.5rem; font-size: 0.62rem; color: rgba(192,192,192,0.25);">Replace this box with a PDF embed or download link</p>
+    </div>
+
+    <!-- Acknowledgement -->
+    <label class="rules-acknowledge reveal">
+      <input type="checkbox" class="rules-checkbox" id="rulesCheck" />
+      <span class="rules-acknowledge-text">
+        I have carefully read and understood all tournament rules and agree to abide by them. I confirm that my team meets all eligibility requirements.
+      </span>
+    </label>
+
+    <div style="text-align:center; margin-bottom: 6rem;" class="reveal">
+      <a href="register.html" class="btn-ghost btn-proceed" id="proceedBtn">
+        Proceed to Registration
+      </a>
+      <p class="proceed-hint" id="proceedHint">Read and acknowledge the rules above to continue</p>
+    </div>
+
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const checkbox = document.getElementById('rulesCheck');
+      const proceedBtn = document.getElementById('proceedBtn');
+      const proceedHint = document.getElementById('proceedHint');
+      if (checkbox && proceedBtn) {
+        checkbox.addEventListener('change', () => {
+          const checked = checkbox.checked;
+          proceedBtn.classList.toggle('enabled', checked);
+          if (proceedHint) proceedHint.classList.toggle('hidden', checked);
+        });
+      }
+
+      // Char count for experience form
+      const textarea = document.getElementById('expMessage');
+      const charCount = document.getElementById('charCount');
+      if (textarea && charCount) {
+        textarea.addEventListener('input', () => {
+          const len = textarea.value.trim().length;
+          charCount.textContent = `${len} / 20 minimum`;
+          charCount.classList.toggle('enough', len >= 20);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fixtures — Obsidian Cup</title>
+  <meta name="description" content="Tournament fixtures, schedules, and brackets for Obsidian Cup." />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <div id="fixturesContent"></div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('fixturesContent');
+
+      if (!SITE_CONFIG.tournamentActive) {
+        container.innerHTML = `
+          <div class="closed-section">
+            <p class="section-label reveal">Live fixtures</p>
+            <h1 class="closed-title reveal">No Active Tournament</h1>
+            <div class="divider reveal"><div class="divider-diamond"></div></div>
+            <p class="closed-sub reveal-fade">
+              Follow <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" style="color:var(--cream); text-decoration:underline;">@obsidiancup</a> on Instagram for fixture updates, match schedules, and live results.
+            </p>
+            <div style="margin-top:3rem;" class="reveal">
+              <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" class="btn-ghost">Follow on Instagram</a>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="tournaments-hero">
+            <p class="section-label reveal">${SITE_CONFIG.currentSeasonName}</p>
+            <h1 class="page-title reveal">Fixtures</h1>
+            <p class="page-subtitle reveal">${SITE_CONFIG.currentSeasonDates} &nbsp;·&nbsp; ${SITE_CONFIG.currentVenue}</p>
+          </div>
+          <div style="max-width:900px; margin: 0 auto; padding: 0 4rem 10rem;">
+            <div style="border: 1px dashed rgba(192,192,192,0.15); padding: 4rem; text-align:center;">
+              <p style="font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--silver-dim);">
+                [ Add your fixture schedule, group tables, and bracket here ]
+              </p>
+            </div>
+          </div>
+        `;
+      }
+
+      // Re-run reveal observer on newly added elements
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal, .reveal-fade').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>
