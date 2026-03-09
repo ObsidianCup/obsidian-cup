@@ -67,6 +67,7 @@ function injectFooter() {
       <a href="${p('pages/about.html')}">About</a>
       <a href="${p('pages/experiences.html')}">Experiences</a>
       <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a>
       <a href="${p('pages/about.html')}#contact">Contact</a>
     </div>
     <p class="footer-copy">© 2026 Obsidian Cup &mdash; All Rights Reserved</p>
