@@ -11,10 +11,10 @@
   --black-mid: #101010;
   --black-card: #111111;
   --cream: #f5f0e8;
-  --cream-dim: rgba(245, 240, 232, 0.7);
+  --cream-dim: rgba(245, 240, 232, 0.85);
   --silver: #c0c0c0;
-  --silver-dim: rgba(192, 192, 192, 0.4);
-  --silver-faint: rgba(192, 192, 192, 0.12);
+  --silver-dim: rgba(192, 192, 192, 0.65);
+  --silver-faint: rgba(192, 192, 192, 0.18);
   --gold: rgba(212, 175, 95, 0.6);
   --gold-faint: rgba(212, 175, 95, 0.15);
   --border-top: rgba(200, 200, 200, 0.15);
@@ -461,7 +461,7 @@ section::before {
   font-size: 0.55rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(192,192,192,0.25);
+  color: rgba(192,192,192,0.55);
   opacity: 0;
   transition: opacity 0.6s ease;
   z-index: 2;
@@ -558,14 +558,14 @@ section::before {
   font-size: 0.54rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(192,192,192,0.25);
+  color: rgba(192,192,192,0.55);
   opacity: 0;
   transition: opacity 0.7s ease;
   z-index: 2;
   pointer-events: none;
 }
 .hero-meta.visible { opacity: 1; }
-.hero-meta-dot { color: rgba(212,175,95,0.38); }
+.hero-meta-dot { color: rgba(212,175,95,0.65); }
 
 /* Scroll line */
 .hero-scroll-line {
@@ -897,7 +897,7 @@ section::before {
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(192,192,192,0.4);
+  color: rgba(192,192,192,0.65);
 }
 
 .champion-runner {
@@ -913,14 +913,14 @@ section::before {
   font-size: 0.55rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(192,192,192,0.28);
+  color: rgba(192,192,192,0.58);
   flex-shrink: 0;
 }
 
 .champion-runner-name {
   font-family: var(--font-display);
   font-size: 1.05rem;
-  color: rgba(245,240,232,0.38);
+  color: rgba(245,240,232,0.65);
   font-weight: 400;
 }
 
@@ -1102,7 +1102,7 @@ footer {
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(192, 192, 192, 0.25);
+  color: rgba(192, 192, 192, 0.55);
 }
 
 /* ---- Floating Particles ---- */
@@ -1165,7 +1165,7 @@ footer {
 }
 
 .experience-card:hover {
-  border-color: rgba(192,192,192,0.4);
+  border-color: rgba(192,192,192,0.65);
   box-shadow: 0 0 50px rgba(255,255,255,0.04), 0 15px 30px rgba(0,0,0,0.3);
   transform: translateY(-3px);
 }
@@ -1199,7 +1199,7 @@ footer {
   .experience-card:active,
   .partner-card:active {
     transform: scale(0.98);
-    border-color: rgba(192,192,192,0.4);
+    border-color: rgba(192,192,192,0.65);
     transition: all 0.15s ease;
   }
 }
@@ -1673,7 +1673,7 @@ footer {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(192,192,192,0.25);
+  color: rgba(192,192,192,0.55);
   margin-top: 0.3rem;
 }
 
@@ -1872,7 +1872,7 @@ footer {
 .proceed-hint {
   font-size: 0.62rem;
   letter-spacing: 0.12em;
-  color: rgba(192,192,192,0.3);
+  color: rgba(192,192,192,0.6);
   margin-top: 1rem;
   transition: opacity 0.4s ease;
 }
@@ -1883,7 +1883,7 @@ footer {
 .char-count {
   font-size: 0.6rem;
   letter-spacing: 0.1em;
-  color: rgba(192,192,192,0.3);
+  color: rgba(192,192,192,0.6);
   text-align: right;
   margin-top: 0.4rem;
   transition: color 0.3s ease;
