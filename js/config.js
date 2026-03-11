@@ -8,29 +8,24 @@
 const SITE_CONFIG = {
 
   // ---- SEASON TOGGLES ----
-  // Change to true when a tournament is running
   tournamentActive: false,
-
-  // Change to true when registration is open
-  registrationOpen: false,
-
-  // Change to true to show the Rules page in nav
+  registrationOpen: true,
   rulesVisible: false,
 
-
   // ---- CURRENT SEASON INFO ----
-  // Update these when a new season starts
-  currentSeasonName: "Season 3",
-  currentSeasonDates: "TBA",
-  currentVenue: "TBA",
-  announcementText: "We're cooking. Something big is coming.",
+  currentSeasonName: "Obsidian Volleyball Super Cup",
+  currentSeasonDates: "3rd and 4th April 2026",
+  currentVenue: "Dhaka, Bangladesh",
+  announcementText: "OVC Season 2 and OVASC Season 2. Together for the first time.",
 
-  // ---- REGISTRATION ----
-  // Paste your Tally or Fillout embed URL here when ready
-  registrationFormUrl: "",
+  // ---- REGISTRATION FORMS ----
+  formInterschool: "https://obsidiancup.fillout.com/ovscinterboys",
+  formBoysOpenAge: "https://obsidiancup.fillout.com/ovscboys",
+  formGirlsOpenAge: "https://obsidiancup.fillout.com/ovscgirls",
 
   // ---- CONTACT ----
   instagramUrl: "https://www.instagram.com/obsidiancup/",
+  facebookUrl: "https://www.facebook.com/share/1Cb8jWH5Gy/",
   contactEmail: "obsidiancup.official@gmail.com",
 
 };
