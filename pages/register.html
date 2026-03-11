@@ -4,101 +4,349 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obsidian Cup | Register</title>
-  <meta name="description" content="Register your team for the Obsidian Cup volleyball tournament." />
+  <meta name="description" content="Register your team for Obsidian Volleyball Super Cup. Boys Interschool, Boys Open Age, Girls Open Age." />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    .reg-iframe-wrap {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 4rem 10rem;
-    }
-    .reg-iframe-wrap iframe {
-      width: 100%;
-      min-height: 800px;
-      border: none;
-      background: transparent;
-    }
-    .reg-placeholder {
-      border: 1px dashed rgba(192,192,192,0.15);
-      padding: 5rem 3rem;
+    .reg-hero {
+      padding: 10rem 4rem 5rem;
       text-align: center;
     }
-    .reg-placeholder p {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
+    .reg-event-label {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--silver-dim);
-      line-height: 2;
+      color: rgba(212,175,95,0.6);
+      margin-bottom: 1.2rem;
     }
-    .reg-placeholder code {
+    .reg-event-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .reg-event-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+    .reg-event-meta-item {
+      text-align: center;
+    }
+    .reg-event-meta-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.35);
       display: block;
-      margin-top: 1.5rem;
-      font-size: 0.7rem;
-      color: rgba(192,192,192,0.4);
+      margin-bottom: 0.4rem;
+    }
+    .reg-event-meta-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--cream-dim);
       letter-spacing: 0.05em;
-      font-family: monospace;
+    }
+    .reg-notice {
+      max-width: 600px;
+      margin: 3rem auto 0;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(192,192,192,0.45);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .reg-notice strong {
+      color: rgba(245,240,232,0.6);
+      font-weight: 400;
+    }
+    .reg-notice a {
+      color: rgba(212,175,95,0.7);
+      text-decoration: none;
+    }
+    .reg-notice a:hover { color: rgba(212,175,95,1); }
+
+    /* Category cards */
+    .reg-categories {
+      padding: 4rem 4rem 10rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .reg-categories-label {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.3);
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .reg-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(192,192,192,0.08);
+    }
+    .reg-card {
+      background: var(--black);
+      padding: 3.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+    .reg-card:hover { background: rgba(255,255,255,0.02); }
+    .reg-card-number {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      color: rgba(212,175,95,0.45);
+      margin-bottom: 2rem;
+    }
+    .reg-card-category {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.35);
+      margin-bottom: 1rem;
+    }
+    .reg-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 500;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .reg-card-desc {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(192,192,192,0.45);
+      line-height: 1.85;
+      letter-spacing: 0.03em;
+      flex: 1;
+      margin-bottom: 2.5rem;
+    }
+    .reg-card-rules {
+      margin-bottom: 2.5rem;
+    }
+    .reg-card-rule {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: rgba(192,192,192,0.3);
+      line-height: 2;
+      border-top: 1px solid rgba(192,192,192,0.06);
+      padding: 0.5rem 0;
+    }
+    .reg-card-rule:last-child { border-bottom: 1px solid rgba(192,192,192,0.06); }
+    .reg-card-cta {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream);
+      border: 1px solid rgba(192,192,192,0.2);
+      padding: 1rem 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .reg-card-cta:hover {
+      border-color: rgba(212,175,95,0.5);
+      color: rgba(212,175,95,0.9);
+      box-shadow: 0 0 20px rgba(212,175,95,0.07);
+    }
+
+    /* Payment instructions */
+    .reg-payment {
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(192,192,192,0.07);
+      padding: 6rem 4rem;
+      text-align: center;
+    }
+    .reg-payment-grid {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+    .reg-payment-item {
+      text-align: center;
+    }
+    .reg-payment-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.3);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .reg-payment-value {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--cream-dim);
+    }
+    .reg-payment-note {
+      max-width: 580px;
+      margin: 3rem auto 0;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: rgba(192,192,192,0.38);
+      line-height: 2;
+      letter-spacing: 0.04em;
+    }
+    .reg-payment-note a {
+      color: rgba(212,175,95,0.7);
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .reg-grid { grid-template-columns: 1fr; }
+      .reg-hero { padding: 8rem 2rem 4rem; }
+      .reg-categories { padding: 3rem 2rem 8rem; }
+      .reg-event-meta { gap: 1.5rem; }
+      .reg-payment { padding: 5rem 2rem; }
+      .reg-payment-grid { gap: 2.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <div id="registerContent"></div>
+  <!-- Hero -->
+  <div class="reg-hero">
+    <p class="reg-event-label reveal">Team Registration — Now Open</p>
+    <h1 class="reg-event-name reveal">Obsidian Volleyball<br/>Super Cup</h1>
+    <p class="page-subtitle reveal" style="margin-top:1rem;">OVC Season 2 &nbsp;×&nbsp; OVASC Season 2 &nbsp;·&nbsp; Together for the first time.</p>
+    <div class="reg-event-meta reveal">
+      <div class="reg-event-meta-item">
+        <span class="reg-event-meta-label">Date</span>
+        <span class="reg-event-meta-value">3rd and 4th April 2026</span>
+      </div>
+      <div class="reg-event-meta-item">
+        <span class="reg-event-meta-label">Location</span>
+        <span class="reg-event-meta-value">Dhaka, Bangladesh</span>
+      </div>
+      <div class="reg-event-meta-item">
+        <span class="reg-event-meta-label">Registration Deadline</span>
+        <span class="reg-event-meta-value">27th March 2026</span>
+      </div>
+      <div class="reg-event-meta-item">
+        <span class="reg-event-meta-label">Fee</span>
+        <span class="reg-event-meta-value">3,800 BDT per team</span>
+      </div>
+    </div>
+    <div class="divider reveal" style="margin-top:3rem;"><div class="divider-diamond"></div></div>
+    <p class="reg-notice reveal-fade">
+      Submitting the form does not confirm your slot.<br/>
+      After registering, send <strong>3,800 BDT</strong> via bKash (Send Money) to <strong>01920232715</strong> using your team name as reference.<br/>
+      Then email your transaction ID and screenshot to <a href="mailto:obsidiancup.official@gmail.com">obsidiancup.official@gmail.com</a>.<br/>
+      We will confirm your slot and issue an invoice within 3 days.<br/><br/>
+      <strong>Late registration after 27th March: 4,000 BDT.</strong><br/>
+      Refund policy: 50% refund if written cancellation is emailed at least 24 hours before the event.
+    </p>
+  </div>
+
+  <!-- Category Cards -->
+  <div class="reg-categories">
+    <p class="reg-categories-label reveal">Choose your category</p>
+    <div class="reg-grid">
+
+      <!-- Boys Interschool -->
+      <div class="reg-card reveal">
+        <p class="reg-card-number">01</p>
+        <p class="reg-card-category">Boys</p>
+        <h2 class="reg-card-title">Interschool</h2>
+        <p class="reg-card-desc">For students currently enrolled in school up to Class 12. Mixed school teams welcome. This is where the next generation carves their name.</p>
+        <div class="reg-card-rules">
+          <p class="reg-card-rule">Current school enrollment required</p>
+          <p class="reg-card-rule">Mixed school teams allowed</p>
+          <p class="reg-card-rule">Max age 22 as of 3rd April 2026</p>
+          <p class="reg-card-rule">Min 6, max 12 players</p>
+          <p class="reg-card-rule">Up to 2 liberos per team</p>
+        </div>
+        <a href="https://obsidiancup.fillout.com/ovscinterboys" target="_blank" rel="noopener" class="reg-card-cta">Register Now →</a>
+      </div>
+
+      <!-- Boys Open Age -->
+      <div class="reg-card reveal">
+        <p class="reg-card-number">02</p>
+        <p class="reg-card-category">Boys</p>
+        <h2 class="reg-card-title">Open Age</h2>
+        <p class="reg-card-desc">No age limit. No restrictions. Open to everyone. Step up, show what you're made of, and let the court decide.</p>
+        <div class="reg-card-rules">
+          <p class="reg-card-rule">All ages, no restrictions</p>
+          <p class="reg-card-rule">Valid photo ID required</p>
+          <p class="reg-card-rule">Min 6, max 12 players</p>
+          <p class="reg-card-rule">Up to 2 liberos per team</p>
+          <p class="reg-card-rule">Matching jerseys required</p>
+        </div>
+        <a href="https://obsidiancup.fillout.com/ovscboys" target="_blank" rel="noopener" class="reg-card-cta">Register Now →</a>
+      </div>
+
+      <!-- Girls Open Age -->
+      <div class="reg-card reveal">
+        <p class="reg-card-number">03</p>
+        <p class="reg-card-category">Girls</p>
+        <h2 class="reg-card-title">Open Age</h2>
+        <p class="reg-card-desc">Amateur category, all ages. For the players who show up because they love the game. The court is yours.</p>
+        <div class="reg-card-rules">
+          <p class="reg-card-rule">All ages, amateur only</p>
+          <p class="reg-card-rule">No divisional or national level players</p>
+          <p class="reg-card-rule">Valid photo ID required</p>
+          <p class="reg-card-rule">Min 6, max 12 players</p>
+          <p class="reg-card-rule">Up to 2 liberos per team</p>
+        </div>
+        <a href="https://obsidiancup.fillout.com/ovscgirls" target="_blank" rel="noopener" class="reg-card-cta">Register Now →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Payment Instructions -->
+  <div class="reg-payment">
+    <p class="section-label reveal">After registering</p>
+    <h2 class="section-title reveal">Confirm Your Slot</h2>
+    <div class="divider reveal"><div class="divider-diamond"></div></div>
+    <div class="reg-payment-grid reveal-fade">
+      <div class="reg-payment-item">
+        <span class="reg-payment-label">Step 1</span>
+        <span class="reg-payment-value">Submit the form</span>
+      </div>
+      <div class="reg-payment-item">
+        <span class="reg-payment-label">Step 2</span>
+        <span class="reg-payment-value">Send 3,800 BDT via bKash</span>
+      </div>
+      <div class="reg-payment-item">
+        <span class="reg-payment-label">Step 3</span>
+        <span class="reg-payment-value">Email us your receipt</span>
+      </div>
+      <div class="reg-payment-item">
+        <span class="reg-payment-label">Step 4</span>
+        <span class="reg-payment-value">We confirm your slot</span>
+      </div>
+    </div>
+    <p class="reg-payment-note reveal-fade">
+      bKash Send Money to <strong style="color:rgba(245,240,232,0.6);">01920232715</strong> — use your team name as reference.<br/>
+      Email transaction ID and screenshot to <a href="mailto:obsidiancup.official@gmail.com">obsidiancup.official@gmail.com</a>.<br/>
+      Confirmation and invoice issued within 3 days.<br/><br/>
+      Questions? Reach us on <a href="https://www.instagram.com/obsidiancup/" target="_blank">Instagram</a> or <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank">Facebook</a>.
+    </p>
+  </div>
 
   <script src="../js/config.js"></script>
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('registerContent');
-
-      if (!SITE_CONFIG.registrationOpen) {
-        container.innerHTML = `
-          <div class="closed-section">
-            <p class="section-label reveal">Team registration</p>
-            <h1 class="closed-title reveal">Registration Closed</h1>
-            <div class="divider reveal"><div class="divider-diamond"></div></div>
-            <p class="closed-sub reveal-fade">
-              Registration for the next season hasn't opened yet.<br/>
-              Follow <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" style="color:var(--cream); text-decoration:underline;">@obsidiancup</a> to be the first to know when it does.
-            </p>
-            <div style="margin-top:3rem; display:flex; flex-direction:column; align-items:center; gap:1.5rem;" class="reveal">
-              <div class="notify-form" style="justify-content:center;">
-                <div class="notify-input-wrap">
-                  <input type="email" class="notify-input" placeholder="Get notified by email" />
-                </div>
-                <button class="btn-ghost">Notify Me</button>
-                <p class="notify-success">✓ &nbsp;You're on the list.</p>
-              </div>
-            </div>
-          </div>
-        `;
-      } else {
-        container.innerHTML = `
-          <div class="tournaments-hero">
-            <p class="section-label reveal">${SITE_CONFIG.currentSeasonName} — Registration</p>
-            <h1 class="page-title reveal">Register Your Team</h1>
-            <p class="page-subtitle reveal">${SITE_CONFIG.currentSeasonDates}</p>
-          </div>
-          <div class="reg-iframe-wrap reveal">
-            ${SITE_CONFIG.registrationFormUrl
-              ? `<iframe src="${SITE_CONFIG.registrationFormUrl}" title="Registration Form" allowfullscreen></iframe>`
-              : `<div class="reg-placeholder">
-                  <p>Registration form will appear here.</p>
-                  <code>
-                    To activate: open js/config.js and paste your<br/>
-                    Tally or Fillout embed URL into registrationFormUrl
-                  </code>
-                </div>`
-            }
-          </div>
-        `;
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal, .reveal-fade').forEach(el => observer.observe(el));
-    });
-  </script>
 </body>
 </html>
