@@ -15,7 +15,7 @@ const SITE_CONFIG = {
   // ---- CURRENT SEASON INFO ----
   currentSeasonName: "Obsidian Volleyball Super Cup",
   currentSeasonDates: "3rd and 4th April 2026",
-  currentVenue: "Dhaka, Bangladesh",
+  currentVenue: "Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000",
   announcementText: "OVC Season 2 and OVASC Season 2. Together for the first time.",
 
   // ---- REGISTRATION FORMS ----
