@@ -1,123 +1,104 @@
-# OBSIDIAN CUP — Website Guide
-Carved by Legacy, Crowned in Obsidian
+# Obsidian Cup — Official Website
+
+**Live site:** [obsidiancup.vercel.app](https://obsidiancup.vercel.app)
+
+Bangladesh's premier underground volleyball tournament brand. Home of OVC (Obsidian Volleyball Cup) and OVASC (Obsidian Volleyball All Stars Cup).
 
 ---
 
-## HOW TO PREVIEW YOUR SITE
+## Tech Stack
 
-1. Unzip this folder anywhere on your computer
-2. Open the folder
-3. Double-click `index.html`
-4. Your site opens in your browser — that's it!
-
-To check other pages, just double-click:
-- `pages/tournaments.html`
-- `pages/about.html`
-- `pages/experiences.html`
-- `pages/register.html`
-- `pages/rules.html`
+| Layer | Technology | Why |
+|---|---|---|
+| Markup | HTML5 (semantic) | Clean, accessible structure with proper ARIA roles |
+| Styling | CSS3 with custom properties | No framework overhead, full design control, easy theming via CSS variables |
+| Behaviour | Vanilla JavaScript (ES6+) | No dependencies, fast load, full DOM control |
+| Hosting | Vercel | Free tier, auto-deploys on GitHub push, global CDN |
+| Version Control | GitHub | CI/CD pipeline — every commit auto-deploys |
+| Forms | Fillout.so | Multi-step forms with conditional logic, file uploads, autosave |
+| Analytics | Google Analytics 4 | Real-time visitor tracking |
 
 ---
 
-## HOW TO CONTROL THE SITE
+## Design Decisions
 
-Open `js/config.js` in any text editor (Notepad works fine).
+**Why no framework (React, Vue, etc)?**
+The site is content-driven and mostly static. A JavaScript framework would add significant bundle size with no real benefit. Vanilla JS delivers sub-second load times on mobile connections in Bangladesh.
 
-You'll see these settings:
+**Why Cormorant Garamond + DM Sans?**
+The tournament brand is built on a dark, editorial aesthetic — premium but not corporate. Cormorant Garamond brings a legacy, almost stone-carved quality to headings. DM Sans keeps body text clean and highly readable at small sizes on mobile.
 
-```js
-tournamentActive: false,   // true = shows Fixtures in nav
-registrationOpen: false,   // true = shows registration form
-rulesVisible: false,       // true = shows Rules in nav
-```
+**Why CSS custom properties over a preprocessor?**
+CSS variables are native, require no build step, and allow runtime theming. The bilingual toggle (EN/BN) and any future dark/light switching can be handled purely in JS by swapping variable values — no Sass or Less needed.
 
-**When a new season starts:**
-1. Change `tournamentActive: true` to show Fixtures
-2. Change `registrationOpen: true` to open registration
-3. Change `rulesVisible: true` to show Rules page
-4. Update `currentSeasonName`, `currentSeasonDates`, `currentVenue`
-5. Paste your Tally/Fillout form link into `registrationFormUrl`
-
-**When tournament ends:**
-Set everything back to `false`.
+**Why Vercel over Netlify or GitHub Pages?**
+Vercel's edge network performs better in South Asia than Netlify's free tier. Zero-config deployment and instant preview URLs make iteration fast.
 
 ---
 
-## HOW TO ADD YOUR LOGO
-
-1. Put your logo file (PNG recommended) in the main folder
-2. Open `js/components.js`
-3. Find: `<div class="nav-logo-mark">O</div>`
-4. Replace with: `<img src="your-logo-filename.png" style="height:36px;" alt="Obsidian Cup" />`
-
----
-
-## HOW TO ADD PARTNER LOGOS
-
-1. Put logo files in the main folder
-2. Open `index.html` and `pages/about.html`
-3. Find the partner cards and replace `[Logo coming soon]` text with:
-   `<img src="smc-logo.png" style="max-height:60px; margin: 1rem auto;" alt="SMC Fruity" />`
-
----
-
-## HOW TO ADD A NEW TOURNAMENT
-
-Open `js/main.js` and find `const TOURNAMENTS = {`
-
-Copy one of the existing entries and add your new one:
-
-```js
-ovc_s2: {
-  season: 'OVC — Season 2',
-  name: 'Obsidian Volleyball Cup',
-  type: 'Interschool',
-  date: 'Your dates here',
-  venue: 'Venue name',
-  venueAddress: 'Full address',
-  description: 'About this tournament...',
-  results: [
-    { category: 'Boys', champion: 'Team name', runner: 'Team name' },
-  ]
-},
-```
-
-Then open `pages/tournaments.html` and copy one of the tournament card blocks and update the details.
-
----
-
-## HOW TO DEPLOY (PUT IT ONLINE — FREE)
-
-1. Go to vercel.com and create a free account
-2. Click "Add New Project"
-3. Drag your entire `obsidian-cup` folder into it
-4. Click Deploy
-5. Your site is live! Vercel gives you a free link like `obsidian-cup.vercel.app`
-
-For a custom domain (like `obsidiancup.com`), buy from Namecheap (~$10/year) and connect in Vercel settings.
-
----
-
-## FILE STRUCTURE
+## Project Structure
 
 ```
 obsidian-cup/
-├── index.html          ← Homepage
+├── index.html              # Homepage
+├── 404.html                # Custom error page
+├── assets/
+│   ├── logo-mark.png       # Circular badge logo
+│   ├── logo-wordmark.png   # Wordmark logo
+│   ├── partner-smc.png     # SMC Fruity partner logo
+│   ├── partner-olyve.png   # OLYVE partner logo
+│   ├── favicon.ico         # Browser tab icon
+│   └── apple-touch-icon.png
 ├── css/
-│   └── style.css       ← All styling
+│   └── style.css           # All styles, organised by component
 ├── js/
-│   ├── config.js       ← YOUR CONTROL PANEL — edit this!
-│   ├── components.js   ← Navbar + footer (auto-injected)
-│   └── main.js         ← Animations + interactions
+│   ├── config.js           # Season control panel (no-code edits)
+│   ├── lang.js             # EN/BN bilingual translations
+│   ├── components.js       # Navbar + footer injection
+│   └── main.js             # Animations, interactions, entrance sequences
 └── pages/
     ├── tournaments.html
     ├── about.html
-    ├── experiences.html
-    ├── fixtures.html
     ├── register.html
+    ├── faq.html
+    ├── fixtures.html
     └── rules.html
 ```
 
 ---
 
-Questions? Ask Claude! Just say "I want to change X on my Obsidian Cup website" and paste the relevant file content.
+## Season Management
+
+All season-specific content is controlled from one file: `js/config.js`
+
+```js
+registrationOpen: true,      // shows Register in nav and opens forms
+tournamentActive: true,      // shows Fixtures in nav
+currentSeasonName: "OVSC",   // updates season label site-wide
+currentSeasonDates: "3rd and 4th April 2026",
+```
+
+No other file needs to be touched to open or close a season.
+
+---
+
+## Features
+
+- Cinematic hero entrance animation with curtain lift sequence
+- Bilingual support: English and Bengali, user preference saved to localStorage
+- Countdown timer to registration deadline
+- Impact numbers section showing tournament scale
+- Semantic HTML5 with ARIA roles and labels
+- Keyboard navigable with visible focus states
+- Touch-friendly — all interactive elements minimum 44×44px
+- Lazy loading on all non-critical images
+- Google Analytics 4 integrated
+- Open Graph meta tags for WhatsApp and Facebook sharing
+- Custom 404 page
+- Auto-deploying CI/CD via GitHub + Vercel
+
+---
+
+## Built by
+
+Uriana — founder of Obsidian Cup, Dhaka, Bangladesh. 2026.
