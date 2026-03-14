@@ -24,6 +24,7 @@ function injectNav() {
       <li><a href="${p('index.html')}">Home</a></li>
       <li><a href="${p('pages/tournaments.html')}">Tournaments</a></li>
       <li><a href="${p('pages/about.html')}">About</a></li>
+      <li><a href="${p('pages/faq.html')}">FAQ</a></li>
       ${SITE_CONFIG.tournamentActive ? `<li><a href="${p('pages/fixtures.html')}">Fixtures</a></li>` : ''}
       ${SITE_CONFIG.registrationOpen ? `<li><a href="${p('pages/register.html')}">Register</a></li>` : ''}
       ${SITE_CONFIG.rulesVisible ? `<li><a href="${p('pages/rules.html')}">Rules</a></li>` : ''}
@@ -44,6 +45,7 @@ function injectNav() {
     <a href="${p('index.html')}">Home</a>
     <a href="${p('pages/tournaments.html')}">Tournaments</a>
     <a href="${p('pages/about.html')}">About</a>
+    <a href="${p('pages/faq.html')}">FAQ</a>
     ${SITE_CONFIG.tournamentActive ? `<a href="${p('pages/fixtures.html')}">Fixtures</a>` : ''}
     ${SITE_CONFIG.registrationOpen ? `<a href="${p('pages/register.html')}">Register</a>` : ''}
     ${SITE_CONFIG.rulesVisible ? `<a href="${p('pages/rules.html')}">Rules</a>` : ''}
@@ -63,6 +65,7 @@ function injectFooter() {
     <div class="footer-links">
       <a href="${p('pages/tournaments.html')}">Tournaments</a>
       <a href="${p('pages/about.html')}">About</a>
+      <a href="${p('pages/faq.html')}">FAQ</a>
       <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a>
       <a href="${p('pages/about.html')}#contact">Contact</a>
