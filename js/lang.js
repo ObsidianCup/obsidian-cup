@@ -78,13 +78,13 @@ const TRANSLATIONS = {
     // Hero
     heroEst: "প্রতিষ্ঠিত ২০২৬",
     heroLocation: "ঢাকা · বাংলাদেশ",
-    heroTitle: "অবসিডিয়ান কাপ",
-    heroTagline: "উত্তরাধিকারে খোদাই · অবসিডিয়ানে মুকুট",
+    heroTitle: "Obsidian Cup",
+    heroTagline: "Carved by Legacy · Crowned in Obsidian",
     heroMeta: "বাংলাদেশ · ভলিবল · ০২ সিজন",
 
     // Announcement
     announcedLabel: "এখন ঘোষিত",
-    announcedTitle: "অবসিডিয়ান ভলিবল সুপার কাপ",
+    announcedTitle: "Obsidian Volleyball Super Cup",
     announcedSub: "OVC সিজন ২ × OVASC সিজন ২ · ৩রা ও ৪ঠা এপ্রিল ২০২৬ · শহীদ নূর হোসেন জাতীয় ভলিবল স্টেডিয়াম, পুরানা পল্টন, ঢাকা ১০০০",
     announcedCategories: "বয়েজ ইন্টারস্কুল · বয়েজ ওপেন এজ · গার্লস ওপেন এজ",
     registerBtn: "দল নিবন্ধন করুন →",
@@ -127,7 +127,7 @@ const TRANSLATIONS = {
     openFacebook: "ফেসবুক খুলুন",
 
     // Footer
-    footerTagline: "উত্তরাধিকারে খোদাই, অবসিডিয়ানে মুকুট",
+    footerTagline: "Carved by Legacy, Crowned in Obsidian",
   }
 };
 
