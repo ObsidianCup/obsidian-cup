@@ -2099,6 +2099,23 @@ button:focus-visible {
 /* ---- Responsive lang toggle ---- */
 @media (max-width: 900px) {
   .lang-toggle:not(.lang-toggle-mobile) { display: none; }
+  .lang-toggle-mobile {
+    display: flex !important;
+    margin-top: 2rem;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+  .lang-toggle-mobile .lang-btn {
+    font-size: 0.75rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(192,192,192,0.15);
+    min-height: 44px;
+    min-width: 60px;
+  }
+  .lang-toggle-mobile .lang-btn-active {
+    border-color: rgba(212,175,95,0.4);
+    color: rgba(212,175,95,0.9);
+  }
 }
 @media (min-width: 901px) {
   .lang-toggle-mobile { display: none !important; }
