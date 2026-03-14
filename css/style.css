@@ -1995,3 +1995,111 @@ footer {
   .impact-grid { gap: 2.5rem; }
   .impact-number { font-size: 2.5rem; }
 }
+
+/* ---- Focus States (Keyboard Navigation) ---- */
+:focus-visible {
+  outline: 2px solid rgba(212,175,95,0.7);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(212,175,95,0.7);
+  outline-offset: 4px;
+}
+
+/* ---- Touch Targets (min 44x44px) ---- */
+.btn-ghost,
+.nav-links a,
+.mobile-menu a,
+.back-to-top,
+.modal-close,
+.hamburger,
+.lang-btn {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Language Toggle ---- */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 1.5rem;
+}
+.lang-sep {
+  color: rgba(192,192,192,0.2);
+  font-size: 0.7rem;
+}
+.lang-btn {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(192,192,192,0.45);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  transition: color 0.3s ease;
+  min-height: 44px;
+  min-width: 44px;
+}
+.lang-btn:hover { color: var(--cream); }
+.lang-btn-active {
+  color: rgba(212,175,95,0.8);
+}
+.lang-toggle-mobile {
+  margin: 1.5rem auto 0;
+  justify-content: center;
+}
+
+/* ---- Register Nav CTA Button ---- */
+.nav-register-btn {
+  background: rgba(212,175,95,0.08) !important;
+  border: 1px solid rgba(212,175,95,0.3) !important;
+  color: rgba(212,175,95,0.9) !important;
+  padding: 0.4rem 1.1rem !important;
+  border-radius: 2px;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.2em !important;
+  transition: all 0.3s ease !important;
+}
+.nav-register-btn:hover {
+  background: rgba(212,175,95,0.15) !important;
+  border-color: rgba(212,175,95,0.6) !important;
+  color: rgba(212,175,95,1) !important;
+  box-shadow: 0 0 16px rgba(212,175,95,0.1) !important;
+}
+
+/* ---- Enhanced Button Micro-interactions ---- */
+.btn-ghost {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-ghost:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 24px rgba(192,192,192,0.08);
+}
+.btn-ghost:active {
+  transform: scale(0.98);
+}
+.path-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              background 0.3s ease;
+}
+.path-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* ---- Responsive lang toggle ---- */
+@media (max-width: 900px) {
+  .lang-toggle:not(.lang-toggle-mobile) { display: none; }
+}
+@media (min-width: 901px) {
+  .lang-toggle-mobile { display: none !important; }
+}
