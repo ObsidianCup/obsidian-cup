@@ -3,7 +3,7 @@
    Carved by Legacy, Crowned in Obsidian
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Noto+Sans+Bengali:wght@300;400;500&display=swap');
 
 /* ---- CSS Variables ---- */
 :root {
@@ -2102,4 +2102,52 @@ button:focus-visible {
 }
 @media (min-width: 901px) {
   .lang-toggle-mobile { display: none !important; }
+}
+
+/* ---- Bengali Font ---- */
+:root {
+  --font-bengali: 'Noto Sans Bengali', sans-serif;
+}
+
+/* Apply Bengali font when lang is set to bn */
+html[lang="bn"] .hero-tagline,
+html[lang="bn"] .cooking-sub,
+html[lang="bn"] .path-desc,
+html[lang="bn"] .section-label,
+html[lang="bn"] .page-subtitle,
+html[lang="bn"] .footer-tagline,
+html[lang="bn"] p,
+html[lang="bn"] .nav-links a,
+html[lang="bn"] .mobile-menu a,
+html[lang="bn"] .champion-tourney,
+html[lang="bn"] .champion-runner-label,
+html[lang="bn"] .impact-label,
+html[lang="bn"] .partner-category,
+html[lang="bn"] .partner-logo-note,
+html[lang="bn"] .reg-card-category,
+html[lang="bn"] .reg-card-desc,
+html[lang="bn"] .lang-btn {
+  font-family: var(--font-bengali);
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+/* Bengali headings - use Noto Sans Bengali, keep display sizing */
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3,
+html[lang="bn"] .cooking-title,
+html[lang="bn"] .path-title,
+html[lang="bn"] .champion-name,
+html[lang="bn"] .impact-number,
+html[lang="bn"] .partner-name {
+  font-family: var(--font-bengali);
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+/* Hero title stays as is - it's a brand name kept in English */
+html[lang="bn"] .hero-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
 }
