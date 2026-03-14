@@ -65,6 +65,64 @@ const TRANSLATIONS = {
 
     // Footer
     footerTagline: "Carved by Legacy, Crowned in Obsidian",
+    // About page
+    aboutLabel: "গল্পটি",
+    aboutTitle: "আমাদের গল্প",
+    visionLabel: "আমরা যেদিকে যাচ্ছি",
+    visionTitle: "আমাদের লক্ষ্য",
+    visionQuote: '"আমরা একটি লক্ষ্য নিয়ে শুরু করেছিলাম। আরও অনেক লক্ষ্য বহন করার পরিকল্পনা আছে।"',
+    partnersLabel2: "যারা আগে বিশ্বাস রেখেছিলেন",
+    partnersTitle2: "আমাদের অংশীদার",
+    contactLabel: "যোগাযোগ করুন",
+    contactTitle: "যোগাযোগ",
+
+    // Register page
+    regLabel: "দল নিবন্ধন — এখন খোলা",
+    regTitle: "Obsidian Volleyball\nSuper Cup",
+    regSub: "OVC সিজন ২ × OVASC সিজন ২ · প্রথমবারের মতো একসাথে।",
+    regDeadlineLabel: "নিবন্ধনের শেষ তারিখ",
+    regFeeLabel: "ফি",
+    regCategoryLabel: "আপনার বিভাগ বেছে নিন",
+    regPayLabel: "নিবন্ধনের পরে",
+    regPayTitle: "আপনার স্লট নিশ্চিত করুন",
+
+    // FAQ page
+    faqLabel: "প্রশ্ন আছে?",
+    faqTitle: "প্রশ্নোত্তর",
+    faqSub: "মাঠে আসার আগে যা জানা দরকার।",
+
+    // Tournaments page
+    tourLabel: "ইতিহাসে খোদাই প্রতিটি লড়াই",
+    tourTitle: "সিজনসমূহ",
+    // About page
+    aboutLabel: "The story",
+    aboutTitle: "Our Story",
+    visionLabel: "Where this is going",
+    visionTitle: "The Vision",
+    visionQuote: '"We started with one cause. We plan to carry many more."',
+    partnersLabel2: "Those who believed early",
+    partnersTitle2: "Our Partners",
+    contactLabel: "Get in touch",
+    contactTitle: "Contact",
+
+    // Register page
+    regLabel: "Team Registration — Now Open",
+    regTitle: "Obsidian Volleyball\nSuper Cup",
+    regSub: "OVC Season 2 × OVASC Season 2 · Together for the first time.",
+    regDeadlineLabel: "Registration Deadline",
+    regFeeLabel: "Fee",
+    regCategoryLabel: "Choose your category",
+    regPayLabel: "After registering",
+    regPayTitle: "Confirm Your Slot",
+
+    // FAQ page
+    faqLabel: "Got questions",
+    faqTitle: "FAQ",
+    faqSub: "Everything you need to know before you show up.",
+
+    // Tournaments page
+    tourLabel: "Every battle carved in history",
+    tourTitle: "The Seasons",
   },
 
   bn: {
@@ -128,6 +186,35 @@ const TRANSLATIONS = {
 
     // Footer
     footerTagline: "Carved by Legacy, Crowned in Obsidian",
+    // About page
+    aboutLabel: "The story",
+    aboutTitle: "Our Story",
+    visionLabel: "Where this is going",
+    visionTitle: "The Vision",
+    visionQuote: '"We started with one cause. We plan to carry many more."',
+    partnersLabel2: "Those who believed early",
+    partnersTitle2: "Our Partners",
+    contactLabel: "Get in touch",
+    contactTitle: "Contact",
+
+    // Register page
+    regLabel: "Team Registration — Now Open",
+    regTitle: "Obsidian Volleyball\nSuper Cup",
+    regSub: "OVC Season 2 × OVASC Season 2 · Together for the first time.",
+    regDeadlineLabel: "Registration Deadline",
+    regFeeLabel: "Fee",
+    regCategoryLabel: "Choose your category",
+    regPayLabel: "After registering",
+    regPayTitle: "Confirm Your Slot",
+
+    // FAQ page
+    faqLabel: "Got questions",
+    faqTitle: "FAQ",
+    faqSub: "Everything you need to know before you show up.",
+
+    // Tournaments page
+    tourLabel: "Every battle carved in history",
+    tourTitle: "The Seasons",
   }
 };
 
@@ -149,5 +236,13 @@ function setLanguage(lang) {
 
 function initLanguage() {
   const saved = localStorage.getItem('oc_lang') || 'en';
+  // Set lang attr immediately before fonts load to prevent flash
+  document.documentElement.lang = saved === 'bn' ? 'bn' : 'en';
   setLanguage(saved);
 }
+
+// Run immediately so font applies before render
+(function() {
+  const saved = localStorage.getItem('oc_lang') || 'en';
+  document.documentElement.lang = saved === 'bn' ? 'bn' : 'en';
+})();
