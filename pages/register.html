@@ -381,15 +381,26 @@
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>
   <script>
-    // Countdown to 27th March 2026 midnight
     function updateCountdown() {
-      const deadline = new Date('2026-03-27T23:59:59+06:00');
-      const now = new Date();
-      const diff = deadline - now;
+      var deadline = new Date('2026-03-27T23:59:59+06:00');
+      var now = new Date();
+      var diff = deadline - now;
       if (diff <= 0) {
         document.getElementById('cdLabel').textContent = 'Registration deadline has passed — Late fee applies';
-        ['cdDays','cdHours','cdMins'].forEach(id => document.getElementById(id).textContent = '00');
+        document.getElementById('cdDays').textContent = '00';
+        document.getElementById('cdHours').textContent = '00';
+        document.getElementById('cdMins').textContent = '00';
         return;
       }
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff % (1000*60*60*24)) / (10
+      var days = Math.floor(diff / (1000*60*60*24));
+      var hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      var mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+      document.getElementById('cdDays').textContent = String(days).padStart(2,'0');
+      document.getElementById('cdHours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cdMins').textContent = String(mins).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
