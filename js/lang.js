@@ -82,7 +82,7 @@ const TRANSLATIONS = {
     faqGroup3: "Match Day",
     faqGroup4: "Other Questions",
     faq1q1: "Does submitting the form confirm my team's spot?",
-    faq1a1: "No. Submitting the form is only the first step. Your slot is confirmed once we receive your payment and email you an invoice. Send 3,800 BDT via bKash (Send Money) to 01711878945, use your team name as reference, then email your transaction ID and screenshot to obsidiancup.official@gmail.com. We will confirm within 3 days.",
+    faq1a1: "No. Submitting the form is only the first step. Your slot is confirmed once we receive your payment and email you an invoice. Send 3,800 BDT via bKash (Send Money) to 01791341727, use your team name as reference, then email your transaction ID and screenshot to obsidiancup.official&#64;gmail.com. We will confirm within 3 days.",
     faq1q2: "What is the registration deadline?",
     faq1a2: "The deadline is 27th March 2026. Registrations received after this date are subject to a late fee of 4,000 BDT per team, and are subject to slot availability.",
     faq1q3: "Can we change a player after registering?",
@@ -114,7 +114,7 @@ const TRANSLATIONS = {
     faq4q2: "Will photos and videos be taken at the event?",
     faq4a2: "Yes. Obsidian Cup will be photographed and filmed throughout both days. By registering, all players and team members consent to their images and videos being used for tournament documentation and promotional purposes across our social media channels.",
     faq4q3: "How do I contact the organiser?",
-    faq4a3: "Email: obsidiancup.official@gmail.com",
+    faq4a3: "Email: obsidiancup.official&#64;gmail.com",
   },
 
   bn: {
@@ -207,7 +207,7 @@ const TRANSLATIONS = {
     faqGroup3: "ম্যাচ ডে",
     faqGroup4: "অন্যান্য প্রশ্ন",
     faq1q1: "ফর্ম জমা দিলে কি আমার দলের স্লট নিশ্চিত হয়?",
-    faq1a1: "না। ফর্ম জমা দেওয়া শুধু প্রথম ধাপ। আপনার স্লট নিশ্চিত হবে তখনই যখন আমরা আপনার পেমেন্ট পাব এবং একটি ইনভয়েস পাঠাব। bKash (Send Money) এর মাধ্যমে ০১৭১১৮৭৮৯৪৫ নম্বরে ৩,৮০০ টাকা পাঠান, রেফারেন্স হিসেবে আপনার দলের নাম ব্যবহার করুন, তারপর ট্রানজেকশন আইডি ও স্ক্রিনশট obsidiancup.official@gmail.com ঠিকানায় ইমেইল করুন। আমরা ৩ দিনের মধ্যে নিশ্চিত করব।",
+    faq1a1: "না। ফর্ম জমা দেওয়া শুধু প্রথম ধাপ। আপনার স্লট নিশ্চিত হবে তখনই যখন আমরা আপনার পেমেন্ট পাব এবং একটি ইনভয়েস পাঠাব। bKash (Send Money) এর মাধ্যমে ০১৭৯১৩৪১৭২৭ নম্বরে ৩,৮০০ টাকা পাঠান, রেফারেন্স হিসেবে আপনার দলের নাম ব্যবহার করুন, তারপর ট্রানজেকশন আইডি ও স্ক্রিনশট obsidiancup.official&#64;gmail.com ঠিকানায় ইমেইল করুন। আমরা ৩ দিনের মধ্যে নিশ্চিত করব।",
     faq1q2: "নিবন্ধনের শেষ তারিখ কখন?",
     faq1a2: "শেষ তারিখ ২৭ মার্চ ২০২৬। এর পরে নিবন্ধন করলে প্রতি দলের জন্য ৪,০০০ টাকা লেট ফি প্রযোজ্য হবে এবং স্লটের প্রাপ্যতার উপর নির্ভর করবে।",
     faq1q3: "নিবন্ধনের পরে কি কোনো খেলোয়াড় পরিবর্তন করা যাবে?",
@@ -239,7 +239,7 @@ const TRANSLATIONS = {
     faq4q2: "ইভেন্টে কি ছবি ও ভিডিও তোলা হবে?",
     faq4a2: "হ্যাঁ। Obsidian Cup উভয় দিন জুড়ে ফটোগ্রাফ ও চিত্রায়ন করা হবে। নিবন্ধন করে সকল খেলোয়াড় ও দলের সদস্যরা তাদের ছবি ও ভিডিও টুর্নামেন্ট ডকুমেন্টেশন ও প্রচারমূলক উদ্দেশ্যে ব্যবহারের সম্মতি দিচ্ছেন।",
     faq4q3: "আয়োজকের সাথে কীভাবে যোগাযোগ করব?",
-    faq4a3: "ইমেইল: obsidiancup.official@gmail.com",
+    faq4a3: "ইমেইল: obsidiancup.official&#64;gmail.com",
   }
 };
 
