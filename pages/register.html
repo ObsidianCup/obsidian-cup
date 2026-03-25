@@ -8,218 +8,44 @@
   <link rel="icon" href="../assets/favicon.ico" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta property="og:title" content="Register — Obsidian Cup" />
-  <meta property="og:description" content="Register your team for Obsidian Volleyball Super Cup. 3rd and 4th April 2026, Dhaka." />
+  <meta property="og:description" content="Register your team for Obsidian Volleyball Super Cup — 3rd and 4th April 2026, Dhaka." />
   <meta property="og:image" content="https://obsidiancup.vercel.app/assets/logo-mark.png" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/register.html" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    .reg-hero {
-      padding: 10rem 4rem 5rem;
-      text-align: center;
-    }
-    .reg-event-label {
-      font-family: var(--font-body);
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(212,175,95,0.6);
-      margin-bottom: 1.2rem;
-    }
-    .reg-event-name {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 600;
-      color: var(--cream);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-    .reg-event-meta {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-      margin-top: 1.8rem;
-    }
-    .reg-event-meta-item {
-      text-align: center;
-    }
-    .reg-event-meta-label {
-      font-family: var(--font-body);
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(192,192,192,0.35);
-      display: block;
-      margin-bottom: 0.4rem;
-    }
-    .reg-event-meta-value {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      color: var(--cream-dim);
-      letter-spacing: 0.05em;
-    }
-    .reg-notice {
-      max-width: 600px;
-      margin: 3rem auto 0;
-      font-family: var(--font-body);
-      font-size: 0.78rem;
-      color: rgba(192,192,192,0.45);
-      line-height: 1.9;
-      letter-spacing: 0.04em;
-      text-align: center;
-    }
-    .reg-notice strong {
-      color: rgba(245,240,232,0.6);
-      font-weight: 400;
-    }
-    .reg-notice a {
-      color: rgba(212,175,95,0.7);
-      text-decoration: none;
-    }
+    .reg-hero { padding: 10rem 4rem 5rem; text-align: center; }
+    .reg-event-label { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(212,175,95,0.6); margin-bottom: 1.2rem; }
+    .reg-event-name { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); font-weight: 600; color: var(--cream); line-height: 1.1; margin-bottom: 1.5rem; }
+    .reg-event-meta { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 1.8rem; }
+    .reg-event-meta-item { text-align: center; }
+    .reg-event-meta-label { font-family: var(--font-body); font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(192,192,192,0.35); display: block; margin-bottom: 0.4rem; }
+    .reg-event-meta-value { font-family: var(--font-display); font-size: 1rem; color: var(--cream-dim); letter-spacing: 0.05em; }
+    .reg-notice { max-width: 600px; margin: 3rem auto 0; font-family: var(--font-body); font-size: 0.78rem; color: rgba(192,192,192,0.55); line-height: 1.9; letter-spacing: 0.04em; text-align: center; }
+    .reg-notice strong { color: rgba(245,240,232,0.7); font-weight: 500; }
+    .reg-notice a { color: rgba(212,175,95,0.7); text-decoration: none; }
     .reg-notice a:hover { color: rgba(212,175,95,1); }
-
-    /* Category cards */
-    .reg-categories {
-      padding: 4rem 4rem 10rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .reg-categories-label {
-      font-family: var(--font-body);
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(192,192,192,0.3);
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .reg-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: rgba(192,192,192,0.08);
-    }
-    .reg-card {
-      background: var(--black);
-      padding: 3.5rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      transition: background 0.3s ease;
-      text-decoration: none;
-    }
+    .reg-categories { padding: 4rem 4rem 10rem; max-width: 1100px; margin: 0 auto; }
+    .reg-categories-label { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(192,192,192,0.3); text-align: center; margin-bottom: 4rem; }
+    .reg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(192,192,192,0.08); }
+    .reg-card { background: var(--black); padding: 3.5rem 2.5rem; display: flex; flex-direction: column; text-decoration: none; transition: background 0.3s ease; }
     .reg-card:hover { background: rgba(255,255,255,0.02); }
-    .reg-card-number {
-      font-family: var(--font-body);
-      font-size: 0.55rem;
-      letter-spacing: 0.35em;
-      color: rgba(212,175,95,0.45);
-      margin-bottom: 2rem;
-    }
-    .reg-card-category {
-      font-family: var(--font-body);
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(192,192,192,0.55);
-      margin-bottom: 1rem;
-    }
-    .reg-card-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 500;
-      color: var(--cream);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-    .reg-card-desc {
-      font-family: var(--font-body);
-      font-size: 0.78rem;
-      color: rgba(192,192,192,0.65);
-      line-height: 1.85;
-      letter-spacing: 0.03em;
-      flex: 1;
-      margin-bottom: 2.5rem;
-    }
-    .reg-card-rules {
-      margin-bottom: 2.5rem;
-    }
-    .reg-card-rule {
-      font-family: var(--font-body);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      color: rgba(192,192,192,0.65);
-      line-height: 2;
-      border-top: 1px solid rgba(192,192,192,0.08);
-      padding: 0.5rem 0;
-    }
-    .reg-card-rule:last-child { border-bottom: 1px solid rgba(192,192,192,0.06); }
-    .reg-card-cta {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--cream);
-      border: 1px solid rgba(192,192,192,0.2);
-      padding: 1rem 2rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    .reg-card-cta:hover {
-      border-color: rgba(212,175,95,0.5);
-      color: rgba(212,175,95,0.9);
-      box-shadow: 0 0 20px rgba(212,175,95,0.07);
-    }
-
-    /* Payment instructions */
-    .reg-payment {
-      background: rgba(255,255,255,0.02);
-      border-top: 1px solid rgba(192,192,192,0.07);
-      padding: 6rem 4rem;
-      text-align: center;
-    }
-    .reg-payment-grid {
-      display: flex;
-      justify-content: center;
-      gap: 5rem;
-      flex-wrap: wrap;
-      margin-top: 3rem;
-    }
-    .reg-payment-item {
-      text-align: center;
-    }
-    .reg-payment-label {
-      font-family: var(--font-body);
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(192,192,192,0.3);
-      display: block;
-      margin-bottom: 0.6rem;
-    }
-    .reg-payment-value {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--cream-dim);
-    }
-    .reg-payment-note {
-      max-width: 580px;
-      margin: 3rem auto 0;
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      color: rgba(192,192,192,0.38);
-      line-height: 2;
-      letter-spacing: 0.04em;
-    }
-    .reg-payment-note a {
-      color: rgba(212,175,95,0.7);
-      text-decoration: none;
-    }
-
+    .reg-card-number { font-family: var(--font-body); font-size: 0.55rem; letter-spacing: 0.35em; color: rgba(212,175,95,0.45); margin-bottom: 2rem; }
+    .reg-card-category { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(192,192,192,0.55); margin-bottom: 1rem; }
+    .reg-card-title { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1.5rem; }
+    .reg-card-desc { font-family: var(--font-body); font-size: 0.78rem; color: rgba(192,192,192,0.65); line-height: 1.85; letter-spacing: 0.03em; flex: 1; margin-bottom: 2.5rem; }
+    .reg-card-rules { margin-bottom: 2.5rem; }
+    .reg-card-rule { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.08em; color: rgba(192,192,192,0.65); line-height: 2; border-top: 1px solid rgba(192,192,192,0.08); padding: 0.5rem 0; }
+    .reg-card-rule:last-child { border-bottom: 1px solid rgba(192,192,192,0.08); }
+    .reg-card-cta { display: inline-block; font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(192,192,192,0.2); padding: 1rem 2rem; text-align: center; transition: all 0.3s ease; text-decoration: none; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .reg-card-cta:hover { border-color: rgba(212,175,95,0.5); color: rgba(212,175,95,0.9); box-shadow: 0 0 20px rgba(212,175,95,0.07); }
+    .reg-payment { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(192,192,192,0.07); padding: 6rem 4rem; text-align: center; }
+    .reg-payment-grid { display: flex; justify-content: center; gap: 5rem; flex-wrap: wrap; margin-top: 3rem; }
+    .reg-payment-item { text-align: center; }
+    .reg-payment-label { font-family: var(--font-body); font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(192,192,192,0.3); display: block; margin-bottom: 0.6rem; }
+    .reg-payment-value { font-family: var(--font-display); font-size: 1.2rem; color: var(--cream-dim); }
+    .reg-payment-note { max-width: 580px; margin: 3rem auto 0; font-family: var(--font-body); font-size: 0.75rem; color: rgba(192,192,192,0.45); line-height: 2; letter-spacing: 0.04em; }
+    .reg-payment-note a { color: rgba(212,175,95,0.7); text-decoration: none; }
     @media (max-width: 900px) {
       .reg-grid { grid-template-columns: 1fr; }
       .reg-hero { padding: 8rem 2rem 4rem; }
@@ -229,18 +55,11 @@
       .reg-payment-grid { gap: 2.5rem; }
     }
   </style>
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-C1KZSFD68V');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C1KZSFD68V');</script>
 </head>
 <body>
 
-  <!-- Hero -->
   <div class="reg-hero">
     <p class="reg-event-label reveal" data-key="regLabel">Team Registration — Now Open</p>
     <h1 class="reg-event-name reveal">Obsidian Volleyball<br/>Super Cup</h1>
@@ -251,8 +70,8 @@
         <span class="reg-event-meta-value">3rd and 4th April 2026</span>
       </div>
       <div class="reg-event-meta-item">
-        <span class="reg-event-meta-label">Location</span>
-        <span class="reg-event-meta-value">Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span>
+        <span class="reg-event-meta-label">Venue</span>
+        <span class="reg-event-meta-value">Shaheed Noor Hossain National Volleyball Stadium, Dhaka</span>
       </div>
       <div class="reg-event-meta-item">
         <span class="reg-event-meta-label">Registration Deadline</span>
@@ -264,6 +83,7 @@
       </div>
     </div>
     <div class="divider reveal" style="margin-top:3rem;"><div class="divider-diamond"></div></div>
+
     <div id="regCountdown" class="reveal-fade" style="margin-top:2rem; display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;">
       <div style="text-align:center;">
         <p id="cdDays" style="font-family:var(--font-display); font-size:3rem; color:var(--cream); line-height:1;">--</p>
@@ -279,22 +99,21 @@
       </div>
     </div>
     <p id="cdLabel" class="reveal-fade" style="font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(212,175,95,0.6); margin-top:1rem; text-align:center;">Until Registration Deadline</p>
+
     <p class="reg-notice reveal-fade">
       Submitting the form does not confirm your slot.<br/>
-      After registering, send <strong>3,800 BDT</strong> via bKash (Send Money) to <strong>01711878945</strong> using your team name as reference.<br/>
-      Then email your transaction ID and screenshot to <a href="/cdn-cgi/l/email-protection#d9b6bbaab0bdb0b8b7baaca9f7b6bfbfb0bab0b8b599beb4b8b0b5f7bab6b4"><span class="__cf_email__" data-cfemail="4f202d3c262b262e212c3a3f61202929262c262e230f28222e2623612c2022">[email&#160;protected]</span></a>.<br/>
+      After registering, send <strong>3,800 BDT</strong> via bKash (Send Money) to <strong>01791341727</strong> using your team name as reference.<br/>
+      Then email your transaction ID and screenshot to <strong>obsidiancup.official&#64;gmail.com</strong>.<br/>
       We will confirm your slot and issue an invoice within 3 days.<br/><br/>
       <strong>Late registration after 27th March: 4,000 BDT.</strong><br/>
       Refund policy: 50% refund if written cancellation is emailed at least 24 hours before the event.
     </p>
   </div>
 
-  <!-- Category Cards -->
   <div class="reg-categories">
     <p class="reg-categories-label reveal" data-key="regCategoryLabel">Choose your category</p>
     <div class="reg-grid">
 
-      <!-- Boys Interschool -->
       <div class="reg-card reveal">
         <p class="reg-card-number">01</p>
         <p class="reg-card-category">Boys</p>
@@ -310,7 +129,6 @@
         <a href="https://obsidiancup.fillout.com/ovscinterboys" target="_blank" rel="noopener" class="reg-card-cta">Register Now →</a>
       </div>
 
-      <!-- Boys Open Age -->
       <div class="reg-card reveal">
         <p class="reg-card-number">02</p>
         <p class="reg-card-category">Boys</p>
@@ -326,7 +144,6 @@
         <a href="https://obsidiancup.fillout.com/ovscboys" target="_blank" rel="noopener" class="reg-card-cta">Register Now →</a>
       </div>
 
-      <!-- Girls Open Age -->
       <div class="reg-card reveal">
         <p class="reg-card-number">03</p>
         <p class="reg-card-category">Girls</p>
@@ -345,7 +162,6 @@
     </div>
   </div>
 
-  <!-- Payment Instructions -->
   <div class="reg-payment">
     <p class="section-label reveal" data-key="regPayLabel">After registering</p>
     <h2 class="section-title reveal" data-key="regPayTitle">Confirm Your Slot</h2>
@@ -369,14 +185,14 @@
       </div>
     </div>
     <p class="reg-payment-note reveal-fade">
-      bKash Send Money to <strong style="color:rgba(245,240,232,0.6);">01711878945</strong> — use your team name as reference.<br/>
-      Email transaction ID and screenshot to <a href="/cdn-cgi/l/email-protection#1d727f6e7479747c737e686d33727b7b747e747c715d7a707c7471337e7270"><span class="__cf_email__" data-cfemail="660904150f020f0708051316480900000f050f070a26010b070f0a4805090b">[email&#160;protected]</span></a>.<br/>
+      bKash Send Money to <strong style="color:rgba(245,240,232,0.6);">01791341727</strong> — use your team name as reference.<br/>
+      Email transaction ID and screenshot to <strong style="color:rgba(245,240,232,0.6);">obsidiancup.official&#64;gmail.com</strong><br/>
       Confirmation and invoice issued within 3 days.<br/><br/>
-      Questions? Reach us on <a href="https://www.instagram.com/obsidiancup/" target="_blank">Instagram</a> or <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank">Facebook</a>.
+      Questions? Reach us on <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener">Instagram</a> or <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a>.
     </p>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/config.js"></script>
+  <script src="../js/config.js"></script>
   <script src="../js/lang.js"></script>
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>

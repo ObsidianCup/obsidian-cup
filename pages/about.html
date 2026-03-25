@@ -13,6 +13,14 @@
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/about.html" />
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Fix contact section alignment on mobile */
+    @media (max-width: 600px) {
+      .contact-links { flex-direction: column; align-items: center; }
+      .contact-sep { width: 60px; height: 1px; }
+      .contact-link { width: 100%; padding: 1.5rem 2rem; }
+    }
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C1KZSFD68V');</script>
 </head>
@@ -25,23 +33,18 @@
 
   <div class="about-story">
     <div class="divider reveal"><div class="divider-diamond"></div></div>
-
     <div class="reveal-fade" style="margin-top: 4rem;">
       <p data-key="aboutP1">Obsidian Cup is a try. A genuine, wholehearted try at giving volleyball in Bangladesh the experience it actually deserves. Better venues, real production, and a standard of care that players can feel from the moment they step on the court.</p>
       <p data-key="aboutP2">Behind it is Uriana, with Tafhim holding things down on the field, and a founding circle, Masheer, Nabid, and Rifa, who are always there when it counts. No corporate backing, no big team. Just people who love the game and turn up every time.</p>
       <p data-key="aboutP3">We want this magic to spread. The feeling of a well-run tournament, of a crowd that's alive, of walking off that court knowing the experience was worth everything. That feeling belongs to everyone. And we're here to make sure more people get to feel it. We started with two categories across two seasons — now we bring three together on one stage. This is just the beginning.</p>
     </div>
-
     <div class="divider reveal" style="margin: 3rem 0;"><div class="divider-diamond"></div></div>
-
     <p class="reveal-fade" style="font-family: var(--font-display); font-style:italic; font-size:1.35rem; color:var(--cream-dim); line-height:1.85; text-align:center; padding-bottom: 1.5rem; max-width: 680px; margin: 0 auto;" data-key="aboutQuote">
       "This isn't just a tournament. This is our air. We breathe it, we build it, we give it to everyone who steps on that court. Because through sport, we find ourselves. We find each other. And we find something worth fighting for."
     </p>
-
     <p class="reveal-fade" style="font-family: var(--font-body); font-size: 0.82rem; color: rgba(192,192,192,0.38); text-align:center; letter-spacing: 0.12em; margin-top: 0.8rem; padding-bottom: 2rem;" data-key="aboutSub">
       On this court we build lifelong friendships, real memories, and something that matters far beyond the final score.
     </p>
-
     <div class="divider reveal" style="margin-top:1rem;"><div class="divider-diamond"></div></div>
   </div>
 
@@ -81,9 +84,9 @@
     <h2 class="section-title reveal" data-key="contactTitle">Contact</h2>
     <div class="divider reveal"><div class="divider-diamond"></div></div>
     <div class="contact-links reveal-fade">
-      <a href="mailto:obsidiancup.official@gmail.com" class="contact-link">
+      <a href="mailto:obsidiancup.official&#64;gmail.com" class="contact-link">
         <span class="contact-link-label" data-key="contactEmailLabel">Email</span>
-        <span class="contact-link-value">obsidiancup.official@gmail.com</span>
+        <span class="contact-link-value">obsidiancup.official&#64;gmail.com</span>
       </a>
       <div class="contact-sep"></div>
       <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" class="contact-link">
