@@ -9,14 +9,14 @@ const SITE_CONFIG = {
 
   // ---- SEASON TOGGLES ----
   tournamentActive: false,
-  registrationOpen: true,
+  registrationOpen: false,
   rulesVisible: false,
 
   // ---- CURRENT SEASON INFO ----
   currentSeasonName: "Obsidian Volleyball Super Cup",
   currentSeasonDates: "3rd and 4th April 2026",
   currentVenue: "Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000",
-  announcementText: "OVC Season 2 and OVASC Season 2. Together for the first time.",
+  announcementText: "Season 2 complete. Thank you to everyone who showed up.",
 
   // ---- REGISTRATION FORMS ----
   formInterschool: "https://obsidiancup.fillout.com/ovscinterboys",

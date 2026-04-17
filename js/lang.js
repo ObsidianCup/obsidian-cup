@@ -15,35 +15,37 @@ const TRANSLATIONS = {
     heroTagline: "Carved by Legacy · Crowned in Obsidian",
 
     // Announcement
-    announcedLabel: "Now Announced",
+    announcedLabel: "Season Wrapped",
     announcedTitle: "Obsidian Volleyball Super Cup",
     announcedSub: "OVC Season 2 × OVASC Season 2 · 3rd and 4th April 2026 · Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000",
-    announcedCategories: "Boys Interschool · Boys Open Age · Girls Open Age",
-    registerBtn: "Register Your Team →",
+    announcedCategories: "Girls Open Age · Boys Open Age",
+    registerBtn: "View Results →",
 
     // Paths
     pathsLabel: "Choose your path", pathsTitle: "The courts don't forget",
-    path1Number: "01", path1Title: "Register Your Team",
-    path1Desc: "Assemble your squad and step onto the court. Registration is your first step toward the Obsidian throne.",
-    path1Link: "Enter the tournament →",
-    path2Number: "02", path2Title: "Follow the Tournament",
-    path2Desc: "Witness the battles, celebrate the champions, and be part of the legacy being carved in obsidian.",
-    path2Link: "Explore the seasons →",
+    path1Number: "01", path1Title: "View the Seasons",
+    path1Desc: "Three seasons. Every battle, every champion, every moment carved in obsidian. See the full legacy.",
+    path1Link: "Explore the seasons →",
+    path2Number: "02", path2Title: "Our Story",
+    path2Desc: "How a group of friends who loved volleyball built something that belongs to everyone. The story behind the cup.",
+    path2Link: "Read our story →",
 
     // Champions
     championsLabel: "Hall of legacy", championsTitle: "Past Champions",
 
     // Impact
-    impact1Number: "2", impact1Label: "Seasons Completed",
-    impact2Number: "17", impact2Label: "Teams Competed",
-    impact3Number: "180+", impact3Label: "Players on Court",
-    impact4Number: "50+", impact4Label: "Spectators",
+    impact1Number: "3", impact1Label: "Seasons Completed",
+    impact2Number: "26", impact2Label: "Teams Competed",
+    impact3Number: "280+", impact3Label: "Players on Court",
+    impact4Number: "80+", impact4Label: "Spectators",
 
     // Partners
     partnersLabel: "Those who believed early", partnersTitle: "Our Partners",
     partnersLabel2: "Those who believed early", partnersTitle2: "Our Partners",
     partnerCat1: "Hydration Partner", partnerCat2: "Apparel Partner",
     partnerNote: "Sponsor, OVASC Season 1",
+    partnerCat3: "Official Sponsor",
+    partnerNote3: "Sponsor, OVSC Season 2",
 
     // Social
     socialLabel: "Stay in the loop", socialTitle: "Follow the Journey",
@@ -128,31 +130,31 @@ const TRANSLATIONS = {
     heroTagline: "Carved by Legacy · Crowned in Obsidian",
 
     // Announcement
-    announcedLabel: "এখন ঘোষিত",
+    announcedLabel: "সিজন শেষ",
     announcedTitle: "Obsidian Volleyball Super Cup",
     announcedSub: "OVC Season 2 × OVASC Season 2 · ৩রা ও ৪ঠা এপ্রিল ২০২৬ · শহীদ নূর হোসেন জাতীয় ভলিবল স্টেডিয়াম, পুরানা পল্টন, ঢাকা ১০০০",
-    announcedCategories: "বয়েজ ইন্টারস্কুল · বয়েজ ওপেন এজ · গার্লস ওপেন এজ",
-    registerBtn: "দল নিবন্ধন করুন →",
+    announcedCategories: "গার্লস ওপেন এজ · বয়েজ ওপেন এজ",
+    registerBtn: "ফলাফল দেখুন →",
 
     // Paths
     pathsLabel: "আপনার পথ বেছে নিন",
     pathsTitle: "কোর্ট কখনো ভুলে না",
-    path1Number: "০১", path1Title: "দল নিবন্ধন করুন",
-    path1Desc: "আপনার দল গঠন করুন এবং কোর্টে পা রাখুন। নিবন্ধন হলো অবসিডিয়ান সিংহাসনের দিকে আপনার প্রথম পদক্ষেপ।",
-    path1Link: "টুর্নামেন্টে যোগ দিন →",
-    path2Number: "০২", path2Title: "টুর্নামেন্ট অনুসরণ করুন",
-    path2Desc: "লড়াই প্রত্যক্ষ করুন, চ্যাম্পিয়নদের উদযাপন করুন এবং এই ইতিহাসের অংশ হোন।",
-    path2Link: "সিজন অন্বেষণ করুন →",
+    path1Number: "০১", path1Title: "সিজন দেখুন",
+    path1Desc: "তিনটি সিজন। প্রতিটি লড়াই, প্রতিটি চ্যাম্পিয়ন, অবসিডিয়ানে খোদাই প্রতিটি মুহূর্ত। সম্পূর্ণ ইতিহাস দেখুন।",
+    path1Link: "সিজন অন্বেষণ করুন →",
+    path2Number: "০২", path2Title: "আমাদের গল্প",
+    path2Desc: "ভলিবলকে ভালোবাসা কিছু বন্ধু কীভাবে এমন কিছু তৈরি করলেন যা সবার জন্য। কাপের পেছনের গল্প।",
+    path2Link: "আমাদের গল্প পড়ুন →",
 
     // Champions
     championsLabel: "উত্তরাধিকারের হল",
     championsTitle: "সাবেক চ্যাম্পিয়ন",
 
     // Impact
-    impact1Number: "২", impact1Label: "সম্পন্ন সিজন",
-    impact2Number: "১৭", impact2Label: "প্রতিযোগী দল",
-    impact3Number: "১৮০+", impact3Label: "কোর্টে খেলোয়াড়",
-    impact4Number: "৫০+", impact4Label: "দর্শক",
+    impact1Number: "৩", impact1Label: "সম্পন্ন সিজন",
+    impact2Number: "২৬", impact2Label: "প্রতিযোগী দল",
+    impact3Number: "২৮০+", impact3Label: "কোর্টে খেলোয়াড়",
+    impact4Number: "৮০+", impact4Label: "দর্শক",
 
     // Partners
     partnersLabel: "যারা আগে বিশ্বাস রেখেছিলেন",
@@ -162,6 +164,8 @@ const TRANSLATIONS = {
     partnerCat1: "হাইড্রেশন পার্টনার",
     partnerCat2: "অ্যাপারেল পার্টনার",
     partnerNote: "স্পনসর, OVASC সিজন ১",
+    partnerCat3: "অফিশিয়াল স্পনসর",
+    partnerNote3: "স্পনসর, OVSC সিজন ২",
 
     // Social
     socialLabel: "সংযুক্ত থাকুন",
