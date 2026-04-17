@@ -2168,3 +2168,22 @@ html[lang="bn"] .hero-title {
   font-family: var(--font-display);
   letter-spacing: 0.12em;
 }
+
+.partner-logo-punch {
+  max-width: 140px;
+  filter: brightness(1.05);
+}
+.partner-card:hover .partner-logo-punch {
+  transform: scale(1.05);
+  filter: brightness(1.15) drop-shadow(0 4px 20px rgba(255,255,255,0.1));
+}
+
+/* ---- Punch Company Logo ---- */
+.partner-logo-punch {
+  max-width: 140px;
+  filter: brightness(1.05);
+}
+.partner-card:hover .partner-logo-punch {
+  transform: scale(1.05);
+  filter: brightness(1.2) drop-shadow(0 4px 16px rgba(255,255,255,0.1));
+}
