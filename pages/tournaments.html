@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obsidian Cup | Tournaments</title>
   <meta name="description" content="Every season of the Obsidian Cup — results, champions, and tournament history." />
-  <meta name="keywords" content="Obsidian Cup tournaments, OVC, OVASC, volleyball Dhaka, Bangladesh volleyball results" />
   <link rel="icon" href="../assets/favicon.ico" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta property="og:title" content="Tournaments — Obsidian Cup" />
@@ -13,43 +12,70 @@
   <meta property="og:image" content="https://obsidiancup.vercel.app/assets/logo-mark.png" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/tournaments.html" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../css/style.css" />
-  <!-- Google Analytics -->
+  <style>
+    .tournament-sponsor {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(192,192,192,0.07);
+    }
+    .tournament-sponsor-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.3);
+      margin-bottom: 0.5rem;
+    }
+    .tournament-sponsor-name {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: rgba(192,192,192,0.6);
+      letter-spacing: 0.05em;
+    }
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-C1KZSFD68V');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C1KZSFD68V');</script>
 </head>
 <body>
 
-  <!-- Page Hero -->
   <div class="tournaments-hero">
     <p class="section-label reveal" data-key="tourLabel">Every battle carved in history</p>
     <h1 class="page-title reveal" data-key="tourTitle">The Seasons</h1>
     <div class="divider reveal" style="margin-top: 3rem;"><div class="divider-diamond"></div></div>
   </div>
 
-  <!-- Tournaments Grid -->
   <div class="tournaments-grid">
 
-    <!-- OVSC — Upcoming -->
-    <div class="tournament-card reveal" style="border: 1px solid rgba(212,175,95,0.15); position:relative;">
+    <!-- OVSC S2 -->
+    <div class="tournament-card reveal" data-tournament="ovsc_s2" style="border: 1px solid rgba(212,175,95,0.12);">
       <p class="tournament-season" style="color:rgba(212,175,95,0.6);">OVSC — Season 2 &nbsp;·&nbsp; OVC × OVASC</p>
       <h2 class="tournament-name">Obsidian Volleyball Super Cup</h2>
       <div class="tournament-meta">
         <span><span class="meta-label">Date</span>3rd &amp; 4th April 2026</span>
-        <span><span class="meta-label">Venue</span>Dhaka, Bangladesh</span>
-        <span><span class="meta-label">Format</span>Boys Interschool, Boys Open Age, Girls Open Age</span>
+        <span><span class="meta-label">Venue</span>Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span>
+        <span><span class="meta-label">Format</span>Girls Open Age &amp; Boys Open Age</span>
+        <span><span class="meta-label">Teams</span>9 total — 5 Girls, 4 Boys</span>
+        <span><span class="meta-label">Spectators</span>40+</span>
       </div>
       <div class="tournament-divider"></div>
-      <div style="text-align:center; padding: 1.5rem 0 0.5rem;">
-        <p style="font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(212,175,95,0.5); margin-bottom:1.2rem;">Registration Open</p>
-        <a href="register.html" class="btn-ghost" style="font-size:0.6rem; padding:0.8rem 1.8rem;">Register Your Team →</a>
+      <div class="tournament-results">
+        <div class="result-row">
+          <span class="result-category">Girls — Champion</span>
+          <span class="result-winner">Pythons</span>
+          <span class="result-runner">Runner-up: Net Ninjas</span>
+        </div>
+        <div class="result-row" style="margin-top:1.2rem;">
+          <span class="result-category">Boys — Champion</span>
+          <span class="result-winner">Pagla Baburchi</span>
+          <span class="result-runner">Runner-up: Zenith</span>
+        </div>
       </div>
+      <div class="tournament-sponsor">
+        <p class="tournament-sponsor-label">Official Sponsor</p>
+        <p class="tournament-sponsor-name">The Punch Company</p>
+      </div>
+      <span class="view-details" style="margin-top:1.5rem; display:block;">View details <span>→</span></span>
     </div>
 
     <!-- OVC S1 -->
@@ -57,10 +83,13 @@
       <p class="tournament-season">OVC — Season 1 &nbsp;·&nbsp; Interschool</p>
       <h2 class="tournament-name">Obsidian Volleyball Cup</h2>
       <div class="tournament-meta">
-        <span><span class="meta-label">Date</span>11th & 12th January 2026</span>
-        <span><span class="meta-label">Venue</span>DBox Sports Complex, Mirpur 12</span>
+        <span><span class="meta-label">Date</span>11th &amp; 12th January 2026</span>
+        <span><span class="meta-label">Venue</span>DBox Sports Complex, Shagufta Housing, Mirpur 12</span>
         <span><span class="meta-label">Format</span>Boys Interschool &amp; Girls Open Age</span>
+        <span><span class="meta-label">Teams</span>10 total — 6 Boys, 4 Girls</span>
+        <span><span class="meta-label">Spectators</span>50+</span>
       </div>
+      <div class="tournament-divider"></div>
       <div class="tournament-results">
         <div class="result-row">
           <span class="result-category">Boys — Champion</span>
@@ -73,7 +102,7 @@
           <span class="result-runner">Runner-up: Panthers</span>
         </div>
       </div>
-      <span class="view-details">View details <span>→</span></span>
+      <span class="view-details" style="margin-top:1.5rem; display:block;">View details <span>→</span></span>
     </div>
 
     <!-- OVASC S1 -->
@@ -81,10 +110,12 @@
       <p class="tournament-season">OVASC — Season 1 &nbsp;·&nbsp; All Stars</p>
       <h2 class="tournament-name">Obsidian Volleyball All Stars Cup</h2>
       <div class="tournament-meta">
-        <span><span class="meta-label">Date</span>6th & 7th February 2026</span>
-        <span><span class="meta-label">Venue</span>Shaheed Noor Hossain National Volleyball Stadium</span>
+        <span><span class="meta-label">Date</span>6th &amp; 7th February 2026</span>
+        <span><span class="meta-label">Venue</span>Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span>
         <span><span class="meta-label">Format</span>Boys Open Age</span>
+        <span><span class="meta-label">Teams</span>7 Boys teams</span>
       </div>
+      <div class="tournament-divider"></div>
       <div class="tournament-results">
         <div class="result-row">
           <span class="result-category">Boys — Champion</span>
@@ -92,13 +123,17 @@
           <span class="result-runner">Runner-up: Dhaka Colonisers</span>
         </div>
       </div>
-      <span class="view-details">View details <span>→</span></span>
+      <div class="tournament-sponsor">
+        <p class="tournament-sponsor-label">Sponsors</p>
+        <p class="tournament-sponsor-name">SMC Fruity &nbsp;·&nbsp; OLYVE</p>
+      </div>
+      <span class="view-details" style="margin-top:1.5rem; display:block;">View details <span>→</span></span>
     </div>
 
   </div>
 
   <!-- Tournament Detail Modal -->
-  <div class="modal-overlay" id="tournamentModal">
+  <div class="modal-overlay" id="tournamentModal" role="dialog" aria-modal="true">
     <div class="modal">
       <button class="modal-close" aria-label="Close">×</button>
       <p class="modal-season"></p>
@@ -110,9 +145,6 @@
       <div class="modal-divider"></div>
       <p class="modal-section-title">Results</p>
       <div class="modal-results-block"></div>
-      <div class="modal-gallery-note">
-        <p>[ Gallery — Photos will be added here ]</p>
-      </div>
     </div>
   </div>
 
