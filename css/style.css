@@ -828,69 +828,65 @@ section::before {
   padding: 10rem 4rem;
 }
 
+/* Season group wrapper */
+.champions-season-group {
+  max-width: 1100px;
+  margin: 0 auto 5rem;
+}
+.champions-season-group:last-child { margin-bottom: 0; }
+
+.champions-season-title {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(212,175,95,0.5);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .champions-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5px;
+  background: rgba(192,192,192,0.06);
 }
 
 .champion-block {
-  border-top: 1px solid var(--border-top);
-  border-right: 1px solid var(--border-side);
-  border-bottom: 1px solid var(--border-side);
-  border-left: 1px solid var(--border-side);
-  padding: 2.5rem 2rem;
-  background: linear-gradient(135deg, #111111, #0e0e0e);
-  transition: var(--transition);
+  padding: 3rem 2.5rem;
+  background: var(--black);
+  transition: background 0.3s ease;
   position: relative;
   overflow: hidden;
 }
-
-.champion-block::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(255,255,255,0.025), transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.champion-block:hover {
-  border-color: rgba(192,192,192,0.35);
-  box-shadow: 0 0 35px rgba(255,255,255,0.03);
-}
-
-.champion-block:hover::after { opacity: 1; }
+.champion-block:hover { background: rgba(255,255,255,0.02); }
 
 .champion-tourney {
   font-family: var(--font-body);
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--silver-dim);
-  margin-bottom: 1.5rem;
+  color: rgba(192,192,192,0.4);
+  margin-bottom: 1.8rem;
   line-height: 1.6;
 }
 
 .champion-crown {
-  font-size: 0.58rem;
+  font-family: var(--font-body);
+  font-size: 0.55rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-  opacity: 0.8;
+  color: rgba(212,175,95,0.65);
+  margin-bottom: 0.6rem;
 }
 
 .champion-name {
   font-family: var(--font-display);
-  font-size: 1.8rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 500;
   color: var(--cream);
-  margin-bottom: 0.2rem;
-  line-height: 1.2;
+  line-height: 1.15;
+  margin-bottom: 0;
 }
 
 .champion-label {
@@ -901,32 +897,47 @@ section::before {
 }
 
 .champion-runner {
-  margin-top: 1.8rem;
+  margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(192,192,192,0.07);
+  border-top: 1px solid rgba(192,192,192,0.06);
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
 }
 
 .champion-runner-label {
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(192,192,192,0.58);
+  color: rgba(192,192,192,0.4);
   flex-shrink: 0;
 }
 
 .champion-runner-name {
   font-family: var(--font-display);
-  font-size: 1.05rem;
-  color: rgba(245,240,232,0.65);
+  font-size: 1rem;
+  color: rgba(245,240,232,0.55);
   font-weight: 400;
 }
 
 /* ---- Partners Section ---- */
 .partners-section {
   padding: 10rem 4rem;
+  text-align: center;
+}
+.partners-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5px;
+  background: rgba(192,192,192,0.06);
+  max-width: 960px;
+  margin: 3rem auto 0;
+}
+.partner-card {
+  flex: 1;
+  min-width: 240px;
+  max-width: 320px;
 }
 
 .partners-grid {
