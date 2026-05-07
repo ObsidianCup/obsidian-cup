@@ -82,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
     const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    const hrefPage = href ? href.split('/').pop() : '';
+    if (hrefPage === currentPage || (currentPage === '' && hrefPage === 'index.html')) {
       link.classList.add('active');
     }
   });
@@ -313,29 +314,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ---- Tournament data ----
 const TOURNAMENTS = {
-  ovc_s1: {
-    season: 'OVC — Season 1',
-    name: 'Obsidian Volleyball Cup',
-    type: 'Interschool',
-    date: '11th & 12th January 2026',
-    venue: 'DBox Sports Complex',
-    venueAddress: 'Shagufta Housing, Mirpur 12, Dhaka',
-    description: 'Our first tournament. An interschool competition that brought together the best young volleyball talent from across Dhaka. Boys competed in the interschool category. Girls competed in an open-age category. Two days, fierce competition, and the beginning of something that would grow beyond what we imagined.',
+  ovsc_s2: {
+    season: 'OVSC — Season 2 · April 2026',
+    name: 'Obsidian Volleyball Super Cup',
+    type: 'OVC × OVASC — Girls & Boys Open Age',
+    date: '3rd & 4th April 2026',
+    venue: 'Shaheed Noor Hossain National Volleyball Stadium',
+    venueAddress: 'Purana Paltan, Dhaka 1000',
+    summary: 'Our third tournament, and the first time OVC and OVASC shared one stage.',
+    description: 'The Super Cup brought the girls open-age and boys open-age brackets together at the National Volleyball Stadium for two full days. It felt bigger, sharper, and more alive than anything before it: nine teams, two categories, a stronger crowd, and a standard that finally matched the ambition of Obsidian Cup.',
+    sponsors: 'The Punch Company',
+    teams: '9 teams · 5 Girls, 4 Boys',
+    spectators: '40+',
     results: [
-      { category: 'Boys — Interschool', champion: 'Galactic Ganjas', runner: 'Nexhai' },
-      { category: 'Girls — Open Age', champion: 'Pythons', runner: 'Panthers' },
+      { category: 'Girls — Open Age', champion: 'Pythons', runner: 'Net Ninjas' },
+      { category: 'Boys — Open Age', champion: 'Pagla Baburchi', runner: 'Zenith' },
     ]
   },
   ovasc_s1: {
-    season: 'OVASC — Season 1',
+    season: 'OVASC — Season 1 · February 2026',
     name: 'Obsidian Volleyball All Stars Cup',
-    type: 'All Stars — Open Age',
+    type: 'All Stars — Boys Open Age',
     date: '6th & 7th February 2026',
     venue: 'Shaheed Noor Hossain National Volleyball Stadium',
     venueAddress: '23/1, Purana Paltan, Dhaka-1000',
-    description: 'Our second tournament and our first time at the National Volleyball Stadium. The All Stars Cup is our open-age, no-restrictions lineup — the highest level of underground volleyball we host. Season 1 was boys only. Girls teams are welcome in future seasons.',
+    summary: 'The first All Stars chapter, built for open-age boys teams.',
+    description: 'Our second tournament and our first time at the National Volleyball Stadium. The All Stars Cup brought together open-age boys teams for two days of high-level underground volleyball. The beginning of what would eventually become the Super Cup.',
+    sponsors: 'SMC Fruity · OLYVE',
+    teams: '7 Boys teams',
+    spectators: '80+',
     results: [
       { category: 'Boys — Open Age', champion: 'Fearless Flyers', runner: 'Dhaka Colonisers' },
+    ]
+  },
+  ovc_s1: {
+    season: 'OVC — Season 1 · January 2026',
+    name: 'Obsidian Volleyball Cup',
+    type: 'Interschool — Boys & Girls',
+    date: '11th & 12th January 2026',
+    venue: 'DBox Sports Complex',
+    venueAddress: 'Shagufta Housing, Mirpur 12, Dhaka',
+    summary: 'The first Obsidian Cup chapter and the spark that started the whole thing.',
+    description: 'Where it all started. Our first tournament brought together school teams from across Dhaka for an interschool competition, alongside a girls open-age category. Two days, ten teams, and the spark that started everything.',
+    sponsors: null,
+    teams: '10 teams · 6 Boys, 4 Girls',
+    spectators: '50+',
+    results: [
+      { category: 'Boys — Interschool', champion: 'Galactic Ganjas', runner: 'Nexhai' },
+      { category: 'Girls — Open Age', champion: 'Pythons', runner: 'Panthers' },
     ]
   }
 };
@@ -351,9 +377,19 @@ function populateModal(data) {
   const infoEl = modal.querySelector('.modal-info-block');
   if (infoEl) {
     infoEl.innerHTML = `
-      <p class="modal-info"><span style="color:var(--silver-dim);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;margin-right:1.2rem;display:inline-block;min-width:55px;">Type</span>${data.type}</p>
-      <p class="modal-info" style="margin-top:0.6rem;"><span style="color:var(--silver-dim);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;margin-right:1.2rem;display:inline-block;min-width:55px;">Date</span>${data.date}</p>
-      <p class="modal-info" style="margin-top:0.6rem;"><span style="color:var(--silver-dim);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;margin-right:1.2rem;display:inline-block;min-width:55px;">Venue</span>${data.venue}, ${data.venueAddress}</p>
+      <p class="modal-kicker">${data.summary || data.type}</p>
+      <div class="modal-stat-grid">
+        <div><span>Format</span><strong>${data.type}</strong></div>
+        <div><span>Date</span><strong>${data.date}</strong></div>
+        <div><span>Teams</span><strong>${data.teams || 'TBA'}</strong></div>
+        <div><span>Spectators</span><strong>${data.spectators || 'TBA'}</strong></div>
+      </div>
+      <div class="modal-venue">
+        <span>Venue</span>
+        <strong>${data.venue}</strong>
+        <small>${data.venueAddress}</small>
+      </div>
+      ${data.sponsors ? `<div class="modal-sponsor"><span>Sponsor</span><strong>${data.sponsors}</strong></div>` : ''}
     `;
   }
 
@@ -363,11 +399,16 @@ function populateModal(data) {
   const resultsEl = modal.querySelector('.modal-results-block');
   if (resultsEl) {
     resultsEl.innerHTML = data.results.map((r, i) => `
-      ${i > 0 ? '<div class="modal-divider"></div>' : ''}
-      <div class="modal-result">
-        <div class="modal-result-category">${r.category}</div>
-        <div class="modal-result-winner">${r.champion}</div>
-        <div class="modal-result-runner">Runner-up &nbsp;·&nbsp; ${r.runner}</div>
+      <div class="modal-podium">
+        <p class="modal-result-category">${r.category}</p>
+        <div class="podium-row podium-row-champion">
+          <span>Champion</span>
+          <strong>${r.champion}</strong>
+        </div>
+        <div class="podium-row">
+          <span>Runner-up</span>
+          <strong>${r.runner}</strong>
+        </div>
       </div>
     `).join('');
   }
