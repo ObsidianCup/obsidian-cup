@@ -2452,8 +2452,10 @@ html[lang="bn"] .hero-title {
 .partner-name {
   margin-bottom: 0;
   overflow-wrap: normal;
-  white-space: nowrap;
-  font-size: clamp(2rem, 3.3vw, 2.75rem);
+  white-space: normal;
+  max-width: 100%;
+  font-size: clamp(2rem, 2.8vw, 2.75rem);
+  line-height: 1.18;
 }
 
 .partner-logo-note {
