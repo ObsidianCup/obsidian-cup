@@ -325,7 +325,7 @@ const TOURNAMENTS = {
     description: 'The Super Cup brought the girls open-age and boys open-age brackets together at the National Volleyball Stadium for two full days. It felt bigger, sharper, and more alive than anything before it: nine teams, two categories, a stronger crowd, and a standard that finally matched the ambition of Obsidian Cup.',
     sponsors: 'The Punch Company',
     teams: '9 teams · 5 Girls, 4 Boys',
-    spectators: '40+',
+    spectators: '50+',
     results: [
       { category: 'Girls — Open Age', champion: 'Pythons', runner: 'Net Ninjas' },
       { category: 'Boys — Open Age', champion: 'Pagla Baburchi', runner: 'Zenith' },
@@ -342,7 +342,7 @@ const TOURNAMENTS = {
     description: 'Our second tournament and our first time at the National Volleyball Stadium. The All Stars Cup brought together open-age boys teams for two days of high-level underground volleyball. The beginning of what would eventually become the Super Cup.',
     sponsors: 'SMC Fruity · OLYVE',
     teams: '7 Boys teams',
-    spectators: '80+',
+    spectators: '30+',
     results: [
       { category: 'Boys — Open Age', champion: 'Fearless Flyers', runner: 'Dhaka Colonisers' },
     ]
