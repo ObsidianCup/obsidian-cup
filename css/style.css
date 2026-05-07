@@ -2365,3 +2365,103 @@ html[lang="bn"] .hero-title {
     gap: 0.15rem;
   }
 }
+
+/* ---- Contact + Sponsor Card Alignment Polish ---- */
+.contact-links {
+  max-width: 980px;
+  align-items: stretch;
+}
+
+.contact-link {
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
+}
+
+.contact-link-value {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.partners-grid {
+  gap: 1.25rem;
+  background: transparent;
+}
+
+.partner-card {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 65% at 50% 0%, rgba(212,175,95,0.035), transparent 62%),
+    linear-gradient(145deg, rgba(18,18,18,0.98), rgba(10,10,10,0.98));
+  border: 1px solid rgba(192,192,192,0.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.035), 0 14px 34px rgba(0,0,0,0.22);
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212,175,95,0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.055),
+    0 24px 70px rgba(0,0,0,0.42),
+    0 0 45px rgba(212,175,95,0.06);
+}
+
+.partner-category,
+.partner-name,
+.partner-logo-note {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.partner-category {
+  min-height: 1.2em;
+  margin-bottom: 0;
+}
+
+.partner-logo-wrap {
+  margin: 0;
+  height: 108px;
+  width: 100%;
+}
+
+.partner-name {
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+
+.partner-logo-note {
+  margin-top: 0;
+  max-width: 260px;
+}
+
+@media (max-width: 900px) {
+  .contact-links {
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(192,192,192,0.08);
+  }
+
+  .contact-link {
+    width: 100%;
+    background: var(--black);
+  }
+
+  .contact-sep {
+    display: none;
+  }
+
+  .partner-card {
+    min-height: 360px;
+  }
+}
