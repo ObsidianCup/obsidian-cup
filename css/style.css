@@ -2370,21 +2370,35 @@ html[lang="bn"] .hero-title {
 .contact-links {
   max-width: 980px;
   align-items: stretch;
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 1px minmax(220px, 0.85fr) 1px minmax(220px, 0.85fr);
+  gap: 0;
 }
 
 .contact-link {
   justify-content: center;
   text-align: center;
   min-width: 0;
+  padding-left: clamp(1.5rem, 3vw, 3.5rem);
+  padding-right: clamp(1.5rem, 3vw, 3.5rem);
 }
 
 .contact-link-value {
   display: block;
   max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: normal;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  white-space: nowrap;
   text-align: center;
   line-height: 1.45;
+}
+
+.contact-sep {
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+  margin: 0;
+  background: linear-gradient(to bottom, transparent, rgba(192,192,192,0.18), transparent);
 }
 
 .partners-grid {
@@ -2437,7 +2451,9 @@ html[lang="bn"] .hero-title {
 
 .partner-name {
   margin-bottom: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  white-space: nowrap;
+  font-size: clamp(2rem, 3.3vw, 2.75rem);
 }
 
 .partner-logo-note {
@@ -2447,6 +2463,7 @@ html[lang="bn"] .hero-title {
 
 @media (max-width: 900px) {
   .contact-links {
+    display: flex;
     flex-direction: column;
     gap: 1px;
     background: rgba(192,192,192,0.08);
@@ -2463,5 +2480,10 @@ html[lang="bn"] .hero-title {
 
   .partner-card {
     min-height: 360px;
+  }
+
+  .partner-name,
+  .contact-link-value {
+    white-space: normal;
   }
 }
