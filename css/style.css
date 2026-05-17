@@ -2489,3 +2489,162 @@ html[lang="bn"] .hero-title {
     white-space: normal;
   }
 }
+
+/* ---- Obsidian Football Launch Elevation ---- */
+.navbar {
+  padding-left: clamp(1.25rem, 3.5vw, 4rem);
+  padding-right: clamp(1.25rem, 3.5vw, 4rem);
+}
+
+.nav-logo {
+  min-width: max-content;
+}
+
+.nav-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.09), 0 0 22px rgba(255,255,255,0.06);
+  image-rendering: auto;
+}
+
+.footer-logo-img,
+.hero-badge-img,
+.mobile-logo {
+  border-radius: 50%;
+  object-fit: cover;
+  image-rendering: auto;
+}
+
+.hero {
+  min-height: 100svh;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.025), transparent 22%),
+    radial-gradient(ellipse 70% 45% at 50% 42%, rgba(212,175,95,0.075), transparent 62%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 92px),
+    var(--black);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 7.2rem clamp(1.1rem, 3vw, 3.5rem) 5.5rem;
+  border: 1px solid rgba(192,192,192,0.07);
+  background:
+    linear-gradient(90deg, transparent 49.94%, rgba(212,175,95,0.11) 50%, transparent 50.06%),
+    radial-gradient(circle at 50% 50%, transparent 0 82px, rgba(212,175,95,0.07) 83px, transparent 84px);
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.hero-badge-wrap {
+  margin-bottom: 2.1rem;
+}
+
+.hero-badge-img {
+  width: clamp(74px, 8.5vw, 116px);
+  height: clamp(74px, 8.5vw, 116px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.1),
+    0 22px 70px rgba(0,0,0,0.45),
+    0 0 38px rgba(245,240,232,0.075);
+}
+
+.hero-title {
+  font-size: clamp(3.45rem, 9.4vw, 9.8rem);
+  letter-spacing: clamp(0.06em, 1vw, 0.13em);
+  text-shadow:
+    0 0 90px rgba(255,255,255,0.08),
+    0 18px 70px rgba(0,0,0,0.5);
+}
+
+.hero-tagline {
+  margin-top: 1.45rem;
+  color: rgba(245,240,232,0.72);
+}
+
+.hero-launch-note {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(212,175,95,0.78);
+  border: 1px solid rgba(212,175,95,0.2);
+  background: rgba(212,175,95,0.045);
+  padding: 0.62rem 1rem;
+  margin-top: 1.35rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.3s ease;
+}
+
+.hero-tagline.visible + .hero-launch-note {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-meta {
+  color: rgba(245,240,232,0.56);
+}
+
+.obsidian-next-section {
+  background:
+    radial-gradient(ellipse 65% 70% at 50% 35%, rgba(212,175,95,0.075), transparent 62%),
+    linear-gradient(180deg, #101010, #080808);
+  border-top: 1px solid rgba(212,175,95,0.08);
+  border-bottom: 1px solid rgba(212,175,95,0.08);
+}
+
+.obsidian-next-section .reveal {
+  max-width: 920px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.obsidian-next-section .cooking-title {
+  font-size: clamp(3.2rem, 7.5vw, 7.5rem);
+  letter-spacing: clamp(0.04em, 0.9vw, 0.14em);
+  text-transform: none;
+}
+
+.obsidian-next-section .cooking-sub {
+  color: rgba(212,175,95,0.82);
+  letter-spacing: 0.26em;
+}
+
+.obsidian-next-copy {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-style: italic;
+  color: rgba(245,240,232,0.76);
+  max-width: 680px;
+  margin: 1.6rem auto 0;
+  line-height: 1.55;
+}
+
+.btn-quiet {
+  border-color: rgba(192,192,192,0.22);
+  color: rgba(245,240,232,0.72);
+}
+
+@media (max-width: 900px) {
+  .nav-logo-text {
+    font-size: 1rem;
+    letter-spacing: 0.07em;
+  }
+
+  .hero {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .hero::before {
+    inset: 6rem 0.8rem 5rem;
+  }
+
+  .hero-launch-note {
+    letter-spacing: 0.22em;
+  }
+}
