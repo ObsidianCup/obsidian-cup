@@ -5,16 +5,16 @@
 
 const TRANSLATIONS = {
   en: {
-    navHome: "Home", navTournaments: "Tournaments", navAbout: "About",
-    navFaq: "FAQ", navRegister: "Register",
+    navHome: "Home", navFootball: "Football", navVolleyball: "Volleyball",
+    navAbout: "About", navFaq: "FAQ", navRegister: "Register",
     heroEst: "Est. 2026", heroLocation: "Dhaka · Bangladesh",
     heroTitle: "Obsidian Cup",
     heroTagline: "Carved by Legacy · Crowned in Obsidian",
-    announcedLabel: "Next Chapter",
-    announcedTitle: "Football enters Obsidian",
-    announcedSub: "June 2026 · A new field, the same Obsidian standard",
-    announcedCategories: "Volleyball carved the first chapter. Football is the next arena.",
-    viewResults: "Follow the launch →",
+    announcedLabel: "Latest Season",
+    announcedTitle: "Obsidian Volleyball Super Cup",
+    announcedSub: "OVC Season 2 × OVASC Season 2 · 3rd and 4th April 2026 · Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000",
+    announcedCategories: "Girls Open Age · Boys Open Age",
+    viewResults: "View Results →",
     pathsLabel: "Choose your path", pathsTitle: "The courts don't forget",
     path1Number: "01", path1Title: "The Seasons",
     path1Desc: "Three seasons. Every battle, every champion, every moment carved in obsidian. See the full legacy.",
@@ -37,7 +37,7 @@ const TRANSLATIONS = {
     openInstagram: "Open Instagram", openFacebook: "Open Facebook",
     footerTagline: "Carved by Legacy, Crowned in Obsidian",
     aboutLabel: "The story", aboutTitle: "Our Story",
-    aboutP1: "Obsidian Cup is a try. A genuine, wholehearted try at giving sports in Bangladesh the experience it actually deserves. Better venues, real production, and a standard of care that players can feel from the moment they step onto the field or court.",
+    aboutP1: "Obsidian Cup is a try. A genuine, wholehearted try at giving volleyball in Bangladesh the experience it actually deserves. Better venues, real production, and a standard of care that players can feel from the moment they step on the court.",
     aboutP2: "Behind it is Uriana, with Tafhim holding things down on the field, and a founding circle, Masheer, Nabid, and Rifa, who are always there when it counts. No corporate backing, no big team. Just people who love the game and turn up every time.",
     aboutP3: "We want this magic to spread. The feeling of a well-run tournament, of a crowd that's alive, of walking off that court knowing the experience was worth everything. That feeling belongs to everyone. And we're here to make sure more people get to feel it. We started with two categories across two seasons — now we bring three together on one stage. This is just the beginning.",
     aboutQuote: "\"This isn't just a tournament. This is our air. We breathe it, we build it, we give it to everyone who steps on that court. Because through sport, we find ourselves. We find each other. And we find something worth fighting for.\"",
@@ -61,11 +61,11 @@ const TRANSLATIONS = {
     faqGroup3: "Events and Match Day",
     faqGroup4: "Get in Touch",
     faq1q1: "What is Obsidian Cup?",
-    faq1a1: "Obsidian Cup is an underground sports platform based in Dhaka, Bangladesh. We began with volleyball through OVC and OVASC, and football is next. Every format is designed to give players a proper, well-run competitive experience with stronger venues, production, atmosphere, and care.",
+    faq1a1: "Obsidian Cup is a volleyball tournament brand based in Dhaka, Bangladesh. We run OVC and OVASC — two tournament formats designed to give players at every level a proper, well-run competitive experience. We care deeply about quality — the venues, the production, the atmosphere — and we're building something that lasts.",
     faq1q2: "Who runs Obsidian Cup?",
     faq1a2: "Founded and run by Uriana, with Tafhim on the field and a core founding circle of Masheer, Nabid, and Rifa. No corporate backing, no large team — just people who love the game.",
     faq1q3: "How many seasons have you run?",
-    faq1a3: "Three seasons across two volleyball tournament formats so far. OVC Season 1, OVASC Season 1, and the Obsidian Volleyball Super Cup in April 2026. Football joins the next chapter in June 2026.",
+    faq1a3: "Three seasons across two tournament formats. OVC Season 1, OVASC Season 1, and the Obsidian Volleyball Super Cup in April 2026. Over 26 teams and 280 players have competed so far.",
     faq1q4: "What sports do you cover?",
     faq1a4: "Volleyball is where we started. Our vision extends beyond it — more sports, more athletes, more stages are part of the plan.",
     faq2q1: "Does filling the registration form confirm my team's spot?",
@@ -87,16 +87,16 @@ const TRANSLATIONS = {
   },
 
   bn: {
-    navHome: "হোম", navTournaments: "টুর্নামেন্ট", navAbout: "আমাদের সম্পর্কে",
-    navFaq: "প্রশ্নোত্তর", navRegister: "নিবন্ধন",
+    navHome: "হোম", navFootball: "ফুটবল", navVolleyball: "ভলিবল",
+    navAbout: "আমাদের সম্পর্কে", navFaq: "প্রশ্নোত্তর", navRegister: "নিবন্ধন",
     heroEst: "প্রতিষ্ঠিত ২০২৬", heroLocation: "ঢাকা · বাংলাদেশ",
     heroTitle: "Obsidian Cup",
     heroTagline: "Carved by Legacy · Crowned in Obsidian",
-    announcedLabel: "পরবর্তী অধ্যায়",
-    announcedTitle: "Football enters Obsidian",
-    announcedSub: "জুন ২০২৬ · নতুন মাঠ, একই Obsidian মান",
-    announcedCategories: "ভলিবল প্রথম অধ্যায় লিখেছে। ফুটবল পরবর্তী মঞ্চ।",
-    viewResults: "লঞ্চ অনুসরণ করুন →",
+    announcedLabel: "সর্বশেষ সিজন",
+    announcedTitle: "Obsidian Volleyball Super Cup",
+    announcedSub: "OVC Season 2 × OVASC Season 2 · ৩রা ও ৪ঠা এপ্রিল ২০২৬ · শহীদ নূর হোসেন জাতীয় ভলিবল স্টেডিয়াম, পুরানা পল্টন, ঢাকা ১০০০",
+    announcedCategories: "গার্লস ওপেন এজ · বয়েজ ওপেন এজ",
+    viewResults: "ফলাফল দেখুন →",
     pathsLabel: "আপনার পথ বেছে নিন",
     pathsTitle: "কোর্ট কখনো ভুলে না",
     path1Number: "০১", path1Title: "সিজনসমূহ",
@@ -120,7 +120,7 @@ const TRANSLATIONS = {
     openInstagram: "ইনস্টাগ্রাম খুলুন", openFacebook: "ফেসবুক খুলুন",
     footerTagline: "Carved by Legacy, Crowned in Obsidian",
     aboutLabel: "গল্পটি", aboutTitle: "আমাদের গল্প",
-    aboutP1: "Obsidian Cup একটি চেষ্টা। বাংলাদেশের খেলাধুলাকে সত্যিকারের মানসম্মত অভিজ্ঞতা দেওয়ার একটি আন্তরিক চেষ্টা। ভালো ভেন্যু, সত্যিকারের প্রোডাকশন, এবং এমন একটি যত্নের মান যা খেলোয়াড়রা মাঠ বা কোর্টে পা দেওয়ার মুহূর্ত থেকেই অনুভব করতে পারেন।",
+    aboutP1: "Obsidian Cup একটি চেষ্টা। বাংলাদেশের ভলিবলকে সত্যিকারের মানসম্মত অভিজ্ঞতা দেওয়ার একটি আন্তরিক চেষ্টা। ভালো ভেন্যু, সত্যিকারের প্রোডাকশন, এবং এমন একটি যত্নের মান যা খেলোয়াড়রা কোর্টে পা দেওয়ার মুহূর্ত থেকেই অনুভব করতে পারেন।",
     aboutP2: "এর পেছনে আছেন Uriana, মাঠে সবকিছু সামলান Tafhim, আর প্রতিষ্ঠাতা বৃত্তে আছেন Masheer, Nabid এবং Rifa — যারা প্রতিবার দরকারে হাজির থাকেন।",
     aboutP3: "আমরা চাই এই জাদু ছড়িয়ে পড়ুক। একটি সুসংগঠিত টুর্নামেন্টের অনুভূতি, একটি জীবন্ত দর্শক সারির অনুভূতি — এই অনুভূতি সবার জন্য।",
     aboutQuote: "\"এটা শুধু একটা টুর্নামেন্ট নয়। এটা আমাদের নিঃশ্বাস। আমরা এটা শ্বাস নিই, এটা গড়ি, আর এটা দিই প্রত্যেককে যে এই কোর্টে পা রাখে।\"",
@@ -171,28 +171,26 @@ const TRANSLATIONS = {
 };
 
 function setLanguage(lang) {
-  const selected = TRANSLATIONS[lang] ? lang : 'en';
   document.querySelectorAll('[data-key]').forEach(el => {
     const key = el.getAttribute('data-key');
-    if (TRANSLATIONS[selected] && TRANSLATIONS[selected][key]) {
-      el.textContent = TRANSLATIONS[selected][key];
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+      el.textContent = TRANSLATIONS[lang][key];
     }
   });
-  localStorage.setItem('oc_lang', selected);
+  localStorage.setItem('oc_lang', lang);
   document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('lang-btn-active', btn.getAttribute('data-lang') === selected);
+    btn.classList.toggle('lang-btn-active', btn.getAttribute('data-lang') === lang);
   });
-  document.documentElement.lang = selected === 'bn' ? 'bn' : 'en';
+  document.documentElement.lang = lang === 'bn' ? 'bn' : 'en';
 }
 
 function initLanguage() {
-  const saved = localStorage.getItem('oc_lang');
-  const selected = saved === 'bn' ? 'bn' : 'en';
-  document.documentElement.lang = selected === 'bn' ? 'bn' : 'en';
-  setLanguage(selected);
+  const saved = localStorage.getItem('oc_lang') || 'en';
+  document.documentElement.lang = saved === 'bn' ? 'bn' : 'en';
+  setLanguage(saved);
 }
 
 (function() {
-  const saved = localStorage.getItem('oc_lang');
+  const saved = localStorage.getItem('oc_lang') || 'en';
   document.documentElement.lang = saved === 'bn' ? 'bn' : 'en';
 })();
