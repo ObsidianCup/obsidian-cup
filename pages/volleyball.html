@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obsidian Cup | Volleyball</title>
-  <meta name="description" content="Obsidian Volleyball — where it all started. OVC, OVASC, and OVSC season history." />
+  <meta name="description" content="Obsidian Volleyball — three seasons of legacy. OVC, OVASC, and OVSC season history." />
   <link rel="icon" href="../assets/favicon.ico" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta property="og:title" content="Volleyball — Obsidian Cup" />
@@ -14,16 +14,171 @@
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
+    .vb-hero {
+      padding: 10rem 4rem 5rem;
+      text-align: center;
+    }
     .sport-tag {
       display: inline-block;
       font-family: var(--font-body);
       font-size: 0.55rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(192,192,192,0.5);
-      border: 1px solid rgba(192,192,192,0.15);
+      color: rgba(192,192,192,0.45);
+      border: 1px solid rgba(192,192,192,0.12);
       padding: 0.4rem 1rem;
       margin-bottom: 2rem;
+    }
+    .vb-ig-handle {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: rgba(245,240,232,0.55);
+      letter-spacing: 0.05em;
+      margin: 1.5rem 0 4rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .vb-ig-handle:hover { color: var(--cream); }
+
+    /* Season groups */
+    .vb-seasons {
+      padding: 0 4rem 8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .vb-season-group {
+      margin-bottom: 5rem;
+    }
+    .vb-season-group:last-child { margin-bottom: 0; }
+    .vb-season-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 1.5px;
+      padding: 1.5rem 2rem;
+      background: rgba(255,255,255,0.01);
+      border-top: 1px solid rgba(192,192,192,0.08);
+    }
+    .vb-season-code {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(212,175,95,0.5);
+    }
+    .vb-season-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: rgba(245,240,232,0.7);
+    }
+    .vb-season-date {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      color: rgba(192,192,192,0.35);
+      margin-left: auto;
+      letter-spacing: 0.08em;
+    }
+
+    /* Info + results in two columns */
+    .vb-season-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: rgba(192,192,192,0.05);
+      gap: 1.5px;
+    }
+    .vb-season-info {
+      background: var(--black);
+      padding: 2.5rem 2rem;
+    }
+    .vb-meta-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      align-items: baseline;
+    }
+    .vb-meta-label {
+      font-family: var(--font-body);
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.3);
+      min-width: 70px;
+      flex-shrink: 0;
+    }
+    .vb-meta-value {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(192,192,192,0.6);
+      line-height: 1.5;
+    }
+    .vb-sponsor-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-family: var(--font-body);
+      font-size: 0.5rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(212,175,95,0.45);
+      border: 1px solid rgba(212,175,95,0.15);
+      padding: 0.35rem 0.8rem;
+    }
+
+    /* Results column */
+    .vb-season-results {
+      background: var(--black);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .vb-result-block {}
+    .vb-result-cat {
+      font-family: var(--font-body);
+      font-size: 0.52rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.3);
+      margin-bottom: 0.5rem;
+    }
+    .vb-result-crown {
+      font-family: var(--font-body);
+      font-size: 0.5rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(212,175,95,0.55);
+      margin-bottom: 0.3rem;
+    }
+    .vb-result-winner {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 0.7rem;
+    }
+    .vb-result-runner {
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      color: rgba(192,192,192,0.38);
+      letter-spacing: 0.06em;
+    }
+    .vb-result-runner span {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.5);
+    }
+    .vb-result-divider {
+      height: 1px;
+      background: rgba(192,192,192,0.06);
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .vb-hero { padding: 8rem 2rem 4rem; }
+      .vb-seasons { padding: 0 2rem 6rem; }
+      .vb-season-body { grid-template-columns: 1fr; }
+      .vb-season-header { flex-wrap: wrap; gap: 0.5rem; }
+      .vb-season-date { margin-left: 0; }
     }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
@@ -31,125 +186,111 @@
 </head>
 <body>
 
-  <div class="tournaments-hero" style="text-align:center;padding:10rem 4rem 5rem;">
+  <div class="vb-hero">
     <div class="sport-tag">Volleyball</div>
     <p class="section-label reveal">Where it started</p>
     <h1 class="page-title reveal">Volleyball Seasons</h1>
     <p class="page-subtitle reveal" style="margin-top:1rem;">Three seasons. The foundation of the Obsidian legacy.</p>
-    <div class="divider reveal" style="margin-top:3rem;"><div class="divider-diamond"></div></div>
+    <a href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener" class="vb-ig-handle reveal">@obsidian.volleyball</a>
+    <div class="divider reveal"><div class="divider-diamond"></div></div>
   </div>
 
-  <!-- Social for volleyball -->
-  <div style="text-align:center;padding:0 4rem 3rem;">
-    <p style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.15em;color:rgba(192,192,192,0.4);margin-bottom:1rem;">Follow volleyball updates</p>
-    <a href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener" class="instagram-handle" style="font-size:1rem;">@obsidian.volleyball</a>
-  </div>
-
-  <div class="tournaments-grid">
+  <div class="vb-seasons">
 
     <!-- OVSC S2 -->
-    <div class="tournament-card latest reveal" data-tournament="ovsc_s2">
-      <div class="tournament-card-left">
-        <p class="latest-badge">Latest Season</p>
-        <p class="tournament-season">OVSC — Season 2 &nbsp;·&nbsp; OVC × OVASC</p>
-        <h2 class="tournament-name">Obsidian Volleyball Super Cup</h2>
-        <div class="tournament-meta-row"><span class="meta-label">Date</span><span class="meta-value">3rd &amp; 4th April 2026</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Venue</span><span class="meta-value">Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Format</span><span class="meta-value">Girls Open Age &amp; Boys Open Age</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Teams</span><span class="meta-value">9 total — 5 Girls, 4 Boys</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Spectators</span><span class="meta-value">40+</span></div>
-        <div class="tournament-sponsor-pill">Sponsored by The Punch Company</div>
+    <div class="vb-season-group reveal">
+      <div class="vb-season-header">
+        <span class="vb-season-code">OVSC · Season 2</span>
+        <span class="vb-season-name">Obsidian Volleyball Super Cup</span>
+        <span class="vb-season-date">April 2026</span>
       </div>
-      <div class="tournament-card-right">
-        <div class="tournament-results-col">
-          <div class="result-block">
-            <p class="result-cat">Girls — Open Age</p>
-            <p class="result-crown">Champion</p>
-            <p class="result-winner">Pythons</p>
-            <p class="result-runner">Runner-up &nbsp;·&nbsp; <span>Net Ninjas</span></p>
+      <div class="vb-season-body">
+        <div class="vb-season-info">
+          <div class="vb-meta-row"><span class="vb-meta-label">Date</span><span class="vb-meta-value">3rd &amp; 4th April 2026</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Venue</span><span class="vb-meta-value">Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Format</span><span class="vb-meta-value">Girls Open Age &amp; Boys Open Age</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Teams</span><span class="vb-meta-value">9 total — 5 Girls, 4 Boys</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Spectators</span><span class="vb-meta-value">40+</span></div>
+          <div class="vb-sponsor-tag">The Punch Company</div>
+        </div>
+        <div class="vb-season-results">
+          <div class="vb-result-block">
+            <p class="vb-result-cat">Girls · Open Age</p>
+            <p class="vb-result-crown">Champion</p>
+            <p class="vb-result-winner">Pythons</p>
+            <p class="vb-result-runner">Runner-up · <span>Net Ninjas</span></p>
           </div>
-          <div class="result-block">
-            <p class="result-cat">Boys — Open Age</p>
-            <p class="result-crown">Champion</p>
-            <p class="result-winner">Pagla Baburchi</p>
-            <p class="result-runner">Runner-up &nbsp;·&nbsp; <span>Zenith</span></p>
+          <div class="vb-result-divider"></div>
+          <div class="vb-result-block">
+            <p class="vb-result-cat">Boys · Open Age</p>
+            <p class="vb-result-crown">Champion</p>
+            <p class="vb-result-winner">Pagla Baburchi</p>
+            <p class="vb-result-runner">Runner-up · <span>Zenith</span></p>
           </div>
         </div>
       </div>
-      <p class="view-details-hint">View full details →</p>
     </div>
 
     <!-- OVASC S1 -->
-    <div class="tournament-card reveal" data-tournament="ovasc_s1">
-      <div class="tournament-card-left">
-        <p class="tournament-season">OVASC — Season 1 &nbsp;·&nbsp; All Stars</p>
-        <h2 class="tournament-name">Obsidian Volleyball All Stars Cup</h2>
-        <div class="tournament-meta-row"><span class="meta-label">Date</span><span class="meta-value">6th &amp; 7th February 2026</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Venue</span><span class="meta-value">Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Format</span><span class="meta-value">Boys Open Age</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Teams</span><span class="meta-value">7 Boys teams</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Spectators</span><span class="meta-value">80+</span></div>
-        <div class="tournament-sponsor-pill">Sponsored by SMC Fruity &amp; OLYVE</div>
+    <div class="vb-season-group reveal">
+      <div class="vb-season-header">
+        <span class="vb-season-code">OVASC · Season 1</span>
+        <span class="vb-season-name">Obsidian Volleyball All Stars Cup</span>
+        <span class="vb-season-date">February 2026</span>
       </div>
-      <div class="tournament-card-right">
-        <div class="tournament-results-col">
-          <div class="result-block">
-            <p class="result-cat">Boys — Open Age</p>
-            <p class="result-crown">Champion</p>
-            <p class="result-winner">Fearless Flyers</p>
-            <p class="result-runner">Runner-up &nbsp;·&nbsp; <span>Dhaka Colonisers</span></p>
+      <div class="vb-season-body">
+        <div class="vb-season-info">
+          <div class="vb-meta-row"><span class="vb-meta-label">Date</span><span class="vb-meta-value">6th &amp; 7th February 2026</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Venue</span><span class="vb-meta-value">Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Format</span><span class="vb-meta-value">Boys Open Age</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Teams</span><span class="vb-meta-value">7 Boys teams</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Spectators</span><span class="vb-meta-value">80+</span></div>
+          <div class="vb-sponsor-tag">SMC Fruity &amp; OLYVE</div>
+        </div>
+        <div class="vb-season-results">
+          <div class="vb-result-block">
+            <p class="vb-result-cat">Boys · Open Age</p>
+            <p class="vb-result-crown">Champion</p>
+            <p class="vb-result-winner">Fearless Flyers</p>
+            <p class="vb-result-runner">Runner-up · <span>Dhaka Colonisers</span></p>
           </div>
         </div>
       </div>
-      <p class="view-details-hint">View full details →</p>
     </div>
 
     <!-- OVC S1 -->
-    <div class="tournament-card reveal" data-tournament="ovc_s1">
-      <div class="tournament-card-left">
-        <p class="tournament-season">OVC — Season 1 &nbsp;·&nbsp; Interschool</p>
-        <h2 class="tournament-name">Obsidian Volleyball Cup</h2>
-        <div class="tournament-meta-row"><span class="meta-label">Date</span><span class="meta-value">11th &amp; 12th January 2026</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Venue</span><span class="meta-value">DBox Sports Complex, Shagufta Housing, Mirpur 12</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Format</span><span class="meta-value">Boys Interschool &amp; Girls Open Age</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Teams</span><span class="meta-value">10 total — 6 Boys, 4 Girls</span></div>
-        <div class="tournament-meta-row"><span class="meta-label">Spectators</span><span class="meta-value">50+</span></div>
+    <div class="vb-season-group reveal">
+      <div class="vb-season-header">
+        <span class="vb-season-code">OVC · Season 1</span>
+        <span class="vb-season-name">Obsidian Volleyball Cup</span>
+        <span class="vb-season-date">January 2026</span>
       </div>
-      <div class="tournament-card-right">
-        <div class="tournament-results-col">
-          <div class="result-block">
-            <p class="result-cat">Boys — Interschool</p>
-            <p class="result-crown">Champion</p>
-            <p class="result-winner">Galactic Ganjas</p>
-            <p class="result-runner">Runner-up &nbsp;·&nbsp; <span>Nexhai</span></p>
+      <div class="vb-season-body">
+        <div class="vb-season-info">
+          <div class="vb-meta-row"><span class="vb-meta-label">Date</span><span class="vb-meta-value">11th &amp; 12th January 2026</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Venue</span><span class="vb-meta-value">DBox Sports Complex, Shagufta Housing, Mirpur 12</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Format</span><span class="vb-meta-value">Boys Interschool &amp; Girls Open Age</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Teams</span><span class="vb-meta-value">10 total — 6 Boys, 4 Girls</span></div>
+          <div class="vb-meta-row"><span class="vb-meta-label">Spectators</span><span class="vb-meta-value">50+</span></div>
+        </div>
+        <div class="vb-season-results">
+          <div class="vb-result-block">
+            <p class="vb-result-cat">Boys · Interschool</p>
+            <p class="vb-result-crown">Champion</p>
+            <p class="vb-result-winner">Galactic Ganjas</p>
+            <p class="vb-result-runner">Runner-up · <span>Nexhai</span></p>
           </div>
-          <div class="result-block">
-            <p class="result-cat">Girls — Open Age</p>
-            <p class="result-crown">Champion</p>
-            <p class="result-winner">Pythons</p>
-            <p class="result-runner">Runner-up &nbsp;·&nbsp; <span>Panthers</span></p>
+          <div class="vb-result-divider"></div>
+          <div class="vb-result-block">
+            <p class="vb-result-cat">Girls · Open Age</p>
+            <p class="vb-result-crown">Champion</p>
+            <p class="vb-result-winner">Pythons</p>
+            <p class="vb-result-runner">Runner-up · <span>Panthers</span></p>
           </div>
         </div>
       </div>
-      <p class="view-details-hint">View full details →</p>
     </div>
 
-  </div>
-
-  <!-- Modal -->
-  <div class="modal-overlay" id="tournamentModal" role="dialog" aria-modal="true">
-    <div class="modal">
-      <button class="modal-close" aria-label="Close">×</button>
-      <p class="modal-season"></p>
-      <h2 class="modal-title"></h2>
-      <div class="modal-info-block"></div>
-      <div class="modal-divider"></div>
-      <p class="modal-section-title">About this tournament</p>
-      <p class="modal-description modal-info"></p>
-      <div class="modal-divider"></div>
-      <p class="modal-section-title">Results</p>
-      <div class="modal-results-block"></div>
-    </div>
   </div>
 
   <script src="../js/config.js"></script>
