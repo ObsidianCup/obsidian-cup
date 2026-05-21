@@ -14,11 +14,177 @@
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    /* Fix contact section alignment on mobile */
-    @media (max-width: 600px) {
-      .contact-links { flex-direction: column; align-items: center; }
-      .contact-sep { width: 60px; height: 1px; }
-      .contact-link { width: 100%; padding: 1.5rem 2rem; }
+    /* Self-contained about page styles — not dependent on external classes */
+    .about-page { max-width: 820px; margin: 0 auto; padding: 10rem 4rem 0; }
+    .about-page p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: rgba(192,192,192,0.7);
+      line-height: 2;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .about-big-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: rgba(245,240,232,0.8);
+      line-height: 1.85;
+      text-align: center;
+      max-width: 680px;
+      margin: 3rem auto;
+      padding: 2rem 0;
+    }
+    .about-sub-quote {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(192,192,192,0.35);
+      text-align: center;
+      letter-spacing: 0.12em;
+      margin-bottom: 3rem;
+    }
+    .about-vision-block {
+      padding: 7rem 4rem;
+      background: rgba(255,255,255,0.015);
+      border-top: 1px solid rgba(192,192,192,0.07);
+      border-bottom: 1px solid rgba(192,192,192,0.07);
+      text-align: center;
+      margin: 4rem 0;
+    }
+    .about-vision-block .vision-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--cream);
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    .about-vision-block p {
+      max-width: 640px;
+      margin: 1.5rem auto 0;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(192,192,192,0.6);
+      line-height: 1.9;
+    }
+    .about-platform-block {
+      padding: 7rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(192,192,192,0.07);
+    }
+    .about-platform-block p {
+      max-width: 640px;
+      margin: 1.5rem auto 0;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(192,192,192,0.6);
+      line-height: 1.9;
+    }
+    .about-platform-closing {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(245,240,232,0.5);
+      margin-top: 2rem !important;
+    }
+    .partners-about {
+      padding: 7rem 4rem;
+      text-align: center;
+    }
+    .partners-about-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.5px;
+      background: rgba(192,192,192,0.06);
+      max-width: 900px;
+      margin: 3rem auto 0;
+      flex-wrap: wrap;
+    }
+    .partner-about-card {
+      flex: 1;
+      min-width: 220px;
+      max-width: 300px;
+      background: var(--black);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+    .partner-about-card:hover { background: rgba(255,255,255,0.02); }
+    .partner-about-cat {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.35);
+      margin-bottom: 1.5rem;
+    }
+    .partner-about-img {
+      width: auto;
+      height: 60px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 1.5rem;
+    }
+    .partner-about-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .partner-about-note {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: rgba(192,192,192,0.3);
+    }
+    .contact-about {
+      padding: 7rem 4rem;
+      text-align: center;
+      border-top: 1px solid rgba(192,192,192,0.07);
+    }
+    .contact-about-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      max-width: 800px;
+      margin: 3rem auto 0;
+    }
+    .contact-about-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 2rem 2.5rem;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      flex: 1;
+      min-width: 160px;
+    }
+    .contact-about-item:hover { opacity: 0.7; }
+    .contact-about-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(192,192,192,0.35);
+    }
+    .contact-about-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: rgba(245,240,232,0.75);
+    }
+    .contact-about-sep {
+      width: 1px;
+      height: 40px;
+      background: rgba(192,192,192,0.08);
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .about-page { padding: 8rem 2rem 0; }
+      .about-vision-block, .about-platform-block, .partners-about, .contact-about { padding: 5rem 2rem; }
+      .contact-about-links { flex-direction: column; }
+      .contact-about-sep { width: 40px; height: 1px; }
     }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
@@ -26,87 +192,103 @@
 </head>
 <body>
 
-  <div class="about-hero">
+  <!-- Story -->
+  <div class="about-page">
     <p class="section-label reveal" data-key="aboutLabel">The story</p>
     <h1 class="page-title reveal" data-key="aboutTitle">Our Story</h1>
-  </div>
-
-  <div class="about-story">
-    <div class="divider reveal"><div class="divider-diamond"></div></div>
-    <div class="reveal-fade" style="margin-top: 4rem;">
-      <p data-key="aboutP1">Obsidian Cup is a try. A genuine, wholehearted try at giving volleyball in Bangladesh the experience it actually deserves. Better venues, real production, and a standard of care that players can feel from the moment they step on the court.</p>
-      <p data-key="aboutP2">Behind it is Uriana, with Tafhim holding things down on the field, and a founding circle, Masheer, Nabid, and Rifa, who are always there when it counts. No corporate backing, no big team. Just people who love the game and turn up every time.</p>
-      <p data-key="aboutP3">We want this magic to spread. The feeling of a well-run tournament, of a crowd that's alive, of walking off that court knowing the experience was worth everything. That feeling belongs to everyone. And we're here to make sure more people get to feel it. We started with two categories across two seasons — now we bring three together on one stage. This is just the beginning.</p>
-    </div>
     <div class="divider reveal" style="margin: 3rem 0;"><div class="divider-diamond"></div></div>
-    <p class="reveal-fade" style="font-family: var(--font-display); font-style:italic; font-size:1.35rem; color:var(--cream-dim); line-height:1.85; text-align:center; padding-bottom: 1.5rem; max-width: 680px; margin: 0 auto;" data-key="aboutQuote">
-      "This isn't just a tournament. This is our air. We breathe it, we build it, we give it to everyone who steps on that court. Because through sport, we find ourselves. We find each other. And we find something worth fighting for."
+
+    <div class="reveal-fade">
+      <p data-key="aboutP1">Obsidian Cup is a try. A genuine, wholehearted try at giving sport in Bangladesh the experience it actually deserves. Better venues, real production, and a standard of care that players can feel from the moment they step onto the court or the pitch.</p>
+      <p data-key="aboutP2">Behind it is Uriana, with Tafhim holding things down on the field, and a founding circle, Masheer, Nabid, and Rifa, who are always there when it counts. No corporate backing, no big team. Just people who love the game and turn up every time.</p>
+      <p data-key="aboutP3">We want this magic to spread. The feeling of a well-run tournament, of a crowd that's alive, of walking off that court knowing the experience was worth everything. That feeling belongs to everyone. And we're here to make sure more people get to feel it.</p>
+    </div>
+
+    <p class="about-big-quote reveal-fade" data-key="aboutQuote">
+      "This isn't just a tournament. This is our air. We breathe it, we build it, we give it to everyone who steps onto that court. Because through sport, we find ourselves. We find each other. And we find something worth fighting for."
     </p>
-    <p class="reveal-fade" style="font-family: var(--font-body); font-size: 0.82rem; color: rgba(192,192,192,0.38); text-align:center; letter-spacing: 0.12em; margin-top: 0.8rem; padding-bottom: 2rem;" data-key="aboutSub">
+    <p class="about-sub-quote reveal-fade" data-key="aboutSub">
       On this court we build lifelong friendships, real memories, and something that matters far beyond the final score.
     </p>
-    <div class="divider reveal" style="margin-top:1rem;"><div class="divider-diamond"></div></div>
+
+    <div class="divider reveal" style="margin-bottom: 0;"><div class="divider-diamond"></div></div>
   </div>
 
-  <section class="about-vision section-alt">
+  <!-- Vision -->
+  <div class="about-vision-block">
     <p class="section-label reveal" data-key="visionLabel">Where this is going</p>
     <h2 class="section-title reveal" data-key="visionTitle">The Vision</h2>
-    <p class="about-vision-text reveal" data-key="visionQuote">"We started with one cause. We plan to carry many more."</p>
-    <p class="about-vision-sub reveal-fade" data-key="visionSub">Volleyball was the beginning. But underground sport in Bangladesh deserves a real home across the board, not just one court. We want to be that home, for every sport, every player, every person who showed up and felt like they didn't belong anywhere else.</p>
-  </section>
+    <p class="vision-quote reveal" data-key="visionQuote">"We started with one cause. We plan to carry many more."</p>
+    <p class="reveal-fade" data-key="visionSub">Volleyball was the beginning. Football is next. But underground sport in Bangladesh deserves a real home across the board — not just one court, not just one game. We want to be that home, for every sport, every player, every person who showed up and felt like they didn't belong anywhere else.</p>
+  </div>
 
-  <section class="partners-section">
+  <!-- Platform -->
+  <div class="about-platform-block">
+    <p class="section-label reveal" data-key="platformLabel">The next chapter</p>
+    <h2 class="section-title reveal" data-key="platformTitle">A Stage for Every Flame</h2>
+    <p class="reveal-fade" data-key="platformP1">We are working toward building a proper platform for our athletes. A space where those who burn with passion get the chance to show it. Where dedication is seen, where effort is recognised, where fire meets the audience it deserves.</p>
+    <p class="reveal-fade" data-key="platformP2">In Bangladesh, most athletes never get that moment. They train, they compete, they give everything — and still go unrecognised. The system wasn't built for them. We want to change that, slowly, intentionally, and with real care. Starting with the courts we already know, and building outward from there.</p>
+    <p class="about-platform-closing reveal-fade" data-key="platformClosing">"Every athlete deserves a stage. We're building it."</p>
+  </div>
+
+  <!-- Partners -->
+  <div class="partners-about">
     <p class="section-label reveal" data-key="partnersLabel2">Those who believed early</p>
     <h2 class="section-title reveal" data-key="partnersTitle2">Our Partners</h2>
     <div class="divider reveal"><div class="divider-diamond"></div></div>
-    <div class="partners-grid">
-      <div class="partner-card reveal-left">
-        <p class="partner-category" data-key="partnerCat1">Hydration Partner</p>
-        <div class="partner-logo-wrap">
-          <img src="../assets/partner-smc.png" alt="SMC Fruity" class="partner-logo partner-logo-smc" loading="lazy" />
-        </div>
-        <p class="partner-name">SMC Fruity</p>
-        <p class="partner-logo-note" data-key="partnerNote">Sponsor, OVASC Season 1</p>
+    <div class="partners-about-grid">
+      <div class="partner-about-card reveal">
+        <p class="partner-about-cat" data-key="partnerCat1">Hydration Partner</p>
+        <img src="../assets/partner-smc.png" alt="SMC Fruity" class="partner-about-img" loading="lazy" />
+        <p class="partner-about-name">SMC Fruity</p>
+        <p class="partner-about-note" data-key="partnerNote">Sponsor, OVASC Season 1</p>
       </div>
-      <div class="partner-card reveal-right">
-        <p class="partner-category" data-key="partnerCat2">Apparel Partner</p>
-        <div class="partner-logo-wrap">
-          <img src="../assets/partner-olyve.png" alt="OLYVE" class="partner-logo partner-logo-olyve" loading="lazy" />
-        </div>
-        <p class="partner-name">OLYVE</p>
-        <p class="partner-logo-note" data-key="partnerNote">Sponsor, OVASC Season 1</p>
+      <div class="partner-about-card reveal">
+        <p class="partner-about-cat" data-key="partnerCat2">Apparel Partner</p>
+        <img src="../assets/partner-olyve.png" alt="OLYVE" class="partner-about-img" loading="lazy" />
+        <p class="partner-about-name">OLYVE</p>
+        <p class="partner-about-note" data-key="partnerNote">Sponsor, OVASC Season 1</p>
       </div>
-      <div class="partner-card reveal">
-        <p class="partner-category">Beverage Partner</p>
-        <div class="partner-logo-wrap">
-          <img src="../assets/partner-punch.png" alt="The Punch Company" class="partner-logo partner-logo-punch" loading="lazy" />
-        </div>
-        <p class="partner-name">The Punch Company</p>
-        <p class="partner-logo-note">Sponsor, OVSC Season 2</p>
+      <div class="partner-about-card reveal">
+        <p class="partner-about-cat" data-key="partnerCat3">Official Sponsor</p>
+        <img src="../assets/partner-punch.png" alt="The Punch Company" class="partner-about-img" loading="lazy" />
+        <p class="partner-about-name">The Punch Company</p>
+        <p class="partner-about-note" data-key="partnerNote3">Sponsor, OVSC Season 2</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="contact-section" id="contact">
+  <!-- Contact -->
+  <div class="contact-about" id="contact">
     <p class="section-label reveal" data-key="contactLabel">Get in touch</p>
     <h2 class="section-title reveal" data-key="contactTitle">Contact</h2>
     <div class="divider reveal"><div class="divider-diamond"></div></div>
-    <div class="contact-links reveal-fade">
-      <a href="/cdn-cgi/l/email-protection#d2bdb0a1bbb6bbb3bcb1a7a2fcbdb4b4bbb1bbb3bef4f1e4e6e9b5bfb3bbbefcb1bdbf" class="contact-link">
-        <span class="contact-link-label" data-key="contactEmailLabel">Email</span>
-        <span class="contact-link-value">obsidiancup.official&#64;gmail.com</span>
+    <div class="contact-about-links reveal-fade">
+      <a href="mailto:obsidiancup.official&#64;gmail.com" class="contact-about-item">
+        <span class="contact-about-label" data-key="contactEmailLabel">Email</span>
+        <span class="contact-about-value">obsidiancup.official&#64;gmail.com</span>
       </a>
-      <div class="contact-sep"></div>
-      <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" class="contact-link">
-        <span class="contact-link-label">Instagram</span>
-        <span class="contact-link-value">@obsidiancup</span>
+      <div class="contact-about-sep"></div>
+      <a href="https://www.instagram.com/obsidian.football/" target="_blank" rel="noopener" class="contact-about-item">
+        <span class="contact-about-label">Football</span>
+        <span class="contact-about-value">@obsidian.football</span>
       </a>
-      <div class="contact-sep"></div>
-      <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" class="contact-link">
-        <span class="contact-link-label">Facebook</span>
-        <span class="contact-link-value">Obsidian Cup</span>
+      <div class="contact-about-sep"></div>
+      <a href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener" class="contact-about-item">
+        <span class="contact-about-label">Volleyball</span>
+        <span class="contact-about-value">@obsidian.volleyball</span>
+      </a>
+      <div class="contact-about-sep"></div>
+      <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" class="contact-about-item">
+        <span class="contact-about-label">Facebook</span>
+        <span class="contact-about-value">Obsidian Cup</span>
       </a>
     </div>
-  </section>
+  </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../j
+  <script src="../js/config.js"></script>
+  <script src="../js/lang.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
