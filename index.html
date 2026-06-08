@@ -4,17 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obsidian Cup</title>
-  <meta name="description" content="Obsidian Cup — Bangladesh's premier underground volleyball tournament. Carved by Legacy, Crowned in Obsidian." />
-  <meta name="keywords" content="Obsidian Cup, volleyball tournament, Bangladesh, Dhaka, interschool volleyball, OVSC" />
+  <meta name="description" content="Obsidian Cup — Bangladesh's premier underground volleyball and football tournament. Carved by Legacy, Crowned in Obsidian." />
+  <meta name="keywords" content="Obsidian Cup, volleyball tournament, football tournament, Bangladesh, Dhaka, futsal, OVSC, OFC" />
   <link rel="icon" href="assets/favicon.ico" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <meta property="og:title" content="Obsidian Cup" />
-  <meta property="og:description" content="Bangladesh's premier underground volleyball tournament. Carved by Legacy, Crowned in Obsidian." />
+  <meta property="og:description" content="Bangladesh's premier underground volleyball and football tournament. Carved by Legacy, Crowned in Obsidian." />
   <meta property="og:image" content="https://obsidiancup.vercel.app/assets/logo-mark.png" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---- Dual Event Cards (homepage) ---- */
+    .dual-event-card {
+      background: linear-gradient(135deg, #111111, #0e0e0e);
+      border-top: 1px solid var(--border-top);
+      border-right: 1px solid var(--border-side);
+      border-bottom: 1px solid var(--border-side);
+      border-left: 1px solid var(--border-side);
+      padding: 3.5rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.3s ease,
+                  box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .dual-event-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 30%, rgba(255,255,255,0.025), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .dual-event-card:hover {
+      border-color: rgba(192,192,192,0.55);
+      box-shadow: 0 0 60px rgba(255,255,255,0.04), 0 20px 40px rgba(0,0,0,0.4);
+      transform: translateY(-4px);
+    }
+    .dual-event-card:hover::before { opacity: 1; }
+    .dual-event-tag {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(212,175,95,0.55);
+      margin-bottom: 1.5rem;
+    }
+    .dual-event-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 1.8rem;
+    }
+    .dual-event-details {
+      flex: 1;
+      margin-bottom: 2rem;
+    }
+    .dual-event-details p {
+      font-family: var(--font-body);
+      font-size: 0.74rem;
+      color: rgba(192,192,192,0.55);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+    .dual-event-details .dual-event-highlight {
+      color: rgba(212,175,95,0.55);
+      font-size: 0.68rem;
+      margin-top: 0.2rem;
+    }
+    .dual-event-cta {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--silver);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+    .dual-event-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--silver);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .dual-event-card:hover .dual-event-cta { color: var(--cream); gap: 0.85rem; }
+    .dual-event-card:hover .dual-event-cta::after { transform: scaleX(1); }
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C1KZSFD68V');</script>
 </head>
@@ -53,20 +145,51 @@
     <div class="hero-scroll-line" aria-hidden="true"></div>
   </section>
 
-  <!-- Announcement — OFC Season 1 -->
-  <section class="cooking-section section-alt" aria-label="Next event">
-    <div class="reveal">
-      <p class="section-label" style="margin-bottom:1.5rem;">Upcoming</p>
-      <h2 class="cooking-title">Obsidian Football Cup</h2>
-      <div class="divider" style="margin: 2rem auto;" aria-hidden="true"><div class="divider-diamond"></div></div>
-      <p class="cooking-sub">OFC Season 1 &nbsp;·&nbsp; Girls Futsal &nbsp;·&nbsp; 23rd June 2026 &nbsp;·&nbsp; JAFF Bashundhara, Dhaka</p>
-      <p style="font-family:var(--font-body); font-size:0.75rem; color:rgba(192,192,192,0.6); letter-spacing:0.08em; margin-top:1rem;">Girls Only &nbsp;·&nbsp; Amateur &nbsp;·&nbsp; Registration Open</p>
-      <div style="margin-top:2.5rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
-        <a href="pages/football.html" class="btn-ghost">Learn More →</a>
-        <a href="pages/volleyball.html" class="btn-ghost" style="opacity:0.5;font-size:0.6rem;">View Volleyball Legacy</a>
-      </div>
+
+  <!-- ══════════════════════════════════════
+       DUAL EVENT — Registration Open
+       Both Football + Volleyball
+       ══════════════════════════════════════ -->
+  <section class="section-alt" aria-label="Open registrations" style="padding: 9rem 4rem;">
+    <p class="section-label reveal" style="text-align:center; margin-bottom:0.8rem;">Registration Open</p>
+    <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(2.2rem,5.5vw,4.5rem); font-weight:400; color:var(--cream); letter-spacing:0.07em; line-height:1.05; text-align:center; margin-bottom:0;">
+      Two Events. Both Now.
+    </h2>
+    <div class="divider reveal" style="margin:2.5rem auto 3.5rem;" aria-hidden="true"><div class="divider-diamond"></div></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:960px; margin:0 auto;">
+
+      <!-- Football -->
+      <a href="pages/football.html" class="dual-event-card reveal">
+        <p class="dual-event-tag">Football &nbsp;·&nbsp; OFC Season 1</p>
+        <h3 class="dual-event-name">Obsidian Football Cup</h3>
+        <div class="dual-event-details">
+          <p>23rd June 2026</p>
+          <p>JAFF Bashundhara, Dhaka</p>
+          <p class="dual-event-highlight">Girls Futsal &nbsp;·&nbsp; Amateur &nbsp;·&nbsp; 4,500 BDT</p>
+        </div>
+        <span class="dual-event-cta">Register Now →</span>
+      </a>
+
+      <!-- Volleyball -->
+      <a href="pages/volleyball.html" class="dual-event-card reveal">
+        <p class="dual-event-tag">Volleyball &nbsp;·&nbsp; OVC Season 4</p>
+        <h3 class="dual-event-name">Obsidian Volleyball Cup</h3>
+        <div class="dual-event-details">
+          <p>1st–4th July 2026</p>
+          <p>National Volleyball Stadium, Paltan, Dhaka</p>
+          <p class="dual-event-highlight">Girls Open &nbsp;·&nbsp; Boys Open &nbsp;·&nbsp; U19 Boys &nbsp;·&nbsp; 3,800 BDT</p>
+        </div>
+        <span class="dual-event-cta">Register Now →</span>
+      </a>
+
     </div>
+
+    <p class="reveal-fade" style="text-align:center; font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(192,192,192,0.3); margin-top:2.5rem;">
+      Football deadline: 10th June &nbsp;·&nbsp; Volleyball deadline: 25–26th June
+    </p>
   </section>
+
 
   <!-- Two Paths -->
   <section class="paths-section" aria-label="Navigation paths">
@@ -76,7 +199,7 @@
       <a href="pages/tournaments.html" class="path-card reveal">
         <p class="path-number" data-key="path1Number">01</p>
         <h3 class="path-title" data-key="path1Title">The Seasons</h3>
-        <p class="path-desc" data-key="path1Desc">Three seasons. Three chapters of legacy carved in obsidian. Explore every tournament, every champion, every story.</p>
+        <p class="path-desc" data-key="path1Desc">Three volleyball seasons. A football chapter now beginning. Every champion, every story carved in obsidian — see the full legacy.</p>
         <span class="path-link" data-key="path1Link">Explore the seasons <span class="path-arrow">→</span></span>
       </a>
       <a href="pages/about.html" class="path-card reveal">
@@ -88,11 +211,13 @@
     </div>
   </section>
 
+
   <!-- Champions -->
   <section class="champions-section section-alt" aria-label="Past champions">
     <p class="section-label reveal" data-key="championsLabel">Hall of legacy</p>
     <h2 class="section-title reveal" data-key="championsTitle">Past Champions</h2>
     <div class="divider reveal" aria-hidden="true"><div class="divider-diamond"></div></div>
+
     <!-- OVSC S2 -->
     <div class="champions-season-group reveal">
       <p class="champions-season-title">Obsidian Volleyball Super Cup — Season 2 &nbsp;·&nbsp; April 2026</p>
@@ -160,6 +285,7 @@
     </div>
   </section>
 
+
   <!-- Impact Numbers -->
   <section class="impact-section" aria-label="Tournament impact">
     <div class="impact-grid">
@@ -181,6 +307,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- Partners -->
   <section class="partners-section" aria-label="Our partners" style="border-top: 1px solid rgba(192,192,192,0.07);">
@@ -214,6 +341,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- Social -->
   <section class="instagram-section section-alt" aria-label="Follow us">
