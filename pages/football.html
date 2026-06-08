@@ -8,14 +8,14 @@
   <link rel="icon" href="../assets/favicon.ico" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta property="og:title" content="Obsidian Football Cup — OFC Season 1" />
-  <meta property="og:description" content="Girls futsal. 23rd June 2026. JAFF Bashundhara, Dhaka. Registration opening soon." />
+  <meta property="og:description" content="Girls futsal. 23rd June 2026. JAFF Bashundhara, Dhaka. Registration open now." />
   <meta property="og:image" content="https://obsidiancup.vercel.app/assets/logo-mark.png" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/football.html" />
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
     .football-hero {
-      padding: 10rem 4rem 6rem;
+      padding: 10rem 4rem 5rem;
       text-align: center;
     }
     .sport-tag {
@@ -34,7 +34,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 0;
       max-width: 900px;
-      margin: 5rem auto 0;
+      margin: 3.5rem auto 0;
       background: rgba(192,192,192,0.06);
     }
     .football-event-cell {
@@ -55,42 +55,14 @@
       color: var(--cream);
       line-height: 1.3;
     }
-    .football-rules {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 8rem 4rem;
-    }
-    .rule-group { margin-bottom: 3rem; }
-    .rule-group-title {
-      font-family: var(--font-body);
-      font-size: 0.58rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(212,175,95,0.55);
-      margin-bottom: 1.5rem;
-    }
-    .rule-item {
-      border-top: 1px solid rgba(192,192,192,0.07);
-      padding: 1rem 0;
-      font-family: var(--font-body);
-      font-size: 0.82rem;
-      color: rgba(192,192,192,0.65);
-      line-height: 1.8;
-      display: flex;
-      gap: 1rem;
-    }
-    .rule-item:last-child { border-bottom: 1px solid rgba(192,192,192,0.07); }
-    .rule-num {
-      font-size: 0.58rem;
-      color: rgba(212,175,95,0.4);
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-    }
+
+    /* ---- Registration Section ---- */
     .reg-coming-soon {
       text-align: center;
       padding: 6rem 4rem;
-      background: rgba(255,255,255,0.01);
       border-top: 1px solid rgba(192,192,192,0.07);
+      border-bottom: 1px solid rgba(192,192,192,0.07);
+      background: rgba(255,255,255,0.01);
     }
     .reg-fee-display {
       font-family: var(--font-display);
@@ -121,10 +93,44 @@
       color: rgba(212,175,95,0.7);
       text-decoration: none;
     }
+
+    /* ---- Rules ---- */
+    .football-rules {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 7rem 4rem 8rem;
+    }
+    .rule-group { margin-bottom: 3rem; }
+    .rule-group-title {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(212,175,95,0.55);
+      margin-bottom: 1.5rem;
+    }
+    .rule-item {
+      border-top: 1px solid rgba(192,192,192,0.07);
+      padding: 1rem 0;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: rgba(192,192,192,0.65);
+      line-height: 1.8;
+      display: flex;
+      gap: 1rem;
+    }
+    .rule-item:last-child { border-bottom: 1px solid rgba(192,192,192,0.07); }
+    .rule-num {
+      font-size: 0.58rem;
+      color: rgba(212,175,95,0.4);
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
     @media (max-width: 768px) {
       .football-hero { padding: 8rem 2rem 4rem; }
-      .football-event-grid { grid-template-columns: 1fr; margin: 3rem 2rem 0; }
-      .football-rules { padding: 5rem 2rem; }
+      .football-event-grid { grid-template-columns: 1fr; margin: 2.5rem 2rem 0; }
+      .football-rules { padding: 5rem 2rem 6rem; }
       .reg-coming-soon { padding: 5rem 2rem; }
     }
   </style>
@@ -133,13 +139,14 @@
 </head>
 <body>
 
-  <!-- Hero -->
+  <!-- ══════════════════════════════════════
+       HERO — Event Details
+       ══════════════════════════════════════ -->
   <div class="football-hero">
     <div class="sport-tag">Football &nbsp;·&nbsp; Futsal</div>
     <p class="section-label reveal">First season</p>
     <h1 class="page-title reveal">Obsidian Football Cup</h1>
     <p class="page-subtitle reveal" style="margin-top:1rem;">OFC Season 1 &nbsp;·&nbsp; Girls Only &nbsp;·&nbsp; Futsal</p>
-    <div class="divider reveal" style="margin-top:2.5rem;"><div class="divider-diamond"></div></div>
 
     <div class="football-event-grid reveal">
       <div class="football-event-cell">
@@ -152,7 +159,7 @@
       </div>
       <div class="football-event-cell">
         <p class="football-event-label">Format</p>
-        <p class="football-event-value">Futsal — Girls Open Age</p>
+        <p class="football-event-value">Futsal — 6-a-side</p>
       </div>
       <div class="football-event-cell">
         <p class="football-event-label">Category</p>
@@ -161,7 +168,38 @@
     </div>
   </div>
 
-  <!-- Rules -->
+
+  <!-- ══════════════════════════════════════
+       REGISTRATION — Moved above rules
+       ══════════════════════════════════════ -->
+  <div class="reg-coming-soon">
+    <p class="section-label reveal">Registration</p>
+    <h2 class="section-title reveal">Join the First Season</h2>
+    <div class="divider reveal" style="margin: 2rem auto;" aria-hidden="true"><div class="divider-diamond"></div></div>
+
+    <p class="reg-fee-label">Registration Fee</p>
+    <p class="reg-fee-display">4,500 BDT</p>
+    <p style="font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(192,192,192,0.3); margin-bottom:0.5rem;">Per Team</p>
+    <p style="font-family:var(--font-body); font-size:0.65rem; color:rgba(192,192,192,0.4); margin-bottom:2.5rem; letter-spacing:0.06em;">
+      Late registration after 10th June: <strong style="color:rgba(245,240,232,0.5);">4,700 BDT</strong>
+    </p>
+
+    <a href="https://obsidiancup.fillout.com/registration" target="_blank" rel="noopener" class="btn-ghost reveal">Register Now →</a>
+
+    <p class="reg-soon-note reveal-fade">
+      Submitting the form does not confirm your slot.<br/><br/>
+      Send <strong>4,500 BDT</strong> via bKash (Send Money) to <strong>01711878945</strong>.<br/>
+      Reference: <strong>[Your team name, OFC]</strong><br/><br/>
+      Then email your transaction ID and screenshot to <strong>obsidiancup.official&#64;gmail.com</strong>.<br/>
+      We will confirm your slot and issue an invoice within 3 days.<br/><br/>
+      <strong>Refund Policy:</strong> 50% refund if written cancellation is emailed at least 24 hours before the event. No refund after that.
+    </p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       RULES
+       ══════════════════════════════════════ -->
   <div class="football-rules">
     <div class="divider reveal"><div class="divider-diamond"></div></div>
 
@@ -169,8 +207,8 @@
       <p class="rule-group-title">Eligibility</p>
       <div class="rule-item"><span class="rule-num">01</span><span>Open to all ages. Girls only.</span></div>
       <div class="rule-item"><span class="rule-num">02</span><span>Strictly amateur. Players who have represented Bangladesh at national, divisional, army, or fire service level are not eligible.</span></div>
-      <div class="rule-item"><span class="rule-num">03</span><span>Valid photo ID required. Accepted: School or University ID with photo, or Passport.</span></div>
-      <div class="rule-item"><span class="rule-num">04</span><span>We are an independent community tournament and cannot conduct formal background checks on every player. We rely on honesty and community reporting. If valid proof of ineligibility is provided, the player or team may be removed. Where no verifiable evidence exists, results stand.</span></div>
+      <div class="rule-item"><span class="rule-num">03</span><span>Valid photo ID required. Accepted: School or University ID with photo, NID, or Passport.</span></div>
+      <div class="rule-item"><span class="rule-num">04</span><span>We are an independent community tournament and rely on honesty and community reporting. Where valid proof of ineligibility is provided, the player or team may be removed. Where no verifiable evidence exists, results stand.</span></div>
     </div>
 
     <div class="rule-group reveal">
@@ -205,39 +243,19 @@
     <div class="divider reveal"><div class="divider-diamond"></div></div>
   </div>
 
-  <!-- Registration -->
-  <div class="reg-coming-soon">
-    <p class="section-label reveal">Registration</p>
-    <h2 class="section-title reveal">Join the First Season</h2>
-    <div class="divider reveal" style="margin: 2rem auto;"><div class="divider-diamond"></div></div>
 
-    <p class="reg-fee-label">Registration Fee</p>
-    <p class="reg-fee-display">4,500 BDT</p>
-    <p style="font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(192,192,192,0.3);margin-bottom:0.5rem;">Per Team</p>
-    <p style="font-family:var(--font-body);font-size:0.65rem;color:rgba(192,192,192,0.4);margin-bottom:2rem;letter-spacing:0.06em;">Late registration after 10th June: <strong style="color:rgba(245,240,232,0.5);">4,700 BDT</strong></p>
-
-    <a href="https://obsidiancup.fillout.com/registration" target="_blank" rel="noopener" class="btn-ghost reveal">Register Now →</a>
-
-    <p class="reg-soon-note reveal-fade">
-      Submitting the form does not confirm your slot.<br/><br/>
-      Send <strong>4,500 BDT</strong> via bKash (Send Money) to <strong>01711878945</strong>.<br/>
-      Reference: <strong>[Your team name, OFC]</strong><br/><br/>
-      Then email your transaction ID and screenshot to <strong>obsidiancup.official&#64;gmail.com</strong>.<br/>
-      We will confirm your slot and issue an invoice within 3 days.<br/><br/>
-      <strong>Refund Policy:</strong> 50% refund if written cancellation is emailed at least 24 hours before the event. No refund after that.
-    </p>
-  </div>
-
-  <!-- Social -->
+  <!-- ══════════════════════════════════════
+       SOCIAL
+       ══════════════════════════════════════ -->
   <section class="instagram-section section-alt">
     <p class="section-label reveal">Follow the football journey</p>
     <h2 class="section-title reveal">Stay Updated</h2>
-    <div class="divider reveal"><div class="divider-diamond"></div></div>
+    <div class="divider reveal" aria-hidden="true"><div class="divider-diamond"></div></div>
     <a href="https://www.instagram.com/obsidian.football/" target="_blank" rel="noopener" class="instagram-handle reveal">@obsidian.football</a>
-    <p class="reveal-fade" style="font-size:0.78rem;color:var(--silver-dim);letter-spacing:0.1em;margin-top:1rem;max-width:400px;margin-left:auto;margin-right:auto;">
+    <p class="reveal-fade" style="font-size:0.78rem; color:var(--silver-dim); letter-spacing:0.1em; margin-top:1rem; max-width:400px; margin-left:auto; margin-right:auto;">
       Fixtures, registration announcements, match day updates — all on Instagram.
     </p>
-    <div style="margin-top:3rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;" class="reveal">
+    <div style="margin-top:3rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;" class="reveal">
       <a href="https://www.instagram.com/obsidian.football/" target="_blank" rel="noopener" class="btn-ghost">Open Instagram</a>
       <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" class="btn-ghost">Open Facebook</a>
     </div>
