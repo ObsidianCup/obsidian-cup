@@ -9,16 +9,24 @@ const SITE_CONFIG = {
 
   // ---- SEASON TOGGLES ----
   tournamentActive: false,
-  registrationOpen: false,
-  rulesVisible: false,
+  registrationOpen: false,   // Disabled — registration lives on sport pages now
+  rulesVisible: true,
 
   // ---- CURRENT SEASON INFO ----
-  currentSeasonName: "Obsidian Volleyball Super Cup",
-  currentSeasonDates: "3rd and 4th April 2026",
-  currentVenue: "Shaheed Noor Hossain National Volleyball Stadium, Purana Paltan, Dhaka 1000",
-  announcementText: "Season 2 complete. Thank you to everyone who showed up.",
+  currentSeasonName: "OFC Season 1 + OVC Season 4",
+  currentSeasonDates: "23rd June & 1st–4th July 2026",
+  currentVenue: "Dhaka",
+  announcementText: "Registration open — Football (23 Jun) & Volleyball (1–4 Jul).",
 
-  // ---- REGISTRATION FORMS ----
+  // ---- VOLLEYBALL REGISTRATION FORMS (OVC S4) ----
+  formVbU19Boys:      "https://obsidiancup.fillout.com/u19boys",
+  formVbAllAgeBoys:   "https://obsidiancup.fillout.com/allageboys",
+  formVbAllAgeGirls:  "https://obsidiancup.fillout.com/allagegirls",
+
+  // ---- FOOTBALL REGISTRATION FORM (OFC S1) ----
+  formFootball: "https://obsidiancup.fillout.com/registration",
+
+  // ---- LEGACY VOLLEYBALL FORMS (OVSC S2 — archived) ----
   formInterschool: "https://obsidiancup.fillout.com/ovscinterboys",
   formBoysOpenAge: "https://obsidiancup.fillout.com/ovscboys",
   formGirlsOpenAge: "https://obsidiancup.fillout.com/ovscgirls",
