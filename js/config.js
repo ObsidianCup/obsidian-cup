@@ -9,24 +9,16 @@ const SITE_CONFIG = {
 
   // ---- SEASON TOGGLES ----
   tournamentActive: false,
-  registrationOpen: false,   // Disabled — registration lives on sport pages now
-  rulesVisible: true,
+  registrationOpen: false,
+  rulesVisible: false,
 
   // ---- CURRENT SEASON INFO ----
-  currentSeasonName: "OFC Season 1 + OVC Season 4",
-  currentSeasonDates: "23rd June & 1st–4th July 2026",
-  currentVenue: "Dhaka",
-  announcementText: "Registration open — Football (23 Jun) & Volleyball (1–4 Jul).",
+  currentSeasonName: "Obsidian Volleyball Cup Season 4",
+  currentSeasonDates: "Completed in 2026",
+  currentVenue: "Dhaka, Bangladesh",
+  announcementText: "OFC Season 1 and OVC Season 4 are complete. Thank you to everyone who showed up.",
 
-  // ---- VOLLEYBALL REGISTRATION FORMS (OVC S4) ----
-  formVbU19Boys:      "https://obsidiancup.fillout.com/u19boys",
-  formVbAllAgeBoys:   "https://obsidiancup.fillout.com/allageboys",
-  formVbAllAgeGirls:  "https://obsidiancup.fillout.com/allagegirls",
-
-  // ---- FOOTBALL REGISTRATION FORM (OFC S1) ----
-  formFootball: "https://obsidiancup.fillout.com/registration",
-
-  // ---- LEGACY VOLLEYBALL FORMS (OVSC S2 — archived) ----
+  // ---- REGISTRATION FORMS ----
   formInterschool: "https://obsidiancup.fillout.com/ovscinterboys",
   formBoysOpenAge: "https://obsidiancup.fillout.com/ovscboys",
   formGirlsOpenAge: "https://obsidiancup.fillout.com/ovscgirls",

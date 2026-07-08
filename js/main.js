@@ -8,6 +8,7 @@ function heroEntrance() {
   const badge    = document.getElementById('heroBadge');
   const title    = document.getElementById('heroTitle');
   const tagline  = document.getElementById('heroTagline');
+  const launchNote = document.querySelector('.hero-launch-note');
   const rule     = document.getElementById('heroRule');
   const meta     = document.getElementById('heroMeta');
   const topMeta  = document.getElementById('heroTopMeta');
@@ -21,6 +22,7 @@ function heroEntrance() {
   at(() => badge   && badge.classList.add('visible'), 500);
   at(() => title   && title.classList.add('revealed'), 780);
   at(() => tagline && tagline.classList.add('visible'), 1100);
+  at(() => launchNote && launchNote.classList.add('visible'), 1100);
   at(() => rule    && rule.classList.add('expanded'),  1150);
   at(() => meta    && meta.classList.add('visible'),   1300);
   at(() => topMeta && topMeta.classList.add('visible'), 1300);
@@ -314,6 +316,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ---- Tournament data ----
 const TOURNAMENTS = {
+  ovc_s4: {
+    season: 'OVC — Season 4 · 2026',
+    name: 'Obsidian Volleyball Cup',
+    type: 'U19 Boys · Boys Open Age · Girls Open Age',
+    date: 'Completed in 2026',
+    venue: 'Bangladesh Volleyball Federation supported season',
+    venueAddress: 'Dhaka, Bangladesh',
+    summary: 'The fourth Obsidian Volleyball Cup, completed across three categories with federation-backed support.',
+    description: 'OVC Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported with help from the Bangladesh Volleyball Federation.',
+    sponsors: 'Stall Partner PHEEZES · Crochet Partner CROKETOPIA · Fragrance Partner HI. TALHA',
+    teams: '17 teams · 5 U19 Boys, 6 Boys Open Age, 6 Girls Open Age',
+    spectators: '60+',
+    results: [
+      { category: 'U19 Boys', champion: 'Silhoutte', runner: 'Fearless Flyers' },
+      { category: 'Boys — Open Age', champion: 'Fearless Flyers', runner: 'Legend Hunters' },
+      { category: 'Girls — Open Age', champion: 'Pythons', runner: 'Panthers' },
+    ]
+  },
+  ofc_s1: {
+    season: 'OFC — Season 1 · June 2026',
+    name: 'Obsidian Football Cup',
+    type: 'Football',
+    date: 'June 2026',
+    venue: 'Obsidian Football Cup stage',
+    venueAddress: 'Dhaka, Bangladesh',
+    summary: 'The first football chapter of Obsidian Cup.',
+    description: 'OFC Season 1 brought football into the Obsidian Cup story with five teams competing in the first season. Thaelor became the first Obsidian Football Cup champion, with Team 01 finishing as runner-up. This season had no sponsors and kept the spotlight on the teams, the game, and the first step into a new format.',
+    sponsors: null,
+    teams: '5 teams',
+    spectators: '15+',
+    results: [
+      { category: 'Football', champion: 'Thaelor', runner: 'Team 01' },
+    ]
+  },
   ovsc_s2: {
     season: 'OVSC — Season 2 · April 2026',
     name: 'Obsidian Volleyball Super Cup',
@@ -322,7 +358,7 @@ const TOURNAMENTS = {
     venue: 'Shaheed Noor Hossain National Volleyball Stadium',
     venueAddress: 'Purana Paltan, Dhaka 1000',
     summary: 'Our third tournament, and the first time OVC and OVASC shared one stage.',
-    description: 'The Super Cup brought the girls open-age and boys open-age brackets together at the National Volleyball Stadium for two full days. It felt bigger, sharper, and more alive than anything before it: nine teams, two categories, a stronger crowd, and a standard that finally matched the ambition of Obsidian Cup.',
+    description: 'The Super Cup brought the girls open-age and boys open-age brackets together at the National Volleyball Stadium for two full days. It felt bigger, sharper, and more alive than anything before it: nine teams, a stronger crowd, and a standard that finally matched the ambition of Obsidian Cup.',
     sponsors: 'The Punch Company',
     teams: '9 teams · 5 Girls, 4 Boys',
     spectators: '50+',
@@ -389,7 +425,7 @@ function populateModal(data) {
         <strong>${data.venue}</strong>
         <small>${data.venueAddress}</small>
       </div>
-      ${data.sponsors ? `<div class="modal-sponsor"><span>Sponsor</span><strong>${data.sponsors}</strong></div>` : ''}
+      ${data.sponsors ? `<div class="modal-sponsor"><span>Partners</span><strong>${data.sponsors}</strong></div>` : ''}
     `;
   }
 
