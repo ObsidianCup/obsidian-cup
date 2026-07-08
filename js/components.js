@@ -23,6 +23,8 @@ function injectNav() {
     <nav role="navigation" aria-label="Main navigation">
       <ul class="nav-links">
         <li><a href="${p('index.html')}" data-key="navHome">Home</a></li>
+        <li><a href="${p('pages/football.html')}" data-key="navFootball">Football</a></li>
+        <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
         <li><a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a></li>
         <li><a href="${p('pages/about.html')}" data-key="navAbout">About</a></li>
         <li><a href="${p('pages/faq.html')}" data-key="navFaq">FAQ</a></li>
@@ -53,6 +55,8 @@ function injectNav() {
     <button class="mobile-close" aria-label="Close menu">×</button>
     <img src="${a('assets/logo-mark.png')}" alt="Obsidian Cup" class="mobile-logo" loading="lazy" />
     <a href="${p('index.html')}" data-key="navHome">Home</a>
+    <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
+    <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
     <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
     <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
     <a href="${p('pages/faq.html')}" data-key="navFaq">FAQ</a>
@@ -78,6 +82,8 @@ function injectFooter() {
     <div class="footer-logo">Obsidian Cup</div>
     <div class="divider"><div class="divider-diamond"></div></div>
     <nav class="footer-links" aria-label="Footer navigation">
+      <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
+      <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
       <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
       <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
       <a href="${p('pages/faq.html')}" data-key="navFaq">FAQ</a>
