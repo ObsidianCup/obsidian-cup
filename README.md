@@ -2,7 +2,7 @@
 
 **Live site:** [obsidiancup.vercel.app](https://obsidiancup.vercel.app)
 
-Bangladesh's premier underground volleyball tournament brand. Home of OVC (Obsidian Volleyball Cup) and OVASC (Obsidian Volleyball All Stars Cup).
+Bangladesh's growing tournament brand. Home of Obsidian Cup football and volleyball events.
 
 ---
 
@@ -26,7 +26,7 @@ Bangladesh's premier underground volleyball tournament brand. Home of OVC (Obsid
 The site is content-driven and mostly static. A JavaScript framework would add significant bundle size with no real benefit. Vanilla JS delivers sub-second load times on mobile connections in Bangladesh.
 
 **Why Cormorant Garamond + DM Sans?**
-The tournament brand is built on a dark, editorial aesthetic — premium but not corporate. Cormorant Garamond brings a legacy, almost stone-carved quality to headings. DM Sans keeps body text clean and highly readable at small sizes on mobile.
+The tournament brand is built on a dark, editorial aesthetic with a premium sports feel. Cormorant Garamond brings a legacy, almost stone-carved quality to headings. DM Sans keeps body text clean and highly readable at small sizes on mobile.
 
 **Why CSS custom properties over a preprocessor?**
 CSS variables are native, require no build step, and allow runtime theming. The bilingual toggle (EN/BN) and any future dark/light switching can be handled purely in JS by swapping variable values — no Sass or Less needed.
