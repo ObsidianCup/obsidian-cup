@@ -2971,3 +2971,202 @@ html[lang="bn"] .hero-title {
     height: 132px;
   }
 }
+
+/* ---- July archive/content pass ---- */
+.champions-grid-feature {
+  max-width: 760px;
+  margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.champions-grid-feature .champion-block {
+  min-height: 230px;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 1px;
+  max-width: 980px;
+  background: rgba(192,192,192,0.08);
+}
+
+.impact-item {
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1.2rem;
+  background: var(--black);
+}
+
+.partner-card {
+  height: 410px;
+  min-height: 410px;
+  max-width: none;
+  gap: 1.15rem;
+}
+
+.partners-grid,
+.sport-partners-row {
+  align-items: stretch;
+}
+
+.partner-card-wide {
+  grid-column: auto;
+}
+
+.partner-logo-wrap,
+.partner-logo-wrap-real,
+.partner-logo-wrap-clean,
+.partner-logo-wrap-text {
+  width: min(100%, 250px);
+  height: 118px;
+  max-width: 250px;
+  margin: 0 auto;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  overflow: visible;
+}
+
+.partner-logo-wrap-real .partner-logo,
+.partner-logo-wrap-clean .partner-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center;
+  filter: brightness(1.08) contrast(1.04);
+}
+
+.partner-logo-pheezes {
+  transform: scale(1.08);
+}
+
+.partner-clean-mark {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(245,240,232,0.9);
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2vw, 1.55rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px rgba(255,255,255,0.12);
+}
+
+.partner-clean-mark-bvf {
+  color: rgba(245,240,232,0.94);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 4.3rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.partner-name-bvf {
+  margin-bottom: -0.6rem;
+}
+
+.partner-subname {
+  max-width: 260px;
+  margin: -0.3rem auto 0;
+  font-size: 0.64rem;
+  line-height: 1.6;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(192,192,192,0.58);
+}
+
+.partner-card:hover .partner-logo-wrap-real .partner-logo,
+.partner-card:hover .partner-logo-wrap-clean .partner-logo,
+.partner-card:hover .partner-clean-mark {
+  transform: scale(1.035);
+  filter: brightness(1.16) drop-shadow(0 6px 18px rgba(255,255,255,0.08));
+}
+
+.sport-event-block {
+  margin-top: 3rem;
+  border: 1px solid rgba(192,192,192,0.08);
+  background:
+    radial-gradient(ellipse 75% 75% at 0% 0%, rgba(212,175,95,0.035), transparent 58%),
+    linear-gradient(145deg, rgba(18,18,18,0.98), rgba(9,9,9,0.98));
+  padding: clamp(2rem, 4vw, 3rem);
+  cursor: pointer;
+}
+
+.sport-event-head {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sport-event-head .section-label {
+  color: rgba(212,175,95,0.62);
+}
+
+.sport-event-head h3 {
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  margin-bottom: 1rem;
+}
+
+.sport-event-head p:last-child {
+  color: rgba(245,240,232,0.68);
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
+.sport-event-block .sport-results-grid {
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .partner-card {
+    height: auto;
+    min-height: 340px;
+  }
+}
+
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 560px) {
+  .impact-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-item {
+    min-height: 140px;
+  }
+
+  .partner-logo-wrap,
+  .partner-logo-wrap-real,
+  .partner-logo-wrap-clean,
+  .partner-logo-wrap-text {
+    height: 104px;
+  }
+}
