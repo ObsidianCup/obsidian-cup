@@ -80,6 +80,7 @@ function injectFooter() {
   footer.innerHTML = `
     <img src="${a('assets/logo-mark.png')}" alt="Obsidian Cup" class="footer-logo-img" loading="lazy" />
     <div class="footer-logo">Obsidian Cup</div>
+    <p class="footer-tagline" data-key="footerTagline">Carved by Legacy · Crowned in Obsidian</p>
     <div class="divider"><div class="divider-diamond"></div></div>
     <nav class="footer-links" aria-label="Footer navigation">
       <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
