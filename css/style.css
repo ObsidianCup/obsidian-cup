@@ -3226,3 +3226,92 @@ html[lang="bn"] .hero-title {
     flex-basis: min(100%, 320px);
   }
 }
+
+/* ---- Final partner asset polish ---- */
+.partner-logo-wrap-pheezes,
+.partner-logo-wrap-croketopia,
+.partner-logo-wrap-hi-talha,
+.partner-logo-wrap-bvf {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.partner-logo-wrap-pheezes .partner-logo-pheezes {
+  object-fit: cover !important;
+  object-position: center;
+  transform: scale(1.34);
+}
+
+.partner-logo-wrap-croketopia {
+  -webkit-mask-image: radial-gradient(ellipse 64% 60% at 50% 50%, #000 60%, rgba(0,0,0,0.72) 75%, transparent 100%);
+  mask-image: radial-gradient(ellipse 64% 60% at 50% 50%, #000 60%, rgba(0,0,0,0.72) 75%, transparent 100%);
+}
+
+.partner-logo-wrap-croketopia .partner-logo-croketopia {
+  object-fit: cover !important;
+  object-position: center 47%;
+  transform: scale(1.34);
+  mix-blend-mode: screen;
+}
+
+.partner-logo-wrap-hi-talha {
+  width: 152px;
+  height: 152px;
+  margin-top: -17px;
+  margin-bottom: -17px;
+  -webkit-mask-image: radial-gradient(ellipse 54% 72% at 50% 52%, #000 54%, rgba(0,0,0,0.64) 76%, transparent 100%);
+  mask-image: radial-gradient(ellipse 54% 72% at 50% 52%, #000 54%, rgba(0,0,0,0.64) 76%, transparent 100%);
+}
+
+.partner-logo-wrap-hi-talha .partner-logo-hi-talha {
+  object-fit: contain !important;
+  object-position: center;
+  transform: scale(1.08);
+  filter: brightness(1.08) contrast(1.04);
+}
+
+.partner-logo-wrap-bvf {
+  width: 118px;
+  height: 118px;
+  border-radius: 24px;
+  background: transparent;
+}
+
+.partner-logo-wrap-bvf .partner-logo-bvf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 184px !important;
+  height: 184px !important;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  object-fit: contain !important;
+  transform: translate(-50%, -50%);
+}
+
+.partner-card:hover .partner-logo-wrap-pheezes .partner-logo-pheezes {
+  transform: scale(1.38);
+}
+
+.partner-card:hover .partner-logo-wrap-croketopia .partner-logo-croketopia {
+  transform: scale(1.38);
+}
+
+.partner-card:hover .partner-logo-wrap-hi-talha .partner-logo-hi-talha {
+  transform: scale(1.11);
+}
+
+.partner-card:hover .partner-logo-wrap-bvf .partner-logo-bvf {
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+@media (max-width: 560px) {
+  .partner-logo-wrap-hi-talha {
+    width: 136px;
+    height: 136px;
+    margin-top: -16px;
+    margin-bottom: -16px;
+  }
+}
