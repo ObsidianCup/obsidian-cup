@@ -24,6 +24,7 @@ previews, and confirm before big or irreversible changes.
 
 Plan and every decision so far: `docs/PLAYER-ACCOUNTS-PLAN.md`.
 Legal/consent texts (English source): `docs/legal/legal-texts-en-v1.md`.
+Season 5 launch plan (research, emails, history, handbook, setup steps): `docs/SEASON-5-LAUNCH-PLAN.md`.
 Keep both files updated as work progresses and decisions change.
 
 ## Rules

@@ -1,6 +1,8 @@
 # Player Accounts System — Plan and Decisions
 
-Last updated: 31 Oct 2026. Status: **planning done, nothing built yet.**
+Last updated: 31 Oct 2026. Status: **planning done, nothing built yet. Target: Season 5 volleyball launch.**
+
+Full launch plan (legal setup, research, emails, history, handbook, setup steps): [`SEASON-5-LAUNCH-PLAN.md`](SEASON-5-LAUNCH-PLAN.md)
 
 This file records every decision made so far, so work can continue from any
 chat or account. Update it whenever a decision changes.
@@ -16,7 +18,9 @@ events, and the organiser verifies everything from one admin page.
 | Topic | Decision |
 | --- | --- |
 | Who has accounts | Every player has their own account |
-| Login | Google sign-in only (free). No phone/SMS login |
+| Login | Google sign-in, or email + password (both free). No phone/SMS login. Passwords are never emailed |
+| Player code | Every account gets a permanent code like `OC-7KM2Q` (no 0/O/1/I), emailed in the welcome email; used for check-in QR, player card, certificates, public page `/player/<code>` |
+| Organiser (legal) | Obsidian Cup is not a legal entity yet. Legal texts name **Uriana Faiha, founder and head organiser, trading as Obsidian Cup**. Recommended next step: sole proprietorship trade licence; later an OPC |
 | Saving | Profile forms autosave as the player types |
 | Teams | Captain creates a team with a **captain code**; players join with a **team join code** and the captain approves. No searching other players |
 | Captain codes | Issued by the organiser from the admin page. One code = one team in one event. Single use, expires, tied to the first account that uses it |
@@ -25,7 +29,11 @@ events, and the organiser verifies everything from one admin page.
 | Under 18 | Guardian completes consent themselves via a private one-time link (7-day expiry) the player sends them. Paper form fallback at check-in |
 | ID photos | Required to play. Private storage, only player + admin can view. Compressed on upload. Marked verified once; image deleted 30 days after the event |
 | Medical notes | Optional, separate explicit consent (health data is sensitive under Bangladesh's PDPO 2025) |
-| Payment | Manual bKash. Captain enters transaction ID; admin verifies. Each transaction ID usable once |
+| Payment | Manual bKash. Captain enters transaction ID; admin verifies. Each transaction ID usable once. Consider a bKash Personal Retail Account to separate tournament money |
+| Emails | 15 automatic emails (welcome, guardian, join, payment reminders, confirmed, match-day pack, changes, results). Email queue table in DB; GitHub Action every 15 min sends via Gmail SMTP (app password); same job keeps Supabase awake. Supabase auth emails use Gmail as custom SMTP. Switch to Resend once a domain exists |
+| History | Import past rosters from Fillout CSV exports and the organiser's awards list. Players claim past records ("this is me"), admin approves |
+| Certificates | Later stage. PDF per player with QR + `/verify/<id>` page |
+| Handbook | One page EN/BN + PDF, new edition per season, linked from the event agreement |
 | Languages | Everything in English and Bangla. Claude writes English; the organiser writes the Bangla |
 | Cost | Free tiers only for now, with a clear upgrade path |
 
@@ -47,7 +55,8 @@ events, and the organiser verifies everything from one admin page.
 | --- | --- | --- | --- |
 | Website | Existing static site on Vercel (vanilla HTML/CSS/JS) | Hobby plan; officially non-commercial, check terms | Vercel Pro, or Cloudflare Pages (free, commercial OK) |
 | Accounts, database, file storage | Supabase, Singapore region, project `obsidian-cup` | 500 MB DB, 1 GB storage, 50k monthly users | Pro $25/month, same project |
-| Login | Supabase Auth with Google provider | Free | Free |
+| Login | Supabase Auth: Google provider + email/password | Free | Free |
+| Email sending | Gmail SMTP (~500/day) via GitHub Actions queue sender | Free | Resend (needs domain; free 100/day, 3,000/month) |
 | Keep-alive | GitHub Action pinging the database daily (free projects pause after ~7 days of low activity) | Free | Not needed on Pro |
 | Domain | Optional, ~$10–15/year. Buy before setting up Google login | — | — |
 
@@ -84,7 +93,7 @@ Supabase account must be owned by obsidiancup.official@gmail.com.
 
 ## Build stages
 
-1. **Foundation:** Supabase schema, Google login, player profile with
+1. **Foundation:** Supabase schema, Google + email/password login, player code + welcome email, player profile with
    autosave, sign-up consents, admin page skeleton, security tests.
 2. **Teams:** captain codes, team creation, join codes, roster rules.
 3. **Registration:** per-event consents, ID upload, guardian consent link,
@@ -93,7 +102,9 @@ Supabase account must be owned by obsidiancup.official@gmail.com.
 
 ## Open questions
 
-- Organiser legal name and postal address for the legal texts.
+- Postal address for the legal texts; whether to get a trade licence now.
+- Season 5 dates, venue, categories, fees, deadline, team limits.
+- Handbook inputs: match format, MVP selection, appeals process, safeguarding contact.
 - Controlling language (English or Bangla) if the versions differ.
 - Offer event credit as an alternative to refunds?
 - Confirm the new refund rules marked "(new)" in the Payment policy.

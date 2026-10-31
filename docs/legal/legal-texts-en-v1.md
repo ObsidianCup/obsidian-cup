@@ -1,6 +1,6 @@
 # Obsidian Cup — Player Accounts: Legal & Consent Texts (English source)
 
-Version 1.0 · drafted 31 Oct 2026 · English source
+Version 1.0 · updated 31 Oct 2026 · English source
 
 ## How to use this doc
 
@@ -13,7 +13,7 @@ This is the English source for every legal text players will see in the Obsidian
 
 **Open questions for you:**
 
-- What is the organiser's legal name? Is Obsidian Cup a registered business or organisation, or run by named individuals?
+- Organiser: Obsidian Cup is not yet a legal entity, so the texts name Uriana Faiha, trading as Obsidian Cup. Update this if a trade licence or company is registered (see the Season 5 Launch Plan, section 1).
 - What postal address should appear for formal notices?
 - Is 30 days after each event the right time to delete ID photos?
 
@@ -23,8 +23,8 @@ Shown once at sign-up. A player must agree before creating a profile.
 
 **Obsidian Cup Account Terms of Use — version 1.0**
 
-1. **Who we are.** Obsidian Cup is a sports tournament organiser based in Dhaka, Bangladesh, operated by \[Organiser legal name\] ("Obsidian Cup", "we", "us"). These terms apply to your Obsidian Cup account and to your use of obsidiancup.vercel.app and any domain we later use.
-2. **Your account.** You sign in with your own Google account. You may hold only one Obsidian Cup account. You must not create an account for someone else, share your account, or let anyone else use it.
+1. **Who we are.** Obsidian Cup is a sports tournament organiser based in Dhaka, Bangladesh, run by its founder and head organiser, Uriana Faiha, trading as Obsidian Cup ("Obsidian Cup", "we", "us"). These terms apply to your Obsidian Cup account and to your use of obsidiancup.vercel.app and any domain we later use.
+2. **Your account.** You sign in with your own Google account, or with your own email address and a password you choose. Keep your password private; Obsidian Cup will never ask for it. You may hold only one Obsidian Cup account. You must not create an account for someone else, share your account, or let anyone else use it.
 3. **Accurate information.** You must give true, complete and current information, including your full name, date of birth and contact details. You must update it if it changes. Giving false information, including a false date of birth or another person's identity, may lead to your account being suspended and to disqualification from any event, without refund.
 4. **Players under 18.** If you are under 18, you may create an account, but you cannot join a team or take part in any event until your parent or legal guardian has given consent through the guardian consent process.
 5. **Captains.** Only a person given a valid captain code by Obsidian Cup may create a team. A captain code is personal, works once, and is tied to the account that uses it first.
@@ -46,7 +46,7 @@ Shown at sign-up, and linked in the footer of every page. Written to cover what 
 
 | Data | Required? | Why we need it |
 | --- | --- | --- |
-| Name, email (from Google sign-in) | Yes | To create and secure your account |
+| Name, email (from Google sign-in or the email you sign up with), your player code | Yes | To create and secure your account |
 | Full legal name, date of birth, gender, phone number | Yes | To check eligibility for categories and age limits, and to contact you about events |
 | School, college or club | For school and age-group categories | To check eligibility |
 | Emergency contact: name, relationship, phone | Yes, to play in an event | To reach someone if you are injured or unwell at an event |
@@ -135,7 +135,7 @@ Every player agrees to this personally, once per event, before their team's regi
 
 **Obsidian Cup Event Participation Agreement — version 1.0**
 
-This agreement is between you and \[Organiser legal name\] ("Obsidian Cup") for the event named on your registration ("the Event").
+This agreement is between you and Uriana Faiha, trading as Obsidian Cup ("Obsidian Cup") for the event named on your registration ("the Event").
 
 **1. Eligibility and honesty**
 
