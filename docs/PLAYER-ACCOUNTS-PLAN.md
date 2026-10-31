@@ -124,8 +124,13 @@ project); real player photos only, never AI-made ones of players.
    checks: 2-step on GitHub, Supabase, Vercel, Google; minimum password
    length set in Supabase too; weekly backup routine.
 3. **Now — website redesign** (three homepage directions on the "Obsidian Cup —
-   Website Redesign" design canvas in the organiser's account: A Editorial,
-   B Matchday, C Daylight; waiting for her pick): design system first (colours 60/30/10, type,
+   Website Redesign" design canvas in the organiser's account, round 2 built
+   with the anti-slop, typography, spacing, reduced-motion and transitions
+   skills: A Court, B Obsidian Glass, C Programme; waiting for her pick.
+   Rules for the build: max 3 weights (none over 600), body 16px, nothing
+   under 12px, headings line-height 1.1–1.2, 8px spacing grid, text ≤70ch,
+   sentence case, no all-caps labels, no stats strip, no scroll fade-ins,
+   every transition has a prefers-reduced-motion fallback): design system first (colours 60/30/10, type,
    spacing, components) shown as a preview, then home → event pages → the
    rest. Live site changes only after approval. New logo slots in when ready.
 4. **Teams + emails:** captain codes, teams, join codes, roster rules;
