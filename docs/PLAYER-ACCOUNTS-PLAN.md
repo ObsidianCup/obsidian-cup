@@ -22,7 +22,9 @@ events, and the organiser verifies everything from one admin page.
 | Who has accounts | Every player has their own account |
 | Login | Google sign-in (live since 1 Nov 2026; Google Cloud project `obsidian-cup` on obsidiancup.official, app published) or email + password (both free). No phone/SMS login. Passwords are never emailed |
 | Player code | Every account gets a permanent code from the player's initials + 3 digits, e.g. Uriana Faiha → `OC-UF427` (digits skip 0 and 1), emailed in the welcome email; used for check-in QR, player card, certificates, public page `/player/<code>` |
-| Custom codes | Organisers can reserve a code for an email (`reserved_player_codes`) or change a code from the SQL Editor; players cannot. Founder's code: OC-UF023 |
+| Custom codes | Organisers can reserve a code for an email (`reserved_player_codes`) or change any code from the SQL Editor. Founder's code: OC-UF023 |
+| Choosing a code | After the automatic code, a player can pick another, Instagram-style: suggestions (777, 123, 2026, …) or their own 3–4 digits, always `OC-` + their initials, live "available/taken" check. At most 2 changes. A code someone gives up is retired forever (`retired_player_codes`). If the welcome email already went out, a `code_changed` email is queued (005) |
+| Login with code | Players can log in with player code + password instead of email. The Edge Function `supabase/functions/login-with-code` looks up the email on the server, so a code never reveals an email. Max 5 failed tries per code and 20 per address in 15 minutes (005). Google login and email login stay |
 | Date of birth | Must match the player's ID (checked at tournaments). First entry is free; a player can change it at most 2 times, then only an organiser can. Saved on leaving the field, after a confirmation |
 | Login links | `flowType: 'implicit'` so confirmation and reset links work on any device; expired links show a clear message |
 | Passwords | Show/hide button on every password field; sign-up and reset ask for the password twice |

@@ -102,6 +102,9 @@
     $('#authTitle').textContent = t(signup ? 'authTitleSignup' : 'authTitleLogin');
     $('#authSubmit').textContent = t(signup ? 'btnSignup' : 'btnLogin');
     $('#authPassword').autocomplete = signup ? 'new-password' : 'current-password';
+    $('#authEmailLabel').textContent = t(signup ? 'email' : 'emailOrCode');
+    $('#authEmail').autocomplete = signup ? 'email' : 'username';
+    $('#authEmail').inputMode = signup ? 'email' : 'text';
     $('#passwordHint').hidden = !signup;
     $('#password2Field').hidden = !signup;
     $('#forgotBtn').parentElement.hidden = signup;
@@ -122,6 +125,21 @@
     });
   }
 
+  // Player code + password: a small server function finds the email, so the
+  // page never sees anyone's email (supabase/functions/login-with-code).
+  async function loginWithCode(code, password) {
+    const res = await fetch(SITE_CONFIG.supabaseUrl + '/functions/v1/login-with-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SITE_CONFIG.supabasePublishableKey },
+      body: JSON.stringify({ code, password }),
+    });
+    const body = await res.json().catch(() => ({}));
+    if (res.status === 429) throw new Error('too many');
+    if (!res.ok || !body.access_token) throw new Error('invalid');
+    const { error } = await db.auth.setSession({ access_token: body.access_token, refresh_token: body.refresh_token });
+    if (error) throw error;
+  }
+
   function wireAuth() {
     wirePasswordToggles();
     $$('.acct-tab').forEach(b => b.addEventListener('click', () => { msg('authMsg', ''); setAuthMode(b.dataset.tab); }));
@@ -129,9 +147,12 @@
 
     $('#authForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = $('#authEmail').value.trim().toLowerCase();
+      const raw = $('#authEmail').value.trim();
+      const email = raw.toLowerCase();
       const password = $('#authPassword').value;
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg('authMsg', t('errEmail'), 'error'); return; }
+      const byCode = authMode === 'login' && !raw.includes('@');
+      if (byCode && !/^(OC)?-?[A-Z]{1,3}[0-9]{3,6}$/i.test(raw.replace(/\s/g, ''))) { msg('authMsg', t('errEmailOrCode'), 'error'); return; }
+      if (!byCode && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg('authMsg', t(authMode === 'login' ? 'errEmailOrCode' : 'errEmail'), 'error'); return; }
       if (password.length < 8) { msg('authMsg', t('errPassword'), 'error'); return; }
       if (authMode === 'signup' && password !== $('#authPassword2').value) { msg('authMsg', t('errPasswordMatch'), 'error'); return; }
       const btn = $('#authSubmit'); btn.disabled = true;
@@ -142,6 +163,8 @@
           if (data.session) return;              // email confirmation switched off: already logged in
           $('#checkEmailBody').textContent = t('checkEmailBody', { email });
           show('checkemail');
+        } else if (byCode) {
+          await loginWithCode(raw, password);
         } else {
           const { error } = await db.auth.signInWithPassword({ email, password });
           if (error) throw error;
@@ -149,7 +172,7 @@
       } catch (err) {
         const m = (err && err.message) || '';
         msg('authMsg', /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
-          : authMode === 'login' ? t('errLogin') : t('genericError'), 'error');
+          : byCode ? t('errLoginCode') : authMode === 'login' ? t('errLogin') : t('genericError'), 'error');
       } finally { btn.disabled = false; }
     });
 
@@ -306,7 +329,81 @@
     $('#copyCode').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(profile.player_code); $('#copyCode').textContent = t('copied'); setTimeout(() => { $('#copyCode').textContent = t('copy'); }, 1500); } catch (e) {}
     });
+    wireCodePicker();
     renderPositions();
+  }
+
+  // ---------- Choosing a player code ----------
+  function initialsOf(name) {
+    const i = (name || '').toUpperCase().split(/\s+/).map(w => w.replace(/[^A-Z]/g, '')).filter(Boolean).map(w => w[0]).join('').slice(0, 3);
+    return i || 'X';
+  }
+  function wireCodePicker() {
+    let checkTimer = null, lastChecked = '';
+    const prefix = () => 'OC-' + initialsOf(profile.legal_name);
+    const left = () => Math.max(0, 2 - (profile.code_changes || 0));
+    const status = (text, kind) => { const el = $('#codeStatus'); el.textContent = text; el.className = 'acct-hint' + (kind ? ' is-' + kind : ''); };
+
+    async function check() {
+      const digits = $('#codeDigits').value;
+      const code = prefix() + digits;
+      $('#codeSave').disabled = true;
+      $$('#codeSuggestions input').forEach(r => { r.checked = r.value === code; });
+      if (!/^[0-9]{3,4}$/.test(digits)) { status(digits ? t('codeFormat') : '', digits ? 'bad' : ''); return; }
+      if (code === profile.player_code) { status(t('codeCurrent')); return; }
+      status(t('codeChecking'));
+      lastChecked = code;
+      const { data, error } = await db.rpc('player_code_status', { p_code: code });
+      if (lastChecked !== code) return;                 // they kept typing
+      if (error) { status(t('genericError'), 'bad'); return; }
+      if (data === 'ok') { status(t('codeOk', { code }), 'ok'); $('#codeSave').disabled = false; }
+      else if (data === 'limit') status(t('codeNoChangesLeft'), 'bad');
+      else if (data === 'format') status(t('codeFormat'), 'bad');
+      else status(t('codeTaken', { code }), 'bad');
+    }
+
+    async function open() {
+      msg('codeDone', '');
+      $('#codePicker').hidden = false; $('#codeChangeWrap').hidden = true;
+      msg('codeMsg', '');
+      $('#codePrefix').textContent = prefix();
+      $('#codeDigits').value = ''; status('');
+      $('#codeSave').disabled = true;
+      const none = left() === 0;
+      $('#codePickerIntro').textContent = none ? t('codeNoChangesLeft') : t('codeChangesLeft', { n: left() });
+      ['#codeSuggestions', '#codeDigits', '#codeSave'].forEach(sel => { $(sel).closest('.acct-field, .acct-chips, button').hidden = none; });
+      $('#codeSuggestions').innerHTML = '';
+      if (none) return;
+      const { data } = await db.rpc('suggest_player_codes');
+      $('#codeSuggestions').innerHTML = (data || []).map(c => `
+        <label class="acct-chip"><input type="radio" name="codeSug" value="${ocEscape(c)}"><span>${ocEscape(c)}</span></label>`).join('');
+      $$('#codeSuggestions input').forEach(r => r.addEventListener('change', () => {
+        $('#codeDigits').value = r.value.slice(prefix().length); check();
+      }));
+    }
+    function close() { $('#codePicker').hidden = true; $('#codeChangeWrap').hidden = !profile.player_code; }
+
+    $('#codeChangeBtn').addEventListener('click', open);
+    $('#codeCancel').addEventListener('click', close);
+    $('#codeDigits').addEventListener('input', e => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+      clearTimeout(checkTimer); checkTimer = setTimeout(check, 350);
+    });
+    $('#codeSave').addEventListener('click', async () => {
+      const code = prefix() + $('#codeDigits').value;
+      if (!confirm(t('codeConfirm', { code, n: left() - 1 }))) return;
+      $('#codeSave').disabled = true;
+      const { data, error } = await db.rpc('choose_player_code', { p_code: code });
+      if (error) {
+        const m = error.message || '';
+        msg('codeMsg', /code_taken/.test(m) ? t('codeTaken', { code }) : /code_limit/.test(m) ? t('codeNoChangesLeft') : t('genericError'), 'error');
+        return;
+      }
+      const { data: fresh } = await db.from('profiles').select('*').eq('id', user.id).maybeSingle();
+      if (fresh) profile = fresh;
+      close(); renderHome();
+      msg('codeDone', t('codeSaved', { code: data }), 'ok');
+    });
   }
 
   // ---------- Phone numbers with country codes ----------
@@ -430,7 +527,8 @@
 
     $('#codeValue').textContent = profile.player_code || '—';
     $('#copyCode').hidden = !profile.player_code;
-    $('#codePending').hidden = !!profile.player_code;
+    $('#codePending').textContent = t(profile.player_code ? 'codeLoginTip' : 'codePending');
+    $('#codeChangeWrap').hidden = !profile.player_code || !$('#codePicker').hidden;
 
     const age = ocAge(profile.date_of_birth);
     const under13 = age !== null && age < 13 && !profile.guardian_consent_at;

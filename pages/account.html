@@ -46,8 +46,8 @@
 
         <form id="authForm" novalidate>
           <div class="acct-field">
-            <label for="authEmail" data-t="email">Email</label>
-            <input class="acct-input" id="authEmail" type="email" autocomplete="email" inputmode="email" required />
+            <label for="authEmail" id="authEmailLabel" data-t="emailOrCode">Email or player code</label>
+            <input class="acct-input" id="authEmail" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required />
           </div>
           <div class="acct-field">
             <label for="authPassword" data-t="password">Password</label>
@@ -157,6 +157,25 @@
           <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="copyCode" hidden data-t="copy">Copy</button>
         </div>
         <p class="acct-muted" id="codePending" data-t="codePending" style="margin-top:0.5rem;"></p>
+        <p style="margin-top:0.75rem;" id="codeChangeWrap" hidden><button class="acct-link" type="button" id="codeChangeBtn" data-t="codeChange">Choose a different code</button></p>
+        <div id="codeDone"></div>
+        <div id="codePicker" hidden>
+          <p class="acct-muted" id="codePickerIntro" style="margin:1rem 0 0.75rem;"></p>
+          <div class="acct-chips" id="codeSuggestions"></div>
+          <div class="acct-field" style="margin-top:1rem;">
+            <label for="codeDigits" data-t="codeOwn">Or type your own numbers</label>
+            <div class="acct-codepick">
+              <span class="acct-codepick-prefix" id="codePrefix">OC-</span>
+              <input class="acct-input" id="codeDigits" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="777" />
+            </div>
+            <span class="acct-hint" id="codeStatus" aria-live="polite"></span>
+          </div>
+          <div id="codeMsg"></div>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <button class="acct-btn acct-btn-small" type="button" id="codeSave" disabled data-t="codeSave">Use this code</button>
+            <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="codeCancel" data-t="cancel">Cancel</button>
+          </div>
+        </div>
       </div>
 
       <div class="acct-card">

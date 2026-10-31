@@ -16,7 +16,7 @@ const expectError = async (sql, params, pattern, name) => {
 
 // --- Simulate Supabase -------------------------------------------------
 await db.exec(`
-  create role anon nologin; create role authenticated nologin;
+  create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;
   create schema auth;
   create table auth.users (id uuid primary key default gen_random_uuid(), email text, email_confirmed_at timestamptz);
   create function auth.uid() returns uuid language sql stable as
@@ -39,8 +39,9 @@ for (const f of fs.readdirSync(path.join(root, 'supabase/migrations')).sort()) {
   await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations', f), 'utf8'));
 }
 await db.exec(fs.readFileSync(path.join(root, 'supabase/seed/legal_documents.sql'), 'utf8'));
-await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/002_reserved_codes.sql'), 'utf8'));
-await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/003_dob_change_limit.sql'), 'utf8'));
+for (const f of fs.readdirSync(path.join(root, 'supabase/migrations')).sort()) {   // whole setup re-run is safe
+  await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations', f), 'utf8'));
+}
 console.log('setup ran twice without errors');
 
 // --- Users -------------------------------------------------------------
@@ -166,6 +167,65 @@ await expectError(`update public.profiles set dob_changes = 0 where id = $1`, [D
 await as(null);
 await db.query(`update public.profiles set date_of_birth = '2001-01-05' where id = $1`, [D]);
 ok((await db.query('select date_of_birth::text d from public.profiles where id = $1', [D])).rows[0].d === '2001-01-05', 'organiser can still correct it');
+
+console.log('\nPlayers choose their own code');
+await as(null);
+const P = await mk('pick@example.com');
+const Q = await mk('quick@example.com');
+await as(P);
+await db.query(`update public.profiles set legal_name = 'Priya Kaur' where id = $1`, [P]);
+const auto = (await db.query('select player_code from public.profiles where id = $1', [P])).rows[0].player_code;
+ok(/^OC-PK[2-9]{3}$/.test(auto), 'gets an automatic code first: ' + auto);
+const sugg = (await db.query('select * from public.suggest_player_codes() s')).rows.map(r => r.s);
+ok(sugg.length >= 4 && sugg.every(c => /^OC-PK[0-9]{3,4}$/.test(c) && c !== auto), 'suggestions use own initials: ' + sugg.join(' '));
+const st = async c => (await db.query('select public.player_code_status($1) s', [c])).rows[0].s;
+ok(await st('OC-PK777') === 'ok', 'free code is available');
+ok(await st('oc-pk 777') === 'ok', 'lower case and spaces are fine');
+ok(await st('OC-AB777') === 'initials', 'code with someone else\'s initials refused');
+ok(await st('OC-PK7') === 'format', 'too few digits refused');
+ok(await st('OC-PK77777') === 'format', 'too many digits refused');
+ok(await st('OC-UF023') === 'initials', 'reserved founder code refused');
+ok((await db.query(`select public.choose_player_code('OC-PK777') c`)).rows[0].c === 'OC-PK777', 'player takes OC-PK777');
+let pk = (await db.query('select player_code, code_changes from public.profiles where id = $1', [P])).rows[0];
+ok(pk.player_code === 'OC-PK777' && pk.code_changes === 1, 'code changed and counted');
+ok((await db.query(`select data->>'player_code' c from public.email_queue where template = 'welcome'`)).rows.length === 0, 'player still cannot read the email queue');
+await as(Q);
+await db.query(`update public.profiles set legal_name = 'Pavel Kim' where id = $1`, [Q]);
+ok(await st('OC-PK777') === 'taken', 'someone else sees OC-PK777 as taken');
+ok(await st(auto) === 'taken', 'the code Priya gave up is retired, not reusable: ' + auto);
+await expectError(`select public.choose_player_code('OC-PK777')`, [], /code_taken/, 'cannot grab a taken code');
+await expectError(`update public.profiles set code_changes = 0 where id = $1`, [Q], /permission denied/, 'player cannot reset the change counter');
+await as(P);
+await db.query(`select public.choose_player_code('OC-PK2026')`);
+ok(await st('OC-PK123') === 'limit', 'after 2 changes no more');
+await expectError(`select public.choose_player_code('OC-PK123')`, [], /code_limit/, 'third change refused');
+await db.query(`update public.profiles set legal_name = 'Priya K' where id = $1`, [P]);
+ok((await db.query('select player_code from public.profiles where id = $1', [P])).rows[0].player_code === 'OC-PK2026', 'normal profile saves do not touch the code');
+await as(null);
+const welcome = (await db.query(`select template, data->>'player_code' c from public.email_queue where to_email = 'pick@example.com' order by id`)).rows;
+ok(welcome.length === 1 && welcome[0].c === 'OC-PK2026', 'unsent welcome email shows the latest code');
+await db.query(`update public.email_queue set sent_at = now() where to_email = 'pick@example.com'`);
+await db.query(`update public.profiles set player_code = 'OC-PK555' where id = $1`, [P]);
+ok((await db.query(`select * from public.email_queue where to_email = 'pick@example.com' and template = 'code_changed'`)).rows.length === 1, 'after the welcome email went out, a code-changed email is queued');
+await as('anon');
+await expectError(`select public.player_code_status('OC-PK999')`, [], /permission denied/, 'visitors cannot check codes');
+await expectError(`select public.choose_player_code('OC-PK999')`, [], /permission denied/, 'visitors cannot choose codes');
+
+console.log('\nLogin with player code (server side)');
+await as(A);
+await expectError(`select public.login_code_lookup('OC-PK555', '1.2.3.4')`, [], /permission denied/, 'players cannot look up emails by code');
+await as('anon');
+await expectError(`select public.login_code_lookup('OC-PK555', '1.2.3.4')`, [], /permission denied/, 'visitors cannot look up emails by code');
+await expectError(`select * from public.login_code_attempts`, [], /permission denied/, 'visitors cannot read login attempts');
+await db.exec('reset role'); await db.exec('set role service_role');
+const look = async (c, ip) => (await db.query('select public.login_code_lookup($1, $2) e', [c, ip])).rows[0].e;
+ok(await look('pk555', '1.2.3.4') === 'pick@example.com', 'server finds the email for a code typed loosely ("pk555")');
+ok(await look('OC-ZZ000', '1.2.3.4') === null, 'unknown code gives nothing');
+for (let i = 0; i < 5; i++) await db.query(`select public.login_code_record('OC-PK555', '9.9.9.9', false)`);
+await expectError(`select public.login_code_lookup('OC-PK555', '5.5.5.5')`, [], /too_many_attempts/, '5 wrong passwords lock that code for 15 minutes');
+ok(await look('OC-UF023', '5.5.5.5') === 'uriana@example.com', 'other codes still work');
+for (let i = 0; i < 20; i++) await db.query(`select public.login_code_record($1, '7.7.7.7', false)`, ['OC-X' + (100 + i)]);
+await expectError(`select public.login_code_lookup('OC-UF023', '7.7.7.7')`, [], /too_many_attempts/, '20 failures from one address block that address');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

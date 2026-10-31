@@ -80,9 +80,30 @@ await stage('load own profile + consents', async i => {
   await asUser(ids[i], `select * from public.my_consents`);
 });
 
+// 6. A third of players (all "MH") race for the same code at the same moment
+let won = 0, lost = 0;
+await stage('race for OC-MH777 (same code)', async i => {
+  if (i % 3) return;
+  try { await asUser(ids[i], `select public.choose_player_code('OC-MH777')`); won++; }
+  catch (e) { if (/code_taken|code_limit/.test(e.message)) lost++; else throw e; }
+});
+// 7. The rest of them pick from their suggestions, retrying if someone beat them
+let picked = 0;
+await stage('pick a suggested code', async i => {
+  if (i % 3) return;
+  for (let k = 0; k < 5; k++) {
+    const sug = (await asUser(ids[i], `select s from public.suggest_player_codes() s`)).rows.map(x => x.s);
+    try { await asUser(ids[i], `select public.choose_player_code($1)`, [sug[0]]); picked++; return; }
+    catch (e) { if (!/code_taken/.test(e.message)) throw e; }
+  }
+});
+console.log(`OC-MH777: ${won} winner, ${lost} told it was taken | ${picked} picked a suggestion`);
+
 // Checks
 const r = await pool.query(`select count(*)::int total, count(player_code)::int with_code, count(distinct player_code)::int unique_codes,
   count(*) filter (where player_code like 'OC-MH%')::int mh from public.profiles`);
+const dupe = await pool.query(`select count(*)::int n from public.profiles p join public.retired_player_codes r on r.code = p.player_code and r.profile_id <> p.id`);
+console.log('codes reused after being given up:', dupe.rows[0].n);
 const q = await pool.query(`select count(*)::int n from public.email_queue where template = 'welcome'`);
 const c = await pool.query(`select count(*)::int n from public.consent_records`);
 const leak = await asUser(ids[0], `select count(*)::int n from public.profiles`);
@@ -90,7 +111,7 @@ console.log('\nprofiles:', r.rows[0], '| welcome emails queued:', q.rows[0].n, '
   '| rows player 0 can see:', leak.rows[0].n);
 const errCount = Object.values(errors).reduce((a, b) => a + b, 0);
 console.log(errCount ? '\nERRORS:\n' + Object.entries(errors).map(([k, v]) => `  ${v} × ${k}`).join('\n') : '\nno errors');
-const okAll = !errCount && r.rows[0].with_code === N && r.rows[0].unique_codes === N && q.rows[0].n === N && c.rows[0].n === 3 * N && leak.rows[0].n === 1;
+const okAll = dupe.rows[0].n === 0 && !errCount && won === 1 && picked > 0 && r.rows[0].with_code === N && r.rows[0].unique_codes === N && q.rows[0].n === N && c.rows[0].n === 3 * N && leak.rows[0].n === 1;
 console.log(okAll ? 'PASS' : 'FAIL');
 await pool.end();
 process.exit(okAll ? 0 : 1);
