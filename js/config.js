@@ -33,7 +33,7 @@ const SITE_CONFIG = {
   // links in the footer. Keep false until accounts are tested and launched.
   accountsEnabled: false,
   // googleLogin: true shows "Continue with Google" (after Google is set up in Supabase).
-  googleLogin: false,
+  googleLogin: true,
   // Public connection details. These are safe to publish: the database's
   // security rules decide what each visitor can see. NEVER put the secret
   // or service_role key here.

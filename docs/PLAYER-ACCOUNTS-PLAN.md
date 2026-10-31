@@ -20,7 +20,7 @@ events, and the organiser verifies everything from one admin page.
 | Topic | Decision |
 | --- | --- |
 | Who has accounts | Every player has their own account |
-| Login | Google sign-in, or email + password (both free). No phone/SMS login. Passwords are never emailed |
+| Login | Google sign-in (live since 1 Nov 2026; Google Cloud project `obsidian-cup` on obsidiancup.official, app published) or email + password (both free). No phone/SMS login. Passwords are never emailed |
 | Player code | Every account gets a permanent code from the player's initials + 3 digits, e.g. Uriana Faiha → `OC-UF427` (digits skip 0 and 1), emailed in the welcome email; used for check-in QR, player card, certificates, public page `/player/<code>` |
 | Custom codes | Organisers can reserve a code for an email (`reserved_player_codes`) or change a code from the SQL Editor; players cannot. Founder's code: OC-UF023 |
 | Date of birth | Must match the player's ID (checked at tournaments). First entry is free; a player can change it at most 2 times, then only an organiser can. Saved on leaving the field, after a confirmation |
