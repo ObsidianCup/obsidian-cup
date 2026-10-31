@@ -67,7 +67,7 @@ const OC_TEXT = {
     checkEmailBody: 'We sent a confirmation link to {email}. Open it on this or any device to finish creating your account. It can take a few minutes; check your spam folder too.',
     errEmail: 'Enter a valid email address.',
     errPassword: 'Use at least 8 characters.',
-    errLogin: 'Email or password is not right, or the email is not confirmed yet.',
+    errLogin: 'Email or password is not right, or the email is not confirmed yet. New here? Use the Create account tab first.',
     emailConfirmed: 'Your email is confirmed. Log in to continue.',
     linkExpired: 'This link has expired or was already used. Log in if your email is confirmed, or create your account again to get a new link.',
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
