@@ -19,6 +19,7 @@
     return {
       error: h.get('error_description') || q.get('error_description') || h.get('error') || q.get('error'),
       fromEmail: !!(h.get('type') || q.get('code') || h.get('access_token')),
+      recovery: h.get('type') === 'recovery' || q.get('type') === 'recovery',
     };
   })();
   let linkNoticeShown = false;
@@ -47,10 +48,17 @@
     $$('[data-go]').forEach(b => b.addEventListener('click', () => { msg('authMsg', ''); show(b.dataset.go); }));
     document.addEventListener('oc:language', () => { renderConsentTexts(); if (profile) { renderHome(); renderDobInfo(); } renderPositions(); setAuthMode(authMode); });
 
+    // A reset-password link: always ask for the new password first, even if
+    // the login library's "recovery" signal arrives late or not at all.
+    if (LINK.recovery && !LINK.error) { recovering = true; show('loading'); }
     db.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') { recovering = true; show('newpass'); return; }
       user = session ? session.user : null;
-      if (recovering) return;
+      if (recovering) {
+        if (session) { show('newpass'); history.replaceState(null, '', location.pathname); }
+        else if (event === 'INITIAL_SESSION') { recovering = false; setTimeout(route, 0); }
+        return;
+      }
       // Run outside the auth callback so database calls are not blocked.
       setTimeout(route, 0);
     });
