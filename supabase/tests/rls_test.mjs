@@ -35,7 +35,11 @@ const as = async (who) => {          // who: uuid | 'anon' | null(owner)
 
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8'));
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8')); // re-run is safe
+for (const f of ['001_foundation.sql', '002_reserved_codes.sql']) {
+  await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations', f), 'utf8'));
+}
 await db.exec(fs.readFileSync(path.join(root, 'supabase/seed/legal_documents.sql'), 'utf8'));
+await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/002_reserved_codes.sql'), 'utf8'));
 console.log('setup ran twice without errors');
 
 // --- Users -------------------------------------------------------------
@@ -123,6 +127,28 @@ await db.query(`delete from auth.users where id = $1`, [ADMIN]);
 const FAKE = await mk('obsidiancup.official@gmail.com', false);
 await as(FAKE);
 ok((await db.query('select public.is_admin() a')).rows[0].a === false, 'unconfirmed admin email gets no admin rights');
+
+console.log('\nReserved and changed player codes');
+await as(null);
+await db.query(`insert into public.reserved_player_codes (email, code) values ('uriana@example.com', 'OC-UF023')`);
+const U = await mk('Uriana@Example.com');
+await as(U);
+await expectError(`select * from public.reserved_player_codes`, [], /permission denied/, 'players cannot see reserved codes');
+await db.query(`update public.profiles set legal_name = 'Uriana Faiha' where id = $1`, [U]);
+ok((await db.query('select player_code from public.profiles where id = $1', [U])).rows[0].player_code === 'OC-UF023', 'reserved code given on first name save');
+await as(null);
+const Other = await mk('other@example.com');
+await as(Other);
+await db.query(`update public.profiles set legal_name = 'Ursula Fox' where id = $1`, [Other]);
+ok((await db.query('select player_code from public.profiles where id = $1', [Other])).rows[0].player_code !== 'OC-UF023', 'nobody else gets a reserved code');
+await as(null);
+await db.query(`update public.profiles set player_code = 'OC-ZZ999' where id = $1`, [A]);
+ok((await db.query('select player_code from public.profiles where id = $1', [A])).rows[0].player_code === 'OC-ZZ999', 'organiser (SQL Editor) can change a code');
+const q = (await db.query(`select data->>'player_code' c from public.email_queue where to_email = 'alice@example.com' and template = 'welcome'`)).rows;
+ok(q.length === 1 && q[0].c === 'OC-ZZ999', 'queued welcome email shows the changed code');
+await expectError(`update public.profiles set player_code = 'bad code' where id = $1`, [A], /check constraint/, 'badly formatted code rejected');
+await as(A);
+await expectError(`update public.profiles set player_code = 'OC-AA222' where id = $1`, [A], /permission denied/, 'player still cannot change own code');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

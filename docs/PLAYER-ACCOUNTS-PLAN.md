@@ -22,6 +22,7 @@ events, and the organiser verifies everything from one admin page.
 | Who has accounts | Every player has their own account |
 | Login | Google sign-in, or email + password (both free). No phone/SMS login. Passwords are never emailed |
 | Player code | Every account gets a permanent code from the player's initials + 3 digits, e.g. Uriana Faiha → `OC-UF427` (digits skip 0 and 1), emailed in the welcome email; used for check-in QR, player card, certificates, public page `/player/<code>` |
+| Custom codes | Organisers can reserve a code for an email (`reserved_player_codes`) or change a code from the SQL Editor; players cannot. Founder's code: OC-UF023 |
 | Organiser (legal) | Obsidian Cup is not a legal entity yet. Legal texts name **Uriana Faiha, founder and head organiser, trading as Obsidian Cup**. Recommended next step: sole proprietorship trade licence; later an OPC |
 | Saving | Profile forms autosave as the player types |
 | Teams | Captain creates a team with a **captain code**; players join with a **team join code** and the captain approves. No searching other players |
