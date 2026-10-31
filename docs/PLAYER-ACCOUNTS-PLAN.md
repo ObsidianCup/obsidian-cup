@@ -49,6 +49,7 @@ events, and the organiser verifies everything from one admin page.
 | Sports | Multi-sport from day one: each event has a sport and its own rules (squad size, special roles like libero, position list, age and gender limits) |
 | Positions | Players pick preferred positions freely from the sport's list (volleyball: outside hitter, setter, middle blocker, opposite, libero; football: goalkeeper, defender, midfielder, forward). Libero cap (2) is a per-team volleyball rule |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
+| Logo | The organiser is designing the new logo herself (31 Oct 2026). Claude's explorations are on the "Obsidian Cup — New Logo" design canvas in her account, for reference only. Until the new logo arrives, the site and login emails keep `assets/logo-mark.png`; when it arrives, swap it in the nav/footer, favicon, og-image and `supabase/email-templates/*.html` |
 
 ## Legal texts
 
