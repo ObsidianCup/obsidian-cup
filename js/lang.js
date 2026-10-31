@@ -6,7 +6,7 @@
 const TRANSLATIONS = {
   en: {
     navHome: "Home", navFootball: "Football", navVolleyball: "Volleyball", navTournaments: "Tournaments", navAbout: "About",
-    navFaq: "FAQ", navRegister: "Register",
+    navFaq: "FAQ", navRegister: "Register", navAccount: "Log in",
     heroEst: "Est. 2026", heroLocation: "Dhaka · Bangladesh",
     heroTitle: "Obsidian Cup",
     heroTagline: "Carved by Legacy · Crowned in Obsidian",

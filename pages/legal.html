@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obsidian Cup | Terms and Policies</title>
+  <meta name="description" content="Obsidian Cup terms of use, privacy notice, media consent and event policies." />
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/account.css" />
+</head>
+<body>
+  <main class="acct-wrap">
+    <p class="acct-label" id="legalVersion"></p>
+    <div id="legalNote"></div>
+    <article class="legal-body" id="legalBody"><p class="acct-muted" data-t="loading">Loading…</p></article>
+  </main>
+
+  <script src="../js/vendor/marked-12.0.2.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/lang.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/oc-accounts.js"></script>
+  <script>
+    // Shows one legal document: legal.html?doc=terms (privacy, media, participation, payment, guardian, captain_code, captain_declaration)
+    (function () {
+      const DOCS = ['terms', 'privacy', 'media', 'participation', 'payment', 'guardian', 'captain_code', 'captain_declaration'];
+      const VERSIONS = Object.assign({ participation: '1.0', payment: '1.0', guardian: '1.0', captain_code: '1.0', captain_declaration: '1.0' }, OC_LEGAL);
+      const AVAILABLE = { en: DOCS, bn: [] };   // add keys to bn as Bangla versions are published
+
+      async function render() {
+        ocApplyText();
+        const doc = new URLSearchParams(location.search).get('doc') || 'terms';
+        const body = document.getElementById('legalBody');
+        if (!DOCS.includes(doc)) { body.innerHTML = `<p>${ocEscape(t('legalNotFound'))}</p>`; return; }
+        const want = ocLang();
+        const lang = AVAILABLE[want].includes(doc) ? want : 'en';
+        document.getElementById('legalNote').innerHTML = want !== lang ? `<p class="acct-msg acct-msg-info">${ocEscape(t('legalNoTranslation'))}</p>` : '';
+        document.getElementById('legalVersion').textContent = t('legalVersion', { version: VERSIONS[doc] });
+        try {
+          const res = await fetch(`/legal/${lang}/${doc}-${VERSIONS[doc]}.md`, { cache: 'no-cache' });
+          if (!res.ok) throw new Error(res.status);
+          const md = await res.text();
+          body.innerHTML = window.marked ? marked.parse(md) : `<pre style="white-space:pre-wrap">${ocEscape(md)}</pre>`;
+          const h = body.querySelector('p > strong');
+          if (h) { document.title = 'Obsidian Cup | ' + h.textContent.replace(/ — version.*/, '').replace(/^Obsidian Cup /, ''); }
+        } catch (e) {
+          body.innerHTML = `<p>${ocEscape(t('legalNotFound'))}</p>`;
+        }
+      }
+      document.addEventListener('DOMContentLoaded', render);
+      document.addEventListener('oc:language', render);
+    })();
+  </script>
+</body>
+</html>

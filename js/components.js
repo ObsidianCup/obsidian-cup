@@ -31,6 +31,7 @@ function injectNav() {
         ${SITE_CONFIG.tournamentActive ? `<li><a href="${p('pages/fixtures.html')}" data-key="navFixtures">Fixtures</a></li>` : ''}
         ${SITE_CONFIG.registrationOpen ? `<li><a href="${p('pages/register.html')}" class="nav-register-btn" data-key="navRegister">Register</a></li>` : ''}
         ${SITE_CONFIG.rulesVisible ? `<li><a href="${p('pages/rules.html')}">Rules</a></li>` : ''}
+        ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/account.html')}" data-key="navAccount">Log in</a></li>` : ''}
       </ul>
     </nav>
     <div class="lang-toggle" role="group" aria-label="Language toggle">
@@ -63,6 +64,7 @@ function injectNav() {
     ${SITE_CONFIG.tournamentActive ? `<a href="${p('pages/fixtures.html')}">Fixtures</a>` : ''}
     ${SITE_CONFIG.registrationOpen ? `<a href="${p('pages/register.html')}" data-key="navRegister">Register</a>` : ''}
     ${SITE_CONFIG.rulesVisible ? `<a href="${p('pages/rules.html')}">Rules</a>` : ''}
+    ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/account.html')}" data-key="navAccount">Log in</a>` : ''}
     <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Language toggle">
       <button class="lang-btn" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
       <span class="lang-sep">|</span>
@@ -92,6 +94,7 @@ function injectFooter() {
       <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Instagram">Instagram</a>
       <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Facebook">Facebook</a>
       <a href="${p('pages/about.html')}#contact">Contact</a>
+      ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/legal.html')}?doc=privacy">Privacy</a><a href="${p('pages/legal.html')}?doc=terms">Terms</a>` : ''}
     </nav>
     <p class="footer-copy">© ${new Date().getFullYear()} Obsidian Cup. All Rights Reserved.</p>
   `;

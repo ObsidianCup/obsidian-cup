@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Obsidian Cup | Organiser</title>
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/account.css" />
+</head>
+<body>
+  <main class="acct-wrap acct-wrap-wide">
+    <p class="acct-label" data-t="adminLabel">Organiser</p>
+    <h1 class="acct-title" data-t="adminTitle">Players</h1>
+    <div id="admMsg"><p class="acct-muted" data-t="loading">Loading…</p></div>
+
+    <div id="admApp" hidden>
+      <div class="adm-bar">
+        <input class="acct-input" id="admSearch" type="search" data-t-placeholder="adminSearch" />
+        <button class="acct-btn acct-btn-ghost acct-btn-small" id="admExport" type="button" data-t="adminExport">Download CSV</button>
+      </div>
+      <p class="acct-muted" id="admCount" style="margin-bottom:0.75rem;"></p>
+      <div class="adm-table-wrap">
+        <table class="adm-table">
+          <thead><tr>
+            <th data-t="colCode">Code</th><th data-t="colName">Name</th><th data-t="colEmail">Email</th>
+            <th data-t="colAge">Age</th><th data-t="colGender">Gender</th><th data-t="colPhone">Phone</th>
+            <th data-t="colJoined">Joined</th><th data-t="colStatus">ID check</th>
+          </tr></thead>
+          <tbody id="admRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/vendor/supabase-js-2.118.0.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/lang.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/oc-accounts.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

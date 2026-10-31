@@ -1,6 +1,8 @@
 # Player Accounts System — Plan and Decisions
 
-Last updated: 31 Oct 2026. Status: **planning done, nothing built yet. Target: Season 5 volleyball launch.**
+Last updated: 31 Oct 2026. Status: **Stage 1 built (accounts, consents, autosaving profile, player codes, admin list). Waiting for the SQL to be run in Supabase and testing. Target: Season 5 volleyball launch.**
+
+Stage 1 files: `supabase/` (SQL, tests, README), `pages/account.html`, `pages/admin.html`, `pages/legal.html`, `js/oc-accounts.js`, `js/account.js`, `js/admin.js`, `css/account.css`, `legal/en/*.md`. Supabase project `mpxcoipozjnqkjwtondm` (Singapore). Accounts stay hidden from the menu until `accountsEnabled: true` in `js/config.js`.
 
 Full launch plan (legal setup, research, emails, history, handbook, setup steps): [`SEASON-5-LAUNCH-PLAN.md`](SEASON-5-LAUNCH-PLAN.md)
 

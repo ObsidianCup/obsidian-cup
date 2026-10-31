@@ -28,4 +28,16 @@ const SITE_CONFIG = {
   facebookUrl: "https://www.facebook.com/share/1Cb8jWH5Gy/",
   contactEmail: "obsidiancup.official@gmail.com",
 
+  // ---- PLAYER ACCOUNTS ----
+  // accountsEnabled: true shows "Log in" in the menu and the Privacy/Terms
+  // links in the footer. Keep false until accounts are tested and launched.
+  accountsEnabled: false,
+  // googleLogin: true shows "Continue with Google" (after Google is set up in Supabase).
+  googleLogin: false,
+  // Public connection details. These are safe to publish: the database's
+  // security rules decide what each visitor can see. NEVER put the secret
+  // or service_role key here.
+  supabaseUrl: "https://mpxcoipozjnqkjwtondm.supabase.co",
+  supabasePublishableKey: "sb_publishable_c7sEaeZLAQ_aZI0zhfjQ6w_Z-D6Z5wV",
+
 };
