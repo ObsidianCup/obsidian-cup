@@ -3318,3 +3318,36 @@ html[lang="bn"] .hero-title {
 
 /* Make the hidden attribute always win */
 [hidden] { display: none !important; }
+
+/* ============================================
+   Readability + motion pass (Oct 2026)
+   - Content is visible without waiting for scroll animations
+   - Small labels are larger and higher contrast
+   - Next section peeks below the hero instead of a "scroll" line
+   ============================================ */
+
+/* Scroll reveals: content is always visible; scrolling is the motion */
+.reveal, .reveal-fade, .reveal-left, .reveal-right {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Hero: leave a sliver of the next section visible so people know to scroll */
+.hero { min-height: 88vh; min-height: 88svh; }
+.hero-scroll-line, .hero-meta { display: none; }
+
+/* Small labels: bigger and easier to read */
+.champions-season-title { font-size: 0.68rem; color: rgba(212,175,95,0.85); }
+.champion-tourney { font-size: 0.68rem; color: rgba(192,192,192,0.72); }
+.champion-runner-label { font-size: 0.62rem; color: rgba(192,192,192,0.7); }
+.champion-runner-name { color: rgba(245,240,232,0.85); }
+.impact-label { font-size: 0.68rem; color: rgba(192,192,192,0.75); }
+.partner-category, .partner-logo-note { font-size: 0.66rem; color: rgba(192,192,192,0.75); }
+.hero-launch-note { font-size: 0.72rem; letter-spacing: 0.18em; color: rgba(245,240,232,0.8); }
+.meta-label, .result-cat { color: rgba(192,192,192,0.72); }
+
+/* Respect people who turn off animations on their device */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

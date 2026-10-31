@@ -32,45 +32,7 @@ function heroEntrance() {
 document.addEventListener('DOMContentLoaded', () => {
   heroEntrance();
 
-  // ---- Cursor glow (desktop only) ----
-  if (window.matchMedia('(hover: hover)').matches) {
-    const glow = document.createElement('div');
-    glow.classList.add('cursor-glow');
-    document.body.appendChild(glow);
-    let cx = -500, cy = -500;
-    document.addEventListener('mousemove', (e) => {
-      cx = e.clientX;
-      cy = e.clientY;
-      glow.style.left = cx + 'px';
-      glow.style.top = cy + 'px';
-    });
-  }
-
-  // ---- Floating particles ----
-  function spawnParticle() {
-    const p = document.createElement('div');
-    p.classList.add('particle');
-    const size = 1 + Math.random() * 2;
-    const driftX = (Math.random() - 0.5) * 60; // random left or right
-    p.style.cssText = `
-      left: ${Math.random() * 100}vw;
-      bottom: -10px;
-      width: ${size}px;
-      height: ${size}px;
-      animation-duration: ${14 + Math.random() * 18}s;
-      animation-delay: ${Math.random() * 3}s;
-      opacity: ${0.08 + Math.random() * 0.15};
-      --drift-x: ${driftX}px;
-    `;
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 38000);
-  }
-
-  // Spawn particles gradually
-  for (let i = 0; i < 12; i++) {
-    setTimeout(spawnParticle, i * 800);
-  }
-  setInterval(spawnParticle, 3000);
+  // Cursor glow and floating particles removed (Oct 2026): decoration that distracted from content.
 
   // ---- Navbar scroll effect ----
   const navbar = document.querySelector('.navbar');
@@ -322,12 +284,12 @@ const TOURNAMENTS = {
     season: 'OVC — Season 4 · July 2026',
     name: 'Obsidian Volleyball Cup Season 4',
     type: 'U19 Boys · Boys Open Age · Girls Open Age',
-    date: '1–4 July 2026',
-    venue: 'Dhaka, Bangladesh',
-    venueAddress: '',
+    date: 'U19 Boys: 1–2 July · All Age: 3–4 July 2026',
+    venue: 'Shaheed Noor Hossain National Volleyball Stadium',
+    venueAddress: 'Purana Paltan, Dhaka 1000',
     summary: 'Our fourth volleyball season, completed across three categories with federation-backed support.',
-    description: 'Held from 1 to 4 July 2026, OVC Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported by the Bangladesh Volleyball Federation.',
-    sponsors: 'Stall Partner PHEEZES · Crochet Partner CROKETOPIA · Fragrance Partner HI. TALHA',
+    description: 'Held at the National Volleyball Stadium, with U19 Boys on 1–2 July and the All Age categories on 3–4 July 2026, OVC Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported by the Bangladesh Volleyball Federation.',
+    sponsors: 'Stall Partner PHEEZES · Gifting Partner CROKETOPIA · Fragrance Partner HI. TALHA',
     teams: '17 teams · 5 U19 Boys, 6 Boys Open Age, 6 Girls Open Age',
     spectators: '60+',
     results: [
@@ -388,7 +350,7 @@ const TOURNAMENTS = {
   ovc_s1: {
     season: 'OVC — Season 1 · January 2026',
     name: 'Obsidian Volleyball Cup Season 1',
-    type: 'Interschool — Boys & Girls',
+    type: 'Boys Interschool · Girls Open Age',
     date: '11th & 12th January 2026',
     venue: 'DBox Sports Complex',
     venueAddress: 'Shagufta Housing, Mirpur 12, Dhaka',
