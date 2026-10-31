@@ -1,12 +1,20 @@
 {
+  "redirects": [
+    { "source": "/about.html", "destination": "/pages/about.html", "permanent": true },
+    { "source": "/experiences.html", "destination": "/pages/experiences.html", "permanent": true },
+    { "source": "/faq.html", "destination": "/pages/faq.html", "permanent": true },
+    { "source": "/fixtures.html", "destination": "/pages/fixtures.html", "permanent": true },
+    { "source": "/football.html", "destination": "/pages/football.html", "permanent": true },
+    { "source": "/register.html", "destination": "/pages/register.html", "permanent": true },
+    { "source": "/rules.html", "destination": "/pages/rules.html", "permanent": true },
+    { "source": "/tournaments.html", "destination": "/pages/tournaments.html", "permanent": true },
+    { "source": "/volleyball.html", "destination": "/pages/volleyball.html", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
       ]
     }
   ]

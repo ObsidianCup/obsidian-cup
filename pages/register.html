@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obsidian Cup | Register</title>
   <meta name="description" content="Register your team for Obsidian Volleyball Super Cup. Boys Interschool, Boys Open Age, Girls Open Age." />
@@ -9,7 +10,9 @@
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta property="og:title" content="Register — Obsidian Cup" />
   <meta property="og:description" content="Register your team for Obsidian Volleyball Super Cup — 3rd and 4th April 2026, Dhaka." />
-  <meta property="og:image" content="https://obsidiancup.vercel.app/assets/logo-mark.png" />
+  <meta property="og:image" content="https://obsidiancup.vercel.app/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/register.html" />
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="../css/style.css" />
@@ -60,6 +63,18 @@
 </head>
 <body>
 
+  <div class="reg-hero" id="regClosed" hidden>
+    <p class="reg-event-label">Team Registration — Closed</p>
+    <h1 class="reg-event-name">No open registration<br/>right now</h1>
+    <p class="page-subtitle" style="margin-top:1rem;">OVC Season 4 has wrapped. The next season will be announced on Instagram and Facebook first.</p>
+    <div class="divider" style="margin-top:3rem;"><div class="divider-diamond"></div></div>
+    <div style="margin-top:2.5rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+      <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" class="btn-ghost">Follow on Instagram</a>
+      <a href="tournaments.html" class="btn-ghost btn-quiet">View past results →</a>
+    </div>
+  </div>
+
+  <div id="regOpen">
   <div class="reg-hero">
     <p class="reg-event-label reveal" data-key="regLabel">Team Registration — Now Open</p>
     <h1 class="reg-event-name reveal">Obsidian Volleyball<br/>Super Cup</h1>
@@ -191,8 +206,15 @@
       Questions? Reach us on <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener">Instagram</a> or <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a>.
     </p>
   </div>
+  </div><!-- /regOpen -->
 
   <script src="../js/config.js"></script>
+  <script>
+    if (!SITE_CONFIG.registrationOpen) {
+      document.getElementById('regOpen').hidden = true;
+      document.getElementById('regClosed').hidden = false;
+    }
+  </script>
   <script src="../js/lang.js"></script>
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>

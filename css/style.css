@@ -3315,3 +3315,6 @@ html[lang="bn"] .hero-title {
     margin-bottom: -16px;
   }
 }
+
+/* Make the hidden attribute always win */
+[hidden] { display: none !important; }

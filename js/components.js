@@ -4,8 +4,8 @@
    ============================================ */
 
 function getNavPath(file) {
-  const isInPages = window.location.pathname.includes('/pages/');
-  return isInPages ? `../${file}` : file;
+  // Root-relative links work from any page, including the 404 page at any URL
+  return file === 'index.html' ? '/' : `/${file}`;
 }
 
 function injectNav() {
@@ -88,11 +88,12 @@ function injectFooter() {
       <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
       <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
       <a href="${p('pages/faq.html')}" data-key="navFaq">FAQ</a>
+      <a href="${p('pages/experiences.html')}">Experiences</a>
       <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Instagram">Instagram</a>
       <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Facebook">Facebook</a>
       <a href="${p('pages/about.html')}#contact">Contact</a>
     </nav>
-    <p class="footer-copy">© 2026 Obsidian Cup. All Rights Reserved.</p>
+    <p class="footer-copy">© ${new Date().getFullYear()} Obsidian Cup. All Rights Reserved.</p>
   `;
   document.body.appendChild(footer);
 }

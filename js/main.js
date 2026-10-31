@@ -288,17 +288,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!message || message.length < 20) { showError('expMessage', 'Please share a bit more (at least 20 characters).'); valid = false; }
         if (!valid) return;
 
-        const submissions = JSON.parse(localStorage.getItem('obsidian_experiences') || '[]');
-        submissions.push({ name, email, tourney, message, date: new Date().toISOString() });
-        localStorage.setItem('obsidian_experiences', JSON.stringify(submissions));
+        const to = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.contactEmail) || 'obsidiancup.official@gmail.com';
+        const subject = `My Obsidian Cup experience — ${tourney}`;
+        const body = `Name: ${name}\nEmail: ${email}\nTournament: ${tourney}\n\n${message}`;
+        window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         expForm.innerHTML = `
           <div style="text-align:center; padding: 2rem 0;">
             <div style="font-size:1.5rem; margin-bottom:1.5rem; color:var(--cream); font-family:var(--font-display);">— ✓ —</div>
-            <p style="font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--cream); margin-bottom:1rem;">Thank you, ${name}.</p>
-            <p style="font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--silver-dim);">Your experience will be reviewed before publishing.</p>
+            <p class="exp-thanks" style="font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--cream); margin-bottom:1rem;"></p>
+            <p style="font-size:0.75rem; letter-spacing:0.12em; color:var(--silver-dim); line-height:1.8;">Your email app should now be open with your message. Just press send.<br/>If nothing opened, email us at ${to}.</p>
           </div>
         `;
+        expForm.querySelector('.exp-thanks').textContent = `Thank you, ${name}.`;
       });
     }
   }
@@ -317,14 +319,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---- Tournament data ----
 const TOURNAMENTS = {
   ovc_s4: {
-    season: 'OVC — Season 4 · 2026',
+    season: 'OVC — Season 4 · July 2026',
     name: 'Obsidian Volleyball Cup Season 4',
     type: 'U19 Boys · Boys Open Age · Girls Open Age',
-    date: '2026',
-    venue: 'Bangladesh Volleyball Federation supported season',
-    venueAddress: 'Dhaka, Bangladesh',
-    summary: 'The fourth Obsidian Volleyball Cup, completed across three categories with federation-backed support.',
-    description: 'OVC Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported by the Bangladesh Volleyball Federation.',
+    date: '1–4 July 2026',
+    venue: 'Dhaka, Bangladesh',
+    venueAddress: '',
+    summary: 'Our fourth volleyball season, completed across three categories with federation-backed support.',
+    description: 'Held from 1 to 4 July 2026, OVC Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported by the Bangladesh Volleyball Federation.',
     sponsors: 'Stall Partner PHEEZES · Crochet Partner CROKETOPIA · Fragrance Partner HI. TALHA',
     teams: '17 teams · 5 U19 Boys, 6 Boys Open Age, 6 Girls Open Age',
     spectators: '60+',
@@ -342,7 +344,7 @@ const TOURNAMENTS = {
     venue: 'JAFF Arena and Academy Bashundhara',
     venueAddress: 'Bashundhara, Dhaka',
     summary: 'The first football chapter of Obsidian Cup, hosted as a girls-only season.',
-    description: 'OFC Season 1 brought girls-only football into the Obsidian Cup story at JAFF Arena and Academy Bashundhara on 23 June 2026, with five teams competing in the first season. Thaelor became the first Obsidian Football Cup champion, with Team 01 finishing as runner-up. This season had no sponsors and kept the spotlight on the teams, the game, and the first step into a new format.',
+    description: 'OFC Season 1 brought girls-only football into the Obsidian Cup story at JAFF Arena and Academy Bashundhara on 23 June 2026, with five teams competing in the first season. Thaelor became the first Obsidian Football Cup champion, with Team 01 finishing as runner-up. The spotlight stayed on the teams, the game, and the first step into a new format.',
     sponsors: null,
     teams: '5 teams',
     spectators: '15+',
@@ -423,7 +425,7 @@ function populateModal(data) {
       <div class="modal-venue">
         <span>Venue</span>
         <strong>${data.venue}</strong>
-        <small>${data.venueAddress}</small>
+        ${data.venueAddress ? `<small>${data.venueAddress}</small>` : ''}
       </div>
       ${data.sponsors ? `<div class="modal-sponsor"><span>Partners</span><strong>${data.sponsors}</strong></div>` : ''}
     `;

@@ -42,43 +42,38 @@ Vercel's edge network performs better in South Asia than Netlify's free tier. Ze
 obsidian-cup/
 ├── index.html              # Homepage
 ├── 404.html                # Custom error page
-├── assets/
-│   ├── logo-mark.png       # Circular badge logo
-│   ├── logo-wordmark.png   # Wordmark logo
-│   ├── partner-smc.png     # SMC Fruity partner logo
-│   ├── partner-olyve.png   # OLYVE partner logo
-│   ├── favicon.ico         # Browser tab icon
-│   └── apple-touch-icon.png
-├── css/
-│   └── style.css           # All styles, organised by component
+├── robots.txt / sitemap.xml
+├── vercel.json             # Redirects from old URLs + headers
+├── assets/                 # Logos, partner logos, icons, og-image.jpg (share preview)
+├── css/style.css           # All styles, organised by component
 ├── js/
 │   ├── config.js           # Season control panel (no-code edits)
 │   ├── lang.js             # EN/BN bilingual translations
 │   ├── components.js       # Navbar + footer injection
-│   └── main.js             # Animations, interactions, entrance sequences
-└── pages/
-    ├── tournaments.html
-    ├── about.html
-    ├── register.html
-    ├── faq.html
-    ├── fixtures.html
-    └── rules.html
+│   └── main.js             # Animations, interactions, tournament details
+└── pages/                  # All other pages (tournaments, volleyball, football,
+                            # about, faq, experiences, register, rules, fixtures)
 ```
+
+Images are kept small for mobile data: logos at most ~420px wide. Resize new
+partner logos before adding them.
 
 ---
 
 ## Season Management
 
-All season-specific content is controlled from one file: `js/config.js`
+Season toggles live in `js/config.js`:
 
 ```js
-registrationOpen: true,      // shows Register in nav and opens forms
-tournamentActive: true,      // shows Fixtures in nav
-currentSeasonName: "OVSC",   // updates season label site-wide
-currentSeasonDates: "3rd and 4th April 2026",
+tournamentActive: false,   // shows Fixtures in nav
+registrationOpen: false,   // shows Register in nav; when false, the register page shows a "closed" message
+rulesVisible: false,       // shows Rules in nav
 ```
 
-No other file needs to be touched to open or close a season.
+When opening registration for a new season:
+1. Set `registrationOpen: true` in `js/config.js`.
+2. Update the event details, fee, dates and form links in `pages/register.html`.
+3. Remove the `<meta name="robots" content="noindex" />` line at the top of `pages/register.html` so Google can list it.
 
 ---
 
@@ -86,7 +81,8 @@ No other file needs to be touched to open or close a season.
 
 - Cinematic hero entrance animation with curtain lift sequence
 - Bilingual support: English and Bengali, user preference saved to localStorage
-- Countdown timer to registration deadline
+- Countdown timer to registration deadline (register page)
+- Experience form opens the visitor's email app with their message addressed to the team
 - Impact numbers section showing tournament scale
 - Semantic HTML5 with ARIA roles and labels
 - Keyboard navigable with visible focus states
