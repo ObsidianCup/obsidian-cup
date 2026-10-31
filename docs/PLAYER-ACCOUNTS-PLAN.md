@@ -107,14 +107,35 @@ Supabase account must be owned by obsidiancup.official@gmail.com.
 - Under-13 accounts are locked until guardian consent; under-18 players cannot join a team, upload ID or play until guardian consent is recorded.
 - Possible duplicate accounts (same name + DOB) are flagged to the admin.
 
-## Build stages
+## Roadmap (agreed 1 Nov 2026)
 
-1. **Foundation:** Supabase schema, Google + email/password login, player code + welcome email, player profile with
-   autosave, sign-up consents, admin page skeleton, security tests.
-2. **Teams:** captain codes, team creation, join codes, roster rules.
-3. **Registration:** per-event consents, ID upload, guardian consent link,
-   bKash transaction ID, admin verification queue, CSV export, deadlines.
-4. **Later:** public player history pages, domain, more sports.
+Rule: no security shortcuts. Keys never go in chat or the repo; Claude does
+not get direct access to the live database (no Supabase MCP on the real
+project); real player photos only, never AI-made ones of players.
+
+1. **Done — foundation:** accounts, consents, autosave profile, player codes
+   (choose your own, log in with code), Gmail sender + branded login emails,
+   Google login, reset password, admin list. 79 security tests, load-tested.
+2. **Now — security hardening (small):** CAPTCHA (Cloudflare Turnstile, free)
+   on sign-up / login / reset; security headers on the site (CSP, HSTS,
+   frame and referrer rules); two-step login for the admin page; owner
+   checks: 2-step on GitHub, Supabase, Vercel, Google; minimum password
+   length set in Supabase too; weekly backup routine.
+3. **Now — website redesign:** design system first (colours 60/30/10, type,
+   spacing, components) shown as a preview, then home → event pages → the
+   rest. Live site changes only after approval. New logo slots in when ready.
+4. **Teams + emails:** captain codes, teams, join codes, roster rules;
+   guardian consent link; automatic emails sent from the queue (welcome,
+   code changed, join requests) with a GitHub Action every 15 minutes, which
+   also keeps Supabase awake.
+5. **Season 5 registration:** event page + per-event consents, ID photo
+   upload (private), bKash transaction ID, admin verification queue,
+   reminders, confirmed / match-day emails, handbook page, CSV export.
+6. **Before launch:** Bangla texts, lawyer review of legal texts, full
+   security and load test pass, rate limits raised, accounts switched on.
+7. **After Season 5:** history import (MVPs, winners), public player pages,
+   certificates with verify links, photo gallery with watermarks (ImageKit
+   or Supabase Storage, media consent respected), domain + Resend.
 
 ## Open questions
 
