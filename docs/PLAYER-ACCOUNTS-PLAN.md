@@ -123,7 +123,9 @@ project); real player photos only, never AI-made ones of players.
    frame and referrer rules); two-step login for the admin page; owner
    checks: 2-step on GitHub, Supabase, Vercel, Google; minimum password
    length set in Supabase too; weekly backup routine.
-3. **Now — website redesign:** design system first (colours 60/30/10, type,
+3. **Now — website redesign** (three homepage directions on the "Obsidian Cup —
+   Website Redesign" design canvas in the organiser's account: A Editorial,
+   B Matchday, C Daylight; waiting for her pick): design system first (colours 60/30/10, type,
    spacing, components) shown as a preview, then home → event pages → the
    rest. Live site changes only after approval. New logo slots in when ready.
 4. **Teams + emails:** captain codes, teams, join codes, roster rules;
