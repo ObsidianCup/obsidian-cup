@@ -11,7 +11,7 @@ const OC_LEGAL = {
   terms: '1.0',
   privacy: '1.0',
   media: '1.0',
-  dob_declaration: '1.0',
+  dob_declaration: '1.1',
   media_feature: '1.0',
 };
 const OC_SIGNUP_REQUIRED = ['terms', 'privacy', 'dob_declaration'];
@@ -64,6 +64,8 @@ const OC_TEXT = {
     errEmail: 'Enter a valid email address.',
     errPassword: 'Use at least 8 characters.',
     errLogin: 'Email or password is not right, or the email is not confirmed yet.',
+    emailConfirmed: 'Your email is confirmed. Log in to continue.',
+    linkExpired: 'This link has expired or was already used. Log in if your email is confirmed, or create your account again to get a new link.',
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
     errExists: 'An account with this email already exists. Try logging in.',
     // consent
@@ -72,7 +74,7 @@ const OC_TEXT = {
     consentIntro: 'Please read and agree to these. Each one is saved with today\'s date as your signature.',
     agreeTerms: 'I have read and agree to the {terms}.',
     agreePrivacy: 'I have read the {privacy} and agree to my data being collected, used and stored as it describes, including storage outside Bangladesh.',
-    agreeDob: 'I confirm that the date of birth I enter is my real date of birth.',
+    agreeDob: 'I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments and can be changed at most 2 times after I first enter it.',
     termsLink: 'Terms of Use',
     privacyLink: 'Privacy Notice',
     btnAgree: 'Agree and continue',
@@ -106,6 +108,11 @@ const OC_TEXT = {
     displayName: 'Name to show publicly',
     displayNameHint: 'Shown on team lists and your player page. Leave empty to use your full name.',
     dob: 'Date of birth',
+    dobHint: 'Must match your ID exactly. Your age is checked against your ID at tournaments.',
+    dobChangesLeft: 'You can change it {n} more time(s).',
+    dobNoChangesLeft: 'You cannot change it again. Email obsidiancup.official@gmail.com if it is wrong.',
+    dobConfirmFirst: 'Save {date} as your date of birth? It must match your ID. After this you can change it only 2 times.',
+    dobConfirmChange: 'Change your date of birth to {date}? You can change it {n} more time(s) after this.',
     gender: 'Gender category',
     genderMale: 'Male',
     genderFemale: 'Female',
@@ -130,6 +137,7 @@ const OC_TEXT = {
     errDob: 'Enter a real date of birth.',
     errUnder13Save: 'A parent or guardian must give consent before you can add this.',
     errLocked: 'Your name and date of birth are locked after verification.',
+    errDobLimit: 'You have already changed your date of birth twice. Email obsidiancup.official@gmail.com to change it.',
     // sports
     sport_volleyball: 'Volleyball',
     sport_football: 'Football',
@@ -209,7 +217,9 @@ function ocClient() {
   if (OC_DB) return OC_DB;
   if (!window.supabase || !SITE_CONFIG.supabaseUrl || !SITE_CONFIG.supabasePublishableKey) return null;
   OC_DB = window.supabase.createClient(SITE_CONFIG.supabaseUrl, SITE_CONFIG.supabasePublishableKey, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    // 'implicit' lets a confirmation or reset link work on any device or browser,
+    // not only the one where the account was created.
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'implicit' },
   });
   return OC_DB;
 }
@@ -232,6 +242,7 @@ function ocErrorMessage(err) {
   const m = (err && (err.message || err.error_description || '')) + ' ' + ((err && err.hint) || '');
   if (/guardian_required_under_13/.test(m)) return t('errUnder13Save');
   if (/locked_after_verification/.test(m)) return t('errLocked');
+  if (/dob_change_limit/.test(m)) return t('errDobLimit');
   if (/phone/.test(m) && /check/.test(m)) return t('errPhone');
   if (/instagram/.test(m) && /check/.test(m)) return t('errInstagram');
   if (/date_of_birth/.test(m) && /check/.test(m)) return t('errDob');

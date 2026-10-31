@@ -9,5 +9,6 @@ insert into public.legal_documents (key, version, lang, title, sha256, url) valu
   ('captain_code', '1.0', 'en', 'Captain Code Terms', '3a8962c120a54da28088d085a228065108b87f93530e172ace3fc4ea3e0da6ab', '/legal/en/captain_code-1.0.md'),
   ('captain_declaration', '1.0', 'en', 'Captain Declaration', '97c9b1af351b8d9344901dc8fbbf402974cedc22f31bb8c20579b8540f5f20a6', '/legal/en/captain_declaration-1.0.md'),
   ('dob_declaration', '1.0', 'en', 'Date of birth declaration', '4b8a14b393f8a25643984717bfc7dddef3177ace4f43e124289363784279734b', null),
+  ('dob_declaration', '1.1', 'en', 'Date of birth declaration', '942385203de3406464956b34f0aa8b403355c7a3b9c7b8951eb975f095f8698c', null),
   ('media_feature', '1.0', 'en', 'Individual feature in promotional posts (optional)', 'f534cea4c5bde1ebef420352ad31f07b6404ad060be09ceb8ff5c76f9fabf42f', null)
 on conflict (key, version, lang) do update set title = excluded.title, sha256 = excluded.sha256, url = excluded.url;

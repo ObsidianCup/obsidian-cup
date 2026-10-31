@@ -11,6 +11,18 @@
 
   let db, user = null, profile = null, consents = {}, authMode = 'login', recovering = false;
 
+  // What the confirmation / reset link put in the address, read before the
+  // login library tidies it away.
+  const LINK = (() => {
+    const h = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const q = new URLSearchParams(location.search);
+    return {
+      error: h.get('error_description') || q.get('error_description') || h.get('error') || q.get('error'),
+      fromEmail: !!(h.get('type') || q.get('code') || h.get('access_token')),
+    };
+  })();
+  let linkNoticeShown = false;
+
   // ---------- Views ----------
   function show(view) {
     $$('[data-view]').forEach(el => { el.hidden = el.dataset.view !== view; });
@@ -33,7 +45,7 @@
     wireProfile();
     $$('[data-action="signout"]').forEach(b => b.addEventListener('click', async () => { await db.auth.signOut(); }));
     $$('[data-go]').forEach(b => b.addEventListener('click', () => { msg('authMsg', ''); show(b.dataset.go); }));
-    document.addEventListener('oc:language', () => { renderConsentTexts(); if (profile) renderHome(); renderPositions(); setAuthMode(authMode); });
+    document.addEventListener('oc:language', () => { renderConsentTexts(); if (profile) { renderHome(); renderDobInfo(); } renderPositions(); setAuthMode(authMode); });
 
     db.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') { recovering = true; show('newpass'); return; }
@@ -45,7 +57,16 @@
   });
 
   async function route() {
-    if (!user) { profile = null; setAuthMode(authMode); show('auth'); return; }
+    if (!user) {
+      profile = null; setAuthMode(authMode); show('auth');
+      if (!linkNoticeShown && (LINK.error || LINK.fromEmail)) {
+        linkNoticeShown = true;
+        msg('authMsg', LINK.error ? t('linkExpired') : t('emailConfirmed'), LINK.error ? 'error' : 'ok');
+        history.replaceState(null, '', location.pathname);
+      }
+      return;
+    }
+    if (LINK.error || LINK.fromEmail) history.replaceState(null, '', location.pathname);
     show('loading');
     const ok = await loadEverything();
     if (!ok) { show('auth'); msg('authMsg', t('genericError'), 'error'); return; }
@@ -168,7 +189,7 @@
 
   // ---------- Profile form + autosave ----------
   const TEXT_FIELDS = ['legal_name', 'display_name', 'phone', 'school_club', 'instagram', 'emergency_name', 'emergency_relationship', 'emergency_phone'];
-  const CHANGE_FIELDS = ['date_of_birth', 'gender', 'language'];
+  const CHANGE_FIELDS = ['gender', 'language'];
   const RULES = {
     phone: v => !v || /^\+?[0-9 ()-]{7,20}$/.test(v) || t('errPhone'),
     emergency_phone: v => !v || /^\+?[0-9 ()-]{7,20}$/.test(v) || t('errPhone'),
@@ -210,6 +231,7 @@
       if (error.code && error.code !== 'PGRST301') {
         // A rule in the database said no: show it next to the field, do not retry.
         keys.forEach(k => fieldErr(k, ocErrorMessage(error)));
+        if ('date_of_birth' in payload) { $('#f_date_of_birth').value = profile.date_of_birth || ''; renderDobInfo(); }
         showStatus(ocErrorMessage(error), true);
       } else {
         pending = Object.assign(payload, pending);   // connection problem: keep and retry
@@ -220,6 +242,7 @@
     }
     profile = data;
     renderHome();
+    renderDobInfo();
     if (Object.keys(pending).length) flush(); else showStatus(t('saved'));
   }
 
@@ -247,6 +270,11 @@
       const el = document.getElementById('f_' + name);
       el.addEventListener('change', () => queue(name, el.value, true));
     });
+    // Date of birth: saved only when the player leaves the field (typing a date
+    // fires many in-between "changes"), and only after they confirm.
+    const dobEl = $('#f_date_of_birth');
+    dobEl.addEventListener('blur', saveDob);
+    dobEl.addEventListener('change', () => { if (document.activeElement !== dobEl) saveDob(); });
     $('#f_media_feature').addEventListener('change', async (e) => {
       const on = e.target.checked;
       queue('media_feature', on, true);
@@ -260,6 +288,29 @@
       try { await navigator.clipboard.writeText(profile.player_code); $('#copyCode').textContent = t('copied'); setTimeout(() => { $('#copyCode').textContent = t('copy'); }, 1500); } catch (e) {}
     });
     renderPositions();
+  }
+
+  function saveDob() {
+    const el = $('#f_date_of_birth');
+    const value = el.value || null;
+    if (!profile || value === (profile.date_of_birth || null)) return;
+    if (!value) { el.value = profile.date_of_birth || ''; return; }   // cannot clear it
+    const verdict = RULES.date_of_birth(value);
+    if (verdict !== true) { fieldErr('date_of_birth', verdict); return; }
+    const pretty = new Date(value + 'T00:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+    const left = 2 - (profile.dob_changes || 0);
+    if (profile.date_of_birth && left <= 0) { fieldErr('date_of_birth', t('errDobLimit')); el.value = profile.date_of_birth; return; }
+    const question = profile.date_of_birth ? t('dobConfirmChange', { date: pretty, n: left - 1 }) : t('dobConfirmFirst', { date: pretty });
+    if (!window.confirm(question)) { el.value = profile.date_of_birth || ''; return; }
+    queue('date_of_birth', value, true);
+  }
+
+  function renderDobInfo() {
+    const box = $('#dobChanges');
+    if (!profile || !profile.date_of_birth || profile.verified_at) { box.textContent = ''; return; }
+    const left = 2 - (profile.dob_changes || 0);
+    box.textContent = left > 0 ? t('dobChangesLeft', { n: left }) : t('dobNoChangesLeft');
+    $('#f_date_of_birth').disabled = left <= 0;
   }
 
   function renderPositions() {
@@ -292,6 +343,8 @@
     $('#f_legal_name').disabled = locked;
     $('#f_date_of_birth').disabled = locked;
     $('#lockedNote').innerHTML = locked ? `<p class="acct-msg acct-msg-info">${ocEscape(t('lockedNote'))}</p>` : '';
+    $('#f_date_of_birth').value = profile.date_of_birth || '';
+    renderDobInfo();
     renderPositions();
   }
 

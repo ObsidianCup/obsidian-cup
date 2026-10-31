@@ -23,11 +23,21 @@ DOCS = [
 ]
 # Short declarations that are agreed to by a checkbox but have no long text
 DECLARATIONS = {
-    "dob_declaration": ("Date of birth declaration",
-                        "I confirm that the date of birth I enter is my real date of birth."),
-    "media_feature": ("Individual feature in promotional posts (optional)",
-                      "I agree that Obsidian Cup may feature me individually in promotional posts, "
-                      "such as player spotlights, highlight clips centred on me, and posters."),
+    # key: (version, title, text). Old versions stay listed so past consent
+    # records keep pointing at the exact words that were agreed to.
+    "dob_declaration": [
+        ("1.0", "Date of birth declaration",
+         "I confirm that the date of birth I enter is my real date of birth."),
+        ("1.1", "Date of birth declaration",
+         "I will enter my real date of birth, exactly as it appears on my ID. "
+         "I understand it is checked against my ID at tournaments and can be changed "
+         "at most 2 times after I first enter it."),
+    ],
+    "media_feature": [
+        ("1.0", "Individual feature in promotional posts (optional)",
+         "I agree that Obsidian Cup may feature me individually in promotional posts, "
+         "such as player spotlights, highlight clips centred on me, and posters."),
+    ],
 }
 
 def extract(lines, start_prefix):
@@ -54,9 +64,10 @@ for lang, src in SOURCES.items():
         path.write_text(body, encoding="utf-8")
         sha = hashlib.sha256(body.encode("utf-8")).hexdigest()
         rows.append((key, version, lang, title, sha, f"/legal/{lang}/{key}-{version}.md"))
-    for key, (title, text) in DECLARATIONS.items():
-        sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
-        rows.append((key, "1.0", lang, title, sha, None))
+    for key, versions in DECLARATIONS.items():
+        for version, title, text in versions:
+            sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
+            rows.append((key, version, lang, title, sha, None))
 
 def q(v):
     return "null" if v is None else "'" + str(v).replace("'", "''") + "'"

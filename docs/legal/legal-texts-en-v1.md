@@ -302,7 +302,7 @@ These short labels sit next to each checkbox, with a link to the full text. No b
 | --- | --- | --- |
 | Sign-up | Yes | I have read and agree to the Terms of Use. |
 | Sign-up | Yes | I have read the Privacy Notice and agree to my data being collected, used and stored as it describes, including storage outside Bangladesh. |
-| Sign-up | Yes | I confirm that the date of birth I enter is my real date of birth. |
+| Sign-up | Yes | I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments and can be changed at most 2 times after I first enter it. (version 1.1) |
 | Profile, medical notes | Only if adding notes | I agree that Obsidian Cup may store my medical notes and share them with first aid or medical staff if I need care at an event. |
 | Profile, ID upload | Yes, to play | I confirm this ID belongs to me and agree to it being stored privately and deleted 30 days after my next event. |
 | Profile, media | Optional | Feature me individually in promotional posts (you can change this any time). |

@@ -35,11 +35,12 @@ const as = async (who) => {          // who: uuid | 'anon' | null(owner)
 
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8'));
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8')); // re-run is safe
-for (const f of ['001_foundation.sql', '002_reserved_codes.sql']) {
+for (const f of ['001_foundation.sql', '002_reserved_codes.sql', '003_dob_change_limit.sql']) {
   await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations', f), 'utf8'));
 }
 await db.exec(fs.readFileSync(path.join(root, 'supabase/seed/legal_documents.sql'), 'utf8'));
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/002_reserved_codes.sql'), 'utf8'));
+await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/003_dob_change_limit.sql'), 'utf8'));
 console.log('setup ran twice without errors');
 
 // --- Users -------------------------------------------------------------
@@ -149,6 +150,22 @@ ok(q.length === 1 && q[0].c === 'OC-ZZ999', 'queued welcome email shows the chan
 await expectError(`update public.profiles set player_code = 'bad code' where id = $1`, [A], /check constraint/, 'badly formatted code rejected');
 await as(A);
 await expectError(`update public.profiles set player_code = 'OC-AA222' where id = $1`, [A], /permission denied/, 'player still cannot change own code');
+
+console.log('\nDate of birth change limit');
+await as(null);
+const D = await mk('dob@example.com');
+await as(D);
+await db.query(`update public.profiles set date_of_birth = '2001-01-01' where id = $1`, [D]);
+await db.query(`update public.profiles set date_of_birth = '2001-01-02' where id = $1`, [D]);
+await db.query(`update public.profiles set date_of_birth = '2001-01-03' where id = $1`, [D]);
+ok((await db.query('select dob_changes from public.profiles where id = $1', [D])).rows[0].dob_changes === 2, 'first entry free, then two changes counted');
+await expectError(`update public.profiles set date_of_birth = '2001-01-04' where id = $1`, [D], /dob_change_limit/, 'third change refused');
+await db.query(`update public.profiles set phone = '+358 40 1234567' where id = $1`, [D]);
+ok(true, 'other fields still save after the limit');
+await expectError(`update public.profiles set dob_changes = 0 where id = $1`, [D], /permission denied/, 'player cannot reset the counter');
+await as(null);
+await db.query(`update public.profiles set date_of_birth = '2001-01-05' where id = $1`, [D]);
+ok((await db.query('select date_of_birth::text d from public.profiles where id = $1', [D])).rows[0].d === '2001-01-05', 'organiser can still correct it');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
