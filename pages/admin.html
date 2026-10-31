@@ -15,10 +15,29 @@
     <h1 class="acct-title" data-t="adminTitle">Players</h1>
     <div id="admMsg"><p class="acct-muted" data-t="loading">Loading…</p></div>
 
+    <div class="acct-card" id="admMfa" hidden>
+      <h2 id="mfaTitle"></h2>
+      <p class="acct-muted" id="mfaIntro" style="margin-bottom:1rem;"></p>
+      <div id="mfaSetup" hidden>
+        <img id="mfaQr" alt="" width="200" height="200" style="background:#fff;padding:8px;border-radius:8px;display:block;margin-bottom:0.75rem;" />
+        <p class="acct-hint" data-t="mfaSecretLabel">Can't scan? Type this key into the app instead:</p>
+        <p><code id="mfaSecret" style="word-break:break-all;"></code></p>
+      </div>
+      <form id="mfaForm" novalidate style="margin-top:1rem;">
+        <div class="acct-field">
+          <label for="mfaCode" data-t="mfaCodeLabel">6-digit code from the app</label>
+          <input class="acct-input" id="mfaCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" style="max-width:12rem;letter-spacing:0.3em;" />
+        </div>
+        <div id="mfaMsg"></div>
+        <button class="acct-btn acct-btn-small" type="submit" data-t="mfaVerify">Continue</button>
+      </form>
+    </div>
+
     <div id="admApp" hidden>
       <div class="adm-bar">
         <input class="acct-input" id="admSearch" type="search" data-t-placeholder="adminSearch" />
         <button class="acct-btn acct-btn-ghost acct-btn-small" id="admExport" type="button" data-t="adminExport">Download CSV</button>
+        <button class="acct-btn acct-btn-ghost acct-btn-small" id="admBackup" type="button" data-t="adminBackup">Download full backup</button>
       </div>
       <p class="acct-muted" id="admCount" style="margin-bottom:0.75rem;"></p>
       <div class="adm-table-wrap">

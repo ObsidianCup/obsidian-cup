@@ -73,6 +73,7 @@ const OC_TEXT = {
     errLogin: 'Email or password is not right, or the email is not confirmed yet. New here? Use the Create account tab first.',
     emailConfirmed: 'Your email is confirmed. Log in to continue.',
     linkExpired: 'This link has expired or was already used. Log in if your email is confirmed, or create your account again to get a new link.',
+    errCaptcha: 'Please complete the check above the button (it proves you are not a robot), then try again.',
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
     errExists: 'An account with this email already exists. Try logging in.',
     // consent
@@ -195,6 +196,16 @@ const OC_TEXT = {
     colJoined: 'Joined',
     colStatus: 'ID check',
     adminEmpty: 'No players yet.',
+    adminBackup: 'Download full backup',
+    adminBackupNote: 'Backup saved. Keep it in the organiser Google Drive only; it contains private player data.',
+    mfaSetupTitle: 'Set up two-step login',
+    mfaSetupIntro: 'This page shows every player\'s private details, so it needs a second step after your password. Install an authenticator app (Google Authenticator or Microsoft Authenticator), scan this code with it, then type the 6-digit code it shows. Save the key below somewhere safe (for example your password manager) in case you lose your phone.',
+    mfaCheckTitle: 'Two-step login',
+    mfaCheckIntro: 'Open your authenticator app and type the 6-digit code for Obsidian Cup.',
+    mfaSecretLabel: 'Can\'t scan? Type this key into the app instead:',
+    mfaCodeLabel: '6-digit code from the app',
+    mfaVerify: 'Continue',
+    mfaWrong: 'That code did not work. Codes change every 30 seconds; try the newest one.',
   },
   bn: {
     // Bangla translations go here, using the same keys as above.

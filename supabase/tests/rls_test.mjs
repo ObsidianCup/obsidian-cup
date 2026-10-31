@@ -21,15 +21,20 @@ await db.exec(`
   create table auth.users (id uuid primary key default gen_random_uuid(), email text, email_confirmed_at timestamptz);
   create function auth.uid() returns uuid language sql stable as
     $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
+  create function auth.jwt() returns jsonb language sql stable as
+    $$ select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb $$;
   grant usage on schema public to anon, authenticated;
   grant usage on schema auth to anon, authenticated;
   grant execute on function auth.uid() to anon, authenticated;
+  grant execute on function auth.jwt() to anon, authenticated;
 `);
-const as = async (who) => {          // who: uuid | 'anon' | null(owner)
+const as = async (who, aal = 'aal1') => {   // who: uuid | 'anon' | null(owner); aal2 = passed two-step login
   await db.exec('reset role');
+  await db.query(`select set_config('request.jwt.claims', '', false)`);
   if (who === null) { await db.query(`select set_config('request.jwt.claim.sub', '', false)`); return; }
   if (who === 'anon') { await db.query(`select set_config('request.jwt.claim.sub', '', false)`); await db.exec('set role anon'); return; }
   await db.query(`select set_config('request.jwt.claim.sub', $1, false)`, [who]);
+  await db.query(`select set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ sub: who, aal })]);
   await db.exec('set role authenticated');
 };
 
@@ -80,6 +85,10 @@ await expectError(`select * from public.admins`, [], /permission denied/, 'canno
 await expectError(`insert into public.admins values ('alice@example.com')`, [], /permission denied/, 'cannot make self admin');
 ok((await db.query('select * from public.email_queue')).rows.length === 0, 'cannot read email queue');
 ok((await db.query('select public.is_admin() a')).rows[0].a === false, 'is_admin false for a player');
+ok((await db.query('select public.is_admin_email() a')).rows[0].a === false, 'is_admin_email false for a player');
+await as(A, 'aal2');
+ok((await db.query('select public.is_admin() a')).rows[0].a === false, 'a player with two-step login is still not admin');
+await as(A);
 await expectError(`select public.admin_set_verified($1, true)`, [B], /not_admin/, 'admin action refused for a player');
 
 console.log('\nConsent records');
@@ -111,8 +120,15 @@ await expectError(`select * from public.profiles`, [], /permission denied/, 'ano
 await expectError(`select * from public.consent_records`, [], /permission denied/, 'anon cannot read consent records');
 ok((await db.query(`select count(*)::int n from public.legal_documents`)).rows[0].n >= 10, 'anon can read the list of legal documents');
 
+console.log('\nAdmin without the two-step code');
+await as(ADMIN, 'aal1');
+ok((await db.query('select public.is_admin() a')).rows[0].a === false, 'admin password alone gives no admin powers');
+ok((await db.query('select public.is_admin_email() a')).rows[0].a === true, 'admin page can tell it should ask for the code');
+ok((await db.query('select * from public.profiles')).rows.length === 1, 'without the code an admin sees only their own profile');
+await expectError(`select public.admin_set_verified($1, true)`, [B], /not_admin/, 'without the code admin actions are refused');
+
 console.log('\nAdmin');
-await as(ADMIN);
+await as(ADMIN, 'aal2');
 ok((await db.query('select public.is_admin() a')).rows[0].a === true, 'admin recognised (email case ignored)');
 ok((await db.query('select * from public.profiles')).rows.length === 4, 'admin sees all profiles');
 await db.query(`select public.admin_set_verified($1, true)`, [B]);
@@ -127,7 +143,7 @@ console.log('\nUnconfirmed email pretending to be admin');
 await as(null);
 await db.query(`delete from auth.users where id = $1`, [ADMIN]);
 const FAKE = await mk('obsidiancup.official@gmail.com', false);
-await as(FAKE);
+await as(FAKE, 'aal2');
 ok((await db.query('select public.is_admin() a')).rows[0].a === false, 'unconfirmed admin email gets no admin rights');
 
 console.log('\nReserved and changed player codes');

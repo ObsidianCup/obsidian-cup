@@ -19,12 +19,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-C1KZSFD68V');
-  </script>
+  <script src="/js/analytics.js"></script>
 </head>
 <body>
 
@@ -93,30 +88,6 @@
   <script src="../js/lang.js"></script>
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const checkbox = document.getElementById('rulesCheck');
-      const proceedBtn = document.getElementById('proceedBtn');
-      const proceedHint = document.getElementById('proceedHint');
-      if (checkbox && proceedBtn) {
-        checkbox.addEventListener('change', () => {
-          const checked = checkbox.checked;
-          proceedBtn.classList.toggle('enabled', checked);
-          if (proceedHint) proceedHint.classList.toggle('hidden', checked);
-        });
-      }
-
-      // Char count for experience form
-      const textarea = document.getElementById('expMessage');
-      const charCount = document.getElementById('charCount');
-      if (textarea && charCount) {
-        textarea.addEventListener('input', () => {
-          const len = textarea.value.trim().length;
-          charCount.textContent = `${len} / 20 minimum`;
-          charCount.classList.toggle('enough', len >= 20);
-        });
-      }
-    });
-  </script>
+  <script src="/js/page-rules.js"></script>
 </body>
 </html>

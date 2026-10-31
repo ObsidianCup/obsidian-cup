@@ -141,3 +141,5 @@ html[lang="bn"] .acct-code-value { font-family: 'Courier New', monospace; }
 .acct-hint.is-ok { color: #9fd3a8; }
 .acct-hint.is-bad { color: #e8a49a; }
 #codeSuggestions .acct-chip span { font-family: 'Courier New', monospace; letter-spacing: 0.06em; }
+
+.acct-captcha:not(:empty) { margin: 0.25rem 0 1rem; min-height: 65px; }

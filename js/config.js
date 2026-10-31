@@ -34,6 +34,10 @@ const SITE_CONFIG = {
   accountsEnabled: false,
   // googleLogin: true shows "Continue with Google" (after Google is set up in Supabase).
   googleLogin: true,
+  // Cloudflare Turnstile anti-bot check on sign-up, log in and password reset.
+  // The SITE key is public and safe here; the SECRET key goes only into
+  // Supabase (Authentication → Attack Protection). Empty = check switched off.
+  turnstileSiteKey: "",
   // Public connection details. These are safe to publish: the database's
   // security rules decide what each visitor can see. NEVER put the secret
   // or service_role key here.

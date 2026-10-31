@@ -34,7 +34,8 @@ events, and the organiser verifies everything from one admin page.
 | Saving | Profile forms autosave as the player types |
 | Teams | Captain creates a team with a **captain code**; players join with a **team join code** and the captain approves. No searching other players |
 | Captain codes | Issued by the organiser from the admin page. One code = one team in one event. Single use, expires, tied to the first account that uses it |
-| Admin | Only the organiser (obsidiancup.official@gmail.com) for now |
+| Admin | Only the organiser (obsidiancup.official@gmail.com) for now. Admin powers need two-step login (authenticator app, `aal2` checked in the database, 006) |
+| Site security | Strict security headers incl. Content-Security-Policy (no inline scripts allowed; page scripts live in `js/page-*.js`, analytics in `js/analytics.js`); Cloudflare Turnstile on sign-up, login, code login and reset; full JSON backup button on the admin page (store only in the organiser Drive) |
 | Consent | Each player agrees for themselves: at sign-up (terms, privacy, real DOB) and per event (participation agreement, media part A, fitness). Media part B (individual feature) is optional |
 | Ages | 13+ can create an account without a guardian. Under 13: guardian consent before the account can be used. Under 18: guardian consent needed only for tournaments (joining a team, ID upload, playing). For 13–17 accounts, collect only basic profile data until the guardian consents (lawyer to confirm this fits the PDPO's rules on children's data) |
 | Guardian consent | Guardian completes consent themselves via a private one-time link (7-day expiry) the player sends them. Paper form fallback at check-in |
@@ -116,7 +117,8 @@ project); real player photos only, never AI-made ones of players.
 1. **Done — foundation:** accounts, consents, autosave profile, player codes
    (choose your own, log in with code), Gmail sender + branded login emails,
    Google login, reset password, admin list. 79 security tests, load-tested.
-2. **Now — security hardening (small):** CAPTCHA (Cloudflare Turnstile, free)
+2. **Built 1 Nov — security hardening** (owner steps pending: run SQL,
+   redeploy function, Turnstile keys, account 2-step checklist): CAPTCHA (Cloudflare Turnstile, free)
    on sign-up / login / reset; security headers on the site (CSP, HSTS,
    frame and referrer rules); two-step login for the admin page; owner
    checks: 2-step on GitHub, Supabase, Vercel, Google; minimum password

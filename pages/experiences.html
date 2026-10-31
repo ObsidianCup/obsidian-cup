@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../css/style.css" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C1KZSFD68V');</script>
+  <script src="/js/analytics.js"></script>
 </head>
 <body>
 
@@ -117,17 +117,5 @@
   <script src="../js/config.js"></script>
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const textarea = document.getElementById('expMessage');
-      const charCount = document.getElementById('charCount');
-      if (textarea && charCount) {
-        textarea.addEventListener('input', () => {
-          const len = textarea.value.trim().length;
-          charCount.textContent = `${len} / 20 minimum`;
-          charCount.classList.toggle('enough', len >= 20);
-        });
-      }
-    });
-  </script>
+  <script src="/js/page-experiences.js"></script>
 </html>

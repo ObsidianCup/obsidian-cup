@@ -42,6 +42,7 @@
     if (!db) { show('off'); return; }
     if (SITE_CONFIG.googleLogin) { $('#googleBtn').hidden = false; $('#googleOr').hidden = false; }
     wireAuth();
+    loadCaptcha();
     wireConsent();
     wireProfile();
     $$('[data-action="signout"]').forEach(b => b.addEventListener('click', async () => { await db.auth.signOut(); }));
@@ -133,13 +134,43 @@
     });
   }
 
+  // ---------- Anti-bot check (Cloudflare Turnstile) ----------
+  // Only when a site key is set in config.js. Each token works once, so the
+  // widget is reset after every attempt.
+  const captcha = { ready: null, ids: {} };
+  function loadCaptcha() {
+    if (!SITE_CONFIG.turnstileSiteKey) return;
+    captcha.ready = new Promise((resolve) => {
+      window.ocTurnstileLoaded = resolve;
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=ocTurnstileLoaded';
+      s.async = true;
+      document.head.appendChild(s);
+    }).then(() => {
+      ['captchaAuth', 'captchaForgot'].forEach(id => {
+        captcha.ids[id] = window.turnstile.render('#' + id, {
+          sitekey: SITE_CONFIG.turnstileSiteKey, theme: 'dark', size: 'flexible',
+          language: ocLang() === 'bn' ? 'bn' : 'en', 'refresh-expired': 'auto',
+        });
+      });
+    });
+  }
+  async function captchaToken(id) {
+    if (!captcha.ready) return undefined;
+    await captcha.ready;
+    const tok = window.turnstile.getResponse(captcha.ids[id]);
+    if (!tok) throw new Error('captcha_missing');
+    return tok;
+  }
+  function captchaReset(id) { if (captcha.ids[id] !== undefined && window.turnstile) window.turnstile.reset(captcha.ids[id]); }
+
   // Player code + password: a small server function finds the email, so the
   // page never sees anyone's email (supabase/functions/login-with-code).
-  async function loginWithCode(code, password) {
+  async function loginWithCode(code, password, captchaTok) {
     const res = await fetch(SITE_CONFIG.supabaseUrl + '/functions/v1/login-with-code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', apikey: SITE_CONFIG.supabasePublishableKey },
-      body: JSON.stringify({ code, password }),
+      body: JSON.stringify({ code, password, captchaToken: captchaTok }),
     });
     const body = await res.json().catch(() => ({}));
     if (res.status === 429) throw new Error('too many');
@@ -165,23 +196,24 @@
       if (authMode === 'signup' && password !== $('#authPassword2').value) { msg('authMsg', t('errPasswordMatch'), 'error'); return; }
       const btn = $('#authSubmit'); btn.disabled = true;
       try {
+        const captchaTok = await captchaToken('captchaAuth');
         if (authMode === 'signup') {
-          const { data, error } = await db.auth.signUp({ email, password, options: { emailRedirectTo: PAGE } });
+          const { data, error } = await db.auth.signUp({ email, password, options: { emailRedirectTo: PAGE, captchaToken: captchaTok } });
           if (error) throw error;
           if (data.session) return;              // email confirmation switched off: already logged in
           $('#checkEmailBody').textContent = t('checkEmailBody', { email });
           show('checkemail');
         } else if (byCode) {
-          await loginWithCode(raw, password);
+          await loginWithCode(raw, password, captchaTok);
         } else {
-          const { error } = await db.auth.signInWithPassword({ email, password });
+          const { error } = await db.auth.signInWithPassword({ email, password, options: { captchaToken: captchaTok } });
           if (error) throw error;
         }
       } catch (err) {
         const m = (err && err.message) || '';
-        msg('authMsg', /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
+        msg('authMsg', /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
           : byCode ? t('errLoginCode') : authMode === 'login' ? t('errLogin') : t('genericError'), 'error');
-      } finally { btn.disabled = false; }
+      } finally { btn.disabled = false; captchaReset('captchaAuth'); }
     });
 
     $('#googleBtn').addEventListener('click', async () => {
@@ -193,9 +225,15 @@
       e.preventDefault();
       const email = $('#forgotEmail').value.trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg('forgotMsg', t('errEmail'), 'error'); return; }
-      const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo: PAGE });
+      let error;
+      try {
+        ({ error } = await db.auth.resetPasswordForEmail(email, { redirectTo: PAGE, captchaToken: await captchaToken('captchaForgot') }));
+      } catch (err) { error = err; }
+      captchaReset('captchaForgot');
       // Same message either way, so nobody can test which emails have accounts.
-      msg('forgotMsg', error && /rate|too many/i.test(error.message) ? t('errRateLimit') : t('resetSent'), error && /rate/i.test(error.message) ? 'error' : 'ok');
+      const m = (error && error.message) || '';
+      msg('forgotMsg', /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : t('resetSent'),
+        /captcha|rate|too many/i.test(m) ? 'error' : 'ok');
     });
 
     $('#newpassForm').addEventListener('submit', async (e) => {

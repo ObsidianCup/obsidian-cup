@@ -42,11 +42,12 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(origin) });
   if (req.method !== 'POST') return reply({ error: 'method' }, 405, origin);
 
-  let code = '', password = '';
+  let code = '', password = '', captchaToken: string | undefined;
   try {
     const b = await req.json();
     code = String(b.code || '').slice(0, 20);
     password = String(b.password || '').slice(0, 200);
+    if (b.captchaToken) captchaToken = String(b.captchaToken).slice(0, 4096);
   } catch { return reply({ error: 'bad_request' }, 400, origin); }
   if (!code || password.length < 8) return reply({ error: 'invalid' }, 400, origin);
 
@@ -63,13 +64,14 @@ Deno.serve(async (req) => {
   let session = null;
   if (email) {
     const auth = createClient(URL_, PUBLIC || SECRET, { auth: { persistSession: false, autoRefreshToken: false } });
-    const { data, error } = await auth.auth.signInWithPassword({ email: email as string, password });
+    const { data, error } = await auth.auth.signInWithPassword({ email: email as string, password, options: { captchaToken } });
     if (error && /rate|too many/i.test(error.message)) return reply({ error: 'too_many' }, 429, origin);
     session = error ? null : data.session;
   }
   await admin.rpc('login_code_record', { p_code: code, p_ip: ip, p_ok: !!session });
 
-  // Same answer for "no such code" and "wrong password".
+  // Same answer for "no such code", "wrong password" and a failed anti-bot
+  // check, so the answer never reveals whether a code exists.
   if (!session) return reply({ error: 'invalid' }, 401, origin);
   return reply({ access_token: session.access_token, refresh_token: session.refresh_token }, 200, origin);
 });
