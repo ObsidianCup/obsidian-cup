@@ -126,7 +126,11 @@ project); real player photos only, never AI-made ones of players.
 3. **Now — website redesign** (three homepage directions on the "Obsidian Cup —
    Website Redesign" design canvas in the organiser's account, round 2 built
    with the anti-slop, typography, spacing, reduced-motion and transitions
-   skills: A Court, B Obsidian Glass, C Programme; waiting for her pick.
+   skills: A Court, B Obsidian Glass, C Programme. **Chosen: B Obsidian Glass**
+   (1 Nov). Tokens: Glass #0b1012 (60%), Facet #151c1f, Bone #eeeae3 (30%),
+   Mist #a7b0b2, Gold sheen #d4b06a (main button + focus ring only, 10%).
+   Unbounded 500/600 headings, Figtree 400/500 text. No ghost buttons: the
+   second action is a filled Facet button. Sticky header keeps Log in in view.
    Rules for the build: max 3 weights (none over 600), body 16px, nothing
    under 12px, headings line-height 1.1–1.2, 8px spacing grid, text ≤70ch,
    sentence case, no all-caps labels, no stats strip, no scroll fade-ins,
