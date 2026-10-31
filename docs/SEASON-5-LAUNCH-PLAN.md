@@ -106,7 +106,7 @@ Under-18 players cannot join a team until a guardian signs. Captains need a code
 
 ## 5. Accounts, player codes and login
 
-Every player gets one account and one permanent **player code**, such as `OC-7KM2Q`, which is emailed to them on sign-up and identifies them across every season.
+Every player gets one account and one permanent **player code**, such as `OC-UF427`, which is emailed to them on sign-up and identifies them across every season.
 
 **Login: two ways, both free**
 
@@ -117,9 +117,9 @@ Passwords are never emailed to anyone and never stored in readable form; even Ob
 
 **The player code**
 
-- Five letters and numbers after `OC-`, skipping look-alikes such as 0/O and 1/I, so it is easy to read out loud.
+- Built from the player's initials plus three digits, for example Uriana Faiha becomes `OC-UF427`. The digits keep codes unique when two players share initials, and skip look-alikes such as 0 and 1.
 - Created once and never changes, even if the player changes email or name.
-- Used for: match-day check-in (as a QR code), the digital player card, certificates, the public player page (for example `/player/OC-7KM2Q`), and linking past awards to the right person.
+- Used for: match-day check-in (as a QR code), the digital player card, certificates, the public player page (for example `/player/OC-UF427`), and linking past awards to the right person.
 - Safe to share: it shows only public information such as name, teams and titles.
 
 **What the account home shows**
@@ -139,12 +139,22 @@ Passwords are never emailed to anyone and never stored in readable form; even Ob
 - Full legal name (as on ID) and the name to show publicly
 - Date of birth (not age, so it stays correct every year), gender category
 - Phone, email, school or club, Instagram handle (optional)
-- Usual position (regular or libero)
+- Preferred positions, chosen freely per sport: for volleyball outside hitter, setter, middle blocker, opposite or libero; for football goalkeeper, defender, midfielder or forward. Volleyball's limit of 2 liberos is checked per team, not on the profile
 - Emergency contact: name, relationship, phone
 - Guardian details, only for under-18s
 - ID photo (private), medical notes (optional, private)
 
-Jersey number and size are asked per team and per event, not on the profile, since they change.
+Jersey number is asked per team, since it changes. Obsidian Cup does not supply jerseys; teams must wear matching jerseys with numbers, and numbers must be unique within a team.
+
+**Ages**
+
+- **13 and over:** create an account freely; no guardian needed for the account itself.
+- **Under 13:** a guardian must consent before the account can be used.
+- **Under 18, for tournaments:** a guardian must consent before the player can join a team, upload an ID or play.
+
+**Every sport, not just volleyball**
+
+Each event is set up with its sport and its own rules: squad size (6 to 12 for volleyball), special roles (liberos), position list, age limits and gender category. Football or any future sport uses the same accounts, teams and history, only with different rules.
 
 ## 6. Automatic emails
 
@@ -201,7 +211,7 @@ Past seasons can be added now from your records, so returning players see their 
 
 Old records have names, not accounts. When a player signs up, the system suggests matching past records by name and date. The player taps "this is me", and you approve it in the admin page. This stops anyone claiming someone else's MVP.
 
-**The public player page** (`/player/OC-7KM2Q`) shows: display name, teams by season, titles and awards, and certificates. It never shows age, contact details or photos unless the player adds a profile photo and has given the individual-feature media consent.
+**The public player page** (`/player/OC-UF427`) shows: display name, teams by season, titles and awards, and certificates. It never shows age, contact details or photos unless the player adds a profile photo and has given the individual-feature media consent.
 
 **Certificates (later stage)**
 

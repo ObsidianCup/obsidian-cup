@@ -19,14 +19,15 @@ events, and the organiser verifies everything from one admin page.
 | --- | --- |
 | Who has accounts | Every player has their own account |
 | Login | Google sign-in, or email + password (both free). No phone/SMS login. Passwords are never emailed |
-| Player code | Every account gets a permanent code like `OC-7KM2Q` (no 0/O/1/I), emailed in the welcome email; used for check-in QR, player card, certificates, public page `/player/<code>` |
+| Player code | Every account gets a permanent code from the player's initials + 3 digits, e.g. Uriana Faiha → `OC-UF427` (digits skip 0 and 1), emailed in the welcome email; used for check-in QR, player card, certificates, public page `/player/<code>` |
 | Organiser (legal) | Obsidian Cup is not a legal entity yet. Legal texts name **Uriana Faiha, founder and head organiser, trading as Obsidian Cup**. Recommended next step: sole proprietorship trade licence; later an OPC |
 | Saving | Profile forms autosave as the player types |
 | Teams | Captain creates a team with a **captain code**; players join with a **team join code** and the captain approves. No searching other players |
 | Captain codes | Issued by the organiser from the admin page. One code = one team in one event. Single use, expires, tied to the first account that uses it |
 | Admin | Only the organiser (obsidiancup.official@gmail.com) for now |
 | Consent | Each player agrees for themselves: at sign-up (terms, privacy, real DOB) and per event (participation agreement, media part A, fitness). Media part B (individual feature) is optional |
-| Under 18 | Guardian completes consent themselves via a private one-time link (7-day expiry) the player sends them. Paper form fallback at check-in |
+| Ages | 13+ can create an account without a guardian. Under 13: guardian consent before the account can be used. Under 18: guardian consent needed only for tournaments (joining a team, ID upload, playing). For 13–17 accounts, collect only basic profile data until the guardian consents (lawyer to confirm this fits the PDPO's rules on children's data) |
+| Guardian consent | Guardian completes consent themselves via a private one-time link (7-day expiry) the player sends them. Paper form fallback at check-in |
 | ID photos | Required to play. Private storage, only player + admin can view. Compressed on upload. Marked verified once; image deleted 30 days after the event |
 | Medical notes | Optional, separate explicit consent (health data is sensitive under Bangladesh's PDPO 2025) |
 | Payment | Manual bKash. Captain enters transaction ID; admin verifies. Each transaction ID usable once. Consider a bKash Personal Retail Account to separate tournament money |
@@ -36,6 +37,10 @@ events, and the organiser verifies everything from one admin page.
 | Handbook | One page EN/BN + PDF, new edition per season, linked from the event agreement |
 | Languages | Everything in English and Bangla. Claude writes English; the organiser writes the Bangla |
 | Cost | Free tiers only for now, with a clear upgrade path |
+| Legal status | No budget to register yet; stay as Uriana Faiha trading as Obsidian Cup. Revisit a trade licence later |
+| Sports | Multi-sport from day one: each event has a sport and its own rules (squad size, special roles like libero, position list, age and gender limits) |
+| Positions | Players pick preferred positions freely from the sport's list (volleyball: outside hitter, setter, middle blocker, opposite, libero; football: goalkeeper, defender, midfielder, forward). Libero cap (2) is a per-team volleyball rule |
+| Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
 
 ## Legal texts
 
@@ -81,14 +86,14 @@ Supabase account must be owned by obsidiancup.official@gmail.com.
 ## Rules the database enforces
 
 - A player can be in only one team per event.
-- 6–12 players per team; at most 2 liberos; unique jersey numbers per team.
+- Squad size, special-role limits (e.g. 2 liberos) and age/gender limits come from each event's sport rules (volleyball: 6–12 players, max 2 liberos); unique jersey numbers per team.
 - Unique team name per event.
 - Age eligibility computed from date of birth as of the event date.
 - Name and date of birth lock once the organiser verifies the player.
 - Roster changes lock at the event's registration deadline.
 - Team slot limit per category, with a waitlist.
 - bKash transaction ID unique across all registrations.
-- Under-18 players cannot join a team until guardian consent is recorded.
+- Under-13 accounts are locked until guardian consent; under-18 players cannot join a team, upload ID or play until guardian consent is recorded.
 - Possible duplicate accounts (same name + DOB) are flagged to the admin.
 
 ## Build stages
