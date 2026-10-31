@@ -465,10 +465,18 @@
     const list = LP.getCountries().map(cc => ({ cc, name: names ? names.of(cc) : cc, code: LP.getCountryCallingCode(cc) }))
       .sort((a, b) => a.name.localeCompare(b.name));
     const first = list.filter(c => ['BD', 'IN', 'FI'].includes(c.cc));
-    const opt = c => `<option value="${c.cc}">+${c.code} ${ocEscape(c.name)}</option>`;
+    const opt = c => `<option value="${c.cc}" data-full="+${c.code} ${ocEscape(c.name)}" data-short="+${c.code}">+${c.code} ${ocEscape(c.name)}</option>`;
     countryOptions = first.sort((a, b) => (a.cc === 'BD' ? -1 : b.cc === 'BD' ? 1 : 0)).map(opt).join('')
       + '<option disabled>──────────</option>' + list.map(opt).join('');
     return countryOptions;
+  }
+  // The closed box shows just "+880" so it fits on phones; the open list
+  // shows "+880 Bangladesh" so players can find their country.
+  function ccShort(sel) {
+    Array.from(sel.options).forEach(o => { if (o.dataset.full) o.textContent = o.selected ? o.dataset.short : o.dataset.full; });
+  }
+  function ccFull(sel) {
+    Array.from(sel.options).forEach(o => { if (o.dataset.full) o.textContent = o.dataset.full; });
   }
   function phoneFill(name, value) {
     const sel = document.getElementById('f_' + name + '_cc');
@@ -477,6 +485,7 @@
     if (!sel.options.length) sel.innerHTML = countryOptionsHtml();
     const parsed = value ? LP.parsePhoneNumberFromString(value) : null;
     sel.value = (parsed && parsed.country) || sel.value || DEFAULT_CC;
+    ccShort(sel);
     input.value = parsed ? parsed.formatNational() : (value || '');
   }
   function phoneRead(name, showErrors) {
@@ -488,7 +497,7 @@
     const parsed = raw.startsWith('+') || raw.startsWith('00')
       ? LP.parsePhoneNumberFromString(raw.replace(/^00/, '+'))
       : LP.parsePhoneNumberFromString(raw, sel.value);
-    if (parsed && parsed.country && parsed.country !== sel.value) sel.value = parsed.country;   // pasted +358… picks Finland
+    if (parsed && parsed.country && parsed.country !== sel.value) { sel.value = parsed.country; ccShort(sel); }   // pasted +358… picks Finland
     return parsed && parsed.isValid() ? { ok: true, value: parsed.number } : { ok: false };
   }
   function wirePhone(name) {
@@ -496,6 +505,9 @@
     const input = document.getElementById('f_' + name);
     if (LP) sel.innerHTML = countryOptionsHtml(); else sel.hidden = true;
     sel.value = DEFAULT_CC;
+    ccShort(sel);
+    ['mousedown', 'focus', 'keydown'].forEach(ev => sel.addEventListener(ev, () => ccFull(sel)));
+    sel.addEventListener('blur', () => ccShort(sel));
     let t0 = null;
     const attempt = (final) => {
       const r = phoneRead(name);
@@ -504,7 +516,7 @@
     };
     input.addEventListener('input', () => { clearTimeout(t0); t0 = setTimeout(() => attempt(false), 700); });
     input.addEventListener('blur', () => { clearTimeout(t0); attempt(true); });
-    sel.addEventListener('change', () => attempt(true));
+    sel.addEventListener('change', () => { ccShort(sel); attempt(true); });
   }
 
   function saveDob() {

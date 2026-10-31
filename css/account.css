@@ -131,7 +131,7 @@ html[lang="bn"] .acct-code-value { font-family: 'Courier New', monospace; }
 .acct-eye:hover { background: rgba(255,255,255,0.05); }
 
 /* Phone: country code + number */
-.acct-phone { display: grid; grid-template-columns: 7.25rem 1fr; gap: 0.5rem; }
+.acct-phone { display: grid; grid-template-columns: 6.25rem 1fr; gap: 0.5rem; }
 .acct-phone .acct-select { padding-right: 0.4rem; }
 
 /* Player code picker */
