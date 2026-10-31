@@ -25,6 +25,9 @@ events, and the organiser verifies everything from one admin page.
 | Custom codes | Organisers can reserve a code for an email (`reserved_player_codes`) or change a code from the SQL Editor; players cannot. Founder's code: OC-UF023 |
 | Date of birth | Must match the player's ID (checked at tournaments). First entry is free; a player can change it at most 2 times, then only an organiser can. Saved on leaving the field, after a confirmation |
 | Login links | `flowType: 'implicit'` so confirmation and reset links work on any device; expired links show a clear message |
+| Passwords | Show/hide button on every password field; sign-up and reset ask for the password twice |
+| Phone numbers | Country picker (Bangladesh first, then Finland, India, then all countries), validated per country with libphonenumber-js, stored as international numbers like +8801711000000 |
+| Load | Load-tested with 1,000 and 3,000 simultaneous players on real Postgres; player codes for the same initials are handed out one at a time (004) |
 | Organiser (legal) | Obsidian Cup is not a legal entity yet. Legal texts name **Uriana Faiha, founder and head organiser, trading as Obsidian Cup**. Recommended next step: sole proprietorship trade licence; later an OPC |
 | Saving | Profile forms autosave as the player types |
 | Teams | Captain creates a team with a **captain code**; players join with a **team join code** and the captain approves. No searching other players |

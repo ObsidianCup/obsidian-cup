@@ -35,7 +35,7 @@ const as = async (who) => {          // who: uuid | 'anon' | null(owner)
 
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8'));
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8')); // re-run is safe
-for (const f of ['001_foundation.sql', '002_reserved_codes.sql', '003_dob_change_limit.sql']) {
+for (const f of fs.readdirSync(path.join(root, 'supabase/migrations')).sort()) {
   await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations', f), 'utf8'));
 }
 await db.exec(fs.readFileSync(path.join(root, 'supabase/seed/legal_documents.sql'), 'utf8'));

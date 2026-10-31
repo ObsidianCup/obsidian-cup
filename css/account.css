@@ -123,3 +123,13 @@
 
 html[lang="bn"] .acct-wrap, html[lang="bn"] .acct-wrap * { font-family: var(--font-bengali), var(--font-body); letter-spacing: 0; }
 html[lang="bn"] .acct-code-value { font-family: 'Courier New', monospace; }
+
+/* Password with show/hide */
+.acct-pass { position: relative; }
+.acct-pass .acct-input { padding-right: 4.75rem; }
+.acct-eye { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); min-height: 40px; min-width: 64px; padding: 0 0.75rem; background: none; border: none; color: rgba(212,175,95,0.95); font-family: var(--font-body); font-size: 0.85rem; cursor: pointer; border-radius: 4px; }
+.acct-eye:hover { background: rgba(255,255,255,0.05); }
+
+/* Phone: country code + number */
+.acct-phone { display: grid; grid-template-columns: 7.25rem 1fr; gap: 0.5rem; }
+.acct-phone .acct-select { padding-right: 0.4rem; }

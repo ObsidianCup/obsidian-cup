@@ -51,8 +51,18 @@
           </div>
           <div class="acct-field">
             <label for="authPassword" data-t="password">Password</label>
-            <input class="acct-input" id="authPassword" type="password" autocomplete="current-password" minlength="8" required />
+            <div class="acct-pass">
+              <input class="acct-input" id="authPassword" type="password" autocomplete="current-password" minlength="8" required />
+              <button class="acct-eye" type="button" data-toggle="authPassword" aria-pressed="false" data-t="show">Show</button>
+            </div>
             <span class="acct-hint" id="passwordHint" data-t="passwordHint" hidden>At least 8 characters.</span>
+          </div>
+          <div class="acct-field" id="password2Field" hidden>
+            <label for="authPassword2" data-t="passwordAgain">Type the password again</label>
+            <div class="acct-pass">
+              <input class="acct-input" id="authPassword2" type="password" autocomplete="new-password" minlength="8" />
+              <button class="acct-eye" type="button" data-toggle="authPassword2" aria-pressed="false" data-t="show">Show</button>
+            </div>
           </div>
           <button class="acct-btn" type="submit" id="authSubmit" data-t="btnLogin">Log in</button>
         </form>
@@ -87,8 +97,18 @@
         <form id="newpassForm" novalidate>
           <div class="acct-field">
             <label for="newPassword" data-t="newPassword">New password</label>
-            <input class="acct-input" id="newPassword" type="password" autocomplete="new-password" minlength="8" required />
+            <div class="acct-pass">
+              <input class="acct-input" id="newPassword" type="password" autocomplete="new-password" minlength="8" required />
+              <button class="acct-eye" type="button" data-toggle="newPassword" aria-pressed="false" data-t="show">Show</button>
+            </div>
             <span class="acct-hint" data-t="passwordHint">At least 8 characters.</span>
+          </div>
+          <div class="acct-field">
+            <label for="newPassword2" data-t="passwordAgain">Type the password again</label>
+            <div class="acct-pass">
+              <input class="acct-input" id="newPassword2" type="password" autocomplete="new-password" minlength="8" required />
+              <button class="acct-eye" type="button" data-toggle="newPassword2" aria-pressed="false" data-t="show">Show</button>
+            </div>
           </div>
           <button class="acct-btn" type="submit" data-t="btnSetPassword">Save new password</button>
         </form>
@@ -190,7 +210,10 @@
           <div class="acct-row">
             <div class="acct-field">
               <label for="f_phone" data-t="phone">Phone number</label>
-              <input class="acct-input" id="f_phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" />
+              <div class="acct-phone">
+                <select class="acct-select" id="f_phone_cc" aria-label="Country code"></select>
+                <input class="acct-input" id="f_phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="24" />
+              </div>
               <span class="acct-hint" data-t="phoneHint"></span>
               <span class="acct-err" data-err="phone"></span>
             </div>
@@ -225,7 +248,10 @@
           </div>
           <div class="acct-field">
             <label for="f_emergency_phone" data-t="emergencyPhone">Contact phone</label>
-            <input class="acct-input" id="f_emergency_phone" name="emergency_phone" type="tel" inputmode="tel" maxlength="20" />
+            <div class="acct-phone">
+              <select class="acct-select" id="f_emergency_phone_cc" aria-label="Country code"></select>
+              <input class="acct-input" id="f_emergency_phone" name="emergency_phone" type="tel" inputmode="tel" maxlength="24" />
+            </div>
             <span class="acct-err" data-err="emergency_phone"></span>
           </div>
 
@@ -249,6 +275,7 @@
   <div class="acct-status" id="saveStatus" role="status" aria-live="polite" hidden></div>
 
   <script src="../js/vendor/supabase-js-2.118.0.js"></script>
+  <script src="../js/vendor/libphonenumber-min-1.13.15.js"></script>
   <script src="../js/config.js"></script>
   <script src="../js/lang.js"></script>
   <script src="../js/components.js"></script>

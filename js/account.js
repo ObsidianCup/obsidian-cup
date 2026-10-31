@@ -103,10 +103,27 @@
     $('#authSubmit').textContent = t(signup ? 'btnSignup' : 'btnLogin');
     $('#authPassword').autocomplete = signup ? 'new-password' : 'current-password';
     $('#passwordHint').hidden = !signup;
+    $('#password2Field').hidden = !signup;
     $('#forgotBtn').parentElement.hidden = signup;
   }
 
+  // Show / hide buttons next to password fields.
+  function wirePasswordToggles() {
+    $$('[data-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.dataset.toggle);
+        const showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        btn.setAttribute('aria-pressed', String(!showing));
+        btn.textContent = t(showing ? 'show' : 'hide');
+        btn.dataset.t = showing ? 'show' : 'hide';
+        input.focus();
+      });
+    });
+  }
+
   function wireAuth() {
+    wirePasswordToggles();
     $$('.acct-tab').forEach(b => b.addEventListener('click', () => { msg('authMsg', ''); setAuthMode(b.dataset.tab); }));
     $('#forgotBtn').addEventListener('click', () => { $('#forgotEmail').value = $('#authEmail').value; msg('forgotMsg', ''); show('forgot'); });
 
@@ -116,6 +133,7 @@
       const password = $('#authPassword').value;
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg('authMsg', t('errEmail'), 'error'); return; }
       if (password.length < 8) { msg('authMsg', t('errPassword'), 'error'); return; }
+      if (authMode === 'signup' && password !== $('#authPassword2').value) { msg('authMsg', t('errPasswordMatch'), 'error'); return; }
       const btn = $('#authSubmit'); btn.disabled = true;
       try {
         if (authMode === 'signup') {
@@ -153,6 +171,7 @@
       e.preventDefault();
       const password = $('#newPassword').value;
       if (password.length < 8) { msg('newpassMsg', t('errPassword'), 'error'); return; }
+      if (password !== $('#newPassword2').value) { msg('newpassMsg', t('errPasswordMatch'), 'error'); return; }
       const { error } = await db.auth.updateUser({ password });
       if (error) { msg('newpassMsg', ocErrorMessage(error), 'error'); return; }
       recovering = false;
@@ -188,11 +207,10 @@
   }
 
   // ---------- Profile form + autosave ----------
-  const TEXT_FIELDS = ['legal_name', 'display_name', 'phone', 'school_club', 'instagram', 'emergency_name', 'emergency_relationship', 'emergency_phone'];
+  const TEXT_FIELDS = ['legal_name', 'display_name', 'school_club', 'instagram', 'emergency_name', 'emergency_relationship'];
+  const PHONE_FIELDS = ['phone', 'emergency_phone'];
   const CHANGE_FIELDS = ['gender', 'language'];
   const RULES = {
-    phone: v => !v || /^\+?[0-9 ()-]{7,20}$/.test(v) || t('errPhone'),
-    emergency_phone: v => !v || /^\+?[0-9 ()-]{7,20}$/.test(v) || t('errPhone'),
     instagram: v => !v || /^@?[A-Za-z0-9._]{1,30}$/.test(v) || t('errInstagram'),
     date_of_birth: v => {
       if (!v) return true;
@@ -283,11 +301,67 @@
         choice: on ? 'accepted' : 'withdrawn', context: 'profile', user_agent: navigator.userAgent.slice(0, 400),
       });
     });
+    PHONE_FIELDS.forEach(wirePhone);
     $('#profileForm').addEventListener('submit', e => e.preventDefault());
     $('#copyCode').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(profile.player_code); $('#copyCode').textContent = t('copied'); setTimeout(() => { $('#copyCode').textContent = t('copy'); }, 1500); } catch (e) {}
     });
     renderPositions();
+  }
+
+  // ---------- Phone numbers with country codes ----------
+  // Saved as international numbers (e.g. +8801711000000); shown in the
+  // country's own format. Bangladesh is the default country.
+  const LP = window.libphonenumber;
+  const DEFAULT_CC = 'BD';
+  let countryOptions = null;
+  function countryOptionsHtml() {
+    if (countryOptions) return countryOptions;
+    let names;
+    try { names = new Intl.DisplayNames([ocLang() === 'bn' ? 'bn' : 'en'], { type: 'region' }); } catch (e) { names = null; }
+    const list = LP.getCountries().map(cc => ({ cc, name: names ? names.of(cc) : cc, code: LP.getCountryCallingCode(cc) }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    const first = list.filter(c => ['BD', 'IN', 'FI'].includes(c.cc));
+    const opt = c => `<option value="${c.cc}">+${c.code} ${ocEscape(c.name)}</option>`;
+    countryOptions = first.sort((a, b) => (a.cc === 'BD' ? -1 : b.cc === 'BD' ? 1 : 0)).map(opt).join('')
+      + '<option disabled>──────────</option>' + list.map(opt).join('');
+    return countryOptions;
+  }
+  function phoneFill(name, value) {
+    const sel = document.getElementById('f_' + name + '_cc');
+    const input = document.getElementById('f_' + name);
+    if (!LP) { input.value = value || ''; return; }
+    if (!sel.options.length) sel.innerHTML = countryOptionsHtml();
+    const parsed = value ? LP.parsePhoneNumberFromString(value) : null;
+    sel.value = (parsed && parsed.country) || sel.value || DEFAULT_CC;
+    input.value = parsed ? parsed.formatNational() : (value || '');
+  }
+  function phoneRead(name, showErrors) {
+    const sel = document.getElementById('f_' + name + '_cc');
+    const input = document.getElementById('f_' + name);
+    const raw = input.value.trim();
+    if (!raw) return { ok: true, value: null };
+    if (!LP) return /^\+?[0-9 ()-]{7,20}$/.test(raw) ? { ok: true, value: raw } : { ok: false };
+    const parsed = raw.startsWith('+') || raw.startsWith('00')
+      ? LP.parsePhoneNumberFromString(raw.replace(/^00/, '+'))
+      : LP.parsePhoneNumberFromString(raw, sel.value);
+    if (parsed && parsed.country && parsed.country !== sel.value) sel.value = parsed.country;   // pasted +358… picks Finland
+    return parsed && parsed.isValid() ? { ok: true, value: parsed.number } : { ok: false };
+  }
+  function wirePhone(name) {
+    const sel = document.getElementById('f_' + name + '_cc');
+    const input = document.getElementById('f_' + name);
+    if (LP) sel.innerHTML = countryOptionsHtml(); else sel.hidden = true;
+    sel.value = DEFAULT_CC;
+    let t0 = null;
+    const attempt = (final) => {
+      const r = phoneRead(name);
+      if (r.ok) { fieldErr(name, ''); if (r.value !== (profile && profile[name])) queue(name, r.value, final); }
+      else if (final) fieldErr(name, t('errPhone'));
+    };
+    input.addEventListener('input', () => { clearTimeout(t0); t0 = setTimeout(() => attempt(false), 700); });
+    input.addEventListener('blur', () => { clearTimeout(t0); attempt(true); });
+    sel.addEventListener('change', () => attempt(true));
   }
 
   function saveDob() {
@@ -344,6 +418,7 @@
     $('#f_date_of_birth').disabled = locked;
     $('#lockedNote').innerHTML = locked ? `<p class="acct-msg acct-msg-info">${ocEscape(t('lockedNote'))}</p>` : '';
     $('#f_date_of_birth').value = profile.date_of_birth || '';
+    PHONE_FIELDS.forEach(n => phoneFill(n, profile[n]));
     renderDobInfo();
     renderPositions();
   }
