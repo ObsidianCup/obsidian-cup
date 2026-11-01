@@ -235,19 +235,83 @@ const TRANSLATIONS = {
   }
 };
 
-function setLanguage(lang) {
-  const selected = TRANSLATIONS[lang] ? lang : 'en';
-  document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.getAttribute('data-key');
-    if (TRANSLATIONS[selected] && TRANSLATIONS[selected][key]) {
-      el.textContent = TRANSLATIONS[selected][key];
+// Original English of every element we translate, so switching back restores it exactly.
+const OC_ORIG = new WeakMap();
+const ocNorm = s => (s || '').replace(/\s+/g, ' ').trim();
+const ocEsc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function ocOrig(el) {
+  let o = OC_ORIG.get(el);
+  if (!o) { o = { html: el.innerHTML, text: ocNorm(el.textContent), ph: el.getAttribute('placeholder') }; OC_ORIG.set(el, o); }
+  return o;
+}
+// Put Bangla into an element. If the English had links (an email address,
+// an Instagram handle), the same text inside the Bangla becomes that link again.
+function ocPutBn(el, bn) {
+  const links = Array.from(el.querySelectorAll('a[href]'));
+  if (!links.length) { el.textContent = bn; return; }
+  let html = ocEsc(bn);
+  links.forEach(a => {
+    const label = ocEsc(ocNorm(a.textContent));
+    if (label && html.includes(label)) {
+      const c = a.cloneNode(false);
+      c.textContent = ocNorm(a.textContent);
+      html = html.replace(label, c.outerHTML);
     }
   });
-  localStorage.setItem('oc_lang', selected);
+  el.innerHTML = html;
+}
+const OC_TEXT_TARGETS = 'h1,h2,h3,p,li,summary,label,button,a,span,option,dt,dd,figcaption';
+
+function setLanguage(lang) {
+  const selected = TRANSLATIONS[lang] ? lang : 'en';
+  const bn = selected === 'bn';
+  const byText = (typeof OC_BN_TEXT !== 'undefined') ? OC_BN_TEXT : {};
+
+  // 1. Elements with a key.
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    const o = ocOrig(el);
+    // The organiser's newer full-site Bangla (matched by the English) wins over older keyed Bangla.
+    const tr = bn && (byText[o.text] || (TRANSLATIONS.bn && TRANSLATIONS.bn[key]));
+    if (bn && tr) ocPutBn(el, tr);
+    else if (!bn && TRANSLATIONS.en[key]) el.textContent = TRANSLATIONS.en[key];
+    else el.innerHTML = o.html;
+  });
+  document.querySelectorAll('[data-key-ph]').forEach(el => {
+    const o = ocOrig(el);
+    const tr = bn && TRANSLATIONS.bn[el.getAttribute('data-key-ph')];
+    el.setAttribute('placeholder', tr || o.ph || '');
+  });
+
+  // 2. Everything else: matched by its English wording (the organiser's full-site translation).
+  document.querySelectorAll('[data-oc-tr]').forEach(el => { el.innerHTML = ocOrig(el).html; el.removeAttribute('data-oc-tr'); });
+  if (bn) {
+    document.querySelectorAll(OC_TEXT_TARGETS).forEach(el => {
+      if (el.closest('[data-key], [data-oc-tr], script, style, svg, .g-lang')) return;
+      const o = ocOrig(el);
+      const tr = byText[o.text];
+      if (!tr) return;
+      ocPutBn(el, tr);
+      el.setAttribute('data-oc-tr', '');
+    });
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+      if (el.hasAttribute('data-key-ph')) return;
+      const o = ocOrig(el);
+      const tr = byText[ocNorm(o.ph)];
+      if (tr) el.setAttribute('placeholder', tr);
+    });
+  } else {
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+      const o = OC_ORIG.get(el); if (o && !el.hasAttribute('data-key-ph')) el.setAttribute('placeholder', o.ph || '');
+    });
+  }
+
+  try { localStorage.setItem('oc_lang', selected); } catch (e) { /* private mode */ }
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('lang-btn-active', btn.getAttribute('data-lang') === selected);
   });
-  document.documentElement.lang = selected === 'bn' ? 'bn' : 'en';
+  document.documentElement.lang = bn ? 'bn' : 'en';
+  document.dispatchEvent(new CustomEvent('oc:site-language', { detail: selected }));
 }
 
 // Language buttons (no inline onclick: the site's security policy blocks inline scripts)
@@ -257,13 +321,13 @@ document.addEventListener('click', (e) => {
 });
 
 function initLanguage() {
-  const saved = localStorage.getItem('oc_lang');
+  let saved = null; try { saved = localStorage.getItem('oc_lang'); } catch (e) { /* private mode */ }
   const selected = saved === 'bn' ? 'bn' : 'en';
   document.documentElement.lang = selected === 'bn' ? 'bn' : 'en';
   setLanguage(selected);
 }
 
 (function() {
-  const saved = localStorage.getItem('oc_lang');
+  let saved = null; try { saved = localStorage.getItem('oc_lang'); } catch (e) { /* private mode */ }
   document.documentElement.lang = saved === 'bn' ? 'bn' : 'en';
 })();

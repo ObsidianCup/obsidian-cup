@@ -525,6 +525,9 @@ const OC_TEXT = {
   },
 };
 
+// The organiser's newer full-site Bangla (js/lang-site.js) wins over older entries above.
+if (typeof OC_SITE_BN_ACCT !== 'undefined') Object.assign(OC_TEXT.bn, OC_SITE_BN_ACCT);
+
 function ocLang() {
   try { return localStorage.getItem('oc_lang') === 'bn' ? 'bn' : 'en'; } catch (e) { return 'en'; }
 }

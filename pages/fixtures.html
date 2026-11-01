@@ -3,33 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obsidian Cup | Fixtures</title>
-  <meta name="description" content="Tournament fixtures, schedules, and brackets for Obsidian Cup." />
+  <title>Fixtures | Obsidian Cup</title>
+  <meta name="description" content="Live fixtures, schedules and results during Obsidian Cup tournaments." />
   <link rel="canonical" href="https://obsidiancup.vercel.app/pages/fixtures.html" />
-  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="icon" href="../assets/favicon.ico?v=2" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2" />
   <meta property="og:title" content="Fixtures — Obsidian Cup" />
-  <meta property="og:description" content="Live fixtures and match schedule." />
+  <meta property="og:description" content="Live fixtures, schedules and results during Obsidian Cup tournaments." />
   <meta property="og:image" content="https://obsidiancup.vercel.app/assets/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/fixtures.html" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <!-- Google Analytics -->
+  <link rel="stylesheet" href="../css/glass.css" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
   <script src="/js/analytics.js"></script>
 </head>
-<body>
+<body class="theme-glass">
 
-  <div id="fixturesContent"></div>
+  <main id="main">
+    <div class="g-wrap">
+      <header class="g-pagehead" id="fxHead">
+        <p class="g-kicker" data-key="fixtures-01">Live fixtures</p>
+        <h1 data-key="fixtures2-01">No tournament is running right now</h1>
+        <p class="g-lead" data-key="fixtures2-02">Fixtures, match times and live results appear here during a tournament. Until then, follow us on Instagram for news.</p>
+      </header>
+      <div class="g-next" id="fxFollow">
+        <a class="g-btn g-btn-second" href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener" data-key="reg2-12">Follow @obsidian.volleyball</a>
+        <a class="g-btn g-btn-second" href="https://www.instagram.com/obsidian.futsal/" target="_blank" rel="noopener" data-key="futsal-07">Follow @obsidian.futsal</a>
+        <a class="g-btn g-btn-second" href="/pages/tournaments.html" data-key="reg2-13">See past seasons</a>
+      </div>
+      <div style="height: var(--s16)"></div>
+    </div>
+  </main>
 
   <script src="../js/config.js"></script>
   <script src="../js/lang.js"></script>
+  <script src="../js/lang-site.js"></script>
   <script src="../js/components.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="/js/page-fixtures.js"></script>
+  <script src="../js/page-fixtures.js"></script>
 </body>
 </html>

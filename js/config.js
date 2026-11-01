@@ -18,6 +18,11 @@ const SITE_CONFIG = {
   currentVenue: "Dhaka, Bangladesh",
   announcementText: "Girls-only OFC Season 1 and OVC Season 4 are complete. Thank you to everyone who showed up.",
 
+  // ---- PLAYER STORIES ----
+  // The three "Anonymous Player" quotes on the Player stories page stay hidden
+  // until the organiser confirms they are real players' words.
+  showPlayerQuotes: false,
+
   // ---- REGISTRATION FORMS ----
   formInterschool: "https://obsidiancup.fillout.com/ovscinterboys",
   formBoysOpenAge: "https://obsidiancup.fillout.com/ovscboys",

@@ -107,6 +107,24 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
 5. Supabase Auth: min password 8, secure email change, secure password change,
    raise rate limits (emails ~100/h, sign-ins ~300 per 5 min).
 
+## Done 1 Nov (late): all pages in glass, Bangla wiring, audit
+
+- Player stories, Register, Rules, Fixtures rebuilt in glass. Register now
+  explains the Season 5 account-based flow (old April Super Cup info removed).
+  Player-story quotes hidden until the owner confirms they are real
+  (`showPlayerQuotes` in js/config.js).
+- New tab/phone icons (OC fills the icon; SVG switches colour for light/dark
+  tab bars); icon links carry ?v=2 to beat browser caches.
+- Bangla: `scripts/build_bn.py` builds `js/lang-site.js` from
+  docs/translation/*.json. lang.js translates [data-key] elements and any
+  other element whose English matches the owner's file, keeps links inside
+  Bangla, restores English exactly. Run the script after saving new Bangla.
+- Audit script (local, Playwright): every page at 1280/375px in EN and BN: no
+  script errors, missing files, sideways scroll, broken links. Legal page got
+  a proper heading; sitemap lists register and rules.
+- Before accounts launch: legal texts still show "[Postal address]" and a
+  "[Lawyer to confirm…]" note.
+
 ## Player card, photo and gate check (built 1 Nov, on `redesign`)
 
 Migration `010_player_card.sql` (photo bucket + rules, card_token, `new_card_token()`,

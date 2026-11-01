@@ -20,7 +20,17 @@
       const md = await res.text();
       body.innerHTML = window.marked ? marked.parse(md) : `<pre style="white-space:pre-wrap">${ocEscape(md)}</pre>`;
       const h = body.querySelector('p > strong');
-      if (h) { document.title = 'Obsidian Cup | ' + h.textContent.replace(/ — version.*/, '').replace(/^Obsidian Cup /, ''); }
+      if (h) {
+        const name = h.textContent.replace(/ — version.*/, '');
+        document.title = 'Obsidian Cup | ' + name.replace(/^Obsidian Cup /, '');
+        // The document's title line becomes the page's main heading (the version is shown above it).
+        if (h.parentElement === body.firstElementChild) {
+          const h1 = document.createElement('h1');
+          h1.className = 'legal-title';
+          h1.textContent = name;
+          h.parentElement.replaceWith(h1);
+        }
+      }
     } catch (e) {
       body.innerHTML = `<p>${ocEscape(t('legalNotFound'))}</p>`;
     }

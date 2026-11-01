@@ -3,120 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obsidian Cup | Experiences</title>
-  <meta name="description" content="Real words from real players. Experiences from the courts of Obsidian Cup." />
+  <title>Player stories | Obsidian Cup</title>
+  <meta name="description" content="Players, spectators and referees on what Obsidian Cup felt like, and how to share your own story." />
   <link rel="canonical" href="https://obsidiancup.vercel.app/pages/experiences.html" />
-  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-  <meta property="og:title" content="Experiences — Obsidian Cup" />
-  <meta property="og:description" content="Real words from real players. Experiences from the courts of Obsidian Cup." />
+  <link rel="icon" href="../assets/favicon.ico?v=2" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2" />
+  <meta property="og:title" content="Player stories — Obsidian Cup" />
+  <meta property="og:description" content="If you were there, your voice belongs here." />
   <meta property="og:image" content="https://obsidiancup.vercel.app/assets/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://obsidiancup.vercel.app/pages/experiences.html" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/glass.css" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1KZSFD68V"></script>
   <script src="/js/analytics.js"></script>
 </head>
-<body>
+<body class="theme-glass">
 
-  <!-- Page Hero -->
-  <div class="experiences-hero">
-    <p class="section-label reveal">Real words, real people</p>
-    <h1 class="page-title reveal">From the Courts</h1>
-    <p class="page-subtitle reveal">Players, spectators, referees, visitors, if you were there, your voice belongs here.</p>
-  </div>
+  <main id="main">
+    <div class="g-wrap">
+      <header class="g-pagehead">
+        <p class="g-kicker" data-key="stories-01">Real words, real people</p>
+        <h1 data-key="stories-02">From the courts</h1>
+        <p class="g-lead" data-key="stories-03">Players, spectators, referees, visitors: if you were there, your voice belongs here.</p>
+      </header>
 
-  <!-- Experiences Grid -->
-  <div class="experiences-grid" style="padding-bottom: 2rem;">
+      <!-- Shown only when SITE_CONFIG.showPlayerQuotes is true (waiting for the organiser to confirm these are real). -->
+      <section class="g-section g-quotes" id="playerQuotes" aria-label="Player stories" hidden>
+        <figure class="g-quote-card">
+          <blockquote><p data-key="stories-04">Playing at the National Stadium was something I never thought would happen at this level. The organisation, the atmosphere — it felt like a real tournament. Obsidian Cup is different.</p></blockquote>
+          <figcaption><span data-key="stories-05">Anonymous Player</span><span class="g-meta" data-key="stories-06">OVASC Season 1</span></figcaption>
+        </figure>
+        <figure class="g-quote-card">
+          <blockquote><p data-key="stories-07">We came in as underdogs and left as champions. The competition was fierce, the court was perfect, and the whole event had a vibe that most professional tournaments don't even achieve.</p></blockquote>
+          <figcaption><span data-key="stories-05">Anonymous Player</span><span class="g-meta" data-key="stories-08">OVC Season 1</span></figcaption>
+        </figure>
+        <figure class="g-quote-card">
+          <blockquote><p data-key="stories-09">It's rare to see someone care this much about getting everything right — the scheduling, the referees, the venue. You can feel the passion behind it. We'll be back next season.</p></blockquote>
+          <figcaption><span data-key="stories-05">Anonymous Player</span><span class="g-meta" data-key="stories-08">OVC Season 1</span></figcaption>
+        </figure>
+      </section>
 
-    <div class="experience-card reveal">
-      <div class="experience-quote-mark">"</div>
-      <p class="experience-text">Playing at the National Stadium was something I never thought would happen at this level. The organisation, the atmosphere — it felt like a real tournament. Obsidian Cup is different.</p>
-      <p class="experience-author">Anonymous Player</p>
-      <p class="experience-tourney">OVASC Season 1</p>
+      <section class="g-section g-share" aria-labelledby="shareTitle">
+        <p class="g-kicker" data-key="stories-10">Share yours</p>
+        <h2 class="g-h2" id="shareTitle" data-key="stories-11">Your experience</h2>
+        <p class="g-prose" data-key="stories-12">Were you a player, a spectator, a ref, or just someone who came through? We want to hear it.</p>
+
+        <form id="expForm" class="g-form" novalidate>
+          <p class="g-form-title" data-key="stories-14">Tell us about your time at Obsidian Cup</p>
+          <div class="g-field">
+            <label for="expName" data-key="stories-15">Your name</label>
+            <input type="text" id="expName" autocomplete="name" placeholder="Full name" data-key-ph="stories-27" />
+          </div>
+          <div class="g-field">
+            <label for="expEmail" data-key="stories-16">Email address</label>
+            <input type="email" id="expEmail" autocomplete="email" inputmode="email" placeholder="your@email.com" />
+            <span class="g-field-error" id="expEmailErr" aria-live="polite"></span>
+          </div>
+          <div class="g-field">
+            <label for="expTourney" data-key="stories-17">Tournament</label>
+            <select id="expTourney">
+              <option value="" selected data-key="stories-18">Which tournament were you at?</option>
+              <option value="Obsidian Volleyball Cup — Season 4" data-key="stories-19">Obsidian Volleyball Cup — Season 4</option>
+              <option value="Obsidian Futsal Cup — Season 1" data-key="stories-20">Obsidian Futsal Cup — Season 1</option>
+              <option value="Obsidian Volleyball Super Cup — Season 2" data-key="stories-21">Obsidian Volleyball Super Cup — Season 2</option>
+              <option value="Obsidian Volleyball All Stars Cup — Season 1" data-key="stories-22">Obsidian Volleyball All Stars Cup — Season 1</option>
+              <option value="Obsidian Volleyball Cup — Season 1" data-key="stories-23">Obsidian Volleyball Cup — Season 1</option>
+            </select>
+            <span class="g-field-error" id="expTourneyErr" aria-live="polite"></span>
+          </div>
+          <div class="g-field">
+            <label for="expMessage" data-key="stories-11">Your experience</label>
+            <textarea id="expMessage" rows="5" placeholder="Tell us about your experience..." data-key-ph="stories-28"></textarea>
+            <span class="g-meta" id="charCount" aria-live="polite">0 / 20 minimum</span>
+            <span class="g-field-error" id="expMessageErr" aria-live="polite"></span>
+          </div>
+          <p class="g-meta" data-key="stories-25">This opens your email app with your message ready to send to us.</p>
+          <div><button type="submit" class="g-btn g-btn-main" data-key="stories-26">Send via email</button></div>
+          <div id="expDone" aria-live="polite"></div>
+        </form>
+      </section>
     </div>
-
-    <div class="experience-card reveal">
-      <div class="experience-quote-mark">"</div>
-      <p class="experience-text">We came in as underdogs and left as champions. The competition was fierce, the court was perfect, and the whole event had a vibe that most professional tournaments don't even achieve.</p>
-      <p class="experience-author">Anonymous Player</p>
-      <p class="experience-tourney">OVC Season 1</p>
-    </div>
-
-    <div class="experience-card reveal">
-      <div class="experience-quote-mark">"</div>
-      <p class="experience-text">It's rare to see someone care this much about getting everything right — the scheduling, the referees, the venue. You can feel the passion behind it. We'll be back next season.</p>
-      <p class="experience-author">Anonymous Player</p>
-      <p class="experience-tourney">OVC Season 1</p>
-    </div>
-
-  </div>
-
-  <div class="divider reveal" style="margin-top:5rem;"><div class="divider-diamond"></div></div>
-
-  <!-- Submit Section -->
-  <section class="submit-experience-section">
-    <p class="section-label reveal">Share yours</p>
-    <h2 class="section-title reveal">Your Experience</h2>
-    <p class="reveal-fade" style="color: var(--silver-dim); font-size: 0.85rem; margin-bottom: 3rem; letter-spacing: 0.05em;">
-      Were you a player, a spectator, a ref, or just someone who came through? We want to hear it.
-    </p>
-    <button class="btn-ghost submit-exp-btn reveal">Share Your Experience</button>
-  </section>
-
-  <!-- Experience Submission Modal -->
-  <div class="modal-overlay" id="experienceModal">
-    <div class="modal">
-      <button class="modal-close" aria-label="Close">×</button>
-      <p class="modal-season">Share Your Experience</p>
-      <h2 class="modal-title" style="font-size:1.6rem; margin-bottom: 2.5rem;">Tell us about your time at Obsidian Cup</h2>
-
-      <form id="expForm" class="exp-modal-form" novalidate>
-
-        <div class="form-group">
-          <label class="form-label" for="expName">Your Name</label>
-          <input type="text" id="expName" class="form-input" placeholder="Full name" autocomplete="off" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="expEmail">Email Address</label>
-          <input type="email" id="expEmail" class="form-input" placeholder="your@email.com" autocomplete="off" />
-          <span class="form-error" id="expEmailErr"></span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="expTourney">Tournament</label>
-          <select id="expTourney" class="form-select">
-            <option value="" disabled selected>Which tournament were you at?</option>
-            <option value="Obsidian Volleyball Cup — Season 4">Obsidian Volleyball Cup — Season 4</option>
-            <option value="Obsidian Futsal Cup — Season 1">Obsidian Futsal Cup — Season 1</option>
-            <option value="Obsidian Volleyball Super Cup — Season 2">Obsidian Volleyball Super Cup — Season 2</option>
-            <option value="Obsidian Volleyball All Stars Cup — Season 1">Obsidian Volleyball All Stars Cup — Season 1</option>
-            <option value="Obsidian Volleyball Cup — Season 1">Obsidian Volleyball Cup — Season 1</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="expMessage">Your Experience</label>
-          <textarea id="expMessage" class="form-textarea" rows="4" placeholder="Tell us about your experience..."></textarea>
-          <div class="char-count" id="charCount">0 / 20 minimum</div>
-        </div>
-
-        <p style="font-size:0.72rem; color:var(--silver-dim); margin-top:0.5rem;">This opens your email app with your message ready to send to us.</p>
-        <div style="display:flex; justify-content:flex-end; margin-top:1rem;">
-          <button type="submit" class="btn-ghost">Send via email</button>
-        </div>
-
-      </form>
-    </div>
-  </div>
+  </main>
 
   <script src="../js/config.js"></script>
+  <script src="../js/lang.js"></script>
+  <script src="../js/lang-site.js"></script>
   <script src="../js/components.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="/js/page-experiences.js"></script>
+  <script src="../js/page-experiences.js"></script>
+</body>
 </html>
