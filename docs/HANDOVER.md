@@ -54,8 +54,9 @@ https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko
 
 Done on `redesign` (1 Nov): contact email on one line, no underline; partner
 logos trimmed and larger; About page volleyball outline drawings in the
-owner's reference poses (dig, jump spike, set, back-view spike; original, not traced;
-`.g-about-art`, desktop only); FAQ "Email us or message us on Instagram";
+owner's reference poses (dig, jump spike, set, back-view spike), hand-sketched
+style, original and not traced (owner's references are other artists' work);
+files `assets/about-sketch-*.svg`, `.g-about-art`, desktop only; FAQ "Email us or message us on Instagram";
 Instagram is now **@obsidian.volleyball** and **@obsidian.futsal** everywhere
 (config.js `instagramVolleyballUrl` / `instagramFutsalUrl`); **futsal, not
 football**: tournament is "Obsidian Futsal Cup, Season 1" (OFC), page
@@ -69,7 +70,9 @@ Still to do: legal texts (payment 1.0, participation 1.0) still mention
 @obsidiancup / football; change them in the next legal version. The owner's Bangla
 for all 248 missing lines is in `js/lang.js` and `js/oc-accounts.js` (1 Nov).
 Some glass-page text has no `data-key` yet (season list, partner cards,
-buttons), so it stays English in Bangla mode. The owner is now translating
+buttons), so it stays English in Bangla mode. Bangla received so far is saved
+in `docs/translation/bn-received.json` (110 of 464 lines: menu, footer, home,
+part of accounts; NOT yet applied to the site). The owner is translating
 ALL site text (464 lines, file `obsidian-cup-all-website-text.txt`, ids in
 `docs/translation/site-text.json`, e.g. [home-14], [acct.authIntro]). When it
 comes back: add a data-key to every element by its id, put the Bangla in
