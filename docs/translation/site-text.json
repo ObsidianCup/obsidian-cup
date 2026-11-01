@@ -44,7 +44,7 @@
  {
   "id": "chrome-07",
   "section": "Menu and footer (every page)",
-  "en": "Volleyball and futsal tournaments in Dhaka, run by players, for players of every level.",
+  "en": "Tournaments for players from every corner of Bangladesh. Run by players, for every level.",
   "bn": "ঢাকায় সব পর্যায়ের খেলোয়াড়দের জন্য, খেলোয়াড়দের পরিচালনায় আয়োজিত ভলিবল ও ফুটসাল টুর্নামেন্ট।",
   "placeholder": false
  },
@@ -79,7 +79,7 @@
  {
   "id": "chrome-12",
   "section": "Menu and footer (every page)",
-  "en": "© 2026 Obsidian Cup, Dhaka, Bangladesh",
+  "en": "© 2026 Obsidian Cup, Bangladesh",
   "bn": "",
   "placeholder": false
  },
@@ -135,7 +135,7 @@
  {
   "id": "home-01",
   "section": "Home page",
-  "en": "Volleyball and futsal tournaments in Dhaka, run by players, for players of every level. Carved by legacy, crowned in obsidian.",
+  "en": "Tournaments for players from every corner of Bangladesh, run by players, for every level. Carved by legacy, crowned in obsidian.",
   "bn": "ঢাকায় সব পর্যায়ের খেলোয়াড়দের জন্য, খেলোয়াড়দের পরিচালনায় আয়োজিত ভলিবল ও ফুটসাল টুর্নামেন্ট। ঐতিহ্যে গড়া, অবসিডিয়ানে মুকুট পরা।",
   "placeholder": false
  },
@@ -716,7 +716,7 @@
  {
   "id": "faq-04",
   "section": "Questions page",
-  "en": "Obsidian Cup is a tournament platform based in Dhaka, Bangladesh. We began with volleyball and have now hosted girls-only futsal through OFC. Every format is designed to give players a proper, well-run competitive experience with stronger venues, production, atmosphere, and care.",
+  "en": "Obsidian Cup is a tournament platform for players from all over Bangladesh. We began with volleyball and have now hosted girls-only futsal through OFC. Every event is built to give players a proper, well-run competitive experience: good venues, real production, a great atmosphere and genuine care.",
   "bn": "Obsidian Cup ঢাকা, বাংলাদেশ ভিত্তিক একটি টুর্নামেন্ট প্ল্যাটফর্ম। আমরা ভলিবল দিয়ে শুরু করেছি এবং এখন OFC-এর মাধ্যমে মেয়েদের ফুটসালও আয়োজন করেছি। প্রতিটি ফরম্যাট খেলোয়াড়দের একটি সঠিক, সুসংগঠিত প্রতিযোগিতামূলক অভিজ্ঞতা দেওয়ার জন্য তৈরি।",
   "placeholder": false
  },
@@ -3202,6 +3202,34 @@
   "id": "fixtures2-02",
   "section": "Fixtures page",
   "en": "Fixtures, match times and live results appear here during a tournament. Until then, follow us on Instagram for news.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "vb-story-01",
+  "section": "Volleyball page",
+  "en": "How it started",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "vb-story-02",
+  "section": "Volleyball page",
+  "en": "Obsidian started small: a few people who just wanted to play, and a dream that playing could feel like it truly mattered. There was no big plan, only the wish to create the kind of tournament we would want to play in ourselves.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "vb-story-03",
+  "section": "Volleyball page",
+  "en": "In January 2026 that wish became the first Obsidian Volleyball Cup, with school teams and a girls open-age category at DBox Sports Complex. By July, Season 4 brought 17 teams to the Shaheed Noor Hossain National Volleyball Stadium, with support from the Bangladesh Volleyball Federation.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "vb-story-04",
+  "section": "Volleyball page",
+  "en": "Every season since has been built the same way: by players, for players. If you love this game, wherever you are in Bangladesh, there is a place for you on our court.",
   "bn": "",
   "placeholder": false
  }

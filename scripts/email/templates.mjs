@@ -16,7 +16,7 @@ function frame(title, bodyHtml) {
       ${bodyHtml}
     </div>
     <div style="padding:18px 28px;border-top:1px solid #eee;font-size:12px;line-height:1.6;color:#777;">
-      Obsidian Cup, Dhaka, Bangladesh. <a href="https://www.instagram.com/obsidian.volleyball/" style="color:#777;">@obsidian.volleyball</a> · <a href="https://www.instagram.com/obsidian.futsal/" style="color:#777;">@obsidian.futsal</a><br />
+      Obsidian Cup, Bangladesh. <a href="https://www.instagram.com/obsidian.volleyball/" style="color:#777;">@obsidian.volleyball</a> · <a href="https://www.instagram.com/obsidian.futsal/" style="color:#777;">@obsidian.futsal</a><br />
       Questions? Reply to this email or write to obsidiancup.official@gmail.com
     </div>
   </div>

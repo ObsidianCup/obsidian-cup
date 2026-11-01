@@ -183,7 +183,7 @@ function injectGlassChrome() {
       <div class="g-footer-top">
         <div class="g-footer-brand">
           <img src="${p('assets/logo-oc.svg')}" alt="Obsidian Cup" width="56" height="40" />
-          <p class="g-meta" data-key="footerAbout">Volleyball and futsal tournaments in Dhaka, run by players, for players of every level.</p>
+          <p class="g-meta" data-key="footerAbout">Tournaments for players from every corner of Bangladesh. Run by players, for every level.</p>
         </div>
         <nav aria-label="Footer"><ul>
           <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
@@ -198,7 +198,7 @@ function injectGlassChrome() {
         </ul></nav>
       </div>
       <div class="g-footer-bottom">
-        <span>© ${year} Obsidian Cup, Dhaka, Bangladesh</span>
+        <span>© ${year} Obsidian Cup, Bangladesh</span>
         <span data-key="footerTagline2">Carved by legacy, crowned in obsidian</span>
       </div>
     </div>`;
