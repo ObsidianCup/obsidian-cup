@@ -183,7 +183,7 @@ function injectGlassChrome() {
       <div class="g-footer-top">
         <div class="g-footer-brand">
           <img src="${p('assets/logo-oc.svg')}" alt="Obsidian Cup" width="56" height="40" />
-          <p class="g-meta" data-key="footerAbout">Tournaments for players from every corner of Bangladesh. Run by players, for every level.</p>
+          <p class="g-meta" data-key="footerAbout">A stage for players from every corner of Bangladesh, at every level.</p>
         </div>
         <nav aria-label="Footer"><ul>
           <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>

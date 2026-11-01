@@ -44,7 +44,7 @@
  {
   "id": "chrome-07",
   "section": "Menu and footer (every page)",
-  "en": "Tournaments for players from every corner of Bangladesh. Run by players, for every level.",
+  "en": "A stage for players from every corner of Bangladesh, at every level.",
   "bn": "ঢাকায় সব পর্যায়ের খেলোয়াড়দের জন্য, খেলোয়াড়দের পরিচালনায় আয়োজিত ভলিবল ও ফুটসাল টুর্নামেন্ট।",
   "placeholder": false
  },
@@ -135,7 +135,7 @@
  {
   "id": "home-01",
   "section": "Home page",
-  "en": "Tournaments for players from every corner of Bangladesh, run by players, for every level. Carved by legacy, crowned in obsidian.",
+  "en": "A stage for players from every corner of Bangladesh, at every level. Carved by legacy, crowned in obsidian.",
   "bn": "ঢাকায় সব পর্যায়ের খেলোয়াড়দের জন্য, খেলোয়াড়দের পরিচালনায় আয়োজিত ভলিবল ও ফুটসাল টুর্নামেন্ট। ঐতিহ্যে গড়া, অবসিডিয়ানে মুকুট পরা।",
   "placeholder": false
  },
@@ -3229,7 +3229,7 @@
  {
   "id": "vb-story-04",
   "section": "Volleyball page",
-  "en": "Every season since has been built the same way: by players, for players. If you love this game, wherever you are in Bangladesh, there is a place for you on our court.",
+  "en": "Every season since has been built the same way, with care for every player who steps on court. If you love this game, wherever you are in Bangladesh, there is a place for you here.",
   "bn": "",
   "placeholder": false
  }
