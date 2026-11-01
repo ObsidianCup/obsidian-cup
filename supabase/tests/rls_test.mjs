@@ -326,7 +326,14 @@ await expectError(`select public.email_done(1, true)`, [], /permission denied/, 
 await db.exec('reset role');
 await db.exec('grant usage on schema public to service_role; grant all on all tables in schema public to service_role;'); // as on Supabase
 await db.exec('set role service_role');
+await db.query(`insert into public.email_queue (to_email, template, data) values ('stranger@nowhere.example', 'welcome', '{}'), ('alice@example.com', 'evil', '{}')`);
+await db.query(`insert into public.email_queue (to_email, template, data, created_at) values ('alice@example.com', 'welcome', '{}', now() - interval '8 days')`);
 const before = (await db.query(`select count(*)::int n from public.email_queue where sent_at is null`)).rows[0].n;
+const claimedAll = (await db.query(`select * from public.email_claim(100)`)).rows;
+ok(!claimedAll.some(r => r.to_email === 'stranger@nowhere.example'), 'never sends to an address that is not a confirmed account');
+ok(!claimedAll.some(r => r.template === 'evil'), 'never sends an unknown template');
+ok((await db.query(`select count(*)::int n from public.email_queue where last_error like 'skipped:%'`)).rows[0].n >= 3, 'strangers, unknown templates and old backlog are marked skipped');
+for (const r of claimedAll) await db.query(`select public.email_release($1)`, [r.id]);
 const c1 = (await db.query(`select * from public.email_claim(2)`)).rows;
 const c2 = (await db.query(`select * from public.email_claim(50)`)).rows;
 ok(c1.length === 2 && !c2.some(r => c1.find(x => x.id === r.id)), 'two runs never get the same email');

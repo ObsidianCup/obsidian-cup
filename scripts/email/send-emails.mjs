@@ -9,8 +9,15 @@ const KEY = process.env.SUPABASE_SECRET_KEY;
 const GMAIL_USER = process.env.GMAIL_USER;
 const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD;
 const BATCH = Number(process.env.EMAIL_BATCH || 50);
+// EMAIL_MODE: 'off' sends nothing; 'test' (the default) sends only to the
+// addresses in EMAIL_TEST_TO and leaves everything else waiting; 'live'
+// sends to players. Set it in GitHub: Settings > Secrets and variables >
+// Actions > Variables.
+const MODE = (process.env.EMAIL_MODE || 'test').toLowerCase();
+const TEST_TO = (process.env.EMAIL_TEST_TO || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
 
 export async function run({ fetchImpl = fetch, transport, log = console.log } = {}) {
+  if (MODE === 'off') { log('Email sending is switched off (EMAIL_MODE=off).'); return { sent: 0, failed: 0, skipped: true }; }
   if (!URL_ || !KEY || !GMAIL_USER || !GMAIL_PASS) {
     log('Email sender is not set up yet (missing secrets). Nothing sent.');
     return { sent: 0, failed: 0, skipped: true };
@@ -23,7 +30,15 @@ export async function run({ fetchImpl = fetch, transport, log = console.log } = 
     return r.status === 204 ? null : r.json();
   };
 
-  const rows = await rpc('email_claim', { p_limit: BATCH });
+  if (MODE !== 'live' && !TEST_TO.length) { log('Test mode with no test addresses: nothing sent.'); return { sent: 0, failed: 0, skipped: true }; }
+  let rows = await rpc('email_claim', { p_limit: BATCH });
+  if (MODE !== 'live') {
+    // Test mode: put back anything not addressed to a test address, untouched.
+    const keep = rows.filter(r => TEST_TO.includes(String(r.to_email).toLowerCase()));
+    for (const r of rows.filter(r => !keep.includes(r))) await rpc('email_release', { p_id: r.id });
+    if (rows.length !== keep.length) log(`Test mode: ${rows.length - keep.length} email(s) left waiting for live mode.`);
+    rows = keep;
+  }
   if (!rows.length) { log('No emails waiting.'); return { sent: 0, failed: 0 }; }
 
   const mailer = transport || nodemailer.createTransport({

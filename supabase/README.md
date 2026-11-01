@@ -59,6 +59,12 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
      **secret** key (`sb_secret_…`). Paste it only into GitHub, never anywhere else.
    - `GMAIL_USER` = `obsidiancup.official@gmail.com`
    - `GMAIL_APP_PASSWORD` = the same Gmail app password used for Supabase SMTP
+   - `EMAIL_TEST_TO` = your own email(s), comma-separated
+   It starts in **test mode**: only emails to `EMAIL_TEST_TO` are sent, all
+   others wait. To go live, add a repository **variable** (Variables tab)
+   `EMAIL_MODE` = `live`; `off` stops all sending. Even live, it only ever
+   emails confirmed player accounts, only known templates, never anything
+   older than 7 days.
    Then Actions → Send emails → Run workflow to test. It runs every 15 minutes
    by itself (GitHub may delay it a little). Logs never show addresses.
    GitHub turns off scheduled runs if the repository has no activity for 60
