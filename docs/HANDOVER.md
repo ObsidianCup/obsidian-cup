@@ -130,6 +130,15 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
 - Before accounts launch: legal texts still show "[Postal address]" and a
   "[Lawyer to confirm…]" note.
 
+## Copy review (1 Nov, late)
+
+Taglines now nationwide and sport-neutral (no "in Dhaka"); volleyball page has
+"How it started". Claude drafted Bangla for 8 changed lines
+(docs/translation/bn-claude-drafts.json) for the owner to check. Review doc
+with suggestions waiting for the owner's yes (FAQ/rules still describe the old
+form process; Bangla term consistency: সিজন/আসর, রানার-আপ, ছেলে/মেয়ে, ফলো,
+Instagram): https://claude.ai/artifact/5uxY5nRkXihEX2ugvV3Uid
+
 ## Player card, photo and gate check (built 1 Nov, on `redesign`)
 
 Migration `010_player_card.sql` (photo bucket + rules, card_token, `new_card_token()`,
