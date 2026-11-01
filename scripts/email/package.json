@@ -1,0 +1,9 @@
+{
+  "name": "obsidian-cup-email-sender",
+  "private": true,
+  "type": "module",
+  "description": "Sends queued emails from Supabase through Gmail. Run by .github/workflows/send-emails.yml.",
+  "dependencies": {
+    "nodemailer": "6.9.16"
+  }
+}

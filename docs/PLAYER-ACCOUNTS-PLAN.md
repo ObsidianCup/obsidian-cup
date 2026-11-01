@@ -142,7 +142,7 @@ project); real player photos only, never AI-made ones of players.
    every transition has a prefers-reduced-motion fallback): design system first (colours 60/30/10, type,
    spacing, components) shown as a preview, then home → event pages → the
    rest. Live site changes only after approval. New logo slots in when ready.
-4. **Teams + emails:** captain codes, teams, join codes, roster rules;
+4. **Teams + emails** (email sender built 1 Nov: `scripts/email/`, `.github/workflows/send-emails.yml`, 008; waiting for the four GitHub secrets): captain codes, teams, join codes, roster rules;
    guardian consent link; automatic emails sent from the queue (welcome,
    code changed, join requests) with a GitHub Action every 15 minutes, which
    also keeps Supabase awake.
