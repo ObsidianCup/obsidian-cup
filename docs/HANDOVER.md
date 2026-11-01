@@ -99,9 +99,10 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
 1. GitHub repo secrets: SUPABASE_URL, SUPABASE_SECRET_KEY, GMAIL_USER,
    GMAIL_APP_PASSWORD, EMAIL_TEST_TO (variable EMAIL_MODE optional, default
    test). Then run the "Send emails" workflow once by hand.
-2. Cloudflare Turnstile: send Claude the site key; put the secret in Supabase
-   → Attack Protection. Then redeploy the `login-with-code` function (captcha
-   version in repo).
+2. Cloudflare Turnstile: DONE 1 Nov (site key in config.js on main and
+   redesign, secret in Supabase). Still to do: redeploy the `login-with-code`
+   function from the repo (it passes the captcha token on).
+   Google account 2-Step Verification: DONE 1 Nov.
 3. 2FA on GitHub, Supabase, Vercel, Cloudflare and both Google accounts.
 4. GitHub secret scanning, push protection, Dependabot.
 5. Supabase Auth: min password 8, secure email change, secure password change,
