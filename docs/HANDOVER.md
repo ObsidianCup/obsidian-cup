@@ -71,8 +71,8 @@ Still to do: legal texts (payment 1.0, participation 1.0) still mention
 for all 248 missing lines is in `js/lang.js` and `js/oc-accounts.js` (1 Nov).
 Some glass-page text has no `data-key` yet (season list, partner cards,
 buttons), so it stays English in Bangla mode. Bangla received so far is saved
-in `docs/translation/bn-received.json` (110 of 464 lines: menu, footer, home,
-part of accounts; NOT yet applied to the site). The owner is translating
+in `docs/translation/bn-received.json` (180 of 464 lines: menu, footer, home,
+volleyball, futsal, seasons, about, FAQ, part of accounts; NOT yet applied). The owner is translating
 ALL site text (464 lines, file `obsidian-cup-all-website-text.txt`, ids in
 `docs/translation/site-text.json`, e.g. [home-14], [acct.authIntro]). When it
 comes back: add a data-key to every element by its id, put the Bangla in
