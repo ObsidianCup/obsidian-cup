@@ -33,7 +33,7 @@ events, and the organiser verifies everything from one admin page.
 | Organiser (legal) | Obsidian Cup is not a legal entity yet. Legal texts name **Uriana Faiha, founder and head organiser, trading as Obsidian Cup**. Recommended next step: sole proprietorship trade licence; later an OPC |
 | Saving | Profile forms autosave as the player types |
 | Teams | Captain creates a team with a **captain code**; players join with a **team join code** and the captain approves. No searching other players |
-| Captain codes | Issued by the organiser from the admin page. One code = one team in one event. Single use, expires, tied to the first account that uses it |
+| Captain codes | Issued by the organiser (`admin_issue_captain_codes`, format CAP-XXXXXXXX). One code = one team in one category. Single use, expires after 14 days, tied to the account that uses it. Team join codes look like T-XXXXXX. Under-18 guardian consent is checked when a team is submitted for registration, not when joining, so teams can form while it is pending (009) |
 | Admin | Only the organiser (obsidiancup.official@gmail.com) for now. Admin powers need two-step login (authenticator app, `aal2` checked in the database, 006) |
 | Site security | Strict security headers incl. Content-Security-Policy (no inline scripts allowed; page scripts live in `js/page-*.js`, analytics in `js/analytics.js`); Cloudflare Turnstile on sign-up, login, code login and reset; full JSON backup button on the admin page (store only in the organiser Drive) |
 | Consent | Each player agrees for themselves: at sign-up (terms, privacy, real DOB) and per event (participation agreement, media part A, fitness). Media part B (individual feature) is optional |
@@ -139,7 +139,7 @@ project); real player photos only, never AI-made ones of players.
    every transition has a prefers-reduced-motion fallback): design system first (colours 60/30/10, type,
    spacing, components) shown as a preview, then home → event pages → the
    rest. Live site changes only after approval. New logo slots in when ready.
-4. **Teams + emails** (email sender built 1 Nov: `scripts/email/`, `.github/workflows/send-emails.yml`, 008; waiting for the four GitHub secrets): captain codes, teams, join codes, roster rules;
+4. **Teams + emails** (team rules built in the database 1 Nov, 009, 124 tests; team pages and the guardian link still to build. Email sender built 1 Nov: `scripts/email/`, `.github/workflows/send-emails.yml`, 008; waiting for the four GitHub secrets): captain codes, teams, join codes, roster rules;
    guardian consent link; automatic emails sent from the queue (welcome,
    code changed, join requests) with a GitHub Action every 15 minutes, which
    also keeps Supabase awake.
