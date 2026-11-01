@@ -238,6 +238,6 @@ body.theme-glass {
 @media (min-width: 1024px) {
   .g-about-body { display: grid; grid-template-columns: minmax(0, 70ch) minmax(0, 1fr); gap: var(--s12); }
   .g-about-art { display: flex; flex-direction: column; justify-content: space-around; align-items: center; color: var(--line-strong); padding: var(--s12) 0; }
-  .g-about-fig { width: 100%; max-width: 280px; height: auto; }
-  .g-about-fig-dig { margin-right: var(--s16); }
+  .g-about-fig { width: 100%; max-width: 240px; max-height: 300px; height: auto; }
+  .g-about-fig:nth-child(even) { margin-left: var(--s16); }
 }
