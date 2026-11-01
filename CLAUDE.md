@@ -1,6 +1,6 @@
 # Obsidian Cup website — notes for Claude
 
-Read this first in any new session.
+Read this first in any new session, then `docs/HANDOVER.md`.
 
 ## What this is
 
