@@ -106,6 +106,7 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
    Bangla: all 499 site lines received and live (1 Nov).
    Supabase Auth: min password 8, secure email/password change, rate limits
    (emails 100/h, sign-ups+sign-ins 500/5 min, token verifications 100/5 min): DONE 1 Nov.
+   Supabase account 2FA: DONE 1 Nov. Still to do: Vercel 2FA.
 3. 2FA on GitHub, Supabase, Vercel, Cloudflare and both Google accounts.
 4. GitHub secret scanning, push protection, Dependabot.
 5. Supabase Auth: min password 8, secure email change, secure password change,
