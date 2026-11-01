@@ -36,5 +36,5 @@ Keep both files updated as work progresses and decisions change.
 - Keep images small (logos under ~420px); compress new assets.
 - Avoid decorative motion and scroll-triggered fade-ins; keep text readable.
 - Tournament facts (dates, venues, results) must match the owner's Instagram
-  @obsidiancup; ask when unsure instead of guessing.
+  @obsidian.volleyball and @obsidian.futsal (before Nov 2026: @obsidiancup); ask when unsure instead of guessing.
 - Commit messages end with the co-author line the session provides.

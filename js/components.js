@@ -91,7 +91,8 @@ function injectFooter() {
       <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
       <a href="${p('pages/faq.html')}" data-key="navFaq">FAQ</a>
       <a href="${p('pages/experiences.html')}">Experiences</a>
-      <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Instagram">Instagram</a>
+      <a href="${SITE_CONFIG.instagramVolleyballUrl}" target="_blank" rel="noopener">Volleyball Instagram</a>
+      <a href="${SITE_CONFIG.instagramFutsalUrl}" target="_blank" rel="noopener">Futsal Instagram</a>
       <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Facebook">Facebook</a>
       <a href="${p('pages/about.html')}#contact">Contact</a>
       ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/legal.html')}?doc=privacy">Privacy</a><a href="${p('pages/legal.html')}?doc=terms">Terms</a>` : ''}
@@ -186,12 +187,13 @@ function injectGlassChrome() {
         </div>
         <nav aria-label="Footer"><ul>
           <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
-          <li><a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="${SITE_CONFIG.instagramVolleyballUrl}" target="_blank" rel="noopener" data-key="footerIgVolleyball">Volleyball Instagram</a></li>
           <li><a href="${p('pages/football.html')}" data-key="navFootball">Football</a></li>
-          <li><a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="${SITE_CONFIG.instagramFutsalUrl}" target="_blank" rel="noopener" data-key="footerIgFutsal">Futsal Instagram</a></li>
           <li><a href="${p('pages/tournaments.html')}" data-key="navSeasons">Past seasons</a></li>
-          <li><a href="mailto:${SITE_CONFIG.contactEmail}" data-key="footerEmail">Email us</a></li>
+          <li><a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="${p('pages/experiences.html')}" data-key="navExperiences">Player stories</a></li>
+          <li><a href="mailto:${SITE_CONFIG.contactEmail}" data-key="footerEmail">Email us</a></li>
           ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/legal.html')}?doc=privacy" data-key="footerPrivacy">Privacy</a></li><li><a href="${p('pages/legal.html')}?doc=terms" data-key="footerTerms">Terms</a></li>` : ''}
         </ul></nav>
       </div>

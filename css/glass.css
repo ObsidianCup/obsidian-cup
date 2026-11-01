@@ -175,7 +175,9 @@ body.theme-glass {
 .g-partners { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s4); list-style: none; margin: 0; padding: 0; }
 .g-partner { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s6); display: flex; flex-direction: column; gap: var(--s3); }
 .g-partner-logo { height: 72px; display: flex; align-items: center; }
-.g-partner-logo img { max-height: 72px; max-width: 100%; width: auto; object-fit: contain; }
+.g-partner-logo img { max-height: 72px; max-width: 100%; width: auto; height: auto; object-fit: contain; }
+/* Wordmark logos (wide and short) fill the card width so they read at the same size as square marks */
+.g-partner-logo-wide img { width: 100%; max-width: 160px; max-height: 56px; }
 .g-partner-name { font-weight: 500; }
 .g-partner-role { font-size: 0.875rem; color: var(--mist); }
 
@@ -215,9 +217,10 @@ body.theme-glass {
 .g-story p { color: var(--soft); font-size: 1.0625rem; line-height: 1.6; }
 .g-quote { margin: var(--s8) 0; padding: var(--s8) 0 var(--s8) var(--s8); border-left: 2px solid var(--ice); max-width: 60ch; }
 .g-quote p { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.25rem, 2.4vw, 1.75rem); line-height: 1.3; color: var(--bone); }
-.g-contact { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s4); }
+.g-contact { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--s4); }
 .g-contact li { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s6); display: flex; flex-direction: column; gap: var(--s1); }
-.g-contact a { font-weight: 500; overflow-wrap: anywhere; }
+.g-contact a { font-weight: 500; text-decoration: none; white-space: nowrap; }
+.g-contact a:hover { color: #ffffff; }
 
 /* FAQ: native disclosure, opens instantly */
 .g-faq-group { padding: var(--s12) 0 0; }
@@ -229,3 +232,12 @@ body.theme-glass {
 .g-faq summary::after { content: "+"; font-family: var(--font-display); color: var(--mist); flex-shrink: 0; }
 .g-faq details[open] summary::after { content: "−"; }
 .g-faq details p { padding: 0 0 var(--s6); max-width: 70ch; color: var(--soft); }
+
+/* ---------- About: volleyball line drawings (decorative, static) ---------- */
+.g-about-art { display: none; }
+@media (min-width: 1024px) {
+  .g-about-body { display: grid; grid-template-columns: minmax(0, 70ch) minmax(0, 1fr); gap: var(--s12); }
+  .g-about-art { display: flex; flex-direction: column; justify-content: space-around; align-items: center; color: var(--line-strong); padding: var(--s12) 0; }
+  .g-about-fig { width: 100%; max-width: 280px; height: auto; }
+  .g-about-fig-dig { margin-right: var(--s16); }
+}

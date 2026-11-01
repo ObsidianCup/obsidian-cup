@@ -15,6 +15,8 @@ const TRANSLATIONS = {
     footerPrivacy: "Privacy",
     footerTerms: "Terms",
     footerTagline2: "Carved by legacy, crowned in obsidian",
+    footerIgVolleyball: "Volleyball Instagram",
+    footerIgFutsal: "Futsal Instagram",
     gHeroLead: "Volleyball and football tournaments in Dhaka, run by players, for players of every level. Carved by legacy, crowned in obsidian.",
     gHeroCta: "See Season 4 results",
     gChampsTitle: "Season 4 champions",
