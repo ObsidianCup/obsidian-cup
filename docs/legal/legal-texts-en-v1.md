@@ -40,7 +40,7 @@ Shown once at sign-up. A player must agree before creating a profile.
 
 Shown at sign-up, and linked in the footer of every page. Written to cover what Bangladesh's [Personal Data Protection Ordinance 2025](https://www.thedailystar.net/tech-startup/news/bangladeshs-personal-data-protection-ordinance-2025-key-takeaways-4015401) asks for: why data is collected, how it is used, who sees it, how long it is kept, and the right to withdraw consent.
 
-**Obsidian Cup Privacy Notice — version 1.0**
+**Obsidian Cup Privacy Notice — version 1.1**
 
 **What we collect**
 
@@ -54,6 +54,7 @@ Shown at sign-up, and linked in the footer of every page. Written to cover what 
 | Photo of your ID document | Yes, to play in an event | To confirm you are the person who registered |
 | Medical notes, such as allergies or conditions | Optional | To help first aid staff if you need care at an event |
 | Instagram handle | Optional | To tag you in event posts, only if you choose |
+| Sports profile: height, weight, standing reach, jump height, playing hand and foot, playing level, year you started, preferred jersey number, shirt size, a short bio | Optional | To build your player profile, help organisers balance teams and categories, and keep sports records over the seasons |
 | Team, position, jersey number, results | Yes, to play | To run the tournament and keep records of results |
 | bKash transaction ID | Captains only | To confirm the team's payment |
 | Records of what you agreed to, with date and time | Yes | To prove consent was given |
@@ -63,11 +64,11 @@ Shown at sign-up, and linked in the footer of every page. Written to cover what 
 - **You** can see and edit your own profile.
 - **Your team captain** can see your name, position, jersey number and whether your registration is complete. Captains cannot see your phone number, date of birth, ID photo, emergency contact or medical notes.
 - **Obsidian Cup organisers** can see everything, only to run events and keep them safe.
-- **The public** can see team names, rosters (player names only), results and event photos.
+- **The public** can see team names, rosters (player names only), results and event photos. If you switch on "show my stats", your public player page also shows your height, reach, jump, playing hand and foot, level and year you started. Your weight is never shown publicly.
 - **First aid or medical staff** at an event may be told your emergency contact and medical notes if you need care.
 - **Authorities**, only if the law requires it.
 
-We never sell your data or use it for advertising. We do not profile or track players under 18.
+We never sell your data or use it for advertising, and we never use it to make automated decisions about you. Players under 13 cannot add a sports profile until a parent or guardian has given consent.
 
 **Where it is stored**
 
@@ -79,7 +80,7 @@ Your data is stored with our service provider Supabase, on servers in Singapore,
 | --- | --- |
 | ID photos | Deleted 30 days after the event you registered for. We keep only a note that your ID was checked |
 | Medical notes | Deleted 30 days after each event, unless you choose to keep them on your profile |
-| Profile and contact details | Until you close your account, or 3 years after your last event |
+| Profile, sports profile and contact details | Until you close your account, or 3 years after your last event. You can clear any sports detail yourself at any time |
 | Results, team names and rosters | Kept permanently as part of the tournament history |
 | Payment records and consent records | 6 years, to meet legal and accounting needs |
 

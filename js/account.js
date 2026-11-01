@@ -276,10 +276,18 @@
   }
 
   // ---------- Profile form + autosave ----------
-  const TEXT_FIELDS = ['legal_name', 'display_name', 'school_club', 'instagram', 'emergency_name', 'emergency_relationship'];
+  const TEXT_FIELDS = ['legal_name', 'display_name', 'school_club', 'instagram', 'emergency_name', 'emergency_relationship',
+    'height_cm', 'weight_kg', 'standing_reach_cm', 'vertical_jump_cm', 'playing_since', 'preferred_jersey', 'bio'];
   const PHONE_FIELDS = ['phone', 'emergency_phone'];
-  const CHANGE_FIELDS = ['gender', 'language'];
+  const CHANGE_FIELDS = ['gender', 'language', 'dominant_hand', 'dominant_foot', 'playing_level', 'shirt_size'];
+  const range = (lo, hi, key) => v => v == null || (/^[0-9]{1,4}$/.test(String(v)) && +v >= lo && +v <= hi) || t(key);
   const RULES = {
+    height_cm: range(100, 250, 'errHeight'),
+    weight_kg: range(25, 200, 'errWeight'),
+    standing_reach_cm: range(120, 350, 'errReach'),
+    vertical_jump_cm: range(5, 150, 'errJump'),
+    playing_since: v => range(1980, new Date().getFullYear(), 'errSince')(v),
+    preferred_jersey: range(0, 99, 'errJersey'),
     instagram: v => !v || /^@?[A-Za-z0-9._]{1,30}$/.test(v) || t('errInstagram'),
     date_of_birth: v => {
       if (!v) return true;
@@ -370,6 +378,7 @@
         choice: on ? 'accepted' : 'withdrawn', context: 'profile', user_agent: navigator.userAgent.slice(0, 400),
       });
     });
+    $('#f_show_sport_stats').addEventListener('change', e => queue('show_sport_stats', e.target.checked, true));
     PHONE_FIELDS.forEach(wirePhone);
     $('#profileForm').addEventListener('submit', e => e.preventDefault());
     $('#copyCode').addEventListener('click', async () => {
@@ -568,6 +577,8 @@
     });
     $('#f_language').value = profile.language || 'en';
     $('#f_media_feature').checked = !!profile.media_feature;
+    $('#f_show_sport_stats').checked = !!profile.show_sport_stats;
+    $('#f_playing_since').max = new Date().getFullYear();
     const locked = !!profile.verified_at;
     $('#f_legal_name').disabled = locked;
     $('#f_date_of_birth').disabled = locked;
@@ -597,21 +608,51 @@
 
     const basics = !!(profile.legal_name && profile.date_of_birth && profile.gender);
     const contact = !!(profile.phone && profile.emergency_name && profile.emergency_relationship && profile.emergency_phone);
+    const sports = !!(profile.height_cm && profile.dominant_hand && profile.playing_level);
     const items = [
       { key: 'checkConsent', state: 'done' },
       { key: 'checkBasics', state: basics ? 'done' : 'todo' },
       { key: 'checkContact', state: under13 ? 'soon' : (contact ? 'done' : 'todo') },
+      { key: 'checkSports', state: under13 ? 'soon' : (sports ? 'done' : 'todo') },
     ];
-    if (age === null || age < 18) items.push({ key: 'checkGuardian', state: profile.guardian_consent_at ? 'done' : 'soon' });
-    items.push({ key: 'checkId', state: 'soon' });
 
     const actionable = items.filter(i => i.state !== 'soon');
     const done = actionable.filter(i => i.state === 'done').length;
     $('#progressBar').style.width = Math.round(done / actionable.length * 100) + '%';
     $('#progressText').textContent = t('progress', { done, total: actionable.length });
+    renderCard(age);
+    const later = [['laterTeam', 'laterTeamWhy'], ['laterAgreement', 'laterAgreementWhy']];
+    if (age === null || age < 18) later.push(['laterGuardian', 'laterGuardianWhy']);
+    later.push(['laterId', 'laterIdWhy']);
+    $('#laterList').innerHTML = later.map(([a, b]) => `<li><strong>${ocEscape(t(a))}</strong><span>${ocEscape(t(b))}</span></li>`).join('');
     $('#checklist').innerHTML = items.map(i => `
       <li><span class="acct-dot ${i.state === 'done' ? 'is-done' : i.state === 'soon' ? 'is-soon' : ''}" aria-hidden="true">✓</span>
       <span>${ocEscape(t(i.key))}</span>
       <span class="acct-tag">${ocEscape(t(i.state === 'done' ? 'done' : i.state === 'soon' ? 'soon' : 'todo'))}</span></li>`).join('');
+  }
+
+  // ---------- Player card (private preview of the player's profile) ----------
+  function renderCard(age) {
+    const p = profile;
+    $('#pcName').textContent = p.display_name || p.legal_name || t('welcomeNoName');
+    $('#pcCode').textContent = p.player_code || '';
+    $('#pcJersey').hidden = p.preferred_jersey == null;
+    $('#pcJersey').textContent = p.preferred_jersey == null ? '' : '#' + p.preferred_jersey;
+    const pos = [];
+    Object.values(p.positions || {}).forEach(list => (list || []).forEach(k => pos.push(t('pos_' + k))));
+    $('#pcPositions').textContent = pos.join(', ');
+    const side = v => v ? t('side' + v[0].toUpperCase() + v.slice(1)) : null;
+    const lvl = { new: 'levelNew', school: 'levelSchool', club: 'levelClub', league: 'levelLeague', national: 'levelNational' };
+    const stats = [
+      ['cardHeight', p.height_cm ? p.height_cm + ' cm' : null],
+      ['cardReach', p.standing_reach_cm ? p.standing_reach_cm + ' cm' : null],
+      ['cardJump', p.vertical_jump_cm ? p.vertical_jump_cm + ' cm' : null],
+      ['cardHand', side(p.dominant_hand)],
+      ['cardLevel', p.playing_level ? t(lvl[p.playing_level]) : null],
+      ['cardSince', p.playing_since || null],
+    ].filter(x => x[1] != null);
+    $('#pcStats').innerHTML = stats.map(([k, v]) => `<div><dt>${ocEscape(t(k))}</dt><dd>${ocEscape(String(v))}</dd></div>`).join('');
+    $('#pcEmpty').hidden = stats.length > 0;
+    $('#playerCard').hidden = age !== null && age < 13 && !p.guardian_consent_at;
   }
 })();

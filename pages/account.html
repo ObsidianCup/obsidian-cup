@@ -181,10 +181,30 @@
       </div>
 
       <div class="acct-card">
-        <h2 data-t="checklistTitle">Your checklist</h2>
+        <h2 data-t="checklistTitle">Your profile</h2>
         <div class="acct-progress"><div id="progressBar" style="width:0%"></div></div>
         <p class="acct-muted" id="progressText"></p>
         <ul class="acct-list" id="checklist"></ul>
+      </div>
+
+      <div class="acct-card acct-playercard" id="playerCard">
+        <div class="acct-pc-head">
+          <div>
+            <p class="acct-pc-name" id="pcName"></p>
+            <p class="acct-pc-code" id="pcCode"></p>
+          </div>
+          <p class="acct-pc-jersey" id="pcJersey" hidden></p>
+        </div>
+        <p class="acct-pc-pos" id="pcPositions"></p>
+        <dl class="acct-pc-stats" id="pcStats"></dl>
+        <p class="acct-muted" id="pcEmpty" data-t="cardEmpty"></p>
+        <p class="acct-hint" data-t="cardPrivate"></p>
+      </div>
+
+      <div class="acct-card" id="laterCard">
+        <h2 data-t="laterTitle">Before your first tournament</h2>
+        <p class="acct-muted" data-t="laterIntro"></p>
+        <ul class="acct-later" id="laterList"></ul>
       </div>
 
       <div id="ageNote"></div>
@@ -253,6 +273,99 @@
           <h3 data-t="secPositions">Positions you play</h3>
           <p class="acct-hint" style="margin-bottom:1rem;" data-t="positionsHint"></p>
           <div id="positions"></div>
+
+          <h3 data-t="secSports">Sports profile</h3>
+          <p class="acct-hint" style="margin-bottom:1rem;" data-t="sportsIntro"></p>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_height_cm" data-t="heightCm">Height (cm)</label>
+              <input class="acct-input" id="f_height_cm" name="height_cm" type="number" inputmode="numeric" min="100" max="250" step="1" />
+              <span class="acct-err" data-err="height_cm"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_weight_kg" data-t="weightKg">Weight (kg, optional)</label>
+              <input class="acct-input" id="f_weight_kg" name="weight_kg" type="number" inputmode="numeric" min="25" max="200" step="1" />
+              <span class="acct-hint" data-t="weightHint"></span>
+              <span class="acct-err" data-err="weight_kg"></span>
+            </div>
+          </div>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_standing_reach_cm" data-t="reachCm">Standing reach (cm)</label>
+              <input class="acct-input" id="f_standing_reach_cm" name="standing_reach_cm" type="number" inputmode="numeric" min="120" max="350" step="1" />
+              <span class="acct-hint" data-t="reachHint"></span>
+              <span class="acct-err" data-err="standing_reach_cm"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_vertical_jump_cm" data-t="jumpCm">Vertical jump (cm)</label>
+              <input class="acct-input" id="f_vertical_jump_cm" name="vertical_jump_cm" type="number" inputmode="numeric" min="5" max="150" step="1" />
+              <span class="acct-hint" data-t="jumpHint"></span>
+              <span class="acct-err" data-err="vertical_jump_cm"></span>
+            </div>
+          </div>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_dominant_hand" data-t="hand">Playing hand</label>
+              <select class="acct-select" id="f_dominant_hand" name="dominant_hand">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="right" data-t="sideRight">Right</option>
+                <option value="left" data-t="sideLeft">Left</option>
+                <option value="both" data-t="sideBoth">Both</option>
+              </select>
+            </div>
+            <div class="acct-field">
+              <label for="f_dominant_foot" data-t="foot">Stronger foot</label>
+              <select class="acct-select" id="f_dominant_foot" name="dominant_foot">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="right" data-t="sideRight">Right</option>
+                <option value="left" data-t="sideLeft">Left</option>
+                <option value="both" data-t="sideBoth">Both</option>
+              </select>
+            </div>
+          </div>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_playing_level" data-t="level">Highest level you have played</label>
+              <select class="acct-select" id="f_playing_level" name="playing_level">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="new" data-t="levelNew">Just starting</option>
+                <option value="school" data-t="levelSchool">School or college team</option>
+                <option value="club" data-t="levelClub">Club team</option>
+                <option value="league" data-t="levelLeague">League or division</option>
+                <option value="national" data-t="levelNational">National or age-group national</option>
+              </select>
+            </div>
+            <div class="acct-field">
+              <label for="f_playing_since" data-t="since">Year you started playing</label>
+              <input class="acct-input" id="f_playing_since" name="playing_since" type="number" inputmode="numeric" min="1980" step="1" />
+              <span class="acct-err" data-err="playing_since"></span>
+            </div>
+          </div>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_preferred_jersey" data-t="jersey">Preferred jersey number</label>
+              <input class="acct-input" id="f_preferred_jersey" name="preferred_jersey" type="number" inputmode="numeric" min="0" max="99" step="1" />
+              <span class="acct-hint" data-t="jerseyHint"></span>
+              <span class="acct-err" data-err="preferred_jersey"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_shirt_size" data-t="shirt">Shirt size</label>
+              <select class="acct-select" id="f_shirt_size" name="shirt_size">
+                <option value="" data-t="choose">Choose…</option>
+                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option>
+              </select>
+            </div>
+          </div>
+          <div class="acct-field">
+            <label for="f_bio" data-t="bio">About you (short)</label>
+            <textarea class="acct-input" id="f_bio" name="bio" rows="3" maxlength="280"></textarea>
+            <span class="acct-hint" data-t="bioHint"></span>
+            <span class="acct-err" data-err="bio"></span>
+          </div>
+          <label class="acct-toggle" style="margin-bottom:1.5rem;">
+            <input type="checkbox" id="f_show_sport_stats" name="show_sport_stats" />
+            <span data-t="showStats"></span>
+          </label>
 
           <h3 data-t="secEmergency">Emergency contact</h3>
           <div class="acct-row">

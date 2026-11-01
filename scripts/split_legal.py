@@ -64,6 +64,14 @@ for lang, src in SOURCES.items():
         path.write_text(body, encoding="utf-8")
         sha = hashlib.sha256(body.encode("utf-8")).hexdigest()
         rows.append((key, version, lang, title, sha, f"/legal/{lang}/{key}-{version}.md"))
+        # Earlier versions stay registered, so old consent records still
+        # point at the exact text that was agreed to.
+        for old in sorted(outdir.glob(f"{key}-*.md")):
+            v = old.stem[len(key) + 1:]
+            if v == version or not re.fullmatch(r"[0-9]+(\.[0-9]+)*", v):
+                continue
+            ob = old.read_text(encoding="utf-8")
+            rows.append((key, v, lang, title, hashlib.sha256(ob.encode("utf-8")).hexdigest(), f"/legal/{lang}/{key}-{v}.md"))
     for key, versions in DECLARATIONS.items():
         for version, title, text in versions:
             sha = hashlib.sha256(text.encode("utf-8")).hexdigest()

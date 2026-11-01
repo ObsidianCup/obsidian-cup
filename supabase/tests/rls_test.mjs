@@ -184,6 +184,22 @@ await as(null);
 await db.query(`update public.profiles set date_of_birth = '2001-01-05' where id = $1`, [D]);
 ok((await db.query('select date_of_birth::text d from public.profiles where id = $1', [D])).rows[0].d === '2001-01-05', 'organiser can still correct it');
 
+console.log('\nSports profile');
+await as(A);
+await db.query(`update public.profiles set height_cm = 178, weight_kg = 70, standing_reach_cm = 230, vertical_jump_cm = 55, dominant_hand = 'right', dominant_foot = 'left', playing_level = 'club', playing_since = 2019, preferred_jersey = 7, shirt_size = 'M', bio = 'Setter from Mirpur', show_sport_stats = true where id = $1`, [A]);
+ok((await db.query('select height_cm, playing_level from public.profiles where id = $1', [A])).rows[0].height_cm === 178, 'player saves a sports profile');
+await expectError(`update public.profiles set height_cm = 40 where id = $1`, [A], /check constraint/, 'impossible height refused');
+await expectError(`update public.profiles set preferred_jersey = 100 where id = $1`, [A], /check constraint/, 'jersey over 99 refused');
+await expectError(`update public.profiles set dominant_hand = 'feet' where id = $1`, [A], /check constraint/, 'unknown playing hand refused');
+await expectError(`update public.profiles set playing_since = 2099 where id = $1`, [A], /playing_since_future/, 'start year in the future refused');
+await expectError(`update public.profiles set bio = repeat('x', 281) where id = $1`, [A], /check constraint/, 'bio over 280 characters refused');
+await db.query(`update public.profiles set weight_kg = null where id = $1`, [A]);
+ok((await db.query('select weight_kg from public.profiles where id = $1', [A])).rows[0].weight_kg === null, 'player can clear a sports detail');
+await as(B);
+ok((await db.query(`update public.profiles set height_cm = 150 where id = $1`, [A])).affectedRows === 0, 'cannot edit another player\'s sports profile');
+await as(KID);
+await expectError(`update public.profiles set height_cm = 140 where id = $1`, [KID], /guardian_required_under_13/, 'under-13 cannot add a sports profile before guardian consent');
+
 console.log('\nPlayers choose their own code');
 await as(null);
 const P = await mk('pick@example.com');

@@ -51,6 +51,8 @@ events, and the organiser verifies everything from one admin page.
 | Legal status | No budget to register yet; stay as Uriana Faiha trading as Obsidian Cup. Revisit a trade licence later |
 | Sports | Multi-sport from day one: each event has a sport and its own rules (squad size, special roles like libero, position list, age and gender limits) |
 | Positions | Players pick preferred positions freely from the sport's list (volleyball: outside hitter, setter, middle blocker, opposite, libero; football: goalkeeper, defender, midfielder, forward). Libero cap (2) is a per-team volleyball rule |
+| Sports profile | Optional: height, weight (never public), standing reach, vertical jump, playing hand and foot, level, year started, preferred jersey, shirt size, short bio, and a "show my stats" switch for future public player pages. Shown to the player as a private player card. Under-13s only after guardian consent (007). Privacy Notice bumped to 1.1 to cover it; 1.0 stays registered for old records. The Claude Doc copy of the legal texts still needs the 1.1 changes |
+| Tournament items | Event agreement, guardian consent, ID photo and joining a team are explained in a "Before your first tournament" card instead of empty tick boxes; they are collected at registration (stage 3) |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
 | Logo | The organiser is designing the new logo herself (31 Oct 2026). Claude's explorations are on the "Obsidian Cup — New Logo" design canvas in her account, for reference only. Until the new logo arrives, the site and login emails keep `assets/logo-mark.png`; when it arrives, swap it in the nav/footer, favicon, og-image and `supabase/email-templates/*.html` |
 
@@ -128,7 +130,7 @@ project); real player photos only, never AI-made ones of players.
    with the anti-slop, typography, spacing, reduced-motion and transitions
    skills: A Court, B Obsidian Glass, C Programme. **Chosen: B Obsidian Glass**
    (1 Nov). Tokens: Glass #0b1012 (60%), Facet #151c1f, Bone #eeeae3 (30%),
-   Mist #a7b0b2, Gold sheen #d4b06a (main button + focus ring only, 10%).
+   Mist #a7b0b2, Ice #d7e9ec (main button + focus ring, 10%; second buttons use Ice at 10% opacity with a 45% border).
    Unbounded 500/600 headings, Figtree 400/500 text. No ghost buttons: the
    second action is a filled Facet button. Sticky header keeps Log in in view.
    Rules for the build: max 3 weights (none over 600), body 16px, nothing
