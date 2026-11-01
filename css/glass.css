@@ -186,3 +186,39 @@ body.theme-glass {
 @media (prefers-reduced-motion: reduce) {
   .g-btn, .g-menu, .g-menu[data-open="true"] { transition: opacity var(--motion-fast) linear, visibility 0s; transform: none !important; }
 }
+
+/* ---------- Inner pages ---------- */
+.g-pagehead { padding: var(--s16) 0 var(--s12); border-bottom: 1px solid var(--line); }
+.g-pagehead h1 { font-weight: 600; font-size: clamp(2.5rem, 7vw, 5.25rem); line-height: 1.1; margin: var(--s2) 0 var(--s6); }
+.g-pagehead .g-lead { max-width: 60ch; }
+.g-kicker { font-size: 0.875rem; color: var(--mist); }
+
+.g-event { padding: var(--s12) 0; border-bottom: 1px solid var(--line); }
+.g-event-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--s12); margin-bottom: var(--s8); }
+.g-event h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.g-event .g-meta { margin-top: var(--s2); }
+.g-champs-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g-champs-1 { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 860px) { .g-event-head { grid-template-columns: 1fr; gap: var(--s4); } }
+
+.g-next { display: flex; gap: var(--s4); flex-wrap: wrap; padding: var(--s12) 0 0; }
+
+/* About */
+.g-story { display: grid; gap: var(--s6); max-width: 70ch; padding: var(--s12) 0; }
+.g-story p { color: var(--soft); font-size: 1.0625rem; line-height: 1.6; }
+.g-quote { margin: var(--s8) 0; padding: var(--s8) 0 var(--s8) var(--s8); border-left: 2px solid var(--ice); max-width: 60ch; }
+.g-quote p { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.25rem, 2.4vw, 1.75rem); line-height: 1.3; color: var(--bone); }
+.g-contact { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s4); }
+.g-contact li { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s6); display: flex; flex-direction: column; gap: var(--s1); }
+.g-contact a { font-weight: 500; overflow-wrap: anywhere; }
+
+/* FAQ: native disclosure, opens instantly */
+.g-faq-group { padding: var(--s12) 0 0; }
+.g-faq-group h2 { font-size: 1.5rem; margin-bottom: var(--s4); }
+.g-faq { border-top: 1px solid var(--line); }
+.g-faq details { border-bottom: 1px solid var(--line); }
+.g-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); padding: var(--s6) 0; font-weight: 500; font-size: 1.0625rem; }
+.g-faq summary::-webkit-details-marker { display: none; }
+.g-faq summary::after { content: "+"; font-family: var(--font-display); color: var(--mist); flex-shrink: 0; }
+.g-faq details[open] summary::after { content: "−"; }
+.g-faq details p { padding: 0 0 var(--s6); max-width: 70ch; color: var(--soft); }
