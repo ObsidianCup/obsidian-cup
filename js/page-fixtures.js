@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <h1 class="closed-title reveal">No Active Tournament</h1>
         <div class="divider reveal"><div class="divider-diamond"></div></div>
         <p class="closed-sub reveal-fade">
-          Follow <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" style="color:var(--cream); text-decoration:underline;">@obsidiancup</a> on Instagram for fixture updates, match schedules, and live results.
+          Follow <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" style="color:var(--cream); text-decoration:underline;">@obsidian.volleyball</a> on Instagram for fixture updates, match schedules, and live results.
         </p>
         <div style="margin-top:3rem;" class="reveal">
           <a href="${SITE_CONFIG.instagramUrl}" target="_blank" rel="noopener" class="btn-ghost">Follow on Instagram</a>

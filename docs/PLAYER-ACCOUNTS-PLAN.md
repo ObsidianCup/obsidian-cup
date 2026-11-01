@@ -50,8 +50,10 @@ events, and the organiser verifies everything from one admin page.
 | Cost | Free tiers only for now, with a clear upgrade path |
 | Legal status | No budget to register yet; stay as Uriana Faiha trading as Obsidian Cup. Revisit a trade licence later |
 | Sports | Multi-sport from day one: each event has a sport and its own rules (squad size, special roles like libero, position list, age and gender limits) |
-| Positions | Players pick preferred positions freely from the sport's list (volleyball: outside hitter, setter, middle blocker, opposite, libero; football: goalkeeper, defender, midfielder, forward). Libero cap (2) is a per-team volleyball rule |
+| Positions | Players pick preferred positions freely from the sport's list (volleyball: outside hitter, setter, middle blocker, opposite, libero; futsal: goalkeeper, defender, winger, pivot; the sport id stays `football` in the database and is shown as "Futsal"). Libero cap (2) is a per-team volleyball rule |
 | Sports profile | Optional: height, weight (never public), standing reach, vertical jump, playing hand and foot, level, year started, preferred jersey, shirt size, short bio, and a "show my stats" switch for future public player pages. Shown to the player as a private player card. Under-13s only after guardian consent (007). Privacy Notice bumped to 1.1 to cover it; 1.0 stays registered for old records. The Claude Doc copy of the legal texts still needs the 1.1 changes |
+| Profile photo | Optional, one square photo (cropped and shrunk to 512px in the browser before upload), private Supabase Storage bucket `avatars` at `<player id>/avatar.webp`. Only the player and organisers can see it. Needs a date of birth, and under-13s need guardian consent first (010). Privacy Notice 1.2 covers it |
+| Player card and gate QR | Every account shows a player card with photo, name, code, stats and a QR code. The QR is a private link (`/pages/check.html#t=<card_token>`); only organisers with two-step login get an answer (`check_player`, 010): name, name on ID, photo, code, age, ID and guardian status, current teams. Players can replace their QR any time (old one stops working). All free: Supabase + Vercel + an MIT QR library in `js/vendor` |
 | Tournament items | Event agreement, guardian consent, ID photo and joining a team are explained in a "Before your first tournament" card instead of empty tick boxes; they are collected at registration (stage 3) |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
 | Logo | For now: the OC monogram from logo round 2 (O in front of C, chip on the C), in `assets/logo-oc.svg` (masked, works on any background). Favicon (`favicon.svg` + `.ico`), `apple-touch-icon.png`, `og-image.jpg` and `email-logo.png` are made from it. The organiser may redesign it later; swap those files and the email templates |
@@ -131,7 +133,10 @@ project); real player photos only, never AI-made ones of players.
    skills: A Court, B Obsidian Glass, C Programme. **Chosen: B Obsidian Glass**
    (1 Nov). Tokens: Glass #0b1012 (60%), Facet #151c1f, Bone #eeeae3 (30%),
    Mist #a7b0b2, Ice #d7e9ec (main button + focus ring, 10%; second buttons use Ice at 10% opacity with a 45% border).
-   Unbounded 500/600 headings, Figtree 400/500 text. No ghost buttons: the
+   Unbounded 500/600 headings, Figtree 400/500 text. Being built on the git
+   branch `redesign` (Vercel preview link): `css/glass.css`, pages opt in with
+   `<body class="theme-glass">`; `js/components.js` then injects the new header,
+   phone menu and footer. Homepage done first; other pages still use style.css. No ghost buttons: the
    second action is a filled Facet button. Sticky header keeps Log in in view.
    Rules for the build: max 3 weights (none over 600), body 16px, nothing
    under 12px, headings line-height 1.1–1.2, 8px spacing grid, text ≤70ch,

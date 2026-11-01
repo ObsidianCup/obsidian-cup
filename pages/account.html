@@ -9,11 +9,11 @@
   <link rel="icon" href="../assets/favicon.ico" sizes="any" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/glass.css" />
   <link rel="stylesheet" href="../css/account.css" />
 </head>
-<body>
-  <main class="acct-wrap" id="acct">
+<body class="theme-glass">
+  <main id="main" class="acct-wrap">
 
     <!-- Loading -->
     <section data-view="loading">
@@ -190,16 +190,40 @@
 
       <div class="acct-card acct-playercard" id="playerCard">
         <div class="acct-pc-head">
-          <div>
-            <p class="acct-pc-name" id="pcName"></p>
-            <p class="acct-pc-code" id="pcCode"></p>
+          <div class="acct-pc-id">
+            <div class="acct-pc-photo" id="pcPhoto"><span id="pcInitials" aria-hidden="true"></span><img id="pcImg" alt="" hidden /></div>
+            <div>
+              <p class="acct-pc-name" id="pcName"></p>
+              <p class="acct-pc-code" id="pcCode"></p>
+            </div>
           </div>
           <p class="acct-pc-jersey" id="pcJersey" hidden></p>
         </div>
+        <div class="acct-pc-photoctl" id="photoCtl">
+          <label class="acct-btn acct-btn-ghost acct-btn-small" for="photoInput" id="photoAddLabel" data-t="photoAdd">Add a photo</label>
+          <input type="file" id="photoInput" accept="image/*" class="acct-visually-hidden" />
+          <button class="acct-link" type="button" id="photoRemove" data-t="photoRemove" hidden>Remove photo</button>
+        </div>
+        <p class="acct-hint" data-t="photoHint"></p>
+        <div id="photoMsg"></div>
         <p class="acct-pc-pos" id="pcPositions"></p>
         <dl class="acct-pc-stats" id="pcStats"></dl>
         <p class="acct-muted" id="pcEmpty" data-t="cardEmpty"></p>
         <p class="acct-hint" data-t="cardPrivate"></p>
+
+        <div class="acct-pc-gate" id="pcGate" hidden>
+          <div class="acct-pc-qr" id="pcQr" role="img"></div>
+          <div class="acct-pc-gatetext">
+            <p class="acct-pc-gatetitle" data-t="gateTitle">Show this at the gate</p>
+            <p class="acct-hint" data-t="gateHint"></p>
+            <p class="acct-pc-gatebtns">
+              <button class="acct-link" type="button" id="qrBig" data-t="qrBig">Make it bigger</button>
+              <button class="acct-link" type="button" id="qrNew" data-t="qrNew">Get a new QR code</button>
+            </p>
+            <div id="qrMsg"></div>
+          </div>
+        </div>
+        <p class="acct-hint" id="gateNeedsCode" data-t="qrNeedsCode" hidden></p>
       </div>
 
       <div class="acct-card" id="laterCard">
@@ -411,6 +435,7 @@
 
   <script src="../js/vendor/supabase-js-2.118.0.js"></script>
   <script src="../js/vendor/libphonenumber-min-1.13.15.js"></script>
+  <script src="../js/vendor/qrcode-generator-1.4.4.js"></script>
   <script src="../js/config.js"></script>
   <script src="../js/lang.js"></script>
   <script src="../js/components.js"></script>

@@ -27,6 +27,16 @@ await db.exec(`
   grant usage on schema auth to anon, authenticated;
   grant execute on function auth.uid() to anon, authenticated;
   grant execute on function auth.jwt() to anon, authenticated;
+  -- stand-in for Supabase Storage (only what the photo rules need)
+  create schema storage;
+  create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
+  create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text, owner uuid default auth.uid());
+  create function storage.foldername(name text) returns text[] language sql immutable as
+    $$ select (string_to_array(name, '/'))[1:array_length(string_to_array(name, '/'), 1) - 1] $$;
+  alter table storage.objects enable row level security;
+  grant usage on schema storage to authenticated;
+  grant select, insert, update, delete on storage.objects to authenticated;
+  grant execute on function storage.foldername(text) to authenticated;
 `);
 const as = async (who, aal = 'aal1') => {   // who: uuid | 'anon' | null(owner); aal2 = passed two-step login
   await db.exec('reset role');
@@ -345,6 +355,49 @@ ok((await db.query(`select * from public.email_claim(50, 1)`)).rows.length === 0
 await db.query(`update public.email_queue set attempts = 5, claimed_at = null where id = $1`, [c1[1].id]);
 ok(!(await db.query(`select * from public.email_claim(50)`)).rows.some(r => r.id === c1[1].id), 'an email that failed 5 times is not tried again');
 ok(before >= 3, 'queue had emails to send: ' + before);
+
+console.log('\nPlayer card, photo and gate check');
+await as(null);
+const OLDIE = await mkp('card@example.com', 'Nusrat Jahan', '2003-04-04', 'female');
+const KID2 = await mkp('kid2@example.com', 'Ayaan Rahman', '2018-06-06', 'male');
+const NODOB = await mk('nodob@example.com');
+const tok = (await db.query(`select card_token from public.profiles where id = $1`, [OLDIE])).rows[0].card_token;
+ok(!!tok, 'every player gets a private card token');
+await as(OLDIE);
+await db.query(`update public.profiles set card_token = gen_random_uuid() where id = $1`, [OLDIE]).catch(() => {});
+await as(null);
+ok((await db.query(`select card_token from public.profiles where id = $1`, [OLDIE])).rows[0].card_token === tok, 'a player cannot set the card token directly');
+await as(OLDIE);
+const tok2 = (await db.query(`select public.new_card_token() t`)).rows[0].t;
+ok(tok2 && tok2 !== tok, 'a player can replace their QR with a new one');
+await expectError(`select * from public.check_player($1)`, [tok2], /organisers_only/, 'a player cannot use the gate check');
+await as(ADM2, 'aal1');
+await expectError(`select * from public.check_player($1)`, [tok2], /organisers_only/, 'organiser without two-step cannot use the gate check');
+await as(ADM2, 'aal2');
+const chk = (await db.query(`select * from public.check_player($1)`, [tok2])).rows;
+ok(chk.length === 1 && chk[0].legal_name === 'Nusrat Jahan' && chk[0].player_code && chk[0].verified === false, 'organiser sees name, code and ID status from the QR');
+ok((await db.query(`select * from public.check_player($1)`, [tok])).rows.length === 0, 'the old QR no longer works after it is replaced');
+ok((await db.query(`select * from public.check_player(gen_random_uuid())`)).rows.length === 0, 'an unknown QR shows nothing');
+const capCheck = (await db.query(`select * from public.check_player((select card_token from public.profiles where id = $1))`, [CAP])).rows[0];
+ok(Array.isArray(capCheck.teams), 'gate check lists the player\'s current teams');
+
+await as(OLDIE);
+await db.query(`update public.profiles set avatar_version = 1 where id = $1`, [OLDIE]);
+await db.query(`insert into storage.objects (bucket_id, name) values ('avatars', $1)`, [OLDIE + '/avatar.webp']);
+ok(true, 'a player (13+) can add a profile photo');
+await expectError(`insert into storage.objects (bucket_id, name) values ('avatars', $1)`, [CAP + '/avatar.webp'], /row-level security/, 'a player cannot put a photo in someone else\'s folder');
+await expectError(`insert into storage.objects (bucket_id, name) values ('avatars', $1)`, [OLDIE + '/other.png'], /row-level security/, 'only the one photo file name is allowed');
+await as(CAP);
+ok((await db.query(`select count(*)::int n from storage.objects where bucket_id = 'avatars'`)).rows[0].n === 0, 'other players cannot see someone\'s photo');
+await as(ADM2, 'aal2');
+ok((await db.query(`select count(*)::int n from storage.objects where bucket_id = 'avatars'`)).rows[0].n === 1, 'organisers can see photos (for the gate check)');
+await as(KID2);
+await expectError(`update public.profiles set avatar_version = 1 where id = $1`, [KID2], /guardian_required_under_13/, 'under-13s cannot add a photo before guardian consent');
+await expectError(`insert into storage.objects (bucket_id, name) values ('avatars', $1)`, [KID2 + '/avatar.webp'], /row-level security/, 'under-13s cannot upload a photo file before guardian consent');
+await as(NODOB);
+await expectError(`update public.profiles set avatar_version = 1 where id = $1`, [NODOB], /guardian_required_under_13/, 'no photo before a date of birth is entered');
+await as(null);
+ok((await db.query(`select public from storage.buckets where id = 'avatars'`)).rows[0]?.public === false, 'the photo bucket is private');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

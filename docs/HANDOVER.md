@@ -29,7 +29,7 @@ ObsidianCup/obsidian-cup and continue"). Last updated 1 Nov 2026.
 
 - `main` = live site https://obsidiancup.vercel.app (every push deploys).
 - `redesign` = new "Obsidian Glass" design, preview only (Vercel → Deployments
-  → newest "redesign" Preview → Visit). Latest commit 22bc63b, main merged in.
+  → newest "redesign" Preview → Visit). main merged in.
   Goes live only when the owner says so: merge `redesign` into `main`.
 
 ## Design: B "Obsidian Glass" (locked in)
@@ -42,7 +42,7 @@ Rules: max 3 weights (none over 600), body 16px, nothing under 12px, 8px grid,
 text ≤70ch, sentence case, no all-caps labels, no stats strip, no ghost
 buttons, no decorative motion, reduced-motion fallbacks.
 Code: `css/glass.css`, `js/components.js` (`injectGlassChrome()` when
-`body.theme-glass`). Pages rebuilt in glass: index, volleyball, football,
+`body.theme-glass`). Pages rebuilt in glass: index, volleyball, futsal,
 tournaments, about, faq, 404, account, admin, legal.
 Not yet glass: experiences, register, rules, fixtures.
 Logo: OC monogram (`assets/logo-oc.svg`) for now; the owner will redesign it.
@@ -50,36 +50,32 @@ Design canvases (Claude artifacts): redesign
 https://claude.ai/artifact/5yGTcp4ErvHb8ZZiA2yrpQ, logo
 https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko
 
-## NEXT: owner's review of the redesign preview (1 Nov) — all still TO DO
+## Owner's redesign review (1 Nov) — status
 
-1. Contact card email (`obsidiancup.official@gmail.com`) must fit on one
-   line and not be underlined (about/faq contact cards).
-2. It is **futsal, not football**. Rename everywhere on the site (nav, pages,
-   tournament names, popups in `js/main.js` TOURNAMENTS, lang.js, about text).
-   Suggest `pages/futsal.html` plus a redirect from `pages/football.html` in
-   vercel.json. Confirm the exact tournament name with the owner (OFC S1 →
-   "Obsidian Futsal Cup"?).
-3. New Instagram accounts: **@obsidian.volleyball** and **@obsidian.futsal**
-   (replace @obsidiancup in components.js footer, config.js `instagramUrl`,
-   index, faq, about, register, rules, page-fixtures.js, the 5 Supabase email
-   templates, scripts/email/templates.mjs, CLAUDE.md). Show both where
-   relevant; sport pages link their own account.
-4. Partners section: Pheezes, Croketopia and Hi. Talha logos look too small;
-   make them larger (consistent visual size).
-5. About page: big empty space on the right. Add volleyball silhouettes
-   (spike, receive/dig, hit) drawn as thin outline linework, like the homepage
-   "OBSIDIAN" outline background. Original drawings, static, no motion.
-6. FAQ/questions page: say "Email us or message us on Instagram" (both links).
-7. Make two Instagram profile pictures (1080×1080 PNG, circle-safe):
-   bold "OBSIDIAN" wordmark (Unbounded, like the homepage hero, with the
-   outline rows behind it).
-   - Volleyball: grey-ish ash-black background (like the original).
-   - Futsal: dark maroon background, same design.
-   Send both to the owner.
-8. Give the owner the list of text that needs Bangla (English keys in
-   `js/lang.js` missing a `bn` value, plus new account strings in
-   `js/oc-accounts.js`) as a table to fill in; the owner translates.
-Then: owner reviews again → "make it live" → merge `redesign` into `main`.
+Done on `redesign` (1 Nov): contact email on one line, no underline; partner
+logos trimmed and larger; About page right column: the OC monogram as outline linework with
+faint echo rings (owner dropped the player drawings; `.g-about-mark`, sticky, desktop only); FAQ "Email us or message us on Instagram";
+Instagram is now **@obsidian.volleyball** and **@obsidian.futsal** everywhere
+(config.js `instagramVolleyballUrl` / `instagramFutsalUrl`); **futsal, not
+football**: tournament is "Obsidian Futsal Cup, Season 1" (OFC), page
+`pages/futsal.html`, old football URLs redirect in vercel.json. In the
+accounts code the sport id stays `football` (database value from 009) but is
+shown as "Futsal" with futsal positions (goalkeeper, defender, winger, pivot).
+Two Instagram profile pictures (1080×1080, ash-black and maroon) sent to the
+owner.
+
+Still to do: legal texts (payment 1.0, participation 1.0) still mention
+@obsidiancup / football; change them in the next legal version. The owner's Bangla
+for all 248 missing lines is in `js/lang.js` and `js/oc-accounts.js` (1 Nov).
+Some glass-page text has no `data-key` yet (season list, partner cards,
+buttons), so it stays English in Bangla mode. Bangla received so far is saved
+in `docs/translation/bn-received.json` (180 of 464 lines: menu, footer, home,
+volleyball, futsal, seasons, about, FAQ, part of accounts; NOT yet applied). The owner is translating
+ALL site text (464 lines, file `obsidian-cup-all-website-text.txt`, ids in
+`docs/translation/site-text.json`, e.g. [home-14], [acct.authIntro]). When it
+comes back: add a data-key to every element by its id, put the Bangla in
+lang.js / oc-accounts.js, and check every page in Bangla. Then: owner reviews again → "make it live" →
+merge `redesign` into `main`.
 
 ## Player accounts (Supabase) — state
 
@@ -103,13 +99,24 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
 1. GitHub repo secrets: SUPABASE_URL, SUPABASE_SECRET_KEY, GMAIL_USER,
    GMAIL_APP_PASSWORD, EMAIL_TEST_TO (variable EMAIL_MODE optional, default
    test). Then run the "Send emails" workflow once by hand.
-2. Cloudflare Turnstile: send Claude the site key; put the secret in Supabase
-   → Attack Protection. Then redeploy the `login-with-code` function (captcha
-   version in repo).
+2. Cloudflare Turnstile: DONE 1 Nov (site key in config.js on main and
+   redesign, secret in Supabase). `login-with-code` function redeployed from
+   the repo, Verify JWT off: DONE 1 Nov.
+   Google account 2-Step Verification: DONE 1 Nov.
 3. 2FA on GitHub, Supabase, Vercel, Cloudflare and both Google accounts.
 4. GitHub secret scanning, push protection, Dependabot.
 5. Supabase Auth: min password 8, secure email change, secure password change,
    raise rate limits (emails ~100/h, sign-ins ~300 per 5 min).
+
+## Player card, photo and gate check (built 1 Nov, on `redesign`)
+
+Migration `010_player_card.sql` (photo bucket + rules, card_token, `new_card_token()`,
+`check_player()` organisers-only), account page photo upload + card QR, gate page
+`pages/check.html` + `js/page-check.js`, QR lib `js/vendor/qrcode-generator-1.4.4.js`
+(MIT), Privacy Notice 1.2 (seed regenerated). Tests: 145 passing.
+OWNER STILL HAS TO: run 010 and the legal seed in the SQL Editor (README step 6b).
+Owner (and every account) will be asked to agree to Privacy 1.2 on next login.
+New account/gate strings need Bangla (in docs/translation/site-text.json, bn empty).
 
 ## Questions waiting for the owner
 

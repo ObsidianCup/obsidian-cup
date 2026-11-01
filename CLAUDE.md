@@ -4,7 +4,7 @@ Read this first in any new session, then `docs/HANDOVER.md`.
 
 ## What this is
 
-Official website of Obsidian Cup, a volleyball and football tournament
+Official website of Obsidian Cup, a volleyball and futsal tournament
 organiser in Dhaka, Bangladesh. Static site (HTML, CSS, vanilla JS) on
 Vercel; every push to `main` deploys to https://obsidiancup.vercel.app.
 The site owner is not a developer: explain things in plain words, show
@@ -36,5 +36,5 @@ Keep both files updated as work progresses and decisions change.
 - Keep images small (logos under ~420px); compress new assets.
 - Avoid decorative motion and scroll-triggered fade-ins; keep text readable.
 - Tournament facts (dates, venues, results) must match the owner's Instagram
-  @obsidiancup; ask when unsure instead of guessing.
+  @obsidian.volleyball and @obsidian.futsal (before Nov 2026: @obsidiancup); ask when unsure instead of guessing.
 - Commit messages end with the co-author line the session provides.

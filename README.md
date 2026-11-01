@@ -2,7 +2,7 @@
 
 **Live site:** [obsidiancup.vercel.app](https://obsidiancup.vercel.app)
 
-Bangladesh's growing tournament brand. Home of Obsidian Cup football and volleyball events.
+Bangladesh's growing tournament brand. Home of Obsidian Cup futsal and volleyball events.
 
 ---
 
@@ -51,7 +51,7 @@ obsidian-cup/
 │   ├── lang.js             # EN/BN bilingual translations
 │   ├── components.js       # Navbar + footer injection
 │   └── main.js             # Animations, interactions, tournament details
-└── pages/                  # All other pages (tournaments, volleyball, football,
+└── pages/                  # All other pages (tournaments, volleyball, futsal,
                             # about, faq, experiences, register, rules, fixtures)
 ```
 

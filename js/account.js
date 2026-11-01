@@ -654,5 +654,118 @@
     $('#pcStats').innerHTML = stats.map(([k, v]) => `<div><dt>${ocEscape(t(k))}</dt><dd>${ocEscape(String(v))}</dd></div>`).join('');
     $('#pcEmpty').hidden = stats.length > 0;
     $('#playerCard').hidden = age !== null && age < 13 && !p.guardian_consent_at;
+    bindCardOnce();
+    renderPhoto();
+    renderQr();
+  }
+
+  // ---------- Profile photo (private: only the player and organisers) ----------
+  const photoPath = () => user.id + '/avatar.webp';
+  let photoUrl = null, photoShownVersion = -1;
+
+  function initials() {
+    const n = (profile.display_name || profile.legal_name || '').trim();
+    return n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+  }
+
+  async function renderPhoto() {
+    const v = profile.avatar_version || 0;
+    $('#pcInitials').textContent = initials();
+    $('#photoAddLabel').textContent = t(v ? 'photoChange' : 'photoAdd');
+    $('#photoRemove').hidden = !v;
+    const mayAdd = !!profile.date_of_birth && (ocAge(profile.date_of_birth) >= 13 || !!profile.guardian_consent_at);
+    $('#photoCtl').hidden = !mayAdd;
+    if (!v) { $('#pcImg').hidden = true; photoShownVersion = 0; return; }
+    if (v === photoShownVersion) return;
+    // Download through the API (the page's security policy allows that), then show it as a local copy.
+    const { data, error } = await db.storage.from('avatars').download(photoPath());
+    if (error || !data) { $('#pcImg').hidden = true; return; }
+    if (photoUrl) URL.revokeObjectURL(photoUrl);
+    photoUrl = URL.createObjectURL(data);
+    $('#pcImg').src = photoUrl;
+    $('#pcImg').hidden = false;
+    photoShownVersion = v;
+  }
+
+  // Square crop from the middle, 512 x 512, WebP (JPEG where the browser cannot make WebP).
+  async function shrinkPhoto(file) {
+    const bmp = await createImageBitmap(file);
+    const side = Math.min(bmp.width, bmp.height);
+    const c = document.createElement('canvas');
+    c.width = c.height = 512;
+    c.getContext('2d').drawImage(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side, 0, 0, 512, 512);
+    if (bmp.close) bmp.close();
+    const make = (type) => new Promise(res => c.toBlob(res, type, 0.85));
+    let blob = await make('image/webp');
+    if (!blob || blob.type !== 'image/webp') blob = await make('image/jpeg');
+    return blob;
+  }
+
+  async function savePhoto(file) {
+    if (!file) return;
+    if (!/^image\//.test(file.type)) { msg('photoMsg', t('photoNotImage'), 'error'); return; }
+    msg('photoMsg', t('photoSaving'), 'info');
+    try {
+      const blob = await shrinkPhoto(file);
+      const up = await db.storage.from('avatars').upload(photoPath(), blob, { upsert: true, contentType: blob.type, cacheControl: '0' });
+      if (up.error) throw up.error;
+      const next = (profile.avatar_version || 0) + 1;
+      const { data, error } = await db.from('profiles').update({ avatar_version: next }).eq('id', user.id).select('*').single();
+      if (error) throw error;
+      profile = data;
+      await renderPhoto();
+      msg('photoMsg', t('photoSaved'), 'ok');
+    } catch (e) {
+      msg('photoMsg', /guardian_required_under_13|row-level/.test(String(e && e.message)) ? t('errUnder13Save') : t('photoError'), 'error');
+    }
+    $('#photoInput').value = '';
+  }
+
+  async function removePhoto() {
+    if (!window.confirm(t('photoRemoveConfirm'))) return;
+    const rm = await db.storage.from('avatars').remove([photoPath()]);
+    if (rm.error) { msg('photoMsg', t('photoError'), 'error'); return; }
+    const { data, error } = await db.from('profiles').update({ avatar_version: 0 }).eq('id', user.id).select('*').single();
+    if (!error && data) profile = data;
+    await renderPhoto();
+    msg('photoMsg', t('photoRemoved'), 'ok');
+  }
+
+  // ---------- Gate QR: a private link only organisers can open ----------
+  function renderQr() {
+    const ready = !!(profile.player_code && profile.card_token && window.qrcode);
+    $('#pcGate').hidden = !ready || $('#playerCard').hidden;
+    $('#gateNeedsCode').hidden = ready || $('#playerCard').hidden;
+    if (!ready) return;
+    const url = location.origin + '/pages/check.html#t=' + profile.card_token;
+    const qr = window.qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    const box = $('#pcQr');
+    box.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+    box.setAttribute('aria-label', t('gateQrLabel', { code: profile.player_code }));
+  }
+
+  async function newQr() {
+    if (!window.confirm(t('qrNewConfirm'))) return;
+    const { data, error } = await db.rpc('new_card_token');
+    if (error || !data) { msg('qrMsg', t('genericError'), 'error'); return; }
+    profile = Object.assign({}, profile, { card_token: data });
+    renderQr();
+    msg('qrMsg', t('qrNewDone'), 'ok');
+  }
+
+  let cardBound = false;
+  function bindCardOnce() {
+    if (cardBound) return;
+    cardBound = true;
+    $('#photoInput').addEventListener('change', e => savePhoto(e.target.files && e.target.files[0]));
+    $('#photoRemove').addEventListener('click', removePhoto);
+    $('#qrNew').addEventListener('click', newQr);
+    $('#qrBig').addEventListener('click', () => {
+      const big = $('#pcGate').classList.toggle('is-big');
+      $('#qrBig').textContent = t(big ? 'qrSmall' : 'qrBig');
+      if (big) $('#pcGate').scrollIntoView({ block: 'center', behavior: 'auto' });
+    });
   }
 })();

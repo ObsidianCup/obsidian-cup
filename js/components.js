@@ -23,7 +23,7 @@ function injectNav() {
     <nav role="navigation" aria-label="Main navigation">
       <ul class="nav-links">
         <li><a href="${p('index.html')}" data-key="navHome">Home</a></li>
-        <li><a href="${p('pages/football.html')}" data-key="navFootball">Football</a></li>
+        <li><a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a></li>
         <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
         <li><a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a></li>
         <li><a href="${p('pages/about.html')}" data-key="navAbout">About</a></li>
@@ -56,7 +56,7 @@ function injectNav() {
     <button class="mobile-close" aria-label="Close menu">×</button>
     <img src="${a('assets/logo-oc.svg')}" alt="Obsidian Cup" class="mobile-logo" width="84" height="60" loading="lazy" />
     <a href="${p('index.html')}" data-key="navHome">Home</a>
-    <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
+    <a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a>
     <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
     <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
     <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
@@ -85,13 +85,14 @@ function injectFooter() {
     <p class="footer-tagline" data-key="footerTagline">Carved by Legacy · Crowned in Obsidian</p>
     <div class="divider"><div class="divider-diamond"></div></div>
     <nav class="footer-links" aria-label="Footer navigation">
-      <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
+      <a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a>
       <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
       <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
       <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
       <a href="${p('pages/faq.html')}" data-key="navFaq">FAQ</a>
       <a href="${p('pages/experiences.html')}">Experiences</a>
-      <a href="https://www.instagram.com/obsidiancup/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Instagram">Instagram</a>
+      <a href="${SITE_CONFIG.instagramVolleyballUrl}" target="_blank" rel="noopener">Volleyball Instagram</a>
+      <a href="${SITE_CONFIG.instagramFutsalUrl}" target="_blank" rel="noopener">Futsal Instagram</a>
       <a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener" aria-label="Obsidian Cup on Facebook">Facebook</a>
       <a href="${p('pages/about.html')}#contact">Contact</a>
       ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/legal.html')}?doc=privacy">Privacy</a><a href="${p('pages/legal.html')}?doc=terms">Terms</a>` : ''}
@@ -109,7 +110,107 @@ function injectBackToTop() {
   document.body.appendChild(btn);
 }
 
+/* ---------- "Obsidian Glass" pages (body.theme-glass) ---------- */
+function glassLinks() {
+  const p = (f) => getNavPath(f);
+  const links = [
+    ['pages/volleyball.html', 'navVolleyball', 'Volleyball'],
+    ['pages/futsal.html', 'navFutsal', 'Futsal'],
+    ['pages/tournaments.html', 'navSeasons', 'Past seasons'],
+    ['pages/about.html', 'navAbout', 'About'],
+    ['pages/faq.html', 'navQuestions', 'Questions'],
+  ];
+  if (SITE_CONFIG.tournamentActive) links.push(['pages/fixtures.html', 'navFixtures', 'Fixtures']);
+  if (SITE_CONFIG.rulesVisible) links.push(['pages/rules.html', 'navRules', 'Rules']);
+  const here = location.pathname.replace(/\/$/, '/index.html');
+  return links.map(([f, key, label]) =>
+    `<li><a href="${p(f)}" data-key="${key}"${here.endsWith(f) ? ' aria-current="page"' : ''}>${label}</a></li>`).join('');
+}
+
+function injectGlassChrome() {
+  const p = (f) => getNavPath(f);
+  const lang = `<div class="g-lang lang-toggle" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang="en">English</button>
+      <button type="button" class="lang-btn" data-lang="bn" lang="bn">বাংলা</button>
+    </div>`;
+  const login = SITE_CONFIG.accountsEnabled
+    ? `<a class="g-btn g-btn-second g-btn-small" href="${p('pages/account.html')}" data-key="navAccount">Log in</a>` : '';
+
+  const header = document.createElement('header');
+  header.className = 'g-header';
+  header.innerHTML = `
+    <a class="g-skip" href="#main">Skip to content</a>
+    <div class="g-wrap g-header-inner">
+      <a class="g-brand" href="${p('index.html')}" aria-label="Obsidian Cup home">
+        <img src="${p('assets/logo-oc.svg')}" alt="" width="42" height="30" />
+        <span>Obsidian Cup</span>
+      </a>
+      <nav class="g-nav" aria-label="Main"><ul>${glassLinks()}</ul></nav>
+      <div class="g-tools">
+        ${lang}
+        ${login}
+        <button type="button" class="g-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="gMenu">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h14M3 13h14"/></svg>
+        </button>
+      </div>
+    </div>`;
+  document.body.insertBefore(header, document.body.firstChild);
+
+  const menu = document.createElement('div');
+  menu.className = 'g-menu';
+  menu.id = 'gMenu';
+  menu.setAttribute('data-open', 'false');
+  menu.innerHTML = `<nav aria-label="Main"><ul>${glassLinks()}</ul></nav>${lang}`;
+  header.after(menu);
+
+  const btn = header.querySelector('.g-menu-btn');
+  const setOpen = (open, returnFocus) => {
+    menu.setAttribute('data-open', String(open));
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (open) { const first = menu.querySelector('a'); if (first) first.focus(); }
+    else if (returnFocus) btn.focus();
+  };
+  btn.addEventListener('click', () => setOpen(menu.getAttribute('data-open') !== 'true', true));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false, true); });
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false, false); });
+
+  const year = new Date().getFullYear();
+  const footer = document.createElement('footer');
+  footer.className = 'g-footer';
+  footer.innerHTML = `
+    <div class="g-wrap">
+      <div class="g-footer-top">
+        <div class="g-footer-brand">
+          <img src="${p('assets/logo-oc.svg')}" alt="Obsidian Cup" width="56" height="40" />
+          <p class="g-meta" data-key="footerAbout">Volleyball and futsal tournaments in Dhaka, run by players, for players of every level.</p>
+        </div>
+        <nav aria-label="Footer"><ul>
+          <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
+          <li><a href="${SITE_CONFIG.instagramVolleyballUrl}" target="_blank" rel="noopener" data-key="footerIgVolleyball">Volleyball Instagram</a></li>
+          <li><a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a></li>
+          <li><a href="${SITE_CONFIG.instagramFutsalUrl}" target="_blank" rel="noopener" data-key="footerIgFutsal">Futsal Instagram</a></li>
+          <li><a href="${p('pages/tournaments.html')}" data-key="navSeasons">Past seasons</a></li>
+          <li><a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="${p('pages/experiences.html')}" data-key="navExperiences">Player stories</a></li>
+          <li><a href="mailto:${SITE_CONFIG.contactEmail}" data-key="footerEmail">Email us</a></li>
+          ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/legal.html')}?doc=privacy" data-key="footerPrivacy">Privacy</a></li><li><a href="${p('pages/legal.html')}?doc=terms" data-key="footerTerms">Terms</a></li>` : ''}
+        </ul></nav>
+      </div>
+      <div class="g-footer-bottom">
+        <span>© ${year} Obsidian Cup, Dhaka, Bangladesh</span>
+        <span data-key="footerTagline2">Carved by legacy, crowned in obsidian</span>
+      </div>
+    </div>`;
+  document.body.appendChild(footer);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  if (document.body.classList.contains('theme-glass')) {
+    injectGlassChrome();
+    if (typeof initLanguage === 'function') initLanguage();
+    return;
+  }
   injectNav();
   injectFooter();
   injectBackToTop();

@@ -24,7 +24,11 @@ const SITE_CONFIG = {
   formGirlsOpenAge: "https://obsidiancup.fillout.com/ovscgirls",
 
   // ---- CONTACT ----
-  instagramUrl: "https://www.instagram.com/obsidiancup/",
+  // Two Instagram accounts since Nov 2026. instagramUrl is the volleyball one
+  // (used by the volleyball fixtures and registration pages).
+  instagramUrl: "https://www.instagram.com/obsidian.volleyball/",
+  instagramVolleyballUrl: "https://www.instagram.com/obsidian.volleyball/",
+  instagramFutsalUrl: "https://www.instagram.com/obsidian.futsal/",
   facebookUrl: "https://www.facebook.com/share/1Cb8jWH5Gy/",
   contactEmail: "obsidiancup.official@gmail.com",
 

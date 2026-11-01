@@ -139,7 +139,7 @@ Passwords are never emailed to anyone and never stored in readable form; even Ob
 - Full legal name (as on ID) and the name to show publicly
 - Date of birth (not age, so it stays correct every year), gender category
 - Phone, email, school or club, Instagram handle (optional)
-- Preferred positions, chosen freely per sport: for volleyball outside hitter, setter, middle blocker, opposite or libero; for football goalkeeper, defender, midfielder or forward. Volleyball's limit of 2 liberos is checked per team, not on the profile
+- Preferred positions, chosen freely per sport: for volleyball outside hitter, setter, middle blocker, opposite or libero; for futsal goalkeeper, defender, winger or pivot. Volleyball's limit of 2 liberos is checked per team, not on the profile
 - Emergency contact: name, relationship, phone
 - Guardian details, only for under-18s
 - ID photo (private), medical notes (optional, private)
@@ -154,7 +154,7 @@ Jersey number is asked per team, since it changes. Obsidian Cup does not supply 
 
 **Every sport, not just volleyball**
 
-Each event is set up with its sport and its own rules: squad size (6 to 12 for volleyball), special roles (liberos), position list, age limits and gender category. Football or any future sport uses the same accounts, teams and history, only with different rules.
+Each event is set up with its sport and its own rules: squad size (6 to 12 for volleyball), special roles (liberos), position list, age limits and gender category. Futsal or any future sport uses the same accounts, teams and history, only with different rules.
 
 ## 6. Automatic emails
 
