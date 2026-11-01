@@ -139,6 +139,20 @@ NEXT: private test run on the live site via the direct link
 Before the public switch: owner fills "[Postal address]" in the legal texts
 (new version numbers) and decides on the lawyer review.
 
+## Live database fix (2 Nov, 00:00)
+
+Migrations 007 (sports profile) and 009 (events and teams) had never run on the
+live database, so height/weight saves failed with HTTP 400. Owner ran 007, 009
+and `notify pgrst, 'reload schema'`; saving works. All of 001–010 are now live.
+If a save fails again, check columns/tables first (SQL Editor, read-only).
+
+Owner's pending change list (do all at once when the owner says go): remove the
+card QR and "Get a new QR code"; card shows DOB, "ID verified" badge, current
+team/tournament or "No current tournament"; a live card (moving OC logo with a
+daily colour ring, ticking clock, today's date) for gate checks; organiser search
+shows photo, age, ID status, team; show the real reason under "Something went
+wrong". More changes may follow from the owner's test run.
+
 ## Copy review (1 Nov, late)
 
 Taglines now nationwide and sport-neutral (no "in Dhaka"); volleyball page has
