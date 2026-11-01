@@ -2487,8 +2487,8 @@
  {
   "id": "acct.sportsIntro",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "All optional. These build your player card and help us balance teams and categories. You can clear them any time.",
-  "bn": "সব তথ্যই ঐচ্ছিক। এগুলো আপনার খেলোয়াড় কার্ড তৈরি করতে এবং দল ও বিভাগ ভারসাম্যপূর্ণ রাখতে আমাদের সাহায্য করে। আপনি যেকোনো সময় এগুলো মুছে দিতে পারবেন।",
+  "en": "Why we ask: we are building a player profile for every Obsidian Cup athlete, with statistics and records that grow with every season you play, so your progress and achievements are kept in one place. These details also help us balance teams and categories. Everything here is optional and stays private unless you turn on \"Show my stats\". You can clear any of it at any time.",
+  "bn": "",
   "placeholder": false
  },
  {
