@@ -131,7 +131,10 @@ project); real player photos only, never AI-made ones of players.
    skills: A Court, B Obsidian Glass, C Programme. **Chosen: B Obsidian Glass**
    (1 Nov). Tokens: Glass #0b1012 (60%), Facet #151c1f, Bone #eeeae3 (30%),
    Mist #a7b0b2, Ice #d7e9ec (main button + focus ring, 10%; second buttons use Ice at 10% opacity with a 45% border).
-   Unbounded 500/600 headings, Figtree 400/500 text. No ghost buttons: the
+   Unbounded 500/600 headings, Figtree 400/500 text. Being built on the git
+   branch `redesign` (Vercel preview link): `css/glass.css`, pages opt in with
+   `<body class="theme-glass">`; `js/components.js` then injects the new header,
+   phone menu and footer. Homepage done first; other pages still use style.css. No ghost buttons: the
    second action is a filled Facet button. Sticky header keeps Log in in view.
    Rules for the build: max 3 weights (none over 600), body 16px, nothing
    under 12px, headings line-height 1.1–1.2, 8px spacing grid, text ≤70ch,
