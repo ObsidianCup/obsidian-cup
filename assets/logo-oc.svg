@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" role="img" aria-label="Obsidian Cup">
+  <title>Obsidian Cup</title>
+  <defs>
+    <mask id="oc-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="140" height="100">
+      <rect width="140" height="100" fill="#fff"/>
+      <circle cx="47" cy="50" r="40" fill="#000"/>
+      <polygon points="123.7,26.0 110.1,14.9 114.0,34.7" fill="#000"/>
+    </mask>
+  </defs>
+  <path d="M113.68,67.36 A27,27 0 1 1 113.68,32.64" fill="none" stroke="#f5f0e8" stroke-width="18" mask="url(#oc-cut)"/>
+  <circle cx="47" cy="50" r="27" fill="none" stroke="#f5f0e8" stroke-width="18"/>
+</svg>

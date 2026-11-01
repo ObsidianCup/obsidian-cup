@@ -54,7 +54,7 @@ events, and the organiser verifies everything from one admin page.
 | Sports profile | Optional: height, weight (never public), standing reach, vertical jump, playing hand and foot, level, year started, preferred jersey, shirt size, short bio, and a "show my stats" switch for future public player pages. Shown to the player as a private player card. Under-13s only after guardian consent (007). Privacy Notice bumped to 1.1 to cover it; 1.0 stays registered for old records. The Claude Doc copy of the legal texts still needs the 1.1 changes |
 | Tournament items | Event agreement, guardian consent, ID photo and joining a team are explained in a "Before your first tournament" card instead of empty tick boxes; they are collected at registration (stage 3) |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
-| Logo | The organiser is designing the new logo herself (31 Oct 2026). Claude's explorations are on the "Obsidian Cup — New Logo" design canvas in her account, for reference only. Until the new logo arrives, the site and login emails keep `assets/logo-mark.png`; when it arrives, swap it in the nav/footer, favicon, og-image and `supabase/email-templates/*.html` |
+| Logo | For now: the OC monogram from logo round 2 (O in front of C, chip on the C), in `assets/logo-oc.svg` (masked, works on any background). Favicon (`favicon.svg` + `.ico`), `apple-touch-icon.png`, `og-image.jpg` and `email-logo.png` are made from it. The organiser may redesign it later; swap those files and the email templates |
 
 ## Legal texts
 

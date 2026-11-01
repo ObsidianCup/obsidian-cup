@@ -17,7 +17,7 @@ function injectNav() {
 
   nav.innerHTML = `
     <a href="${p('index.html')}" class="nav-logo" aria-label="Obsidian Cup Home">
-      <img src="${a('assets/logo-mark.png')}" alt="Obsidian Cup logo" class="nav-logo-img" loading="lazy" />
+      <img src="${a('assets/logo-oc.svg')}" alt="Obsidian Cup logo" class="nav-logo-img" width="45" height="32" loading="lazy" />
       <span class="nav-logo-text">Obsidian Cup</span>
     </a>
     <nav role="navigation" aria-label="Main navigation">
@@ -54,7 +54,7 @@ function injectNav() {
   mobile.setAttribute('aria-label', 'Mobile navigation');
   mobile.innerHTML = `
     <button class="mobile-close" aria-label="Close menu">×</button>
-    <img src="${a('assets/logo-mark.png')}" alt="Obsidian Cup" class="mobile-logo" loading="lazy" />
+    <img src="${a('assets/logo-oc.svg')}" alt="Obsidian Cup" class="mobile-logo" width="84" height="60" loading="lazy" />
     <a href="${p('index.html')}" data-key="navHome">Home</a>
     <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
     <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
@@ -80,7 +80,7 @@ function injectFooter() {
   const footer = document.createElement('footer');
   footer.setAttribute('role', 'contentinfo');
   footer.innerHTML = `
-    <img src="${a('assets/logo-mark.png')}" alt="Obsidian Cup" class="footer-logo-img" loading="lazy" />
+    <img src="${a('assets/logo-oc.svg')}" alt="Obsidian Cup" class="footer-logo-img" width="70" height="50" loading="lazy" />
     <div class="footer-logo">Obsidian Cup</div>
     <p class="footer-tagline" data-key="footerTagline">Carved by Legacy · Crowned in Obsidian</p>
     <div class="divider"><div class="divider-diamond"></div></div>
