@@ -300,18 +300,18 @@ const TOURNAMENTS = {
   },
   ofc_s1: {
     season: 'OFC — Season 1 · 23 June 2026',
-    name: 'Obsidian Football Cup Season 1',
-    type: 'Girls-only football',
+    name: 'Obsidian Futsal Cup Season 1',
+    type: 'Girls-only futsal',
     date: '23 June 2026',
     venue: 'JAFF Arena and Academy Bashundhara',
     venueAddress: 'Bashundhara, Dhaka',
-    summary: 'The first football chapter of Obsidian Cup, hosted as a girls-only season.',
-    description: 'OFC Season 1 brought girls-only football into the Obsidian Cup story at JAFF Arena and Academy Bashundhara on 23 June 2026, with five teams competing in the first season. Thaelor became the first Obsidian Football Cup champion, with Team 01 finishing as runner-up. The spotlight stayed on the teams, the game, and the first step into a new format.',
+    summary: 'The first futsal chapter of Obsidian Cup, hosted as a girls-only season.',
+    description: 'OFC Season 1 brought girls-only futsal into the Obsidian Cup story at JAFF Arena and Academy Bashundhara on 23 June 2026, with five teams competing in the first season. Thaelor became the first Obsidian Futsal Cup champion, with Team 01 finishing as runner-up. The spotlight stayed on the teams, the game, and the first step into a new format.',
     sponsors: null,
     teams: '5 teams',
     spectators: '15+',
     results: [
-      { category: 'Girls — Football', champion: 'Thaelor', runner: 'Team 01' },
+      { category: 'Girls — Futsal', champion: 'Thaelor', runner: 'Team 01' },
     ]
   },
   ovsc_s2: {

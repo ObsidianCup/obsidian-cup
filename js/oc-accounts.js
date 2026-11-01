@@ -20,7 +20,8 @@ const OC_SIGNUP_REQUIRED = ['terms', 'privacy', 'dob_declaration'];
 // on every profile; event rules (squad size, libero limits) live with events.
 const OC_SPORTS = {
   volleyball: ['outside_hitter', 'setter', 'middle_blocker', 'opposite', 'libero'],
-  football: ['goalkeeper', 'defender', 'midfielder', 'forward'],
+  // Shown as "Futsal". The id stays 'football' because the database (009) stores that value.
+  football: ['goalkeeper', 'defender', 'winger', 'pivot'],
 };
 
 // ---- Words on the account pages ------------------------------------
@@ -215,7 +216,7 @@ const OC_TEXT = {
     errDobLimit: 'You have already changed your date of birth twice. Email obsidiancup.official@gmail.com to change it.',
     // sports
     sport_volleyball: 'Volleyball',
-    sport_football: 'Football',
+    sport_football: 'Futsal',
     pos_outside_hitter: 'Outside hitter',
     pos_setter: 'Setter',
     pos_middle_blocker: 'Middle blocker',
@@ -223,8 +224,8 @@ const OC_TEXT = {
     pos_libero: 'Libero',
     pos_goalkeeper: 'Goalkeeper',
     pos_defender: 'Defender',
-    pos_midfielder: 'Midfielder',
-    pos_forward: 'Forward',
+    pos_winger: 'Winger',
+    pos_pivot: 'Pivot',
     // legal page
     legalNoTranslation: 'This document is not available in Bangla yet, so it is shown in English.',
     legalNotFound: 'Document not found.',

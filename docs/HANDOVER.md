@@ -29,7 +29,7 @@ ObsidianCup/obsidian-cup and continue"). Last updated 1 Nov 2026.
 
 - `main` = live site https://obsidiancup.vercel.app (every push deploys).
 - `redesign` = new "Obsidian Glass" design, preview only (Vercel → Deployments
-  → newest "redesign" Preview → Visit). Latest commit 22bc63b, main merged in.
+  → newest "redesign" Preview → Visit). main merged in.
   Goes live only when the owner says so: merge `redesign` into `main`.
 
 ## Design: B "Obsidian Glass" (locked in)
@@ -42,7 +42,7 @@ Rules: max 3 weights (none over 600), body 16px, nothing under 12px, 8px grid,
 text ≤70ch, sentence case, no all-caps labels, no stats strip, no ghost
 buttons, no decorative motion, reduced-motion fallbacks.
 Code: `css/glass.css`, `js/components.js` (`injectGlassChrome()` when
-`body.theme-glass`). Pages rebuilt in glass: index, volleyball, football,
+`body.theme-glass`). Pages rebuilt in glass: index, volleyball, futsal,
 tournaments, about, faq, 404, account, admin, legal.
 Not yet glass: experiences, register, rules, fixtures.
 Logo: OC monogram (`assets/logo-oc.svg`) for now; the owner will redesign it.
@@ -50,36 +50,24 @@ Design canvases (Claude artifacts): redesign
 https://claude.ai/artifact/5yGTcp4ErvHb8ZZiA2yrpQ, logo
 https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko
 
-## NEXT: owner's review of the redesign preview (1 Nov) — all still TO DO
+## Owner's redesign review (1 Nov) — status
 
-1. Contact card email (`obsidiancup.official@gmail.com`) must fit on one
-   line and not be underlined (about/faq contact cards).
-2. It is **futsal, not football**. Rename everywhere on the site (nav, pages,
-   tournament names, popups in `js/main.js` TOURNAMENTS, lang.js, about text).
-   Suggest `pages/futsal.html` plus a redirect from `pages/football.html` in
-   vercel.json. Confirm the exact tournament name with the owner (OFC S1 →
-   "Obsidian Futsal Cup"?).
-3. New Instagram accounts: **@obsidian.volleyball** and **@obsidian.futsal**
-   (replace @obsidiancup in components.js footer, config.js `instagramUrl`,
-   index, faq, about, register, rules, page-fixtures.js, the 5 Supabase email
-   templates, scripts/email/templates.mjs, CLAUDE.md). Show both where
-   relevant; sport pages link their own account.
-4. Partners section: Pheezes, Croketopia and Hi. Talha logos look too small;
-   make them larger (consistent visual size).
-5. About page: big empty space on the right. Add volleyball silhouettes
-   (spike, receive/dig, hit) drawn as thin outline linework, like the homepage
-   "OBSIDIAN" outline background. Original drawings, static, no motion.
-6. FAQ/questions page: say "Email us or message us on Instagram" (both links).
-7. Make two Instagram profile pictures (1080×1080 PNG, circle-safe):
-   bold "OBSIDIAN" wordmark (Unbounded, like the homepage hero, with the
-   outline rows behind it).
-   - Volleyball: grey-ish ash-black background (like the original).
-   - Futsal: dark maroon background, same design.
-   Send both to the owner.
-8. Give the owner the list of text that needs Bangla (English keys in
-   `js/lang.js` missing a `bn` value, plus new account strings in
-   `js/oc-accounts.js`) as a table to fill in; the owner translates.
-Then: owner reviews again → "make it live" → merge `redesign` into `main`.
+Done on `redesign` (1 Nov): contact email on one line, no underline; partner
+logos trimmed and larger; About page volleyball outline drawings
+(`.g-about-art`, desktop only); FAQ "Email us or message us on Instagram";
+Instagram is now **@obsidian.volleyball** and **@obsidian.futsal** everywhere
+(config.js `instagramVolleyballUrl` / `instagramFutsalUrl`); **futsal, not
+football**: tournament is "Obsidian Futsal Cup, Season 1" (OFC), page
+`pages/futsal.html`, old football URLs redirect in vercel.json. In the
+accounts code the sport id stays `football` (database value from 009) but is
+shown as "Futsal" with futsal positions (goalkeeper, defender, winger, pivot).
+Two Instagram profile pictures (1080×1080, ash-black and maroon) sent to the
+owner.
+
+Still to do: legal texts (payment 1.0, participation 1.0) still mention
+@obsidiancup / football; change them in the next legal version. Bangla table
+sent to the owner to fill in. Then: owner reviews again → "make it live" →
+merge `redesign` into `main`.
 
 ## Player accounts (Supabase) — state
 

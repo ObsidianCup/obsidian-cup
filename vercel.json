@@ -22,7 +22,7 @@
     },
     {
       "source": "/football.html",
-      "destination": "/pages/football.html",
+      "destination": "/pages/futsal.html",
       "permanent": true
     },
     {
@@ -43,6 +43,16 @@
     {
       "source": "/volleyball.html",
       "destination": "/pages/volleyball.html",
+      "permanent": true
+    },
+    {
+      "source": "/futsal.html",
+      "destination": "/pages/futsal.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/football.html",
+      "destination": "/pages/futsal.html",
       "permanent": true
     }
   ],

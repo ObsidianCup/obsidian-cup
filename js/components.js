@@ -23,7 +23,7 @@ function injectNav() {
     <nav role="navigation" aria-label="Main navigation">
       <ul class="nav-links">
         <li><a href="${p('index.html')}" data-key="navHome">Home</a></li>
-        <li><a href="${p('pages/football.html')}" data-key="navFootball">Football</a></li>
+        <li><a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a></li>
         <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
         <li><a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a></li>
         <li><a href="${p('pages/about.html')}" data-key="navAbout">About</a></li>
@@ -56,7 +56,7 @@ function injectNav() {
     <button class="mobile-close" aria-label="Close menu">×</button>
     <img src="${a('assets/logo-oc.svg')}" alt="Obsidian Cup" class="mobile-logo" width="84" height="60" loading="lazy" />
     <a href="${p('index.html')}" data-key="navHome">Home</a>
-    <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
+    <a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a>
     <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
     <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
     <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
@@ -85,7 +85,7 @@ function injectFooter() {
     <p class="footer-tagline" data-key="footerTagline">Carved by Legacy · Crowned in Obsidian</p>
     <div class="divider"><div class="divider-diamond"></div></div>
     <nav class="footer-links" aria-label="Footer navigation">
-      <a href="${p('pages/football.html')}" data-key="navFootball">Football</a>
+      <a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a>
       <a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a>
       <a href="${p('pages/tournaments.html')}" data-key="navTournaments">Tournaments</a>
       <a href="${p('pages/about.html')}" data-key="navAbout">About</a>
@@ -115,7 +115,7 @@ function glassLinks() {
   const p = (f) => getNavPath(f);
   const links = [
     ['pages/volleyball.html', 'navVolleyball', 'Volleyball'],
-    ['pages/football.html', 'navFootball', 'Football'],
+    ['pages/futsal.html', 'navFutsal', 'Futsal'],
     ['pages/tournaments.html', 'navSeasons', 'Past seasons'],
     ['pages/about.html', 'navAbout', 'About'],
     ['pages/faq.html', 'navQuestions', 'Questions'],
@@ -183,12 +183,12 @@ function injectGlassChrome() {
       <div class="g-footer-top">
         <div class="g-footer-brand">
           <img src="${p('assets/logo-oc.svg')}" alt="Obsidian Cup" width="56" height="40" />
-          <p class="g-meta" data-key="footerAbout">Volleyball and football tournaments in Dhaka, run by players, for players of every level.</p>
+          <p class="g-meta" data-key="footerAbout">Volleyball and futsal tournaments in Dhaka, run by players, for players of every level.</p>
         </div>
         <nav aria-label="Footer"><ul>
           <li><a href="${p('pages/volleyball.html')}" data-key="navVolleyball">Volleyball</a></li>
           <li><a href="${SITE_CONFIG.instagramVolleyballUrl}" target="_blank" rel="noopener" data-key="footerIgVolleyball">Volleyball Instagram</a></li>
-          <li><a href="${p('pages/football.html')}" data-key="navFootball">Football</a></li>
+          <li><a href="${p('pages/futsal.html')}" data-key="navFutsal">Futsal</a></li>
           <li><a href="${SITE_CONFIG.instagramFutsalUrl}" target="_blank" rel="noopener" data-key="footerIgFutsal">Futsal Instagram</a></li>
           <li><a href="${p('pages/tournaments.html')}" data-key="navSeasons">Past seasons</a></li>
           <li><a href="https://www.facebook.com/share/1Cb8jWH5Gy/" target="_blank" rel="noopener">Facebook</a></li>

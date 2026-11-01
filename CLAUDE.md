@@ -4,7 +4,7 @@ Read this first in any new session, then `docs/HANDOVER.md`.
 
 ## What this is
 
-Official website of Obsidian Cup, a volleyball and football tournament
+Official website of Obsidian Cup, a volleyball and futsal tournament
 organiser in Dhaka, Bangladesh. Static site (HTML, CSS, vanilla JS) on
 Vercel; every push to `main` deploys to https://obsidiancup.vercel.app.
 The site owner is not a developer: explain things in plain words, show
