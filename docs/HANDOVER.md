@@ -106,7 +106,7 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
    Bangla: all 499 site lines received and live (1 Nov).
    Supabase Auth: min password 8, secure email/password change, rate limits
    (emails 100/h, sign-ups+sign-ins 500/5 min, token verifications 100/5 min): DONE 1 Nov.
-   Supabase account 2FA: DONE 1 Nov. Still to do: Vercel 2FA.
+   Supabase account 2FA: DONE 1 Nov. Vercel 2FA: DONE 1 Nov.
 3. 2FA on GitHub, Supabase, Vercel, Cloudflare and both Google accounts.
 4. GitHub secret scanning, push protection, Dependabot.
 5. Supabase Auth: min password 8, secure email change, secure password change,
@@ -129,6 +129,15 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
   a proper heading; sitemap lists register and rules.
 - Before accounts launch: legal texts still show "[Postal address]" and a
   "[Lawyer to confirm…]" note.
+
+## Player login: where it stands (1 Nov, 23:30)
+
+All security setup done (2FA on Google, GitHub, Cloudflare, Supabase, Vercel;
+Turnstile; Gmail SMTP; Supabase auth limits). Copy review fixes applied.
+NEXT: private test run on the live site via the direct link
+/pages/account.html (menu link stays hidden while accountsEnabled is false).
+Before the public switch: owner fills "[Postal address]" in the legal texts
+(new version numbers) and decides on the lawyer review.
 
 ## Copy review (1 Nov, late)
 
