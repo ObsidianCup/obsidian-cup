@@ -1,0 +1,37 @@
+# Sends queued emails (welcome email with player code, code changes, and
+# later payment reminders and confirmations) through the Obsidian Cup Gmail.
+# Also keeps the free Supabase project from pausing.
+# Secrets live in GitHub: Settings > Secrets and variables > Actions.
+# This repository is public: the script never prints addresses or names.
+name: Send emails
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: send-emails
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install (pinned versions from the lockfile)
+        run: npm ci --prefix scripts/email --ignore-scripts --no-audit --no-fund
+      - name: Send
+        run: node scripts/email/send-emails.mjs
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}

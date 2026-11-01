@@ -259,5 +259,26 @@ ok(await look('OC-UF023', '5.5.5.5') === 'uriana@example.com', 'other codes stil
 for (let i = 0; i < 20; i++) await db.query(`select public.login_code_record($1, '7.7.7.7', false)`, ['OC-X' + (100 + i)]);
 await expectError(`select public.login_code_lookup('OC-UF023', '7.7.7.7')`, [], /too_many_attempts/, '20 failures from one address block that address');
 
+console.log('\nEmail sender');
+await as(A);
+await expectError(`select * from public.email_claim(10)`, [], /permission denied/, 'players cannot claim emails');
+await as('anon');
+await expectError(`select public.email_done(1, true)`, [], /permission denied/, 'visitors cannot mark emails sent');
+await db.exec('reset role');
+await db.exec('grant usage on schema public to service_role; grant all on all tables in schema public to service_role;'); // as on Supabase
+await db.exec('set role service_role');
+const before = (await db.query(`select count(*)::int n from public.email_queue where sent_at is null`)).rows[0].n;
+const c1 = (await db.query(`select * from public.email_claim(2)`)).rows;
+const c2 = (await db.query(`select * from public.email_claim(50)`)).rows;
+ok(c1.length === 2 && !c2.some(r => c1.find(x => x.id === r.id)), 'two runs never get the same email');
+await db.query(`select public.email_done($1, true)`, [c1[0].id]);
+await db.query(`select public.email_done($1, false, 'smtp down')`, [c1[1].id]);
+const r1 = (await db.query(`select sent_at, claimed_at from public.email_queue where id = $1`, [c1[1].id])).rows[0];
+ok(r1.sent_at === null && r1.claimed_at === null, 'a failed email is released for the next run');
+ok((await db.query(`select * from public.email_claim(50, 1)`)).rows.length === 0, 'daily cap stops sending');
+await db.query(`update public.email_queue set attempts = 5, claimed_at = null where id = $1`, [c1[1].id]);
+ok(!(await db.query(`select * from public.email_claim(50)`)).rows.some(r => r.id === c1[1].id), 'an email that failed 5 times is not tried again');
+ok(before >= 3, 'queue had emails to send: ' + before);
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
