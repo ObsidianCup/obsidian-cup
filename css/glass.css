@@ -233,11 +233,10 @@ body.theme-glass {
 .g-faq details[open] summary::after { content: "−"; }
 .g-faq details p { padding: 0 0 var(--s6); max-width: 70ch; color: var(--soft); }
 
-/* ---------- About: volleyball line drawings (decorative, static) ---------- */
+/* ---------- About: the OC monogram as outline linework (decorative, static) ---------- */
 .g-about-art { display: none; }
 @media (min-width: 1024px) {
   .g-about-body { display: grid; grid-template-columns: minmax(0, 70ch) minmax(0, 1fr); gap: var(--s12); }
-  .g-about-art { display: flex; flex-direction: column; justify-content: space-around; align-items: center; color: var(--line-strong); padding: var(--s12) 0; }
-  .g-about-fig { width: 100%; max-width: 240px; max-height: 300px; height: auto; }
-  .g-about-fig:nth-child(even) { margin-left: var(--s16); }
+  .g-about-art { display: block; color: var(--line-strong); padding-top: var(--s12); }
+  .g-about-mark { position: sticky; top: calc(var(--s24) + var(--s8)); display: block; width: 100%; max-width: 440px; height: auto; margin-left: auto; }
 }

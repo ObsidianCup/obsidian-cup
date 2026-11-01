@@ -53,10 +53,8 @@ https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko
 ## Owner's redesign review (1 Nov) — status
 
 Done on `redesign` (1 Nov): contact email on one line, no underline; partner
-logos trimmed and larger; About page volleyball outline drawings in the
-owner's reference poses (dig, jump spike, set, back-view spike), hand-sketched
-style, original and not traced (owner's references are other artists' work);
-files `assets/about-sketch-*.svg`, `.g-about-art`, desktop only; FAQ "Email us or message us on Instagram";
+logos trimmed and larger; About page right column: the OC monogram as outline linework with
+faint echo rings (owner dropped the player drawings; `.g-about-mark`, sticky, desktop only); FAQ "Email us or message us on Instagram";
 Instagram is now **@obsidian.volleyball** and **@obsidian.futsal** everywhere
 (config.js `instagramVolleyballUrl` / `instagramFutsalUrl`); **futsal, not
 football**: tournament is "Obsidian Futsal Cup, Season 1" (OFC), page
