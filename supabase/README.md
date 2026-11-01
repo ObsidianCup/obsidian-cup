@@ -51,6 +51,11 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    account; it walks through scanning a code with an authenticator app.
    Lost phone: see the note at the top of `migrations/006_admin_two_step.sql`.
 
+6b. **Player card, profile photo and gate check (010):** SQL Editor → New
+   query → paste all of `migrations/010_player_card.sql` → Run. Then paste
+   all of `seed/legal_documents.sql` → Run (registers Privacy Notice 1.2).
+   This creates the private `avatars` storage bucket and its rules. Check it
+   under Storage: the bucket must say **Private**.
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:

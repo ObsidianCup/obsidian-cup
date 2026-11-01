@@ -3246,5 +3246,250 @@
   "en": "That code did not work. Codes change every 30 seconds; try the newest one.",
   "bn": "কোডটি কাজ করেনি। প্রতি ৩০ সেকেন্ডে কোড পরিবর্তিত হয়; সর্বশেষ কোডটি দিয়ে আবার চেষ্টা করুন।",
   "placeholder": false
+ },
+ {
+  "id": "acct.photoAdd",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Add a photo",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoChange",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Change photo",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoRemove",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Remove photo",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoHint",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "A clear photo of your face helps organisers recognise you at check-in. Only you and Obsidian Cup organisers can see it. We crop it to a square and make it small before saving.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoSaving",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Saving your photo…",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoSaved",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Photo saved.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoRemoved",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Photo removed.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoRemoveConfirm",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Remove your profile photo?",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoNotImage",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Choose a photo (JPG, PNG, WebP or HEIC from your phone).",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.photoError",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Could not save the photo. Check your connection and try again.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.gateTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Show this at the gate",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.gateHint",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Organisers scan this code to check you in. It only works for logged-in organisers, so a screenshot is fine to keep on your phone.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.gateQrLabel",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "QR code for checking in player {code}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.qrBig",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Make it bigger",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.qrSmall",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Make it smaller",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.qrNew",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Get a new QR code",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.qrNewConfirm",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Make a new QR code? Your old one (and any screenshot of it) will stop working.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.qrNewDone",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Done. Use this new QR code from now on.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.qrNeedsCode",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Add your full name to get your player code and your gate QR code.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkLabel",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Organiser",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Gate check",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkNoCode",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "This link has no player code in it. Scan the QR on the player's card again.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkLoginFirst",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Only organisers can check player cards. Log in on the organiser page with two-step login, then scan the QR again.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkLoginBtn",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Go to the organiser page",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkNotFound",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "No player has this QR code. The player may have made a new one: ask them to open their account and show the current code.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkLegalName",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Name on ID: {name}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkAge",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Age {n}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkIdOk",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "ID checked and verified",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkIdNo",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "ID not verified yet: check their ID now",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkGuardianOk",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Under 18: parent or guardian has consented",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkGuardianNo",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Under 18: no parent or guardian consent yet",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkTeams",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Teams in upcoming events",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkNoTeam",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Not in a team for an upcoming event.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkPending",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "waiting for captain",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checkCompare",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Compare the photo and name with the player's ID before letting them in.",
+  "bn": "",
+  "placeholder": false
  }
 ]

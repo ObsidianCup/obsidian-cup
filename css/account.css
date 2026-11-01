@@ -167,3 +167,44 @@ textarea.acct-input { resize: vertical; min-height: 5.5rem; font-family: var(--f
 .theme-glass .acct-intro { margin: 0 0 2rem; }
 .theme-glass [data-view="app"] > div:first-child { margin-bottom: 1.5rem; }
 .theme-glass .acct-card h2 { margin: 0 0 0.5rem; }
+
+/* ---------- Player card: photo and gate QR (010) ---------- */
+.acct-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.acct-pc-id { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+.acct-pc-id > div:last-child { min-width: 0; }
+.acct-pc-photo { position: relative; flex: 0 0 auto; width: 72px; height: 72px; border-radius: 50%; overflow: hidden; display: grid; place-items: center;
+  background: rgba(215,233,236,0.10); border: 1px solid rgba(215,233,236,0.45); }
+.acct-pc-photo span { font-family: var(--font-display); font-size: 1.4rem; color: var(--cream); }
+.acct-pc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.acct-pc-photoctl { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin: 1rem 0 0.25rem; }
+.acct-pc-photoctl label { cursor: pointer; }
+.acct-pc-photoctl:focus-within label { outline: 2px solid #d7e9ec; outline-offset: 3px; }
+.acct-pc-gate { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(215,233,236,0.18); }
+.acct-pc-qr { flex: 0 0 auto; width: 136px; aspect-ratio: 1; max-width: 100%; background: #ffffff; border-radius: 8px; padding: 6px; }
+.acct-pc-qr svg { display: block; width: 100%; height: 100%; }
+.acct-pc-gatetext { flex: 1 1 14rem; min-width: 0; }
+.acct-pc-gatetitle { margin: 0 0 0.25rem; font-weight: 500; color: var(--cream); }
+.acct-pc-gatebtns { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0.75rem 0 0; }
+.acct-pc-gate.is-big { flex-direction: column; align-items: stretch; }
+.acct-pc-gate.is-big .acct-pc-qr { width: min(100%, 420px); margin: 0 auto; padding: 12px; }
+
+/* ---------- Gate check page (pages/check.html) ---------- */
+.acct-gate-head { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+.acct-gate-photo { position: relative; flex: 0 0 auto; width: 140px; height: 140px; border-radius: 12px; overflow: hidden; display: grid; place-items: center;
+  background: rgba(215,233,236,0.10); border: 1px solid rgba(215,233,236,0.45); }
+.acct-gate-photo span { font-family: var(--font-display); font-size: 2.4rem; color: var(--cream); }
+.acct-gate-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.acct-gate-who { flex: 1 1 12rem; min-width: 0; }
+.acct-gate-name { font-family: var(--font-display); font-size: 1.75rem; line-height: 1.2; margin: 0; color: var(--cream); overflow-wrap: anywhere; }
+.acct-gate-legal { margin: 0.25rem 0 0; color: rgba(245,240,232,0.85); }
+.acct-gate-status { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 0.5rem; }
+.acct-gate-status li { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem 1rem; border-radius: 8px; font-weight: 500; }
+.acct-gate-status li span { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; font-size: 0.875rem; flex: 0 0 auto; }
+.acct-gate-status .is-ok { background: rgba(120, 200, 150, 0.12); border: 1px solid rgba(120, 200, 150, 0.5); color: #c8ecd5; }
+.acct-gate-status .is-ok span { background: rgba(120, 200, 150, 0.35); }
+.acct-gate-status .is-warn { background: rgba(240, 180, 100, 0.12); border: 1px solid rgba(240, 180, 100, 0.55); color: #f6d7ad; }
+.acct-gate-status .is-warn span { background: rgba(240, 180, 100, 0.35); }
+.acct-gate-sub { margin: 0 0 0.5rem; font-weight: 500; color: var(--cream); }
+.acct-gate-teams { list-style: none; padding: 0; margin: 0 0 1.25rem; display: grid; gap: 0.5rem; }
+.acct-gate-teams li { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; align-items: baseline; padding: 0.75rem 1rem; border: 1px solid rgba(215,233,236,0.18); border-radius: 8px; }
+.acct-gate-teams li span { color: rgba(245,240,232,0.8); }

@@ -108,6 +108,16 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
 5. Supabase Auth: min password 8, secure email change, secure password change,
    raise rate limits (emails ~100/h, sign-ins ~300 per 5 min).
 
+## Player card, photo and gate check (built 1 Nov, on `redesign`)
+
+Migration `010_player_card.sql` (photo bucket + rules, card_token, `new_card_token()`,
+`check_player()` organisers-only), account page photo upload + card QR, gate page
+`pages/check.html` + `js/page-check.js`, QR lib `js/vendor/qrcode-generator-1.4.4.js`
+(MIT), Privacy Notice 1.2 (seed regenerated). Tests: 145 passing.
+OWNER STILL HAS TO: run 010 and the legal seed in the SQL Editor (README step 6b).
+Owner (and every account) will be asked to agree to Privacy 1.2 on next login.
+New account/gate strings need Bangla (in docs/translation/site-text.json, bn empty).
+
 ## Questions waiting for the owner
 
 - Are the "Anonymous Player" quotes on the experiences page real?
