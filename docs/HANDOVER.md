@@ -65,8 +65,10 @@ Two Instagram profile pictures (1080×1080, ash-black and maroon) sent to the
 owner.
 
 Still to do: legal texts (payment 1.0, participation 1.0) still mention
-@obsidiancup / football; change them in the next legal version. Bangla table
-sent to the owner to fill in. Then: owner reviews again → "make it live" →
+@obsidiancup / football; change them in the next legal version. The owner's Bangla
+for all 248 missing lines is in `js/lang.js` and `js/oc-accounts.js` (1 Nov).
+Some glass-page text has no `data-key` yet (season list, partner cards,
+buttons), so it stays English in Bangla mode. Then: owner reviews again → "make it live" →
 merge `redesign` into `main`.
 
 ## Player accounts (Supabase) — state
