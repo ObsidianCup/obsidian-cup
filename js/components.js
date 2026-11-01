@@ -35,9 +35,9 @@ function injectNav() {
       </ul>
     </nav>
     <div class="lang-toggle" role="group" aria-label="Language toggle">
-      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+      <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
       <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="bn" onclick="setLanguage('bn')" aria-label="বাংলায় পরিবর্তন করুন">বাংলা</button>
+      <button class="lang-btn" data-lang="bn" aria-label="বাংলায় পরিবর্তন করুন">বাংলা</button>
     </div>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -66,9 +66,9 @@ function injectNav() {
     ${SITE_CONFIG.rulesVisible ? `<a href="${p('pages/rules.html')}">Rules</a>` : ''}
     ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/account.html')}" data-key="navAccount">Log in</a>` : ''}
     <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Language toggle">
-      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+      <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
       <span class="lang-sep">|</span>
-      <button class="lang-btn" data-lang="bn" onclick="setLanguage('bn')" aria-label="বাংলায় পরিবর্তন করুন">বাংলা</button>
+      <button class="lang-btn" data-lang="bn" aria-label="বাংলায় পরিবর্তন করুন">বাংলা</button>
     </div>
   `;
   document.body.appendChild(mobile);

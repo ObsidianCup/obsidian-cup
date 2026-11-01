@@ -199,6 +199,12 @@ function setLanguage(lang) {
   document.documentElement.lang = selected === 'bn' ? 'bn' : 'en';
 }
 
+// Language buttons (no inline onclick: the site's security policy blocks inline scripts)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest && e.target.closest('.lang-btn[data-lang]');
+  if (btn) setLanguage(btn.getAttribute('data-lang'));
+});
+
 function initLanguage() {
   const saved = localStorage.getItem('oc_lang');
   const selected = saved === 'bn' ? 'bn' : 'en';
