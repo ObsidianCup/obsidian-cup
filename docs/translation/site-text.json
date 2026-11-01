@@ -541,7 +541,7 @@
  {
   "id": "futsal-02",
   "section": "Futsal page",
-  "en": "Futsal joined the story on 23 June 2026 with a girls-only tournament at JAFF Arena and Academy, Bashundhara: 5 teams and more than 15 spectators.",
+  "en": "Futsal joined the story on 23 June 2026 with a girls-only tournament at JAFF Arena and Academy, Bashundhara: five teams and our first futsal final.",
   "bn": "",
   "placeholder": false
  },
@@ -779,21 +779,21 @@
  {
   "id": "faq-13",
   "section": "Questions page",
-  "en": "No. Submitting a registration form is only the first step when registration is open. A slot is confirmed only after payment is received and we issue an invoice. Follow the payment instructions for the specific event and email your transaction ID and screenshot to obsidiancup.official@gmail.com.",
+  "en": "No. A team's slot is confirmed only after the entry fee is paid and we have checked the payment. From Season 5, the captain enters the bKash transaction ID in the team's registration on this website and we confirm the slot there.",
   "bn": "না। নিবন্ধন খোলা থাকলে ফর্ম জমা দেওয়া শুধু প্রথম ধাপ। পেমেন্ট পাওয়ার পর এবং ইনভয়েস দেওয়া হলে স্লট নিশ্চিত হয়। নির্দিষ্ট ইভেন্টের পেমেন্ট নির্দেশনা অনুসরণ করে ট্রানজেকশন আইডি ও স্ক্রিনশট obsidiancup.official@gmail.com-এ ইমেইল করুন।",
   "placeholder": false
  },
  {
   "id": "faq-14",
   "section": "Questions page",
-  "en": "What happens if I pay but don't send the transaction details?",
+  "en": "What happens if we pay but don't enter the transaction ID?",
   "bn": "পেমেন্ট করলে কিন্তু ট্রানজেকশন বিবরণ না পাঠালে কী হবে?",
   "placeholder": false
  },
  {
   "id": "faq-15",
   "section": "Questions page",
-  "en": "Your slot will not be confirmed. We cannot match a payment to a team without the transaction ID and screenshot. Always email us immediately after paying.",
+  "en": "Your slot is not confirmed until the transaction ID is entered. Without it we cannot match the payment to your team, so enter it as soon as you pay.",
   "bn": "আপনার স্লট নিশ্চিত হবে না। ট্রানজেকশন আইডি ও স্ক্রিনশট ছাড়া আমরা পেমেন্ট দলের সাথে মেলাতে পারব না।",
   "placeholder": false
  },
@@ -3124,7 +3124,7 @@
  {
   "id": "rules-17",
   "section": "Rules page",
-  "en": "Registration is only confirmed after payment via bKash is received and verified by the tournament committee. Slots are allocated on a first-come, first-served basis. Teams must pay within 48 hours of submitting the form, or the slot will be released. Once payment is verified, we confirm the slot and issue an invoice within 3 days.",
+  "en": "Registration is only confirmed after payment via bKash is received and verified by the tournament committee. Slots are allocated on a first-come, first-served basis. Teams must pay within 48 hours of submitting their registration, or the slot will be released. Once payment is verified, we confirm the slot and issue an invoice within 3 days.",
   "bn": "",
   "placeholder": false
  },
