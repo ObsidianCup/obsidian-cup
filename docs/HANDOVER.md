@@ -102,6 +102,8 @@ EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
    redesign, secret in Supabase). `login-with-code` function redeployed from
    the repo, Verify JWT off: DONE 1 Nov.
    Google account 2-Step Verification: DONE 1 Nov.
+   GitHub 2FA: DONE 1 Nov. Gmail as Supabase custom SMTP (app password): DONE 1 Nov.
+   Bangla: all 499 site lines received and live (1 Nov).
 3. 2FA on GitHub, Supabase, Vercel, Cloudflare and both Google accounts.
 4. GitHub secret scanning, push protection, Dependabot.
 5. Supabase Auth: min password 8, secure email change, secure password change,
