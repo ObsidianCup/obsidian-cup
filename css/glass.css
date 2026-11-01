@@ -33,12 +33,19 @@
   --radius: 8px;
   --radius-lg: 16px;
 
+  /* names used by css/account.css */
+  --cream: var(--bone);
+  --font-body: var(--font-text);
+  --font-bengali: 'Noto Sans Bengali', sans-serif;
+
   --motion-fast: 150ms;
   --motion: 200ms;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .theme-glass, .theme-glass * , .theme-glass *::before, .theme-glass *::after { box-sizing: border-box; }
+/* the hidden attribute always wins over layout classes */
+.theme-glass [hidden] { display: none !important; }
 body.theme-glass {
   margin: 0;
   background: var(--glass);
