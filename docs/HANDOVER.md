@@ -28,9 +28,9 @@ ObsidianCup/obsidian-cup and continue"). Last updated 1 Nov 2026.
 ## Branches and deploys
 
 - `main` = live site https://obsidiancup.vercel.app (every push deploys).
-- `redesign` = new "Obsidian Glass" design, preview only (Vercel → Deployments
-  → newest "redesign" Preview → Visit). main merged in.
-  Goes live only when the owner says so: merge `redesign` into `main`.
+- The "Obsidian Glass" redesign went LIVE on 1 Nov 2026 (merge commit b1bdd48,
+  owner said "we go live"). `redesign` is kept level with `main`; new work can go
+  on `main` directly or on a preview branch first for bigger changes.
 
 ## Design: B "Obsidian Glass" (locked in)
 
@@ -74,8 +74,7 @@ volleyball, futsal, seasons, about, FAQ, part of accounts; NOT yet applied). The
 ALL site text (464 lines, file `obsidian-cup-all-website-text.txt`, ids in
 `docs/translation/site-text.json`, e.g. [home-14], [acct.authIntro]). When it
 comes back: add a data-key to every element by its id, put the Bangla in
-lang.js / oc-accounts.js, and check every page in Bangla. Then: owner reviews again → "make it live" →
-merge `redesign` into `main`.
+lang.js / oc-accounts.js, and check every page in Bangla. Redesign is live (1 Nov). Bangla: apply the owner's full file when it comes back.
 
 ## Player accounts (Supabase) — state
 
