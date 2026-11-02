@@ -14,16 +14,16 @@ This is the English source for every legal text players will see in the Obsidian
 **Open questions for you:**
 
 - Organiser: Obsidian Cup is not yet a legal entity, so the texts name Uriana Faiha, trading as Obsidian Cup. Update this if a trade licence or company is registered (see the Season 5 Launch Plan, section 1).
-- What postal address should appear for formal notices?
+- Postal address: none. The organiser has no postal address; email is the contact for formal notices (decided 2 Nov 2026).
 - Is 30 days after each event the right time to delete ID photos?
 
 ## 1. Terms of Use (player accounts)
 
 Shown once at sign-up. A player must agree before creating a profile.
 
-**Obsidian Cup Account Terms of Use — version 1.0**
+**Obsidian Cup Account Terms of Use — version 1.1**
 
-1. **Who we are.** Obsidian Cup is a sports tournament organiser based in Dhaka, Bangladesh, run by its founder and head organiser, Uriana Faiha, trading as Obsidian Cup ("Obsidian Cup", "we", "us"). These terms apply to your Obsidian Cup account and to your use of obsidiancup.vercel.app and any domain we later use.
+1. **Who we are.** Obsidian Cup is a sports tournament organiser based in Bangladesh, run by its founder and head organiser, Uriana Faiha, trading as Obsidian Cup ("Obsidian Cup", "we", "us"). These terms apply to your Obsidian Cup account and to your use of obsidiancup.vercel.app and any domain we later use.
 2. **Your account.** You sign in with your own Google account, or with your own email address and a password you choose. Keep your password private; Obsidian Cup will never ask for it. You may hold only one Obsidian Cup account. You must not create an account for someone else, share your account, or let anyone else use it.
 3. **Accurate information.** You must give true, complete and current information, including your full name, date of birth and contact details. You must update it if it changes. Giving false information, including a false date of birth or another person's identity, may lead to your account being suspended and to disqualification from any event, without refund.
 4. **Age.** You may create an account yourself from age 13. Under 13, your account can be used only after your parent or legal guardian has given consent. If you are 13 to 17, you can create and use your account, but you cannot join a team for a tournament, upload ID documents or take part in any event until your parent or legal guardian has given consent through the guardian consent process.
@@ -34,13 +34,13 @@ Shown once at sign-up. A player must agree before creating a profile.
 9. **Closing your account.** You may ask us to close your account at any time by emailing obsidiancup.official@gmail.com. Some records may be kept for the periods set out in our Privacy Notice.
 10. **Changes to these terms.** We may update these terms. If a change is important, you will be asked to agree to the new version the next time you sign in. If you do not agree, you may close your account.
 11. **Law.** These terms are governed by the laws of Bangladesh. Any dispute will be handled by the courts of Dhaka, Bangladesh, after first trying to settle it with us in good faith.
-12. **Contact.** obsidiancup.official@gmail.com · \[Postal address\]
+12. **Contact.** obsidiancup.official@gmail.com. Formal notices to us must be sent to this address.
 
 ## 2. Privacy Notice
 
 Shown at sign-up, and linked in the footer of every page. Written to cover what Bangladesh's [Personal Data Protection Ordinance 2025](https://www.thedailystar.net/tech-startup/news/bangladeshs-personal-data-protection-ordinance-2025-key-takeaways-4015401) asks for: why data is collected, how it is used, who sees it, how long it is kept, and the right to withdraw consent.
 
-**Obsidian Cup Privacy Notice — version 1.2**
+**Obsidian Cup Privacy Notice — version 1.3**
 
 **What we collect**
 
@@ -54,7 +54,7 @@ Shown at sign-up, and linked in the footer of every page. Written to cover what 
 | Photo of your ID document | Yes, to play in an event | To confirm you are the person who registered |
 | Medical notes, such as allergies or conditions | Optional | To help first aid staff if you need care at an event |
 | Instagram handle | Optional | To tag you in event posts, only if you choose |
-| Sports profile: height, weight, standing reach, jump height, playing hand and foot, playing level, year you started, preferred jersey number, shirt size, a short bio | Optional | To build your player profile, help organisers balance teams and categories, and keep sports records over the seasons |
+| Sports you play, and a sports profile: height, weight, standing reach, jump height, playing hand and foot, year you started, preferred jersey number, shirt size, a short bio. Your playing level is set by organisers | Sports: yes. The rest: optional | To build your player profile, help organisers balance teams and categories, and keep sports records over the seasons |
 | Profile photo | Optional | Shown on your player card so organisers can recognise you when they check you in at an event. We crop it to a square and make it small before saving |
 | Team, position, jersey number, results | Yes, to play | To run the tournament and keep records of results |
 | bKash transaction ID | Captains only | To confirm the team's payment |
@@ -64,7 +64,7 @@ Shown at sign-up, and linked in the footer of every page. Written to cover what 
 
 - **You** can see and edit your own profile.
 - **Your team captain** can see your name, position, jersey number and whether your registration is complete. Captains cannot see your phone number, date of birth, ID photo, emergency contact or medical notes.
-- **Obsidian Cup organisers** can see everything, only to run events and keep them safe. At the gate, an organiser can scan the QR code on your player card to see your name, photo, player code, age, whether your ID and any parent or guardian consent have been checked, and your team. The QR code is a private link that only works for logged-in organisers; you can replace it with a new one at any time from your account.
+- **Obsidian Cup organisers** can see everything, only to run events and keep them safe. At an event, organisers may ask to see the player card in your account, which shows your name, photo, player code, date of birth, whether your ID has been checked, and your team.
 - **The public** can see team names, rosters (player names only), results and event photos. If you switch on "show my stats", your public player page also shows your height, reach, jump, playing hand and foot, level and year you started. Your weight is never shown publicly.
 - **First aid or medical staff** at an event may be told your emergency contact and medical notes if you need care.
 - **Authorities**, only if the law requires it.
@@ -73,7 +73,7 @@ We never sell your data or use it for advertising, and we never use it to make a
 
 **Where it is stored**
 
-Your data is stored with our service provider Supabase, on servers in Singapore, and our website is hosted by Vercel. Both use encryption and access controls. By creating an account, you agree to your data being stored outside Bangladesh with these providers. \[Lawyer to confirm this meets the Ordinance's rules on storing and transferring data abroad.\]
+Your data is stored with our service provider Supabase, on servers in Singapore, and our website is hosted by Vercel. Both use encryption and access controls. By creating an account, you agree to your data being stored outside Bangladesh with these providers.
 
 **How long we keep it**
 
@@ -97,7 +97,7 @@ If a data breach could affect you, we will report it to the authorities as the l
 
 Contact us first. You may also complain to Bangladesh's data protection authority.
 
-**Contact:** obsidiancup.official@gmail.com · \[Postal address\]
+**Contact:** obsidiancup.official@gmail.com
 
 ## 3. Media and Photo Consent
 
@@ -304,7 +304,7 @@ These short labels sit next to each checkbox, with a link to the full text. No b
 | --- | --- | --- |
 | Sign-up | Yes | I have read and agree to the Terms of Use. |
 | Sign-up | Yes | I have read the Privacy Notice and agree to my data being collected, used and stored as it describes, including storage outside Bangladesh. |
-| Sign-up | Yes | I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments and can be changed at most 2 times after I first enter it. (version 1.1) |
+| Sign-up | Yes | I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments. (version 1.2) |
 | Profile, medical notes | Only if adding notes | I agree that Obsidian Cup may store my medical notes and share them with first aid or medical staff if I need care at an event. |
 | Profile, ID upload | Yes, to play | I confirm this ID belongs to me and agree to it being stored privately and deleted 30 days after my next event. |
 | Profile, media | Optional | Feature me individually in promotional posts (you can change this any time). |

@@ -146,12 +146,18 @@ live database, so height/weight saves failed with HTTP 400. Owner ran 007, 009
 and `notify pgrst, 'reload schema'`; saving works. All of 001–010 are now live.
 If a save fails again, check columns/tables first (SQL Editor, read-only).
 
-Owner's pending change list (do all at once when the owner says go): remove the
-card QR and "Get a new QR code"; card shows DOB, "ID verified" badge, current
-team/tournament or "No current tournament"; a live card (moving OC logo with a
-daily colour ring, ticking clock, today's date) for gate checks; organiser search
-shows photo, age, ID status, team; show the real reason under "Something went
-wrong". More changes may follow from the owner's test run.
+Owner's change list from the test run: DONE 2 Nov (migration 011 + site).
+Sports choice before the account opens (volleyball/futsal, add the other
+later); playing level set only by organisers ('school' -> 'amateur'); live
+card (moving logo, daily colour ring from ocCardColour(), ticking clock) with
+DOB, ID badge and current team instead of the QR; QR and gate page removed;
+organiser look-up, level dropdown, today's colour; checklist OK; success
+messages fade; legacy positions named; real error reason shown; BD shirt
+sizes with chest; DOB change limit no longer advertised (still enforced);
+legal: no postal address, Terms 1.1, Privacy 1.3, DOB declaration 1.2;
+legal page redesigned; seasons shown as separate cards. Tests: 158 passing.
+OWNER MUST RUN 011 + legal seed (README step 6c). Claude's Bangla drafts for
+the new account strings are in docs/translation/bn-claude-drafts.json.
 
 ## Copy review (1 Nov, late)
 

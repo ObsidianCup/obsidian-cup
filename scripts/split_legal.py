@@ -32,6 +32,9 @@ DECLARATIONS = {
          "I will enter my real date of birth, exactly as it appears on my ID. "
          "I understand it is checked against my ID at tournaments and can be changed "
          "at most 2 times after I first enter it."),
+        ("1.2", "Date of birth declaration",
+         "I will enter my real date of birth, exactly as it appears on my ID. "
+         "I understand it is checked against my ID at tournaments."),
     ],
     "media_feature": [
         ("1.0", "Individual feature in promotional posts (optional)",

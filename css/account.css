@@ -102,15 +102,6 @@
 .acct-toggle span { font-size: 0.9rem; line-height: 1.6; color: rgba(245,240,232,0.88); }
 
 /* Legal page */
-.legal-body { font-size: 0.95rem; line-height: 1.85; color: rgba(245,240,232,0.85); }
-.legal-body p, .legal-body ul, .legal-body ol, .legal-body table { margin-bottom: 1rem; }
-.legal-body ol, .legal-body ul { padding-left: 1.4rem; }
-.legal-body li { margin-bottom: 0.45rem; }
-.legal-body strong { color: var(--cream); font-weight: 600; }
-.legal-body table { width: 100%; border-collapse: collapse; font-size: 0.85rem; display: block; overflow-x: auto; }
-.legal-body th, .legal-body td { border: 1px solid rgba(192,192,192,0.18); padding: 0.55rem 0.7rem; text-align: left; vertical-align: top; }
-.legal-body th { color: var(--cream); background: rgba(255,255,255,0.03); }
-.legal-body a { color: rgba(215,233,236,0.95); }
 
 /* Admin table */
 .adm-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
@@ -208,4 +199,115 @@ textarea.acct-input { resize: vertical; min-height: 5.5rem; font-family: var(--f
 .acct-gate-teams { list-style: none; padding: 0; margin: 0 0 1.25rem; display: grid; gap: 0.5rem; }
 .acct-gate-teams li { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; align-items: baseline; padding: 0.75rem 1rem; border: 1px solid rgba(215,233,236,0.18); border-radius: 8px; }
 .acct-gate-teams li span { color: rgba(245,240,232,0.8); }
-.legal-body .legal-title { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: var(--s2, 0.5rem) 0 var(--s8, 2rem); text-wrap: balance; }
+.legal-body .legal-title-old { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: var(--s2, 0.5rem) 0 var(--s8, 2rem); text-wrap: balance; }
+
+/* ---------- 011: sport choice, live card, checklist done ---------- */
+.acct-sportpick { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 0.75rem; margin-bottom: 1.25rem; }
+.acct-sportopt { position: relative; display: flex; align-items: center; gap: 0.75rem; min-height: 64px; padding: 1rem 1.25rem; border: 1px solid rgba(215,233,236,0.25); border-radius: 10px; cursor: pointer; background: rgba(215,233,236,0.04); }
+.acct-sportopt input { width: 20px; height: 20px; accent-color: #d7e9ec; flex: 0 0 auto; }
+.acct-sportopt-name { font-family: var(--font-display); font-size: 1.125rem; color: var(--cream); }
+.acct-sportopt:has(input:checked) { border-color: #d7e9ec; background: rgba(215,233,236,0.10); }
+.acct-sportopt:focus-within { outline: 2px solid #d7e9ec; outline-offset: 3px; }
+.acct-mysports { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; margin-bottom: 1.5rem; }
+.acct-sportchip { display: inline-flex; align-items: center; min-height: 36px; padding: 0 0.9rem; border-radius: 999px; background: rgba(215,233,236,0.12); border: 1px solid rgba(215,233,236,0.45); color: var(--cream); font-weight: 500; }
+.acct-label-like { display: block; font-weight: 500; margin-bottom: 0.4rem; }
+.acct-readonly { margin: 0 0 0.35rem; padding: 0.7rem 0.9rem; border: 1px dashed rgba(215,233,236,0.25); border-radius: 8px; color: var(--cream); }
+
+.acct-alldone { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 1rem; padding: 0.9rem 1rem; border-radius: 8px; background: rgba(120,200,150,0.10); border: 1px solid rgba(120,200,150,0.45); }
+.acct-alldone p { margin: 0; color: #c8ecd5; font-weight: 500; }
+
+/* Live card */
+.acct-playercard { overflow: hidden; }
+.acct-live { display: flex; align-items: center; gap: 1rem; margin: -0.25rem 0 1.5rem; padding: 0.9rem 1rem; border-radius: 10px; background: rgba(215,233,236,0.06); border: 1px solid rgba(215,233,236,0.18); }
+.acct-live-mark { --live: #d7e9ec; position: relative; flex: 0 0 auto; width: 64px; height: 64px; display: grid; place-items: center; }
+.acct-live-mark img { position: relative; width: 38px; height: auto; animation: acct-live-float 2.4s ease-in-out infinite; }
+.acct-live-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--live);
+  border-top-color: transparent; border-left-color: color-mix(in srgb, var(--live) 45%, transparent); animation: acct-live-spin 1.6s linear infinite; }
+.acct-live-text { min-width: 0; }
+.acct-live-title { margin: 0; font-size: 0.875rem; color: rgba(192,192,192,0.85); }
+.acct-live-clock { margin: 0.1rem 0; font-family: var(--font-display); font-size: 1.6rem; line-height: 1.1; color: var(--cream); font-variant-numeric: tabular-nums; }
+.acct-live-date { margin: 0; font-size: 0.875rem; color: rgba(245,240,232,0.85); }
+@keyframes acct-live-spin { to { transform: rotate(360deg); } }
+@keyframes acct-live-float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-2px) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) {
+  /* No spinning; the ticking clock and today's colour still show the card is live. */
+  .acct-live-ring { animation: none; border-top-color: var(--live); }
+  .acct-live-mark img { animation: none; }
+}
+
+/* Identity row: wraps on phones instead of overlapping */
+.acct-pc-id { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.acct-pc-who { flex: 1 1 12rem; min-width: 0; }
+.acct-playercard .acct-pc-name { font-size: clamp(1.4rem, 6vw, 1.9rem); overflow-wrap: anywhere; }
+.acct-playercard .acct-pc-code { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; letter-spacing: 0.06em; margin-top: 0.35rem; }
+.acct-playercard .acct-pc-jersey { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0; padding: 0.15rem 0.6rem; border-radius: 999px; border: 1px solid rgba(215,233,236,0.45); color: var(--cream); }
+.acct-pc-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: 0.75rem 1.5rem; margin: 1.25rem 0; }
+.acct-pc-facts div { display: flex; flex-direction: column; gap: 0.3rem; }
+.acct-pc-facts dt { font-size: 0.75rem; color: rgba(192,192,192,0.75); }
+.acct-pc-facts dd { margin: 0; color: var(--cream); }
+.acct-badge { display: inline-flex; align-items: center; min-height: 28px; padding: 0 0.7rem; border-radius: 999px; font-size: 0.875rem; font-weight: 500; }
+.acct-badge.is-ok { background: rgba(120,200,150,0.15); border: 1px solid rgba(120,200,150,0.55); color: #c8ecd5; }
+.acct-badge.is-wait { background: rgba(240,180,100,0.12); border: 1px solid rgba(240,180,100,0.5); color: #f6d7ad; }
+.acct-pc-now { padding: 1rem 0; border-top: 1px solid rgba(215,233,236,0.14); border-bottom: 1px solid rgba(215,233,236,0.14); margin-bottom: 1rem; }
+.acct-pc-sub { margin: 0 0 0.5rem; font-size: 0.75rem; color: rgba(192,192,192,0.75); }
+.acct-pc-teams { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.acct-pc-teams li { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; align-items: baseline; }
+.acct-pc-teams li span { color: rgba(245,240,232,0.8); }
+
+/* Organiser page: today's colour, look-up panel, level select */
+.adm-colour { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem; color: var(--cream); font-weight: 500; }
+.adm-swatch { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); flex: 0 0 auto; }
+.adm-look-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.adm-look-photo { width: 120px; height: 120px; border-radius: 12px; }
+.adm-level { min-width: 9rem; min-height: 40px; padding: 0.3rem 0.5rem; }
+
+/* ---------- Legal pages: readable layout ---------- */
+.legal-page { padding-block: 3rem 5rem; }
+.legal-head { padding-bottom: 2rem; border-bottom: 1px solid rgba(215,233,236,0.14); margin-bottom: 2rem; }
+.legal-head h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 6vw, 3.25rem); line-height: 1.1; margin: 0.5rem 0 1rem; text-wrap: balance; }
+.legal-head .legal-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin: 0 0 1.5rem; color: rgba(192,192,192,0.85); font-size: 0.875rem; }
+.legal-chip { display: inline-flex; align-items: center; min-height: 28px; padding: 0 0.75rem; border-radius: 999px; border: 1px solid rgba(215,233,236,0.35); color: var(--cream); font-variant-numeric: tabular-nums; }
+.legal-docs { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem; scrollbar-width: thin; }
+.legal-docs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 0 1rem; border-radius: 999px; border: 1px solid rgba(215,233,236,0.2); color: rgba(245,240,232,0.85); text-decoration: none; font-size: 0.9375rem; white-space: nowrap; }
+.legal-docs a:hover { border-color: rgba(215,233,236,0.6); color: #fff; }
+.legal-docs a[aria-current="page"] { background: #d7e9ec; border-color: #d7e9ec; color: #0b1012; font-weight: 500; }
+.legal-layout { display: grid; gap: 2rem; }
+@media (min-width: 961px) {
+  .legal-layout { grid-template-columns: 15rem minmax(0, 1fr); gap: 4rem; align-items: start; }
+  .legal-toc { position: sticky; top: 6rem; }
+}
+.legal-toc details { border: 1px solid rgba(215,233,236,0.16); border-radius: 10px; padding: 0.25rem 1rem; background: rgba(255,255,255,0.02); }
+.legal-toc summary { cursor: pointer; padding: 0.75rem 0; font-weight: 500; color: var(--cream); list-style: none; display: flex; justify-content: space-between; }
+.legal-toc summary::after { content: "+"; color: rgba(192,192,192,0.8); }
+.legal-toc details[open] summary::after { content: "–"; }
+.legal-toc summary::-webkit-details-marker { display: none; }
+.legal-toc ol { list-style: none; margin: 0 0 0.75rem; padding: 0; display: grid; gap: 0.15rem; counter-reset: toc; }
+.legal-toc li { counter-increment: toc; }
+.legal-toc a { display: flex; gap: 0.6rem; padding: 0.35rem 0; color: rgba(245,240,232,0.8); text-decoration: none; font-size: 0.9rem; line-height: 1.4; }
+.legal-toc a::before { content: counter(toc); color: rgba(192,192,192,0.6); font-variant-numeric: tabular-nums; min-width: 1.2rem; }
+.legal-toc a:hover { color: #fff; }
+
+.legal-body { max-width: 68ch; font-size: 1rem; line-height: 1.75; color: rgba(245,240,232,0.88); }
+.legal-page .legal-body > * + * { margin-top: 1rem; }
+.legal-page .legal-body h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.375rem; line-height: 1.3; color: var(--cream); margin-top: 2.75rem; padding-top: 1.5rem; border-top: 1px solid rgba(215,233,236,0.12); scroll-margin-top: 6rem; }
+.legal-body h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.legal-body ol, .legal-body ul { padding-left: 1.4rem; }
+.legal-body li + li { margin-top: 0.6rem; }
+.legal-body strong { color: var(--cream); font-weight: 600; }
+.legal-body a { color: #d7e9ec; text-underline-offset: 3px; }
+.legal-table-wrap { overflow-x: auto; border: 1px solid rgba(215,233,236,0.16); border-radius: 10px; }
+.legal-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.55; }
+.legal-table th, .legal-table td { padding: 0.8rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(215,233,236,0.1); }
+.legal-table th { color: var(--cream); background: rgba(215,233,236,0.06); font-weight: 500; }
+.legal-table tbody tr:last-child td { border-bottom: 0; }
+.legal-table td:first-child { color: var(--cream); font-weight: 500; }
+/* Phones: each row becomes a small card, with the column name above each value */
+@media (max-width: 640px) {
+  .legal-table-wrap { border: 0; overflow: visible; }
+  .legal-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .legal-table, .legal-table tbody, .legal-table tr, .legal-table td { display: block; width: 100%; }
+  .legal-table tr { border: 1px solid rgba(215,233,236,0.16); border-radius: 10px; padding: 0.4rem 0; margin-bottom: 0.75rem; background: rgba(255,255,255,0.02); }
+  .legal-table td { border: 0; padding: 0.45rem 1rem; }
+  .legal-table td::before { content: attr(data-label); display: block; font-size: 0.75rem; color: rgba(192,192,192,0.8); font-weight: 400; margin-bottom: 0.1rem; }
+  .legal-table td:first-child::before { display: none; }
+}

@@ -1290,7 +1290,7 @@
  {
   "id": "acct.agreeDob",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments and can be changed at most 2 times after I first enter it.",
+  "en": "I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments.",
   "bn": "আমি আমার পরিচয়পত্রে থাকা জন্মতারিখ অনুযায়ী সঠিক জন্মতারিখ লিখব। আমি বুঝতে পারছি, টুর্নামেন্টে এটি আমার পরিচয়পত্রের সঙ্গে মিলিয়ে দেখা হবে এবং প্রথমবার দেওয়ার পর সর্বোচ্চ ২ বার পরিবর্তন করা যাবে।",
   "placeholder": false
  },
@@ -1535,7 +1535,7 @@
  {
   "id": "acct.checkSports",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Sports profile: height, playing hand, level",
+  "en": "Sports profile: height, playing hand",
   "bn": "খেলাধুলার প্রোফাইল: উচ্চতা, খেলার হাত, পর্যায়",
   "placeholder": false
  },
@@ -2004,14 +2004,14 @@
  {
   "id": "acct.dobConfirmFirst",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Save {date} as your date of birth? It must match your ID. After this you can change it only 2 times.",
+  "en": "Save {date} as your date of birth? It must match your ID exactly.",
   "bn": "{date} কি আপনার জন্মতারিখ হিসেবে সংরক্ষণ করবেন? এটি অবশ্যই আপনার পরিচয়পত্রের সঙ্গে মিলতে হবে। এরপর আপনি এটি মাত্র ২ বার পরিবর্তন করতে পারবেন।",
   "placeholder": false
  },
  {
   "id": "acct.dobConfirmChange",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Change your date of birth to {date}? You can change it {n} more time(s) after this.",
+  "en": "Change your date of birth to {date}? It must match your ID exactly.",
   "bn": "জন্মতারিখ {date}-এ পরিবর্তন করবেন? এরপর আপনি আরও {n} বার পরিবর্তন করতে পারবেন।",
   "placeholder": false
  },
@@ -3230,6 +3230,293 @@
   "id": "vb-story-04",
   "section": "Volleyball page",
   "en": "Every season since has been built the same way, with care for every player who steps on court. If you love this game, wherever you are in Bangladesh, there is a place for you here.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.sportsPickLabel",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Before you start",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.sportsPickTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Which sports do you play?",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.sportsPickIntro",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Choose one or both. You can add the other one later from your profile.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.sportsContinue",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Continue",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.sportsPickNeed",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Choose at least one sport.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secMySports",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Sports you play",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.sportsAdd",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Add {sport}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.errSportsRequired",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Keep at least one sport.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.levelAmateur",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Amateur",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.levelSetByUs",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Set by Obsidian Cup organisers. Email us if it looks wrong.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.levelNotSet",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Not set yet",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.shirtChest",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "{size} · chest {in} in ({cm} cm)",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.shirtHint",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Bangladeshi jersey sizes: measure around the widest part of your chest.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardLive",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Live card",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardLiveHint",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Show this screen if an organiser asks. The logo moves and the clock ticks, so a screenshot will not pass.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardDob",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Date of birth",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardIdOk",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "ID verified",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardIdNo",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "ID not verified yet",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardNow",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Current tournament",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardNoTournament",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "No current tournament. Join a team to play in the next one.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardWaiting",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "waiting for captain",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardTodayColour",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Today's colour: {colour}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checklistAllDone",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "All done. Your profile is ready.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.checklistOk",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "OK",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.pos_midfielder",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Midfielder",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.pos_forward",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Forward",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.errDetail",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Reason: {reason}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_ice",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Ice blue",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_mint",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Mint",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_amber",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Amber",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_coral",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Coral",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_violet",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Violet",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_rose",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Rose",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.colour_lime",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Lime",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLevel",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Level",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminTodayColour",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Today's live-card colour: {colour}",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLookup",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Look up",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLookupTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Player look-up",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminClose",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Close",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.legalKicker",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Terms and policies",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.legalOnThisPage",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "On this page",
   "bn": "",
   "placeholder": false
  }

@@ -56,6 +56,10 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    all of `seed/legal_documents.sql` → Run (registers Privacy Notice 1.2).
    This creates the private `avatars` storage bucket and its rules. Check it
    under Storage: the bucket must say **Private**.
+6c. **Sports choice and organiser-set level (011):** SQL Editor → New query →
+   paste all of `migrations/011_sports_choice_and_level.sql` → Run. Then paste
+   all of `seed/legal_documents.sql` → Run (Terms 1.1, Privacy 1.3, date of
+   birth declaration 1.2). Then run `notify pgrst, 'reload schema';`.
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:

@@ -40,13 +40,21 @@
         <button class="acct-btn acct-btn-ghost acct-btn-small" id="admExport" type="button" data-t="adminExport">Download CSV</button>
         <button class="acct-btn acct-btn-ghost acct-btn-small" id="admBackup" type="button" data-t="adminBackup">Download full backup</button>
       </div>
+      <p class="adm-colour" id="admColour"><span class="adm-swatch" id="admSwatch" aria-hidden="true"></span><span id="admColourText"></span></p>
+      <section class="acct-card adm-look" id="admLook" hidden aria-labelledby="admLookTitle">
+        <div class="adm-look-head">
+          <h2 id="admLookTitle" data-t="adminLookupTitle">Player look-up</h2>
+          <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="admLookClose" data-t="adminClose">Close</button>
+        </div>
+        <div id="admLookBody"></div>
+      </section>
       <p class="acct-muted" id="admCount" style="margin-bottom:0.75rem;"></p>
       <div class="adm-table-wrap">
         <table class="adm-table">
           <thead><tr>
             <th data-t="colCode">Code</th><th data-t="colName">Name</th><th data-t="colEmail">Email</th>
             <th data-t="colAge">Age</th><th data-t="colGender">Gender</th><th data-t="colPhone">Phone</th>
-            <th data-t="colJoined">Joined</th><th data-t="colStatus">ID check</th>
+            <th data-t="colJoined">Joined</th><th data-t="adminLevel">Level</th><th data-t="colStatus">ID check</th><th><span class="acct-visually-hidden" data-t="adminLookup">Look up</span></th>
           </tr></thead>
           <tbody id="admRows"></tbody>
         </table>

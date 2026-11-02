@@ -399,5 +399,36 @@ await expectError(`update public.profiles set avatar_version = 1 where id = $1`,
 await as(null);
 ok((await db.query(`select public from storage.buckets where id = 'avatars'`)).rows[0]?.public === false, 'the photo bucket is private');
 
+console.log('\nSports choice, level and player card (011)');
+await as(null);
+const SP = await mkp('sports@example.com', 'Sadia Rahman', '2004-04-04', 'female');
+await as(SP);
+await db.query(`update public.profiles set sports = '{volleyball}' where id = $1`, [SP]);
+ok((await db.query(`select sports from public.profiles where id=$1`, [SP])).rows[0].sports.join() === 'volleyball', 'a player picks their sport');
+await db.query(`update public.profiles set sports = '{volleyball,football}' where id = $1`, [SP]);
+ok((await db.query(`select sports from public.profiles where id=$1`, [SP])).rows[0].sports.length === 2, 'a player can add futsal later');
+await expectError(`update public.profiles set sports = '{}' where id = $1`, [SP], /sports_required/, 'a player cannot remove every sport');
+await expectError(`update public.profiles set sports = '{cricket}' where id = $1`, [SP], /check constraint|violates/, 'only volleyball and futsal can be chosen');
+await db.query(`update public.profiles set playing_level = 'national' where id = $1`, [SP]);
+ok((await db.query(`select playing_level from public.profiles where id=$1`, [SP])).rows[0].playing_level === null, 'a player cannot set their own level');
+await expectError(`select public.admin_set_level($1, 'club')`, [SP], /not_admin/, 'a player cannot use the organiser level tool');
+await as(ADM2, 'aal1');
+await expectError(`select public.admin_set_level($1, 'club')`, [SP], /not_admin/, 'organiser without two-step cannot set a level');
+await as(ADM2, 'aal2');
+await db.query(`select public.admin_set_level($1, 'amateur')`, [SP]);
+await as(null);
+ok((await db.query(`select playing_level from public.profiles where id=$1`, [SP])).rows[0].playing_level === 'amateur', 'an organiser sets the level (Amateur)');
+await as(SP);
+await db.query(`update public.profiles set playing_level = 'national', height_cm = 170 where id = $1`, [SP]);
+const lv = (await db.query(`select playing_level, height_cm from public.profiles where id=$1`, [SP])).rows[0];
+ok(lv.playing_level === 'amateur' && lv.height_cm === 170, 'the player still saves other fields, but the level stays as the organiser set it');
+ok(Array.isArray((await db.query(`select public.my_card() c`)).rows[0].c), 'a player reads their own current teams');
+await as(P1);
+const mine = (await db.query(`select public.my_card() c`)).rows[0].c;
+ok(mine.length >= 1 && mine[0].team && mine[0].event, 'a player in a team sees the team and tournament on their card');
+await expectError(`select public.admin_player_teams($1)`, [P1], /not_admin/, 'a player cannot look up someone else\'s teams');
+await as(ADM2, 'aal2');
+ok(Array.isArray((await db.query(`select public.admin_player_teams($1) c`, [P1])).rows[0].c), 'an organiser looks up a player\'s teams');
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

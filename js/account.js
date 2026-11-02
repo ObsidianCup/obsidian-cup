@@ -29,10 +29,14 @@
     $$('[data-view]').forEach(el => { el.hidden = el.dataset.view !== view; });
     window.scrollTo(0, 0);
   }
+  const msgTimers = {};
   function msg(boxId, text, kind) {
     const box = document.getElementById(boxId);
     if (!box) return;
+    clearTimeout(msgTimers[boxId]);
     box.innerHTML = text ? `<p class="acct-msg acct-msg-${kind || 'info'}">${ocEscape(text)}</p>` : '';
+    // A success note goes away by itself; errors stay until fixed.
+    if (text && kind === 'ok') msgTimers[boxId] = setTimeout(() => { box.innerHTML = ''; }, 3500);
   }
 
   // ---------- Start ----------
@@ -45,9 +49,10 @@
     loadCaptcha();
     wireConsent();
     wireProfile();
+    wireSportsPick();
     $$('[data-action="signout"]').forEach(b => b.addEventListener('click', async () => { await db.auth.signOut(); }));
     $$('[data-go]').forEach(b => b.addEventListener('click', () => { msg('authMsg', ''); show(b.dataset.go); }));
-    document.addEventListener('oc:language', () => { renderConsentTexts(); if (profile) { renderHome(); renderDobInfo(); } renderPositions(); setAuthMode(authMode); });
+    document.addEventListener('oc:language', () => { renderConsentTexts(); if (profile) { renderHome(); renderDobInfo(); fillShirtSizes(); renderMySports(); renderLevel(); } renderPositions(); setAuthMode(authMode); });
 
     // A reset-password link: always ask for the new password first, even if
     // the login library's "recovery" signal arrives late or not at all.
@@ -81,6 +86,7 @@
     if (!ok) { show('auth'); msg('authMsg', t('genericError'), 'error'); return; }
     const missing = OC_SIGNUP_REQUIRED.filter(k => !(consents[k] && consents[k].choice === 'accepted' && consents[k].doc_version === OC_LEGAL[k]));
     if (missing.length) { renderConsentTexts(); show('consent'); return; }
+    if (!(profile.sports || []).length) { msg('sportsMsg', ''); show('sports'); return; }
     fillForm();
     renderHome();
     show('app');
@@ -279,7 +285,7 @@
   const TEXT_FIELDS = ['legal_name', 'display_name', 'school_club', 'instagram', 'emergency_name', 'emergency_relationship',
     'height_cm', 'weight_kg', 'standing_reach_cm', 'vertical_jump_cm', 'playing_since', 'preferred_jersey', 'bio'];
   const PHONE_FIELDS = ['phone', 'emergency_phone'];
-  const CHANGE_FIELDS = ['gender', 'language', 'dominant_hand', 'dominant_foot', 'playing_level', 'shirt_size'];
+  const CHANGE_FIELDS = ['gender', 'language', 'dominant_hand', 'dominant_foot', 'shirt_size'];
   const range = (lo, hi, key) => v => v == null || (/^[0-9]{1,4}$/.test(String(v)) && +v >= lo && +v <= hi) || t(key);
   const RULES = {
     height_cm: range(100, 250, 'errHeight'),
@@ -538,7 +544,7 @@
     const pretty = new Date(value + 'T00:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
     const left = 2 - (profile.dob_changes || 0);
     if (profile.date_of_birth && left <= 0) { fieldErr('date_of_birth', t('errDobLimit')); el.value = profile.date_of_birth; return; }
-    const question = profile.date_of_birth ? t('dobConfirmChange', { date: pretty, n: left - 1 }) : t('dobConfirmFirst', { date: pretty });
+    const question = profile.date_of_birth ? t('dobConfirmChange', { date: pretty }) : t('dobConfirmFirst', { date: pretty });
     if (!window.confirm(question)) { el.value = profile.date_of_birth || ''; return; }
     queue('date_of_birth', value, true);
   }
@@ -547,24 +553,27 @@
     const box = $('#dobChanges');
     if (!profile || !profile.date_of_birth || profile.verified_at) { box.textContent = ''; return; }
     const left = 2 - (profile.dob_changes || 0);
-    box.textContent = left > 0 ? t('dobChangesLeft', { n: left }) : t('dobNoChangesLeft');
+    box.textContent = left > 0 ? '' : t('dobNoChangesLeft');   // the limit is not advertised
     $('#f_date_of_birth').disabled = left <= 0;
   }
 
   function renderPositions() {
     const box = $('#positions');
     const current = (profile && profile.positions) || {};
-    box.innerHTML = Object.keys(OC_SPORTS).map(sport => `
+    const mine = (profile && profile.sports && profile.sports.length) ? profile.sports : Object.keys(OC_SPORTS);
+    box.innerHTML = Object.keys(OC_SPORTS).filter(sp => mine.includes(sp)).map(sport => `
       <div class="acct-sport">
         <p class="acct-sport-name">${ocEscape(t('sport_' + sport))}</p>
         <div class="acct-chips">
           ${OC_SPORTS[sport].map(pos => `
             <label class="acct-chip"><input type="checkbox" data-sport="${sport}" value="${pos}" ${(current[sport] || []).includes(pos) ? 'checked' : ''} />
-            <span>${ocEscape(t('pos_' + pos))}</span></label>`).join('')}
+            <span>${ocEscape(ocPositionName(pos))}</span></label>`).join('')}
         </div>
       </div>`).join('');
     $$('input[data-sport]', box).forEach(cb => cb.addEventListener('change', () => {
+      // keep positions saved for a sport that is not shown (none are removed by accident)
       const obj = {};
+      Object.keys(current).forEach(sp => { if (!mine.includes(sp)) obj[sp] = current[sp]; });
       $$('input[data-sport]:checked', box).forEach(c => { (obj[c.dataset.sport] = obj[c.dataset.sport] || []).push(c.value); });
       queue('positions', obj, true);
     }));
@@ -585,8 +594,60 @@
     $('#lockedNote').innerHTML = locked ? `<p class="acct-msg acct-msg-info">${ocEscape(t('lockedNote'))}</p>` : '';
     $('#f_date_of_birth').value = profile.date_of_birth || '';
     PHONE_FIELDS.forEach(n => phoneFill(n, profile[n]));
+    fillShirtSizes();
+    renderLevel();
+    renderMySports();
     renderDobInfo();
     renderPositions();
+  }
+
+  // Shirt sizes, Bangladeshi jersey sizing (chest all round, inches).
+  const SHIRT = [['XS', 32], ['S', 34], ['M', 36], ['L', 38], ['XL', 40], ['XXL', 42], ['XXXL', 44]];
+  function fillShirtSizes() {
+    const sel = $('#f_shirt_size');
+    const v = (profile && profile.shirt_size) || sel.value || '';
+    sel.innerHTML = `<option value="">${ocEscape(t('choose'))}</option>` + SHIRT.map(([size, inch]) =>
+      `<option value="${size}">${ocEscape(t('shirtChest', { size, in: inch, cm: Math.round(inch * 2.54) }))}</option>`).join('');
+    sel.value = v;
+  }
+
+  const LEVELS = { new: 'levelNew', amateur: 'levelAmateur', club: 'levelClub', league: 'levelLeague', national: 'levelNational' };
+  function renderLevel() {
+    $('#levelValue').textContent = profile && profile.playing_level ? t(LEVELS[profile.playing_level] || 'levelNotSet') : t('levelNotSet');
+  }
+
+  // Sports the player plays: shown as chips, with a button to add the other one.
+  function sportName(sp) { return t('sport_' + sp); }
+  function renderMySports() {
+    const box = $('#mySports');
+    const mine = (profile && profile.sports) || [];
+    const others = Object.keys(OC_SPORTS).filter(sp => !mine.includes(sp));
+    box.innerHTML = mine.map(sp => `<span class="acct-sportchip">${ocEscape(sportName(sp))}</span>`).join('') +
+      others.map(sp => `<button type="button" class="acct-btn acct-btn-ghost acct-btn-small" data-add-sport="${sp}">${ocEscape(t('sportsAdd', { sport: sportName(sp) }))}</button>`).join('');
+    $$('[data-add-sport]', box).forEach(b => b.addEventListener('click', async () => {
+      b.disabled = true;
+      const next = mine.concat(b.dataset.addSport);
+      const { data, error } = await db.from('profiles').update({ sports: next }).eq('id', user.id).select().single();
+      if (error) { fieldErr('sports', ocErrorMessage(error)); b.disabled = false; return; }
+      profile = data;
+      renderMySports(); renderPositions(); renderHome();
+      showStatus(t('saved'));
+    }));
+  }
+
+  function wireSportsPick() {
+    const boxes = () => $$('[data-pick-sport]');
+    $('#sportsBtn').addEventListener('click', async () => {
+      const chosen = boxes().filter(b => b.checked).map(b => b.value);
+      if (!chosen.length) { msg('sportsMsg', t('sportsPickNeed'), 'error'); return; }
+      $('#sportsBtn').disabled = true;
+      const { data, error } = await db.from('profiles').update({ sports: chosen }).eq('id', user.id).select().single();
+      $('#sportsBtn').disabled = false;
+      if (error) { msg('sportsMsg', ocErrorMessage(error), 'error'); return; }
+      profile = data;
+      await route();
+    });
+    boxes().forEach(b => b.addEventListener('change', () => msg('sportsMsg', '')));
   }
 
   // ---------- Home: welcome, code, checklist ----------
@@ -608,7 +669,7 @@
 
     const basics = !!(profile.legal_name && profile.date_of_birth && profile.gender);
     const contact = !!(profile.phone && profile.emergency_name && profile.emergency_relationship && profile.emergency_phone);
-    const sports = !!(profile.height_cm && profile.dominant_hand && profile.playing_level);
+    const sports = !!(profile.height_cm && profile.dominant_hand);
     const items = [
       { key: 'checkConsent', state: 'done' },
       { key: 'checkBasics', state: basics ? 'done' : 'todo' },
@@ -629,26 +690,41 @@
       <li><span class="acct-dot ${i.state === 'done' ? 'is-done' : i.state === 'soon' ? 'is-soon' : ''}" aria-hidden="true">✓</span>
       <span>${ocEscape(t(i.key))}</span>
       <span class="acct-tag">${ocEscape(t(i.state === 'done' ? 'done' : i.state === 'soon' ? 'soon' : 'todo'))}</span></li>`).join('');
+    const allDone = done === actionable.length;
+    let dismissed = false;
+    try { dismissed = localStorage.getItem('oc_checklist_ok_' + user.id) === '1'; } catch (e) { /* private mode */ }
+    $('#checklistDone').hidden = !allDone;
+    $('#checklistCard').hidden = allDone && dismissed;
   }
 
-  // ---------- Player card (private preview of the player's profile) ----------
+  // ---------- Live player card ----------
+  // Shown to organisers on the player's own phone when needed. The moving logo,
+  // today's colour ring and the ticking clock make a screenshot easy to spot.
+  let teamsCache = null, teamsLoaded = false;
   function renderCard(age) {
     const p = profile;
     $('#pcName').textContent = p.display_name || p.legal_name || t('welcomeNoName');
     $('#pcCode').textContent = p.player_code || '';
     $('#pcJersey').hidden = p.preferred_jersey == null;
     $('#pcJersey').textContent = p.preferred_jersey == null ? '' : '#' + p.preferred_jersey;
+    $('#pcDob').textContent = p.date_of_birth
+      ? new Date(p.date_of_birth + 'T00:00:00').toLocaleDateString(ocLang() === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+      : '—';
+    const idb = $('#pcId');
+    idb.textContent = t(p.verified_at ? 'cardIdOk' : 'cardIdNo');
+    idb.className = 'acct-badge ' + (p.verified_at ? 'is-ok' : 'is-wait');
+
     const pos = [];
-    Object.values(p.positions || {}).forEach(list => (list || []).forEach(k => pos.push(t('pos_' + k))));
+    const mine = (p.sports && p.sports.length) ? p.sports : Object.keys(p.positions || {});
+    Object.entries(p.positions || {}).forEach(([sp, list]) => { if (mine.includes(sp)) (list || []).forEach(k => pos.push(ocPositionName(k))); });
     $('#pcPositions').textContent = pos.join(', ');
     const side = v => v ? t('side' + v[0].toUpperCase() + v.slice(1)) : null;
-    const lvl = { new: 'levelNew', school: 'levelSchool', club: 'levelClub', league: 'levelLeague', national: 'levelNational' };
     const stats = [
       ['cardHeight', p.height_cm ? p.height_cm + ' cm' : null],
       ['cardReach', p.standing_reach_cm ? p.standing_reach_cm + ' cm' : null],
       ['cardJump', p.vertical_jump_cm ? p.vertical_jump_cm + ' cm' : null],
       ['cardHand', side(p.dominant_hand)],
-      ['cardLevel', p.playing_level ? t(lvl[p.playing_level]) : null],
+      ['cardLevel', p.playing_level ? t(LEVELS[p.playing_level] || 'levelNotSet') : null],
       ['cardSince', p.playing_since || null],
     ].filter(x => x[1] != null);
     $('#pcStats').innerHTML = stats.map(([k, v]) => `<div><dt>${ocEscape(t(k))}</dt><dd>${ocEscape(String(v))}</dd></div>`).join('');
@@ -656,7 +732,37 @@
     $('#playerCard').hidden = age !== null && age < 13 && !p.guardian_consent_at;
     bindCardOnce();
     renderPhoto();
-    renderQr();
+    renderTeams();
+    startLiveClock();
+  }
+
+  async function renderTeams() {
+    if (!teamsLoaded) {
+      const { data, error } = await db.rpc('my_card');
+      teamsCache = error ? [] : (data || []);
+      teamsLoaded = true;
+    }
+    const box = $('#pcTeams');
+    box.innerHTML = teamsCache.length
+      ? '<ul class="acct-pc-teams">' + teamsCache.map(x =>
+          `<li><strong>${ocEscape(x.team)}</strong><span>${ocEscape(x.event)} · ${ocEscape(x.category)}${x.jersey != null ? ' · #' + ocEscape(String(x.jersey)) : ''}</span>` +
+          (x.status === 'approved' ? '' : `<span class="acct-tag">${ocEscape(t('cardWaiting'))}</span>`) + '</li>').join('') + '</ul>'
+      : `<p class="acct-muted">${ocEscape(t('cardNoTournament'))}</p>`;
+  }
+
+  let clockTimer = null;
+  function startLiveClock() {
+    const tick = () => {
+      const now = new Date();
+      const bn = ocLang() === 'bn';
+      $('#liveClock').textContent = now.toLocaleTimeString(bn ? 'bn-BD' : 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Dhaka' });
+      $('#liveClock').setAttribute('datetime', now.toISOString());
+      const c = ocCardColour(now);
+      $('#liveDate').textContent = now.toLocaleDateString(bn ? 'bn-BD' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Dhaka' }) + ' · ' + t('cardTodayColour', { colour: c.name });
+      $('#liveMark').style.setProperty('--live', c.hex);
+    };
+    tick();
+    if (!clockTimer) clockTimer = setInterval(tick, 1000);
   }
 
   // ---------- Profile photo (private: only the player and organisers) ----------
@@ -731,41 +837,15 @@
     msg('photoMsg', t('photoRemoved'), 'ok');
   }
 
-  // ---------- Gate QR: a private link only organisers can open ----------
-  function renderQr() {
-    const ready = !!(profile.player_code && profile.card_token && window.qrcode);
-    $('#pcGate').hidden = !ready || $('#playerCard').hidden;
-    $('#gateNeedsCode').hidden = ready || $('#playerCard').hidden;
-    if (!ready) return;
-    const url = location.origin + '/pages/check.html#t=' + profile.card_token;
-    const qr = window.qrcode(0, 'M');
-    qr.addData(url);
-    qr.make();
-    const box = $('#pcQr');
-    box.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
-    box.setAttribute('aria-label', t('gateQrLabel', { code: profile.player_code }));
-  }
-
-  async function newQr() {
-    if (!window.confirm(t('qrNewConfirm'))) return;
-    const { data, error } = await db.rpc('new_card_token');
-    if (error || !data) { msg('qrMsg', t('genericError'), 'error'); return; }
-    profile = Object.assign({}, profile, { card_token: data });
-    renderQr();
-    msg('qrMsg', t('qrNewDone'), 'ok');
-  }
-
   let cardBound = false;
   function bindCardOnce() {
     if (cardBound) return;
     cardBound = true;
     $('#photoInput').addEventListener('change', e => savePhoto(e.target.files && e.target.files[0]));
     $('#photoRemove').addEventListener('click', removePhoto);
-    $('#qrNew').addEventListener('click', newQr);
-    $('#qrBig').addEventListener('click', () => {
-      const big = $('#pcGate').classList.toggle('is-big');
-      $('#qrBig').textContent = t(big ? 'qrSmall' : 'qrBig');
-      if (big) $('#pcGate').scrollIntoView({ block: 'center', behavior: 'auto' });
+    $('#checklistOk').addEventListener('click', () => {
+      try { localStorage.setItem('oc_checklist_ok_' + user.id, '1'); } catch (e) { /* private mode */ }
+      $('#checklistCard').hidden = true;
     });
   }
 })();

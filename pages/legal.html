@@ -12,10 +12,25 @@
   <link rel="stylesheet" href="../css/account.css" />
 </head>
 <body class="theme-glass">
-  <main id="main" class="acct-wrap">
-    <p class="acct-label" id="legalVersion"></p>
-    <div id="legalNote"></div>
-    <article class="legal-body" id="legalBody"><p class="acct-muted" data-t="loading">Loading…</p></article>
+  <main id="main">
+    <div class="g-wrap legal-page">
+      <header class="legal-head">
+        <p class="g-kicker" data-t="legalKicker">Terms and policies</p>
+        <h1 id="legalTitle"></h1>
+        <p class="legal-meta"><span class="legal-chip" id="legalVersion"></span><span id="legalLang"></span></p>
+        <nav class="legal-docs" aria-label="Documents" id="legalDocs"></nav>
+      </header>
+      <div id="legalNote"></div>
+      <div class="legal-layout">
+        <aside class="legal-toc" id="legalTocWrap" hidden>
+          <details open id="legalTocBox">
+            <summary data-t="legalOnThisPage">On this page</summary>
+            <ol id="legalToc"></ol>
+          </details>
+        </aside>
+        <article class="legal-body" id="legalBody"><p class="acct-muted" data-t="loading">Loading…</p></article>
+      </div>
+    </div>
   </main>
 
   <script src="../js/vendor/marked-12.0.2.min.js"></script>

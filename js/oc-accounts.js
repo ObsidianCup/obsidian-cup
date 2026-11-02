@@ -8,10 +8,10 @@
 // Bump a version here (and in docs/legal + scripts/split_legal.py output)
 // to make every player agree again.
 const OC_LEGAL = {
-  terms: '1.0',
-  privacy: '1.2',
+  terms: '1.1',
+  privacy: '1.3',
   media: '1.0',
-  dob_declaration: '1.1',
+  dob_declaration: '1.2',
   media_feature: '1.0',
 };
 const OC_SIGNUP_REQUIRED = ['terms', 'privacy', 'dob_declaration'];
@@ -22,6 +22,10 @@ const OC_SPORTS = {
   volleyball: ['outside_hitter', 'setter', 'middle_blocker', 'opposite', 'libero'],
   // Shown as "Futsal". The id stays 'football' because the database (009) stores that value.
   football: ['goalkeeper', 'defender', 'winger', 'pivot'],
+};
+// Older positions some players saved before futsal replaced football: still shown on their card.
+const OC_OLD_POSITIONS = {
+  football: ['midfielder', 'forward'],
 };
 
 // ---- Words on the account pages ------------------------------------
@@ -83,7 +87,7 @@ const OC_TEXT = {
     consentIntro: 'Please read and agree to these. Each one is saved with today\'s date as your signature.',
     agreeTerms: 'I have read and agree to the {terms}.',
     agreePrivacy: 'I have read the {privacy} and agree to my data being collected, used and stored as it describes, including storage outside Bangladesh.',
-    agreeDob: 'I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments and can be changed at most 2 times after I first enter it.',
+    agreeDob: "I will enter my real date of birth, exactly as it appears on my ID. I understand it is checked against my ID at tournaments.",
     termsLink: 'Terms of Use',
     privacyLink: 'Privacy Notice',
     btnAgree: 'Agree and continue',
@@ -119,7 +123,7 @@ const OC_TEXT = {
     cardSince: 'Playing since',
     cardJersey: 'Jersey',
     cardPrivate: 'Only you and organisers see this card. Turn on "Show my stats" to put these on your public player page later.',
-    checkSports: 'Sports profile: height, playing hand, level',
+    checkSports: "Sports profile: height, playing hand",
     laterTitle: 'Before your first tournament',
     laterIntro: 'Nothing to do yet. When you or your captain register a team for an event, we will ask for these, and you can finish them in a few minutes:',
     laterAgreement: 'Event agreement and media consent for that event',
@@ -161,7 +165,7 @@ const OC_TEXT = {
     sideRight: 'Right',
     sideLeft: 'Left',
     sideBoth: 'Both',
-    level: 'Highest level you have played',
+    level: "Highest level you have played",
     levelNew: 'Just starting',
     levelSchool: 'School or college team',
     levelClub: 'Club team',
@@ -187,8 +191,8 @@ const OC_TEXT = {
     dobHint: 'Must match your ID exactly. Your age is checked against your ID at tournaments.',
     dobChangesLeft: 'You can change it {n} more time(s).',
     dobNoChangesLeft: 'You cannot change it again. Email obsidiancup.official@gmail.com if it is wrong.',
-    dobConfirmFirst: 'Save {date} as your date of birth? It must match your ID. After this you can change it only 2 times.',
-    dobConfirmChange: 'Change your date of birth to {date}? You can change it {n} more time(s) after this.',
+    dobConfirmFirst: "Save {date} as your date of birth? It must match your ID exactly.",
+    dobConfirmChange: "Change your date of birth to {date}? It must match your ID exactly.",
     gender: 'Gender category',
     genderMale: 'Male',
     genderFemale: 'Female',
@@ -297,6 +301,48 @@ const OC_TEXT = {
     checkNoTeam: "Not in a team for an upcoming event.",
     checkPending: "waiting for captain",
     checkCompare: "Compare the photo and name with the player's ID before letting them in.",
+    // Sports choice, live card, organiser tools (011)
+    sportsPickLabel: "Before you start",
+    sportsPickTitle: "Which sports do you play?",
+    sportsPickIntro: "Choose one or both. You can add the other one later from your profile.",
+    sportsContinue: "Continue",
+    sportsPickNeed: "Choose at least one sport.",
+    secMySports: "Sports you play",
+    sportsAdd: "Add {sport}",
+    errSportsRequired: "Keep at least one sport.",
+    levelAmateur: "Amateur",
+    levelSetByUs: "Set by Obsidian Cup organisers. Email us if it looks wrong.",
+    levelNotSet: "Not set yet",
+    shirtChest: "{size} · chest {in} in ({cm} cm)",
+    shirtHint: "Bangladeshi jersey sizes: measure around the widest part of your chest.",
+    cardLive: "Live card",
+    cardLiveHint: "Show this screen if an organiser asks. The logo moves and the clock ticks, so a screenshot will not pass.",
+    cardDob: "Date of birth",
+    cardIdOk: "ID verified",
+    cardIdNo: "ID not verified yet",
+    cardNow: "Current tournament",
+    cardNoTournament: "No current tournament. Join a team to play in the next one.",
+    cardWaiting: "waiting for captain",
+    cardTodayColour: "Today's colour: {colour}",
+    checklistAllDone: "All done. Your profile is ready.",
+    checklistOk: "OK",
+    pos_midfielder: "Midfielder",
+    pos_forward: "Forward",
+    errDetail: "Reason: {reason}",
+    colour_ice: "Ice blue",
+    colour_mint: "Mint",
+    colour_amber: "Amber",
+    colour_coral: "Coral",
+    colour_violet: "Violet",
+    colour_rose: "Rose",
+    colour_lime: "Lime",
+    adminLevel: "Level",
+    adminTodayColour: "Today's live-card colour: {colour}",
+    adminLookup: "Look up",
+    adminLookupTitle: "Player look-up",
+    adminClose: "Close",
+    legalKicker: "Terms and policies",
+    legalOnThisPage: "On this page",
   },
   bn: {
     // Translated by the organiser, Nov 2026. Same keys as above.
@@ -595,5 +641,32 @@ function ocErrorMessage(err) {
   if (/instagram/.test(m) && /check/.test(m)) return t('errInstagram');
   if (/date_of_birth/.test(m) && /check/.test(m)) return t('errDob');
   if (/rate limit|too many/i.test(m)) return t('errRateLimit');
-  return t('genericError');
+  if (/sports_required/.test(m)) return t('errSportsRequired');
+  // Unknown problem: say so, and show the real reason in small words so it can be reported.
+  const reason = (err && (err.message || err.code)) ? String(err.message || err.code).slice(0, 160) : '';
+  return reason ? t('genericError') + ' ' + t('errDetail', { reason }) : t('genericError');
+}
+
+// A position's name; never shows a raw key like "pos_midfielder".
+function ocPositionName(key) {
+  const k = 'pos_' + key;
+  const v = t(k);
+  return v !== k ? v : key.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
+}
+
+// Live player card: one colour per day (Bangladesh date), the same for every
+// player and the organiser page, so gate staff know what today's card looks like.
+const OC_CARD_COLOURS = [
+  ['ice', '#9fd8e6'], ['mint', '#8fe0b0'], ['amber', '#f2c46b'], ['coral', '#f29a86'],
+  ['violet', '#b9a6f2'], ['rose', '#f2a6c9'], ['lime', '#cde67a'],
+];
+function ocDhakaDate(d) {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Dhaka', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d || new Date());
+}
+function ocCardColour(d) {
+  const day = ocDhakaDate(d);
+  let h = 7;
+  for (const ch of day + 'obsidian') h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const [key, hex] = OC_CARD_COLOURS[h % OC_CARD_COLOURS.length];
+  return { key, hex, name: t('colour_' + key) };
 }
