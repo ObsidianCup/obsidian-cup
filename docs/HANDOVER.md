@@ -13,7 +13,8 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
 
 ## Who and how to work
 
-- Owner: Uriana, founder and head organiser, under 18. Not a developer: plain
+- Owner: Uriana, founder and head organiser (an adult; her test account used
+  an under-18 birth date only to see the minors' screens). Not a developer: plain
   words, show previews (screenshots), confirm before big or irreversible changes.
 - **Give the owner ONE task at a time**, wait for "done", then the next.
 - When the owner must paste SQL, give **raw GitHub links**, e.g.
@@ -116,8 +117,7 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 - Are the "Anonymous Player" quotes on the experiences page real? (hidden
   until `showPlayerQuotes` is true)
 - FAQ refund / photo-consent wording vs the legal texts: which wins?
-- Refund policy decision; lawyer review yes/no (the owner is under 18: raise
-  contracting in that review).
+- Refund policy decision; lawyer review yes/no.
 - Season 5: dates, categories, squad sizes, fee, slots.
 - Copy review suggestions waiting for a yes:
   https://claude.ai/artifact/5uxY5nRkXihEX2ugvV3Uid
