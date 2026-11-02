@@ -2,7 +2,7 @@
 
 > Audit date: 2 Nov 2026
 > Audited by: Claude (UX, content, SEO, accessibility, AI search)
-> Pages reviewed: 15 public pages and documents, English and Bangla, at desktop and phone widths
+> Pages reviewed: 17 public pages and documents, English and Bangla, at desktop and phone widths
 > Site URL: https://obsidiancup.vercel.app
 
 ## Executive summary
