@@ -60,6 +60,11 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    paste all of `migrations/011_sports_choice_and_level.sql` → Run. Then paste
    all of `seed/legal_documents.sql` → Run (Terms 1.1, Privacy 1.3, date of
    birth declaration 1.2). Then run `notify pgrst, 'reload schema';`.
+6d. **Live-card switch and level chosen once (012):** SQL Editor → New query →
+   paste all of `migrations/012_live_switch_and_level_once.sql` → Run. Then
+   paste all of `seed/legal_documents.sql` → Run again (one line in Privacy
+   1.3 changed). Then run `notify pgrst, 'reload schema';`. The live card
+   starts **off**; turn it on from the organiser page on event days.
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:

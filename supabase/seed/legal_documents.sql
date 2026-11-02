@@ -2,7 +2,7 @@
 insert into public.legal_documents (key, version, lang, title, sha256, url) values
   ('terms', '1.1', 'en', 'Obsidian Cup Account Terms of Use', 'a828b1912d67e0e4ef8c7113eefcc23e3d4c5369623f92fecfc8d839f5542cec', '/legal/en/terms-1.1.md'),
   ('terms', '1.0', 'en', 'Obsidian Cup Account Terms of Use', '5e11a655bbba45b0304bc392b8023b368ec4b2a638f66757f8d75ac907a957ed', '/legal/en/terms-1.0.md'),
-  ('privacy', '1.3', 'en', 'Obsidian Cup Privacy Notice', 'db4085bb1b811de728a12f6aaa606c343eb062b7c13f248d2e886a5303c339c2', '/legal/en/privacy-1.3.md'),
+  ('privacy', '1.3', 'en', 'Obsidian Cup Privacy Notice', '6f506262567cf3d4384a4e5e3bb605006479128ae411035562d27bcbc81db379', '/legal/en/privacy-1.3.md'),
   ('privacy', '1.0', 'en', 'Obsidian Cup Privacy Notice', 'a3f246abbb2f0577c3cf0548d27b27e5de88792b038fcc73517a8159d9c10d34', '/legal/en/privacy-1.0.md'),
   ('privacy', '1.1', 'en', 'Obsidian Cup Privacy Notice', '6604ec6dd101d6ad6fe63a1ef3b57dafae7cd3a8ffcd0968086005bc81965818', '/legal/en/privacy-1.1.md'),
   ('privacy', '1.2', 'en', 'Obsidian Cup Privacy Notice', '869ed22be9459b6442a4f978a63ccf5c8c3ade6fa7f0d7416a7bd9d163bfa5fd', '/legal/en/privacy-1.2.md'),

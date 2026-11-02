@@ -409,8 +409,10 @@ await db.query(`update public.profiles set sports = '{volleyball,football}' wher
 ok((await db.query(`select sports from public.profiles where id=$1`, [SP])).rows[0].sports.length === 2, 'a player can add futsal later');
 await expectError(`update public.profiles set sports = '{}' where id = $1`, [SP], /sports_required/, 'a player cannot remove every sport');
 await expectError(`update public.profiles set sports = '{cricket}' where id = $1`, [SP], /check constraint|violates/, 'only volleyball and futsal can be chosen');
+await db.query(`update public.profiles set playing_level = 'club' where id = $1`, [SP]);
+ok((await db.query(`select playing_level from public.profiles where id=$1`, [SP])).rows[0].playing_level === 'club', 'a player chooses their level once');
 await db.query(`update public.profiles set playing_level = 'national' where id = $1`, [SP]);
-ok((await db.query(`select playing_level from public.profiles where id=$1`, [SP])).rows[0].playing_level === null, 'a player cannot set their own level');
+ok((await db.query(`select playing_level from public.profiles where id=$1`, [SP])).rows[0].playing_level === 'club', 'after that, the player cannot change their level');
 await expectError(`select public.admin_set_level($1, 'club')`, [SP], /not_admin/, 'a player cannot use the organiser level tool');
 await as(ADM2, 'aal1');
 await expectError(`select public.admin_set_level($1, 'club')`, [SP], /not_admin/, 'organiser without two-step cannot set a level');
@@ -429,6 +431,20 @@ ok(mine.length >= 1 && mine[0].team && mine[0].event, 'a player in a team sees t
 await expectError(`select public.admin_player_teams($1)`, [P1], /not_admin/, 'a player cannot look up someone else\'s teams');
 await as(ADM2, 'aal2');
 ok(Array.isArray((await db.query(`select public.admin_player_teams($1) c`, [P1])).rows[0].c), 'an organiser looks up a player\'s teams');
+
+console.log('\nLive-card switch (012)');
+await as(P1);
+ok((await db.query(`select on_off from public.site_settings where key='live_card'`)).rows[0]?.on_off === false, 'players can read the live-card switch (off by default)');
+await expectError(`update public.site_settings set on_off = true`, [], /permission denied/, 'players cannot flip the switch directly');
+await expectError(`select public.admin_set_switch('live_card', true)`, [], /not_admin/, 'players cannot use the switch tool');
+await as('anon');
+await expectError(`select * from public.site_settings`, [], /permission denied/, 'visitors who are not logged in cannot read switches');
+await as(ADM2, 'aal1');
+await expectError(`select public.admin_set_switch('live_card', true)`, [], /not_admin/, 'organiser without two-step cannot flip the switch');
+await as(ADM2, 'aal2');
+await db.query(`select public.admin_set_switch('live_card', true)`);
+await as(P1);
+ok((await db.query(`select on_off from public.site_settings where key='live_card'`)).rows[0].on_off === true, 'an organiser turns the live card on and players see it');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

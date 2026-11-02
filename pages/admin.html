@@ -40,7 +40,15 @@
         <button class="acct-btn acct-btn-ghost acct-btn-small" id="admExport" type="button" data-t="adminExport">Download CSV</button>
         <button class="acct-btn acct-btn-ghost acct-btn-small" id="admBackup" type="button" data-t="adminBackup">Download full backup</button>
       </div>
-      <p class="adm-colour" id="admColour"><span class="adm-swatch" id="admSwatch" aria-hidden="true"></span><span id="admColourText"></span></p>
+      <div class="adm-live" id="admLive">
+        <div class="adm-live-text">
+          <p class="adm-live-title"><span data-t="adminLiveTitle">Live player card</span> <span class="acct-badge" id="admLiveState"></span></p>
+          <p class="acct-hint" id="admLiveWhat"></p>
+          <p class="adm-colour" id="admColour" hidden><span class="adm-swatch" id="admSwatch" aria-hidden="true"></span><span id="admColourText"></span></p>
+        </div>
+        <button class="acct-btn acct-btn-small" type="button" id="admLiveBtn" aria-pressed="false"></button>
+      </div>
+      <div id="admLiveMsg"></div>
       <section class="acct-card adm-look" id="admLook" hidden aria-labelledby="admLookTitle">
         <div class="adm-look-head">
           <h2 id="admLookTitle" data-t="adminLookupTitle">Player look-up</h2>

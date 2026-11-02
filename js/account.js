@@ -50,6 +50,9 @@
     wireConsent();
     wireProfile();
     wireSportsPick();
+    wireLevel();
+    // Pick up the organiser's live-card switch when the player comes back to the page.
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && profile) { liveOn = null; renderLive(); } });
     $$('[data-action="signout"]').forEach(b => b.addEventListener('click', async () => { await db.auth.signOut(); }));
     $$('[data-go]').forEach(b => b.addEventListener('click', () => { msg('authMsg', ''); show(b.dataset.go); }));
     document.addEventListener('oc:language', () => { renderConsentTexts(); if (profile) { renderHome(); renderDobInfo(); fillShirtSizes(); renderMySports(); renderLevel(); } renderPositions(); setAuthMode(authMode); });
@@ -557,24 +560,26 @@
     $('#f_date_of_birth').disabled = left <= 0;
   }
 
+  // Each sport has its own group on the form (positions plus that sport's
+  // details); groups for sports the player does not play are hidden.
   function renderPositions() {
-    const box = $('#positions');
     const current = (profile && profile.positions) || {};
     const mine = (profile && profile.sports && profile.sports.length) ? profile.sports : Object.keys(OC_SPORTS);
-    box.innerHTML = Object.keys(OC_SPORTS).filter(sp => mine.includes(sp)).map(sport => `
-      <div class="acct-sport">
-        <p class="acct-sport-name">${ocEscape(t('sport_' + sport))}</p>
-        <div class="acct-chips">
-          ${OC_SPORTS[sport].map(pos => `
-            <label class="acct-chip"><input type="checkbox" data-sport="${sport}" value="${pos}" ${(current[sport] || []).includes(pos) ? 'checked' : ''} />
-            <span>${ocEscape(ocPositionName(pos))}</span></label>`).join('')}
-        </div>
-      </div>`).join('');
-    $$('input[data-sport]', box).forEach(cb => cb.addEventListener('change', () => {
+    $$('[data-sport-block]').forEach(b => { b.hidden = !mine.includes(b.dataset.sportBlock); });
+    Object.keys(OC_SPORTS).forEach(sport => {
+      const box = document.getElementById('positions_' + sport);
+      if (!box) return;
+      // Older positions the player already saved stay visible (ticked) until they untick them.
+      const old = ((OC_OLD_POSITIONS[sport] || [])).filter(pos => (current[sport] || []).includes(pos));
+      box.innerHTML = OC_SPORTS[sport].concat(old).map(pos => `
+        <label class="acct-chip"><input type="checkbox" data-sport="${sport}" value="${pos}" ${(current[sport] || []).includes(pos) ? 'checked' : ''} />
+        <span>${ocEscape(ocPositionName(pos))}</span></label>`).join('');
+    });
+    $$('input[data-sport]').forEach(cb => cb.addEventListener('change', () => {
       // keep positions saved for a sport that is not shown (none are removed by accident)
       const obj = {};
       Object.keys(current).forEach(sp => { if (!mine.includes(sp)) obj[sp] = current[sp]; });
-      $$('input[data-sport]:checked', box).forEach(c => { (obj[c.dataset.sport] = obj[c.dataset.sport] || []).push(c.value); });
+      $$('input[data-sport]:checked').forEach(c => { (obj[c.dataset.sport] = obj[c.dataset.sport] || []).push(c.value); });
       queue('positions', obj, true);
     }));
   }
@@ -612,8 +617,28 @@
   }
 
   const LEVELS = { new: 'levelNew', amateur: 'levelAmateur', club: 'levelClub', league: 'levelLeague', national: 'levelNational' };
+  // Level: the player chooses it once; after that it is locked and only
+  // organisers can change it (the database enforces this, see 012).
   function renderLevel() {
-    $('#levelValue').textContent = profile && profile.playing_level ? t(LEVELS[profile.playing_level] || 'levelNotSet') : t('levelNotSet');
+    const lv = profile && profile.playing_level;
+    $('#levelPick').hidden = !!lv;
+    $('#levelValue').hidden = !lv;
+    $('#levelValue').textContent = lv ? t(LEVELS[lv] || 'levelNotSet') : '';
+    $('#levelHint').textContent = t(lv ? 'levelSetByUs' : 'levelChooseOnce');
+    if (!lv) { $('#f_playing_level').value = ''; $('#levelSave').disabled = true; }
+  }
+  function wireLevel() {
+    const sel = $('#f_playing_level'), btn = $('#levelSave');
+    sel.addEventListener('change', () => { btn.disabled = !sel.value; fieldErr('playing_level', ''); });
+    btn.addEventListener('click', async () => {
+      if (!sel.value) return;
+      btn.disabled = true;
+      const { data, error } = await db.from('profiles').update({ playing_level: sel.value }).eq('id', user.id).select().single();
+      if (error) { fieldErr('playing_level', ocErrorMessage(error)); btn.disabled = false; return; }
+      profile = data;
+      renderLevel(); renderHome();
+      showStatus(t('saved'));
+    });
   }
 
   // Sports the player plays: shown as chips, with a button to add the other one.
@@ -669,7 +694,10 @@
 
     const basics = !!(profile.legal_name && profile.date_of_birth && profile.gender);
     const contact = !!(profile.phone && profile.emergency_name && profile.emergency_relationship && profile.emergency_phone);
-    const sports = !!(profile.height_cm && profile.dominant_hand);
+    const plays = (profile.sports || []);
+    const sports = !!(profile.height_cm && profile.playing_level &&
+      (!plays.includes('volleyball') || profile.dominant_hand) &&
+      (!plays.includes('football') || profile.dominant_foot));
     const items = [
       { key: 'checkConsent', state: 'done' },
       { key: 'checkBasics', state: basics ? 'done' : 'todo' },
@@ -714,26 +742,49 @@
     idb.textContent = t(p.verified_at ? 'cardIdOk' : 'cardIdNo');
     idb.className = 'acct-badge ' + (p.verified_at ? 'is-ok' : 'is-wait');
 
-    const pos = [];
-    const mine = (p.sports && p.sports.length) ? p.sports : Object.keys(p.positions || {});
-    Object.entries(p.positions || {}).forEach(([sp, list]) => { if (mine.includes(sp)) (list || []).forEach(k => pos.push(ocPositionName(k))); });
-    $('#pcPositions').textContent = pos.join(', ');
+    // General details first, then one block per sport the player plays.
     const side = v => v ? t('side' + v[0].toUpperCase() + v.slice(1)) : null;
-    const stats = [
+    const dl = list => list.filter(x => x[1] != null).map(([k, v]) => `<div><dt>${ocEscape(t(k))}</dt><dd>${ocEscape(String(v))}</dd></div>`).join('');
+    const general = [
       ['cardHeight', p.height_cm ? p.height_cm + ' cm' : null],
-      ['cardReach', p.standing_reach_cm ? p.standing_reach_cm + ' cm' : null],
-      ['cardJump', p.vertical_jump_cm ? p.vertical_jump_cm + ' cm' : null],
-      ['cardHand', side(p.dominant_hand)],
       ['cardLevel', p.playing_level ? t(LEVELS[p.playing_level] || 'levelNotSet') : null],
       ['cardSince', p.playing_since || null],
-    ].filter(x => x[1] != null);
-    $('#pcStats').innerHTML = stats.map(([k, v]) => `<div><dt>${ocEscape(t(k))}</dt><dd>${ocEscape(String(v))}</dd></div>`).join('');
-    $('#pcEmpty').hidden = stats.length > 0;
+    ];
+    $('#pcStats').innerHTML = dl(general);
+    const mine = (p.sports && p.sports.length) ? p.sports : Object.keys(p.positions || {});
+    const extra = {
+      volleyball: [['cardHand', side(p.dominant_hand)], ['cardReach', p.standing_reach_cm ? p.standing_reach_cm + ' cm' : null], ['cardJump', p.vertical_jump_cm ? p.vertical_jump_cm + ' cm' : null]],
+      football: [['cardFoot', side(p.dominant_foot)]],
+    };
+    let filled = general.some(x => x[1] != null);
+    $('#pcSports').innerHTML = Object.keys(OC_SPORTS).filter(sp => mine.includes(sp)).map(sp => {
+      const pos = ((p.positions || {})[sp] || []).map(ocPositionName).join(', ');
+      const facts = dl(extra[sp] || []);
+      if (pos || facts) filled = true;
+      return `<div class="acct-pc-sport"><p class="acct-pc-sub">${ocEscape(t('sport_' + sp))}</p>` +
+        (pos ? `<p class="acct-pc-pos">${ocEscape(pos)}</p>` : '') +
+        (facts ? `<dl class="acct-pc-stats">${facts}</dl>` : '') + '</div>';
+    }).join('');
+    $('#pcEmpty').hidden = filled;
     $('#playerCard').hidden = age !== null && age < 13 && !p.guardian_consent_at;
     bindCardOnce();
     renderPhoto();
     renderTeams();
-    startLiveClock();
+    renderLive();
+  }
+
+  // The moving logo, daily colour and clock only show while an organiser has
+  // the live card switched on (organiser page, for event days).
+  let liveOn = null;
+  async function renderLive() {
+    if (liveOn === null) {
+      const { data } = await db.from('site_settings').select('on_off').eq('key', 'live_card').maybeSingle();
+      liveOn = !!(data && data.on_off);
+    }
+    $('#liveBox').hidden = !liveOn;
+    $('#liveHint').hidden = !liveOn;
+    if (liveOn) startLiveClock();
+    else if (clockTimer) { clearInterval(clockTimer); clockTimer = null; }
   }
 
   async function renderTeams() {

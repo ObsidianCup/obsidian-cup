@@ -27,7 +27,9 @@
     $('#admBackup').addEventListener('click', backup);
     $('#admSearch').addEventListener('input', render);
     $('#admExport').addEventListener('click', exportCsv);
-    document.addEventListener('oc:language', () => { render(); showColour(); });
+    document.addEventListener('oc:language', () => { render(); showColour(); showLive(); });
+    $('#admLiveBtn').addEventListener('click', toggleLive);
+    await loadLive();
     $('#admLookClose').addEventListener('click', () => { $('#admLook').hidden = true; });
     showColour();
     setInterval(showColour, 60000);
@@ -155,6 +157,33 @@
   }
 
   const LEVEL_KEYS = { new: 'levelNew', amateur: 'levelAmateur', club: 'levelClub', league: 'levelLeague', national: 'levelNational' };
+
+  // Live-card switch: on for event days, off the rest of the time.
+  let liveOn = false;
+  async function loadLive() {
+    const { data } = await db.from('site_settings').select('on_off').eq('key', 'live_card').maybeSingle();
+    liveOn = !!(data && data.on_off);
+    showLive();
+  }
+  function showLive() {
+    $('#admLiveState').textContent = t(liveOn ? 'adminLiveOn' : 'adminLiveOff');
+    $('#admLiveState').className = 'acct-badge ' + (liveOn ? 'is-ok' : 'is-wait');
+    $('#admLiveWhat').textContent = t(liveOn ? 'adminLiveOnWhat' : 'adminLiveOffWhat');
+    $('#admLiveBtn').textContent = t(liveOn ? 'adminLiveTurnOff' : 'adminLiveTurnOn');
+    $('#admLiveBtn').setAttribute('aria-pressed', String(liveOn));
+    $('#admLiveBtn').className = 'acct-btn acct-btn-small' + (liveOn ? ' acct-btn-ghost' : '');
+    $('#admColour').hidden = !liveOn;
+  }
+  async function toggleLive() {
+    const btn = $('#admLiveBtn');
+    btn.disabled = true;
+    const { error } = await db.rpc('admin_set_switch', { p_key: 'live_card', p_on: !liveOn });
+    btn.disabled = false;
+    if (error) { $('#admLiveMsg').innerHTML = `<p class="acct-msg acct-msg-error">${ocEscape(ocErrorMessage(error))}</p>`; return; }
+    $('#admLiveMsg').innerHTML = '';
+    liveOn = !liveOn;
+    showLive();
+  }
 
   function showColour() {
     const c = ocCardColour();

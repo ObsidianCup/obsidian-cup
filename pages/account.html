@@ -210,7 +210,7 @@
       </div>
 
       <div class="acct-card acct-playercard" id="playerCard">
-        <div class="acct-live" aria-live="off">
+        <div class="acct-live" id="liveBox" aria-live="off" hidden>
           <div class="acct-live-mark" id="liveMark" aria-hidden="true">
             <span class="acct-live-ring"></span>
             <img src="../assets/logo-oc.svg" alt="" width="56" height="40" />
@@ -240,10 +240,10 @@
           <div id="pcTeams"></div>
         </div>
 
-        <p class="acct-pc-pos" id="pcPositions"></p>
         <dl class="acct-pc-stats" id="pcStats"></dl>
+        <div id="pcSports"></div>
         <p class="acct-muted" id="pcEmpty" data-t="cardEmpty"></p>
-        <p class="acct-hint" data-t="cardLiveHint"></p>
+        <p class="acct-hint" id="liveHint" data-t="cardLiveHint" hidden></p>
 
         <div class="acct-pc-photoctl" id="photoCtl">
           <label class="acct-btn acct-btn-ghost acct-btn-small" for="photoInput" id="photoAddLabel" data-t="photoAdd">Add a photo</label>
@@ -327,10 +327,6 @@
           <div class="acct-mysports" id="mySports"></div>
           <span class="acct-err" data-err="sports"></span>
 
-          <h3 data-t="secPositions">Positions you play</h3>
-          <p class="acct-hint" style="margin-bottom:1rem;" data-t="positionsHint"></p>
-          <div id="positions"></div>
-
           <h3 data-t="secSports">Sports profile</h3>
           <p class="acct-hint" style="margin-bottom:1rem;" data-t="sportsIntro"></p>
           <div class="acct-row">
@@ -348,43 +344,21 @@
           </div>
           <div class="acct-row">
             <div class="acct-field">
-              <label for="f_standing_reach_cm" data-t="reachCm">Standing reach (cm)</label>
-              <input class="acct-input" id="f_standing_reach_cm" name="standing_reach_cm" type="number" inputmode="numeric" min="120" max="350" step="1" />
-              <span class="acct-hint" data-t="reachHint"></span>
-              <span class="acct-err" data-err="standing_reach_cm"></span>
-            </div>
-            <div class="acct-field">
-              <label for="f_vertical_jump_cm" data-t="jumpCm">Vertical jump (cm)</label>
-              <input class="acct-input" id="f_vertical_jump_cm" name="vertical_jump_cm" type="number" inputmode="numeric" min="5" max="150" step="1" />
-              <span class="acct-hint" data-t="jumpHint"></span>
-              <span class="acct-err" data-err="vertical_jump_cm"></span>
-            </div>
-          </div>
-          <div class="acct-row">
-            <div class="acct-field">
-              <label for="f_dominant_hand" data-t="hand">Playing hand</label>
-              <select class="acct-select" id="f_dominant_hand" name="dominant_hand">
-                <option value="" data-t="choose">Choose…</option>
-                <option value="right" data-t="sideRight">Right</option>
-                <option value="left" data-t="sideLeft">Left</option>
-                <option value="both" data-t="sideBoth">Both</option>
-              </select>
-            </div>
-            <div class="acct-field">
-              <label for="f_dominant_foot" data-t="foot">Stronger foot</label>
-              <select class="acct-select" id="f_dominant_foot" name="dominant_foot">
-                <option value="" data-t="choose">Choose…</option>
-                <option value="right" data-t="sideRight">Right</option>
-                <option value="left" data-t="sideLeft">Left</option>
-                <option value="both" data-t="sideBoth">Both</option>
-              </select>
-            </div>
-          </div>
-          <div class="acct-row">
-            <div class="acct-field">
-              <span class="acct-label-like" data-t="level">Highest level you have played</span>
-              <p class="acct-readonly" id="levelValue">—</p>
-              <span class="acct-hint" data-t="levelSetByUs"></span>
+              <label for="f_playing_level" data-t="level">Highest level you have played</label>
+              <div class="acct-level-pick" id="levelPick">
+                <select class="acct-select" id="f_playing_level" name="playing_level">
+                  <option value="" data-t="choose">Choose…</option>
+                  <option value="new" data-t="levelNew">New to the sport</option>
+                  <option value="amateur" data-t="levelAmateur">Amateur</option>
+                  <option value="club" data-t="levelClub">Club</option>
+                  <option value="league" data-t="levelLeague">League</option>
+                  <option value="national" data-t="levelNational">National</option>
+                </select>
+                <button class="acct-btn acct-btn-small" type="button" id="levelSave" data-t="levelSave" disabled>Save level</button>
+              </div>
+              <p class="acct-readonly" id="levelValue" hidden>—</p>
+              <span class="acct-hint" id="levelHint"></span>
+              <span class="acct-err" data-err="playing_level"></span>
             </div>
             <div class="acct-field">
               <label for="f_playing_since" data-t="since">Year you started playing</label>
@@ -392,6 +366,7 @@
               <span class="acct-err" data-err="playing_since"></span>
             </div>
           </div>
+
           <div class="acct-row">
             <div class="acct-field">
               <label for="f_preferred_jersey" data-t="jersey">Preferred jersey number</label>
@@ -413,6 +388,58 @@
             <span class="acct-hint" data-t="bioHint"></span>
             <span class="acct-err" data-err="bio"></span>
           </div>
+
+          <section class="acct-sportgroup" data-sport-block="volleyball" aria-labelledby="sgVolleyball">
+            <h3 id="sgVolleyball" data-t="sport_volleyball">Volleyball</h3>
+            <p class="acct-label-like" data-t="secPositions">Positions you play</p>
+            <p class="acct-hint" data-t="positionsHint"></p>
+            <div class="acct-chips" id="positions_volleyball"></div>
+            <div class="acct-row">
+              <div class="acct-field">
+              <label for="f_dominant_hand" data-t="hand">Playing hand</label>
+              <select class="acct-select" id="f_dominant_hand" name="dominant_hand">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="right" data-t="sideRight">Right</option>
+                <option value="left" data-t="sideLeft">Left</option>
+                <option value="both" data-t="sideBoth">Both</option>
+              </select>
+              </div>
+              <div class="acct-field"></div>
+            </div>
+            <div class="acct-row">
+              <div class="acct-field">
+                <label for="f_standing_reach_cm" data-t="reachCm">Standing reach (cm)</label>
+                <input class="acct-input" id="f_standing_reach_cm" name="standing_reach_cm" type="number" inputmode="numeric" min="120" max="350" step="1" />
+                <span class="acct-hint" data-t="reachHint"></span>
+                <span class="acct-err" data-err="standing_reach_cm"></span>
+              </div>
+              <div class="acct-field">
+                <label for="f_vertical_jump_cm" data-t="jumpCm">Vertical jump (cm)</label>
+                <input class="acct-input" id="f_vertical_jump_cm" name="vertical_jump_cm" type="number" inputmode="numeric" min="5" max="150" step="1" />
+                <span class="acct-hint" data-t="jumpHint"></span>
+                <span class="acct-err" data-err="vertical_jump_cm"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="acct-sportgroup" data-sport-block="football" aria-labelledby="sgFootball">
+            <h3 id="sgFootball" data-t="sport_football">Futsal</h3>
+            <p class="acct-label-like" data-t="secPositions">Positions you play</p>
+            <p class="acct-hint" data-t="positionsHint"></p>
+            <div class="acct-chips" id="positions_football"></div>
+            <div class="acct-row">
+              <div class="acct-field">
+              <label for="f_dominant_foot" data-t="foot">Stronger foot</label>
+              <select class="acct-select" id="f_dominant_foot" name="dominant_foot">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="right" data-t="sideRight">Right</option>
+                <option value="left" data-t="sideLeft">Left</option>
+                <option value="both" data-t="sideBoth">Both</option>
+              </select>
+              </div>
+              <div class="acct-field"></div>
+            </div>
+          </section>
           <label class="acct-toggle" style="margin-bottom:1.5rem;">
             <input type="checkbox" id="f_show_sport_stats" name="show_sport_stats" />
             <span data-t="showStats"></span>

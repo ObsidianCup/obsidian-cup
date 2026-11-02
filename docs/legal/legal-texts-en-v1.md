@@ -54,7 +54,7 @@ Shown at sign-up, and linked in the footer of every page. Written to cover what 
 | Photo of your ID document | Yes, to play in an event | To confirm you are the person who registered |
 | Medical notes, such as allergies or conditions | Optional | To help first aid staff if you need care at an event |
 | Instagram handle | Optional | To tag you in event posts, only if you choose |
-| Sports you play, and a sports profile: height, weight, standing reach, jump height, playing hand and foot, year you started, preferred jersey number, shirt size, a short bio. Your playing level is set by organisers | Sports: yes. The rest: optional | To build your player profile, help organisers balance teams and categories, and keep sports records over the seasons |
+| Sports you play, and a sports profile: height, weight, standing reach, jump height, playing hand and foot, year you started, preferred jersey number, shirt size, a short bio. You choose your playing level once; after that, only organisers can change it | Sports: yes. The rest: optional | To build your player profile, help organisers balance teams and categories, and keep sports records over the seasons |
 | Profile photo | Optional | Shown on your player card so organisers can recognise you when they check you in at an event. We crop it to a square and make it small before saving |
 | Team, position, jersey number, results | Yes, to play | To run the tournament and keep records of results |
 | bKash transaction ID | Captains only | To confirm the team's payment |

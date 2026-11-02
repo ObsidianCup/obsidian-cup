@@ -1535,7 +1535,7 @@
  {
   "id": "acct.checkSports",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Sports profile: height, playing hand",
+  "en": "Sports profile: height, level, and your playing hand or stronger foot",
   "bn": "খেলাধুলার প্রোফাইল: উচ্চতা, খেলার হাত, পর্যায়",
   "placeholder": false
  },
@@ -3299,7 +3299,7 @@
  {
   "id": "acct.levelSetByUs",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Set by Obsidian Cup organisers. Email us if it looks wrong.",
+  "en": "Locked. Only organisers can change it now. Email us if it needs changing.",
   "bn": "",
   "placeholder": false
  },
@@ -3517,6 +3517,76 @@
   "id": "acct.legalOnThisPage",
   "section": "Player account pages (log in, profile, admin)",
   "en": "On this page",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.levelChooseOnce",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Choose carefully: you can set this once. After that, only organisers can change it.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.levelSave",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Save level",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardFoot",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Stronger foot",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Live player card",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveOn",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "On",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveOff",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Off",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveOnWhat",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Players see the moving logo, today's colour and the clock on their card. Turn it off after the event.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveOffWhat",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Player cards are plain. Turn this on for event days, when you check players at the gate.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveTurnOn",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Turn on",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.adminLiveTurnOff",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Turn off",
   "bn": "",
   "placeholder": false
  }

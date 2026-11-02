@@ -159,6 +159,20 @@ legal page redesigned; seasons shown as separate cards. Tests: 158 passing.
 OWNER MUST RUN 011 + legal seed (README step 6c). Claude's Bangla drafts for
 the new account strings are in docs/translation/bn-claude-drafts.json.
 
+Follow-up (2 Nov, migration 012, not yet run by owner when written):
+- Live card has an on/off switch (`site_settings.live_card`, organiser page,
+  `admin_set_switch`). Off = plain card, no spin/colour/clock. Default off.
+- Playing level: the player chooses it once (Save level button); then it is
+  locked and only organisers change it (trigger in 012). Privacy 1.3 line
+  corrected in place (accounts not public yet), seed re-run needed.
+- Form and card grouped by sport: Volleyball (positions, playing hand,
+  standing reach, vertical jump), Futsal (positions, stronger foot); general
+  part (height, weight, level, year started, jersey, shirt, bio). Groups for
+  sports the player does not play are hidden. Older saved futsal positions
+  (midfielder, forward) still show as ticked chips until unticked.
+- Open question for owner: should "Midfielder" be a normal futsal choice?
+  Current list: goalkeeper, defender, winger, pivot.
+
 ## Copy review (1 Nov, late)
 
 Taglines now nationwide and sport-neutral (no "in Dhaka"); volleyball page has

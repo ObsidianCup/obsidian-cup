@@ -255,7 +255,11 @@ textarea.acct-input { resize: vertical; min-height: 5.5rem; font-family: var(--f
 .acct-pc-teams li span { color: rgba(245,240,232,0.8); }
 
 /* Organiser page: today's colour, look-up panel, level select */
-.adm-colour { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem; color: var(--cream); font-weight: 500; }
+.adm-live { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0 0 1rem; padding: 1rem 1.25rem; border-radius: 10px; background: rgba(215,233,236,0.05); border: 1px solid rgba(215,233,236,0.18); }
+.adm-live-text { min-width: 0; flex: 1 1 16rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.adm-live-title { margin: 0; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; color: var(--cream); font-weight: 500; }
+.adm-live .acct-hint { margin: 0; }
+.adm-colour { display: flex; align-items: center; gap: 0.6rem; margin: 0.25rem 0 0; color: var(--cream); font-weight: 500; }
 .adm-swatch { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); flex: 0 0 auto; }
 .adm-look-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .adm-look-photo { width: 120px; height: 120px; border-radius: 12px; }
@@ -311,3 +315,18 @@ textarea.acct-input { resize: vertical; min-height: 5.5rem; font-family: var(--f
   .legal-table td::before { content: attr(data-label); display: block; font-size: 0.75rem; color: rgba(192,192,192,0.8); font-weight: 400; margin-bottom: 0.1rem; }
   .legal-table td:first-child::before { display: none; }
 }
+
+/* Profile form: one group per sport */
+.acct-sportgroup { margin: 0.5rem 0 1.5rem; padding: 1.25rem 1.25rem 0.25rem; border-radius: 10px; border: 1px solid rgba(215,233,236,0.16); background: rgba(215,233,236,0.03); }
+.acct-sportgroup h3 { margin-top: 0; }
+.acct-sportgroup .acct-label-like { margin-bottom: 0.25rem; }
+.acct-sportgroup .acct-hint { display: block; margin-bottom: 0.75rem; }
+.acct-sportgroup .acct-chips { margin-bottom: 1.25rem; }
+.acct-level-pick { display: flex; gap: 0.5rem; align-items: stretch; flex-wrap: wrap; }
+.acct-level-pick .acct-select { flex: 1 1 10rem; min-width: 0; }
+@media (max-width: 640px) { .acct-sportgroup { padding: 1rem 1rem 0.25rem; } }
+
+/* Player card: one block per sport */
+.acct-pc-sport { margin: 0 0 1rem; padding-top: 1rem; border-top: 1px solid rgba(215,233,236,0.14); }
+.acct-pc-sport .acct-pc-pos { margin: 0.25rem 0 0; }
+.acct-pc-sport .acct-pc-stats { margin: 0.75rem 0 0; }
