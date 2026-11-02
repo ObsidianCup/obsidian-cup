@@ -156,6 +156,7 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 
 ## Audit and Bangla notes (2 Nov)
 
+What-if audit of the registration plan, with clashes against the current database: `docs/REGISTRATION-WHAT-IF-AUDIT.md`. Read it before building.
 Full audit: `docs/WEBSITE-AUDIT-2026-11.md`. Bangla style notes for the owner's
 manual translation: `docs/translation/BANGLA-STYLE-NOTES.md`. Translation work is
 on hold: the owner does it by hand.
