@@ -1,26 +1,27 @@
 // Page script for pages/legal.html (no inline scripts: the site's security policy blocks them).
-// Shows one legal document: legal.html?doc=terms (privacy, media, participation, payment, guardian, captain_code, captain_declaration)
+// Shows one legal document: legal.html?doc=terms (privacy, media).
+// Only documents that matter for having an account are listed here. Tournament
+// documents (participation, payment, guardian, captain_code, captain_declaration)
+// are shown inside team registration when that is built, to the people they apply to.
 (function () {
-  const DOCS = ['terms', 'privacy', 'media', 'participation', 'payment', 'guardian', 'captain_code', 'captain_declaration'];
-  const VERSIONS = Object.assign({ participation: '1.0', payment: '1.0', guardian: '1.0', captain_code: '1.0', captain_declaration: '1.0' }, OC_LEGAL);
+  const DOCS = ['terms', 'privacy', 'media'];
+  const VERSIONS = OC_LEGAL;
   const AVAILABLE = { en: DOCS, bn: [] };   // add keys to bn as Bangla versions are published
   // Short names for the document switcher (the full title comes from the document itself).
   const SHORT = {
     terms: ['Terms of use', 'ব্যবহারের শর্তাবলি'], privacy: ['Privacy', 'গোপনীয়তা'], media: ['Media consent', 'মিডিয়া সম্মতি'],
-    participation: ['Event agreement', 'ইভেন্ট সম্মতিপত্র'], payment: ['Payments and refunds', 'পেমেন্ট ও টাকা ফেরত'],
-    guardian: ['Guardian consent', 'অভিভাবকের সম্মতি'], captain_code: ['Captain code', 'অধিনায়ক কোড'], captain_declaration: ['Captain declaration', 'অধিনায়কের ঘোষণা'],
   };
   const $ = id => document.getElementById(id);
   const slug = (s, i) => 'sec-' + (i + 1) + '-' + s.toLowerCase().replace(/[^a-z0-9ঀ-৿]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
 
   async function render() {
     ocApplyText();
-    const doc = new URLSearchParams(location.search).get('doc') || 'terms';
+    const asked = new URLSearchParams(location.search).get('doc');
+    const doc = DOCS.includes(asked) ? asked : 'terms';
     const body = $('legalBody');
     const bn = ocLang() === 'bn';
     $('legalDocs').innerHTML = DOCS.map(d =>
       `<a href="legal.html?doc=${d}"${d === doc ? ' aria-current="page"' : ''}>${ocEscape(SHORT[d][bn ? 1 : 0])}</a>`).join('');
-    if (!DOCS.includes(doc)) { $('legalTitle').textContent = t('legalNotFound'); body.innerHTML = ''; return; }
     const want = ocLang();
     const lang = AVAILABLE[want].includes(doc) ? want : 'en';
     $('legalNote').innerHTML = want !== lang ? `<p class="acct-msg acct-msg-info">${ocEscape(t('legalNoTranslation'))}</p>` : '';
@@ -60,9 +61,21 @@
       heads.push(h);
     });
     heads.forEach((h, i) => { h.id = slug(h.textContent, i); });
-    $('legalToc').innerHTML = heads.map(h => `<li><a href="#${h.id}">${ocEscape(h.textContent)}</a></li>`).join('');
-    $('legalTocWrap').hidden = heads.length < 3;
+    // Documents written as one numbered list have no headings: use each item's bold lead-in.
+    const items = heads.length >= 3 ? heads.map(h => ({ el: h, label: h.textContent })) :
+      Array.from(body.querySelectorAll(':scope > ol > li')).map(li => ({ el: li, lead: li.firstElementChild }))
+        .filter(x => x.lead && x.lead.matches('strong'))
+        .map(x => ({ el: x.el, label: x.lead.textContent.trim().replace(/[.:]$/, '') }));
+    items.forEach((x, i) => { if (!x.el.id) x.el.id = slug(x.label, i); });
+    $('legalToc').innerHTML = items.map(x => `<li><a href="#${x.el.id}">${ocEscape(x.label)}</a></li>`).join('');
+    $('legalTocWrap').hidden = items.length < 3;
+    $('legalLayout').classList.toggle('legal-layout-toc', items.length >= 3);
     if (window.matchMedia('(max-width: 960px)').matches) $('legalTocBox').open = false;
+
+    // A tick box inside a document is only a picture of the real choice in the profile.
+    body.querySelectorAll('input[type="checkbox"]').forEach(box => {
+      box.setAttribute('aria-label', box.parentElement.textContent.trim());
+    });
 
     body.querySelectorAll('table').forEach(tbl => {
       const labels = Array.from(tbl.querySelectorAll('thead th')).map(th => th.textContent.trim());

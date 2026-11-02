@@ -81,6 +81,9 @@ What exists:
   `docs/legal/legal-texts-en-v1.md` → `python3 scripts/split_legal.py` →
   `legal/en/*.md` + `supabase/seed/legal_documents.sql`. Legal page redesigned
   (doc tabs, contents list, tables as cards on phones). No postal address.
+  The legal page lists only Terms, Privacy and Media consent. Tournament documents
+  (event agreement, payment, guardian, captain) open Terms if asked for by link;
+  show them inside registration, captain ones to captains only (owner, 2 Nov).
 - Before the account opens the player chooses sports (volleyball / futsal);
   they can add the other later, cannot remove all.
 - Profile form: basics, contact, emergency contact, then a general sports part
@@ -117,7 +120,9 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 - Are the "Anonymous Player" quotes on the experiences page real? (hidden
   until `showPlayerQuotes` is true)
 - FAQ refund / photo-consent wording vs the legal texts: which wins?
-- Refund policy decision; lawyer review yes/no.
+- Refund policy decision; lawyer review yes/no. The "(new)" labels were removed
+  from Payment policy 1.1 at the owner's request, but she has not confirmed those
+  rules yet.
 - Season 5: dates, categories, squad sizes, fee, slots.
 - Copy review suggestions waiting for a yes:
   https://claude.ai/artifact/5uxY5nRkXihEX2ugvV3Uid
@@ -132,8 +137,9 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 2. Season 5 team registration: team pages (captain code, join, roster) on top
    of 009, guardian consent link, per-event consents, ID upload, bKash payment,
    verification queue, reminders, handbook (see SEASON-5-LAUNCH-PLAN.md).
-3. Legal: payment 1.0 and participation 1.0 still mention @obsidiancup and
-   football; fix in the next version.
+3. Legal: participation 1.0 still mentions football; fix in the next version.
+   Payment 1.1 is in the repo; the owner re-runs `supabase/seed/legal_documents.sql`
+   when team registration is built (not needed before, nobody agrees to it yet).
 4. Public launch: `accountsEnabled: true` in js/config.js.
 
 ## Handy tools Claude used (rebuild in a new session if needed)
@@ -145,6 +151,12 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 - Site audit: every page EN/BN at 1280/375 for script errors, missing files,
   sideways scroll and broken links. Only known item: Fixtures is left out of
   the sitemap on purpose.
+
+## Audit and Bangla notes (2 Nov)
+
+Full audit: `docs/WEBSITE-AUDIT-2026-11.md`. Bangla style notes for the owner's
+manual translation: `docs/translation/BANGLA-STYLE-NOTES.md`. Translation work is
+on hold: the owner does it by hand.
 
 ## Links
 
