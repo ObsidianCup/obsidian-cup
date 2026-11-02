@@ -1,208 +1,155 @@
 # Obsidian Cup — handover for a new Claude chat
 
-Paste this whole file into a new chat (or say: "read docs/HANDOVER.md in
-ObsidianCup/obsidian-cup and continue"). Last updated 1 Nov 2026.
+Last updated 2 Nov 2026, 14:30 (Helsinki time). Attach this file to a new chat,
+or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
 
 ## How to start the new chat
 
-1. Attach the GitHub repo **ObsidianCup/obsidian-cup** (push access) and clone it.
+1. Attach the GitHub repo **ObsidianCup/obsidian-cup** (push access) and clone it
+   with enough history (`--depth=1000`, a shallow clone breaks merges).
 2. Read, in this order: `CLAUDE.md`, this file, `docs/PLAYER-ACCOUNTS-PLAN.md`,
    `supabase/README.md`, `docs/SEASON-5-LAUNCH-PLAN.md`.
-3. Check out the `redesign` branch for website work (see "Branches").
+3. Work on `main` (live). Keep `redesign` level with `main` after every push.
 
 ## Who and how to work
 
-- Owner: Uriana, founder and head organiser. Not a developer: plain words,
-  show previews, confirm before big or irreversible changes.
-- **Give ONE task at a time** to the owner, wait for "done", then the next.
-- The owner writes Bangla; Claude writes English.
+- Owner: Uriana, founder and head organiser, under 18. Not a developer: plain
+  words, show previews (screenshots), confirm before big or irreversible changes.
+- **Give the owner ONE task at a time**, wait for "done", then the next.
+- When the owner must paste SQL, give **raw GitHub links**, e.g.
+  `https://raw.githubusercontent.com/ObsidianCup/obsidian-cup/main/supabase/migrations/<file>.sql`
+  (she selects all, copies, pastes into Supabase SQL Editor → New query → Run).
+- The owner writes Bangla; Claude writes English. Claude's Bangla drafts go in
+  `docs/translation/bn-claude-drafts.json` for her to check.
+- The owner often sends several changes at once ("dont make changes now, ill
+  give u all at once"): wait until she says go.
 - Security, no compromises: the repo is public. Never put secrets, the Supabase
   secret/service_role key, real player data or personal email addresses in the
   repo or chat. Only the Supabase Project URL and publishable key may appear in
   chat. Passwords and secret keys go straight into Supabase / GitHub settings
   by the owner. No Supabase MCP / direct AI database access. No AI photos of
-  players. Permissions live in the database (RLS).
-- Tournament facts must match the owner's Instagram; ask when unsure.
-- Commit messages end with the co-author line the session provides.
+  players. Permissions live in the database (RLS), never only in page code.
+- Do not trace or copy other people's drawings or artwork (declined before; the
+  owner chose the OC logo art instead).
+- Tournament facts must match the owner's Instagram (@obsidian.volleyball,
+  @obsidian.futsal); ask when unsure.
+- Commit messages end with the co-author lines the session provides.
 
-## Branches and deploys
+## Site basics
 
-- `main` = live site https://obsidiancup.vercel.app (every push deploys).
-- The "Obsidian Glass" redesign went LIVE on 1 Nov 2026 (merge commit b1bdd48,
-  owner said "we go live"). `redesign` is kept level with `main`; new work can go
-  on `main` directly or on a preview branch first for bigger changes.
+- Static HTML/CSS/vanilla JS on Vercel. `main` = https://obsidiancup.vercel.app
+  (every push deploys). Strict security policy: **no inline scripts**, each page
+  has its own `js/page-*.js`.
+- Design "Obsidian Glass" is live on every page (`css/glass.css`,
+  `js/components.js`). Colours: page #0b1012, panels #151c1f, lines #2a3337 /
+  #3d484c, text #eeeae3, soft #c9cfd0, mist #a7b0b2, Ice #d7e9ec (main button,
+  focus). Fonts: Unbounded 500/600, Figtree 400/500, Noto Sans Bengali.
+  Rules: max 3 weights (none over 600), body 16px, nothing under 12px, 8px
+  grid, text ≤70ch, sentence case, no all-caps, no decorative motion,
+  reduced-motion fallbacks.
+- Sports: **Volleyball** and **Futsal** (never "football" in wording; the
+  database id stays `football`). Futsal tournament: "Obsidian Futsal Cup,
+  Season 1" (OFC), `pages/futsal.html`.
+- Taglines are nationwide and sport-neutral ("a stage for players from all
+  over Bangladesh"); no "in Dhaka", no "run by players".
+- Seasons are shown as separate cards on the tournaments page.
 
-## Design: B "Obsidian Glass" (locked in)
+## Bangla
 
-Colours: Glass #0b1012 page, Facet #151c1f panels, Line #2a3337 / #3d484c,
-Bone #eeeae3 text, Soft #c9cfd0, Mist #a7b0b2, Ice #d7e9ec main button and
-focus, Ice tint rgba(215,233,236,.10), Ice edge rgba(215,233,236,.45).
-Fonts: Unbounded 500/600 headings, Figtree 400/500 text, Noto Sans Bengali.
-Rules: max 3 weights (none over 600), body 16px, nothing under 12px, 8px grid,
-text ≤70ch, sentence case, no all-caps labels, no stats strip, no ghost
-buttons, no decorative motion, reduced-motion fallbacks.
-Code: `css/glass.css`, `js/components.js` (`injectGlassChrome()` when
-`body.theme-glass`). Pages rebuilt in glass: index, volleyball, futsal,
-tournaments, about, faq, 404, account, admin, legal.
-Not yet glass: experiences, register, rules, fixtures.
-Logo: OC monogram (`assets/logo-oc.svg`) for now; the owner will redesign it.
-Design canvases (Claude artifacts): redesign
-https://claude.ai/artifact/5yGTcp4ErvHb8ZZiA2yrpQ, logo
-https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko
+All site text has Bangla and is live. Source files in `docs/translation/`:
+`site-text.json` (every id → English), `bn-received.json` (Bangla by id),
+`bn-claude-drafts.json` (Claude drafts waiting for the owner's check).
+After changing them run `python3 scripts/build_bn.py` → regenerates
+`js/lang-site.js`. New account strings: English in `js/oc-accounts.js`
+(`OC_TEXT.en`), add the id `acct.<key>` to site-text.json and the Bangla to
+bn-received.json (+ drafts file if Claude wrote it), then run the script.
 
-## Owner's redesign review (1 Nov) — status
+## Player accounts (Supabase) — state on 2 Nov
 
-Done on `redesign` (1 Nov): contact email on one line, no underline; partner
-logos trimmed and larger; About page right column: the OC monogram as outline linework with
-faint echo rings (owner dropped the player drawings; `.g-about-mark`, sticky, desktop only); FAQ "Email us or message us on Instagram";
-Instagram is now **@obsidian.volleyball** and **@obsidian.futsal** everywhere
-(config.js `instagramVolleyballUrl` / `instagramFutsalUrl`); **futsal, not
-football**: tournament is "Obsidian Futsal Cup, Season 1" (OFC), page
-`pages/futsal.html`, old football URLs redirect in vercel.json. In the
-accounts code the sport id stays `football` (database value from 009) but is
-shown as "Futsal" with futsal positions (goalkeeper, defender, winger, pivot).
-Two Instagram profile pictures (1080×1080, ash-black and maroon) sent to the
-owner.
+All migrations **001–012 are live** in the database, plus the legal seed
+(owner confirmed "done" 2 Nov 14:27). Accounts are **not public yet**
+(`js/config.js` `accountsEnabled: false`); the page works by direct link
+`/pages/account.html` for the private test run. Organiser page:
+`/pages/admin.html` (needs two-step login).
 
-Still to do: legal texts (payment 1.0, participation 1.0) still mention
-@obsidiancup / football; change them in the next legal version. The owner's Bangla
-for all 248 missing lines is in `js/lang.js` and `js/oc-accounts.js` (1 Nov).
-Some glass-page text has no `data-key` yet (season list, partner cards,
-buttons), so it stays English in Bangla mode. Bangla received so far is saved
-in `docs/translation/bn-received.json` (180 of 464 lines: menu, footer, home,
-volleyball, futsal, seasons, about, FAQ, part of accounts; NOT yet applied). The owner is translating
-ALL site text (464 lines, file `obsidian-cup-all-website-text.txt`, ids in
-`docs/translation/site-text.json`, e.g. [home-14], [acct.authIntro]). When it
-comes back: add a data-key to every element by its id, put the Bangla in
-lang.js / oc-accounts.js, and check every page in Bangla. Redesign is live (1 Nov). Bangla: apply the owner's full file when it comes back.
+What exists:
+- Sign up / log in (email+password, Google, player code via Edge Function
+  `login-with-code`), Turnstile captcha, Gmail SMTP sender, admin two-step.
+- Consent to legal documents with versions: Terms 1.1, Privacy 1.3, DOB
+  declaration 1.2 (`OC_LEGAL` in js/oc-accounts.js). Legal source:
+  `docs/legal/legal-texts-en-v1.md` → `python3 scripts/split_legal.py` →
+  `legal/en/*.md` + `supabase/seed/legal_documents.sql`. Legal page redesigned
+  (doc tabs, contents list, tables as cards on phones). No postal address.
+- Before the account opens the player chooses sports (volleyball / futsal);
+  they can add the other later, cannot remove all.
+- Profile form: basics, contact, emergency contact, then a general sports part
+  (height, weight, **level chosen once then locked**, year started, jersey,
+  Bangladeshi shirt sizes with chest), then a **Volleyball group** (positions,
+  playing hand, reach, jump) and a **Futsal group** (positions: goalkeeper,
+  defender, winger, pivot; stronger foot). Only the groups for the player's
+  sports show. Older saved futsal positions (midfielder, forward) still show
+  ticked until unticked. DOB can be changed twice (limit enforced, not shown).
+- Private profile photo (bucket `avatars`, private).
+- Player card: photo, name, code, jersey, DOB, ID-check badge, current
+  tournament team, general stats, then per-sport positions and stats.
+  **Live card** (moving logo, today's colour ring, ticking clock) shows only
+  while the organiser switch is on (`site_settings.live_card`, default off).
+  The QR code and gate page were removed (gate staff already have names).
+- Organiser page: player list, search, CSV, full backup, level dropdown per
+  player (`admin_set_level`), player look-up (photo, teams), **Live player card
+  on/off switch** with today's colour.
+- Checklist on the account home with an OK button once everything is done.
+- Events / categories / captain codes / teams tables exist (009) but there is
+  no team UI yet.
 
-## Player accounts (Supabase) — state
+Tests: `supabase/tests/rls_test.mjs` (165 passing, PGlite; run with
+`node rls_test.mjs <repo path>` from a folder with `@electric-sql/pglite`
+installed). Load test: `supabase/tests/load_test.mjs`.
+Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 
-Done and live in the database (owner ran `supabase/SETUP-STAGE-1.sql`,
-migrations 001–009): profiles, consent, legal versions (Privacy 1.1),
-chosen player codes OC-INITIALS+digits (005), login with player code via Edge
-Function `login-with-code` (deployed, Verify JWT off), Google login, admin
-two-step (006), sports profile (007), email sender queue (008), events /
-categories / captain codes / teams (009). Owner's account is admin.
-Tests: `supabase/tests/rls_test.mjs` (127 passing, PGlite),
-`supabase/tests/load_test.mjs` (real Postgres, 1,500 players).
-`js/config.js`: `accountsEnabled: false` (accounts not public yet),
-`turnstileSiteKey: ""`.
+## Open questions for the owner
 
-Email safety (owner asked: "no random emails go anywhere"): sender only mails
-confirmed accounts, only templates welcome/code_changed, only <7 days old,
-EMAIL_MODE test by default (only to EMAIL_TEST_TO), never logs addresses.
-
-## Owner's to-do list (give ONE at a time, after the redesign review)
-
-1. GitHub repo secrets: SUPABASE_URL, SUPABASE_SECRET_KEY, GMAIL_USER,
-   GMAIL_APP_PASSWORD, EMAIL_TEST_TO (variable EMAIL_MODE optional, default
-   test). Then run the "Send emails" workflow once by hand.
-2. Cloudflare Turnstile: DONE 1 Nov (site key in config.js on main and
-   redesign, secret in Supabase). `login-with-code` function redeployed from
-   the repo, Verify JWT off: DONE 1 Nov.
-   Google account 2-Step Verification: DONE 1 Nov.
-   GitHub 2FA: DONE 1 Nov. Gmail as Supabase custom SMTP (app password): DONE 1 Nov.
-   Bangla: all 499 site lines received and live (1 Nov).
-   Supabase Auth: min password 8, secure email/password change, rate limits
-   (emails 100/h, sign-ups+sign-ins 500/5 min, token verifications 100/5 min): DONE 1 Nov.
-   Supabase account 2FA: DONE 1 Nov. Vercel 2FA: DONE 1 Nov.
-3. 2FA on GitHub, Supabase, Vercel, Cloudflare and both Google accounts.
-4. GitHub secret scanning, push protection, Dependabot.
-5. Supabase Auth: min password 8, secure email change, secure password change,
-   raise rate limits (emails ~100/h, sign-ins ~300 per 5 min).
-
-## Done 1 Nov (late): all pages in glass, Bangla wiring, audit
-
-- Player stories, Register, Rules, Fixtures rebuilt in glass. Register now
-  explains the Season 5 account-based flow (old April Super Cup info removed).
-  Player-story quotes hidden until the owner confirms they are real
-  (`showPlayerQuotes` in js/config.js).
-- New tab/phone icons (OC fills the icon; SVG switches colour for light/dark
-  tab bars); icon links carry ?v=2 to beat browser caches.
-- Bangla: `scripts/build_bn.py` builds `js/lang-site.js` from
-  docs/translation/*.json. lang.js translates [data-key] elements and any
-  other element whose English matches the owner's file, keeps links inside
-  Bangla, restores English exactly. Run the script after saving new Bangla.
-- Audit script (local, Playwright): every page at 1280/375px in EN and BN: no
-  script errors, missing files, sideways scroll, broken links. Legal page got
-  a proper heading; sitemap lists register and rules.
-- Before accounts launch: legal texts still show "[Postal address]" and a
-  "[Lawyer to confirm…]" note.
-
-## Player login: where it stands (1 Nov, 23:30)
-
-All security setup done (2FA on Google, GitHub, Cloudflare, Supabase, Vercel;
-Turnstile; Gmail SMTP; Supabase auth limits). Copy review fixes applied.
-NEXT: private test run on the live site via the direct link
-/pages/account.html (menu link stays hidden while accountsEnabled is false).
-Before the public switch: owner fills "[Postal address]" in the legal texts
-(new version numbers) and decides on the lawyer review.
-
-## Live database fix (2 Nov, 00:00)
-
-Migrations 007 (sports profile) and 009 (events and teams) had never run on the
-live database, so height/weight saves failed with HTTP 400. Owner ran 007, 009
-and `notify pgrst, 'reload schema'`; saving works. All of 001–010 are now live.
-If a save fails again, check columns/tables first (SQL Editor, read-only).
-
-Owner's change list from the test run: DONE 2 Nov (migration 011 + site).
-Sports choice before the account opens (volleyball/futsal, add the other
-later); playing level set only by organisers ('school' -> 'amateur'); live
-card (moving logo, daily colour ring from ocCardColour(), ticking clock) with
-DOB, ID badge and current team instead of the QR; QR and gate page removed;
-organiser look-up, level dropdown, today's colour; checklist OK; success
-messages fade; legacy positions named; real error reason shown; BD shirt
-sizes with chest; DOB change limit no longer advertised (still enforced);
-legal: no postal address, Terms 1.1, Privacy 1.3, DOB declaration 1.2;
-legal page redesigned; seasons shown as separate cards. Tests: 158 passing.
-OWNER MUST RUN 011 + legal seed (README step 6c). Claude's Bangla drafts for
-the new account strings are in docs/translation/bn-claude-drafts.json.
-
-Follow-up (2 Nov, migration 012, not yet run by owner when written):
-- Live card has an on/off switch (`site_settings.live_card`, organiser page,
-  `admin_set_switch`). Off = plain card, no spin/colour/clock. Default off.
-- Playing level: the player chooses it once (Save level button); then it is
-  locked and only organisers change it (trigger in 012). Privacy 1.3 line
-  corrected in place (accounts not public yet), seed re-run needed.
-- Form and card grouped by sport: Volleyball (positions, playing hand,
-  standing reach, vertical jump), Futsal (positions, stronger foot); general
-  part (height, weight, level, year started, jersey, shirt, bio). Groups for
-  sports the player does not play are hidden. Older saved futsal positions
-  (midfielder, forward) still show as ticked chips until unticked.
-- Open question for owner: should "Midfielder" be a normal futsal choice?
-  Current list: goalkeeper, defender, winger, pivot.
-
-## Copy review (1 Nov, late)
-
-Taglines now nationwide and sport-neutral (no "in Dhaka"); volleyball page has
-"How it started". Claude drafted Bangla for 8 changed lines
-(docs/translation/bn-claude-drafts.json) for the owner to check. Review doc
-with suggestions waiting for the owner's yes (FAQ/rules still describe the old
-form process; Bangla term consistency: সিজন/আসর, রানার-আপ, ছেলে/মেয়ে, ফলো,
-Instagram): https://claude.ai/artifact/5uxY5nRkXihEX2ugvV3Uid
-
-## Player card, photo and gate check (built 1 Nov, on `redesign`)
-
-Migration `010_player_card.sql` (photo bucket + rules, card_token, `new_card_token()`,
-`check_player()` organisers-only), account page photo upload + card QR, gate page
-`pages/check.html` + `js/page-check.js`, QR lib `js/vendor/qrcode-generator-1.4.4.js`
-(MIT), Privacy Notice 1.2 (seed regenerated). Tests: 145 passing.
-OWNER STILL HAS TO: run 010 and the legal seed in the SQL Editor (README step 6b).
-Owner (and every account) will be asked to agree to Privacy 1.2 on next login.
-New account/gate strings need Bangla (in docs/translation/site-text.json, bn empty).
-
-## Questions waiting for the owner
-
-- Are the "Anonymous Player" quotes on the experiences page real?
-- FAQ refund / photo-consent wording conflicts with the legal texts: which wins?
+- Should "Midfielder" be a normal futsal position for everyone? (Now only kept
+  for players who saved it before.)
+- Check Claude's Bangla drafts (`bn-claude-drafts.json`), latest: level lock,
+  live switch, sports checklist line.
+- Are the "Anonymous Player" quotes on the experiences page real? (hidden
+  until `showPlayerQuotes` is true)
+- FAQ refund / photo-consent wording vs the legal texts: which wins?
+- Refund policy decision; lawyer review yes/no (the owner is under 18: raise
+  contracting in that review).
 - Season 5: dates, categories, squad sizes, fee, slots.
-- The owner is under 18: raise contracting in the lawyer review.
+- Copy review suggestions waiting for a yes:
+  https://claude.ai/artifact/5uxY5nRkXihEX2ugvV3Uid
+- Confirm these are done (not recorded): GitHub repo secrets for the email
+  workflow (SUPABASE_URL, SUPABASE_SECRET_KEY, GMAIL_USER, GMAIL_APP_PASSWORD,
+  EMAIL_TEST_TO) and GitHub secret scanning / push protection / Dependabot.
 
-## Claude's build list after that
+## Next steps (suggested order)
 
-Team pages UI (captain code, join, roster) on top of 009; guardian consent
-link; Season 5 registration (per-event consents, ID upload, bKash,
-verification queue, reminders, handbook); remaining glass pages; add the
-owner's Bangla; update the Claude Docs copy of the legal texts (Privacy 1.1);
-lawyer review; launch (`accountsEnabled: true`).
+1. Private test run of accounts with a few friends on the live site; collect
+   the owner's change list and do it in one batch.
+2. Season 5 team registration: team pages (captain code, join, roster) on top
+   of 009, guardian consent link, per-event consents, ID upload, bKash payment,
+   verification queue, reminders, handbook (see SEASON-5-LAUNCH-PLAN.md).
+3. Legal: payment 1.0 and participation 1.0 still mention @obsidiancup and
+   football; fix in the next version.
+4. Public launch: `accountsEnabled: true` in js/config.js.
+
+## Handy tools Claude used (rebuild in a new session if needed)
+
+- Local preview: `python3 -m http.server 8765` in the repo, Playwright
+  screenshots at 1280 and 375/390px, EN and BN.
+- Account page previews without a real login: route `supabase-js` to a small
+  stand-in script that returns a fake profile.
+- Site audit: every page EN/BN at 1280/375 for script errors, missing files,
+  sideways scroll and broken links. Only known item: Fixtures is left out of
+  the sitemap on purpose.
+
+## Links
+
+- Live site: https://obsidiancup.vercel.app
+- Account page: https://obsidiancup.vercel.app/pages/account.html
+- Organiser page: https://obsidiancup.vercel.app/pages/admin.html
+- Design canvases: https://claude.ai/artifact/5yGTcp4ErvHb8ZZiA2yrpQ (redesign),
+  https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko (logo)
