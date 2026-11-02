@@ -239,8 +239,6 @@ Cancellations must be emailed by the captain to obsidiancup.official@gmail.com.
 
 We announce changes by email to captains and players, in the website account, and on our official Instagram @obsidian.volleyball and @obsidian.futsal and our Facebook page. Captains must make sure their players know.
 
-**Open question:** should the policy also offer a credit for the next event instead of a refund? It helps keep money in the tournament, but it must stay optional.
-
 ## 6. Parent / Guardian Consent (players under 18)
 
 The guardian completes this themselves, not the player. The player's profile creates a private one-time link, which the player sends to their guardian by WhatsApp or SMS. The guardian opens it on their own phone, fills in their details, ticks each box and types their full name as a signature. The link expires after 7 days or once used. A paper copy of the same form is kept at check-in for guardians who cannot use the link.
@@ -276,13 +274,14 @@ This consent covers all Obsidian Cup events until the player turns 18, unless I 
 
 The code terms are shown when a captain enters a code. The declaration is agreed when the captain submits the team's registration.
 
-**Captain Code Terms — version 1.0**
+**Captain Code Terms — version 1.1**
 
-1. Captain codes are given only by Obsidian Cup, by request to obsidiancup.official@gmail.com or our official Instagram.
-2. Each code works once, for one team in one event, and expires on the date shown with it.
-3. The code becomes tied to the account that uses it first. Do not share it. If someone else uses your code, contact us immediately and we will cancel it.
-4. Obsidian Cup may refuse or cancel a code at any time, for example if a category is full or the request appears false.
-5. Captaincy can be moved to another player in the team only by Obsidian Cup, on request.
+1. A captain must be at least 18 years old on the first day of the event.
+2. Captain codes are given only by Obsidian Cup, by request to obsidiancup.official@gmail.com or our official Instagram.
+3. Each code works once, for one team in one event, and expires on the date shown with it.
+4. The code becomes tied to the account that uses it first. Do not share it. If someone else uses your code, contact us immediately and we will cancel it.
+5. Obsidian Cup may refuse or cancel a code at any time, for example if a category is full or the request appears false.
+6. Captaincy can be moved to another player in the team only by Obsidian Cup, on request.
 
 **Captain Declaration — version 1.0**
 

@@ -276,6 +276,7 @@ const CAP = await mkp('cap@example.com', 'Rina Akter', '2005-05-05', 'female');
 const P1 = await mkp('p1@example.com', 'Mim Khan', '2006-01-01', 'female');
 const P2 = await mkp('p2@example.com', 'Tania Islam', '2004-02-02', 'female');
 const BOY = await mkp('boy@example.com', 'Rafi Hasan', '2005-03-03', 'male');
+const TEEN = await mkp('teen@example.com', 'Sadia Teen', '2010-06-06', 'female');
 const OLD = await mkp('old@example.com', 'Nadia Old', '1980-03-03', 'female');
 const ADM2 = await mk('ObsidianCup.Official@gmail.com');
 await as(ADM2, 'aal1');
@@ -291,6 +292,8 @@ ok((await db.query(`select * from public.events`)).rows.some(r => r.slug === 'ov
 await expectError(`select public.admin_issue_captain_codes($1, 1)`, [CATG], /not_admin/, 'players cannot issue captain codes');
 await as(BOY);
 await expectError(`select public.create_team($1, 'Boys Try')`, [codes[0]], /not_eligible_gender/, 'wrong gender cannot captain a girls team');
+await as(TEEN);
+await expectError(`select public.create_team($1, 'Too Young')`, [codes[0]], /captain_under_18/, 'a player under 18 on the first event day cannot be captain');
 await as(CAP);
 const TEAM = (await db.query(`select public.create_team($1, 'Night Owls') t`, [codes[0].toLowerCase()])).rows[0].t;
 ok(!!TEAM, 'captain creates a team with the code (case ignored)');

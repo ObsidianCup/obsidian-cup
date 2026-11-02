@@ -57,6 +57,9 @@ events, and the organiser verifies everything from one admin page.
 | Player card and gate QR | Every account shows a player card with photo, name, code, stats and a QR code. The QR is a private link (`/pages/check.html#t=<card_token>`); only organisers with two-step login get an answer (`check_player`, 010): name, name on ID, photo, code, age, ID and guardian status, current teams. Players can replace their QR any time (old one stops working). All free: Supabase + Vercel + an MIT QR library in `js/vendor` |
 | Tournament items | Event agreement, guardian consent, ID photo and joining a team are explained in a "Before your first tournament" card instead of empty tick boxes; they are collected at registration (stage 3) |
 | Legal page | Lists only Terms, Privacy and Media consent. Tournament documents appear only during registration, captain documents only to captains (2 Nov) |
+| Captain age | A captain must be at least 18 on the first day of the event, enforced by the database (013). Added 2 Nov |
+| Event credit | No credit for the next event; refunds only (owner, 2 Nov) |
+| Accepted ID | Any government or institution ID card showing the player's photo and date of birth, so age can be verified (owner, 2 Nov) |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
 | Logo | For now: the OC monogram from logo round 2 (O in front of C, chip on the C), in `assets/logo-oc.svg` (masked, works on any background). Favicon (`favicon.svg` + `.ico`), `apple-touch-icon.png`, `og-image.jpg` and `email-logo.png` are made from it. The organiser may redesign it later; swap those files and the email templates |
 
@@ -165,7 +168,6 @@ project); real player photos only, never AI-made ones of players.
 - Season 5 dates, venue, categories, fees, deadline, team limits.
 - Handbook inputs: match format, MVP selection, appeals process, safeguarding contact.
 - Controlling language (English or Bangla) if the versions differ.
-- Offer event credit as an alternative to refunds?
 - Confirm the new refund rules marked "(new)" in the Payment policy.
 
 ## Notes from the old Fillout form (OVC S4, All Age Boys)

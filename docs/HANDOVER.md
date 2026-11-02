@@ -120,6 +120,11 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 - Are the "Anonymous Player" quotes on the experiences page real? (hidden
   until `showPlayerQuotes` is true)
 - FAQ refund / photo-consent wording vs the legal texts: which wins?
+- Under-18 consent through captains and captains seeing dates of birth: the owner
+  wants this; research says a captain alone cannot consent (PDPO s.9, s.38; Contract
+  Act s.11). Decision pending, nothing edited. Rules page Bangla for rules-05 and
+  rules-09 is out of date until she translates the new English.
+- Libero wording on the Rules page: waiting for her yes.
 - Refund policy decision; lawyer review yes/no. The "(new)" labels were removed
   from Payment policy 1.1 at the owner's request, but she has not confirmed those
   rules yet.
@@ -138,8 +143,8 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
    of 009, guardian consent link, per-event consents, ID upload, bKash payment,
    verification queue, reminders, handbook (see SEASON-5-LAUNCH-PLAN.md).
 3. Legal: participation 1.0 still mentions football; fix in the next version.
-   Payment 1.1 is in the repo; the owner re-runs `supabase/seed/legal_documents.sql`
-   when team registration is built (not needed before, nobody agrees to it yet).
+   Waiting to be run in Supabase, together with the consent changes once decided:
+   migration 013 (captain 18+) and the seed (Payment 1.1, Captain code terms 1.1).
 4. Public launch: `accountsEnabled: true` in js/config.js.
 
 ## Handy tools Claude used (rebuild in a new session if needed)

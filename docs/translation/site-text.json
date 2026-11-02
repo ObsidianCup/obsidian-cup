@@ -3040,7 +3040,7 @@
  {
   "id": "rules-05",
   "section": "Rules page",
-  "en": "All participating players must meet the eligibility criteria specified for the tournament category listed on the registration page for that event (for example, age limits for interschool or U19 categories). Team managers or captains are responsible for ensuring all players are eligible.",
+  "en": "All participating players must meet the eligibility criteria specified for the tournament category listed on the registration page for that event (for example, age limits for interschool or U19 categories). Team managers or captains are responsible for ensuring all players are eligible. The team captain must be at least 18 years old.",
   "bn": "",
   "placeholder": false
  },
@@ -3068,7 +3068,7 @@
  {
   "id": "rules-09",
   "section": "Rules page",
-  "en": "Each player must provide a valid scanned copy of one of the following: National ID Card, Passport, or current institution Student ID. Failure to provide valid identification will result in disqualification of the player or team.",
+  "en": "Each player must provide a clear photo of a government ID card or institution ID card that shows their photo and date of birth, so we can verify their age. Failure to provide valid identification will result in disqualification of the player or team.",
   "bn": "",
   "placeholder": false
  },

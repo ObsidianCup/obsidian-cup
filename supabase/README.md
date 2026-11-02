@@ -65,6 +65,9 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    paste all of `seed/legal_documents.sql` → Run again (one line in Privacy
    1.3 changed). Then run `notify pgrst, 'reload schema';`. The live card
    starts **off**; turn it on from the organiser page on event days.
+6e. **Captain age and new legal versions (013):** SQL Editor → New query →
+   paste all of `migrations/013_captain_age.sql` → Run. Then paste all of
+   `seed/legal_documents.sql` → Run (Payment 1.1, Captain code terms 1.1).
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:

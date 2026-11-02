@@ -39,5 +39,3 @@ Cancellations must be emailed by the captain to obsidiancup.official@gmail.com.
 **Changes we tell you about**
 
 We announce changes by email to captains and players, in the website account, and on our official Instagram @obsidian.volleyball and @obsidian.futsal and our Facebook page. Captains must make sure their players know.
-
-**Open question:** should the policy also offer a credit for the next event instead of a refund? It helps keep money in the tournament, but it must stay optional.
