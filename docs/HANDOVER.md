@@ -130,6 +130,10 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
   workflow (SUPABASE_URL, SUPABASE_SECRET_KEY, GMAIL_USER, GMAIL_APP_PASSWORD,
   EMAIL_TEST_TO) and GitHub secret scanning / push protection / Dependabot.
 
+## Hosting (2 Nov)
+
+Vercel support replied in writing: the site counts as organisational and commercial use, needs Pro, off-site or hidden payment does not change that, and there are no discounts. Plan: buy a domain, test a copy on Cloudflare with Vercel left running, switch only after everything passes. Waiting for the owner to buy the domain. Check Cloudflare's own terms first (only a third-party review was read).
+
 ## Next steps (suggested order)
 
 1. Private test run of accounts with a few friends on the live site; collect
