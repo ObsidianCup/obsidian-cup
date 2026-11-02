@@ -57,9 +57,12 @@ events, and the organiser verifies everything from one admin page.
 | Player card and gate QR | Every account shows a player card with photo, name, code, stats and a QR code. The QR is a private link (`/pages/check.html#t=<card_token>`); only organisers with two-step login get an answer (`check_player`, 010): name, name on ID, photo, code, age, ID and guardian status, current teams. Players can replace their QR any time (old one stops working). All free: Supabase + Vercel + an MIT QR library in `js/vendor` |
 | Tournament items | Event agreement, guardian consent, ID photo and joining a team are explained in a "Before your first tournament" card instead of empty tick boxes; they are collected at registration (stage 3) |
 | Legal page | Lists only Terms, Privacy and Media consent. Tournament documents appear only during registration, captain documents only to captains (2 Nov) |
-| Captain age | A captain must be at least 18 on the first day of the event, enforced by the database (013). Added 2 Nov |
 | Event credit | No credit for the next event; refunds only (owner, 2 Nov) |
 | Accepted ID | Any government or institution ID card showing the player's photo and date of birth, so age can be verified (owner, 2 Nov) |
+| Team decisions (2 Nov, not built yet) | No captain codes: any confirmed player with a finished profile creates a team. One team link for the WhatsApp group; eligible players join directly and the captain can remove them. Captain must be a player; vice-captain required; coach optional, a non-player with no account. Captains see age eligibility, never date of birth. Payment may come from the captain's, vice-captain's or a parent's bKash number. Players leave and captains remove until the deadline, then only organisers can |
+| Under-18 consent (2 Nov, not built yet) | Parent email plus phone number, never the player's own. Parent opens a page, ticks each box, types their name; the date fills in. Each child has their own consent, so siblings can share an email; 3 or more children, or details that do not match, are flagged. Backup: signed paper form, photo uploaded before the deadline, original brought on match day. Under-18s can be captains with this consent. Every "we emailed you" message mentions the spam folder |
+| Delete account (2 Nov, not built yet) | Button in settings: warning, type DELETE plus password or Google, 14-day grace period, emails. Blocked while on a team after the deadline or as captain of an active team. Past results, consent and payment records stay |
+| Lawyer | No lawyer review: the owner cannot afford it. Do not suggest it again |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
 | Logo | For now: the OC monogram from logo round 2 (O in front of C, chip on the C), in `assets/logo-oc.svg` (masked, works on any background). Favicon (`favicon.svg` + `.ico`), `apple-touch-icon.png`, `og-image.jpg` and `email-logo.png` are made from it. The organiser may redesign it later; swap those files and the email templates |
 
@@ -156,7 +159,7 @@ project); real player photos only, never AI-made ones of players.
 5. **Season 5 registration:** event page + per-event consents, ID photo
    upload (private), bKash transaction ID, admin verification queue,
    reminders, confirmed / match-day emails, handbook page, CSV export.
-6. **Before launch:** Bangla texts, lawyer review of legal texts, full
+6. **Before launch:** Bangla texts, full
    security and load test pass, rate limits raised, accounts switched on.
 7. **After Season 5:** history import (MVPs, winners), public player pages,
    certificates with verify links, photo gallery with watermarks (ImageKit
