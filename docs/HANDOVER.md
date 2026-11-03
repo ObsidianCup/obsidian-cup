@@ -134,6 +134,8 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 
 Vercel support replied in writing: the site counts as organisational and commercial use, needs Pro, off-site or hidden payment does not change that, and there are no discounts. Plan: buy a domain, test a copy on Cloudflare with Vercel left running, switch only after everything passes. Waiting for the owner to buy the domain. Check Cloudflare's own terms first (only a third-party review was read).
 
+Update 3 Nov: the owner decided to stay on Vercel for now. Vercel's site would show player stats, team information and rosters only; no registration or payment. Registration stays on a Google Form. The team-registration build is on hold until she decides otherwise. Vercel has not confirmed that this fits Hobby; Netlify is the fallback if the site is paused.
+
 ## Next steps (suggested order)
 
 1. Private test run of accounts with a few friends on the live site; collect
