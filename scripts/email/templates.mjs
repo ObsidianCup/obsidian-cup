@@ -51,6 +51,45 @@ export const TEMPLATES = {
       text: `Your Obsidian Cup player code is now ${d.player_code}. Your old code ${d.old_code} no longer works. If you did not do this, email obsidiancup.official@gmail.com.\n`,
     }),
   },
+  deletion_requested: {
+    en: (d) => {
+      const name = String(d.name || '').split(/\s+/)[0] || 'there';
+      return {
+        subject: 'Your Obsidian Cup account will be deleted',
+        html: frame(`Hi ${name}`,
+          p(`You asked us to delete your Obsidian Cup account. It will be deleted on <strong>${esc(d.delete_on)}</strong>.`)
+          + p('Changed your mind? Log in before then and your account stays, with everything in it.')
+          + button(`${SITE}/pages/account.html`, 'Keep my account')
+          + p('If you did not ask for this, log in now and change your password, then write to us.')),
+        text: `You asked us to delete your Obsidian Cup account. It will be deleted on ${d.delete_on}.\nTo keep it, log in before then: ${SITE}/pages/account.html\nIf you did not ask for this, log in, change your password and email obsidiancup.official@gmail.com.\n`,
+      };
+    },
+  },
+  deletion_cancelled: {
+    en: (d) => {
+      const name = String(d.name || '').split(/\s+/)[0] || 'there';
+      return {
+        subject: 'Your Obsidian Cup account is staying',
+        html: frame(`Welcome back, ${name}`,
+          p('You logged in, so your account will not be deleted. Everything is just as you left it.')
+          + p('If this was not you, change your password and write to us straight away.')),
+        text: 'You logged in, so your Obsidian Cup account will not be deleted. If this was not you, change your password and email obsidiancup.official@gmail.com.\n',
+      };
+    },
+  },
+  account_deleted: {
+    en: (d) => {
+      const name = String(d.name || '').split(/\s+/)[0] || 'there';
+      return {
+        subject: 'Your Obsidian Cup account has been deleted',
+        html: frame(`Goodbye for now, ${name}`,
+          p('Your Obsidian Cup account has been deleted, with your profile, photo and contact details. Your player code is retired and will not be given to anyone else.')
+          + p('We keep past results and team lists as tournament history, and the records of what you agreed to, as our Privacy Notice explains.')
+          + p('You are welcome back any time: just create a new account.')),
+        text: 'Your Obsidian Cup account has been deleted, with your profile, photo and contact details. Past results, team lists and consent records are kept as our Privacy Notice explains. You are welcome back any time.\n',
+      };
+    },
+  },
 };
 
 export function render(template, lang, data) {

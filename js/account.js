@@ -23,6 +23,8 @@
     };
   })();
   let linkNoticeShown = false;
+  let authNotice = null;      // shown on the log-in screen after signing out (deletion requested)
+  let deleting = false;       // true while a deletion request is being made
 
   // ---------- Views ----------
   function show(view) {
@@ -51,6 +53,7 @@
     wireProfile();
     wireSportsPick();
     wireLevel();
+    wireDelete();
     // Pick up the organiser's live-card switch when the player comes back to the page.
     document.addEventListener('visibilitychange', () => { if (!document.hidden && profile) { liveOn = null; renderLive(); } });
     $$('[data-action="signout"]').forEach(b => b.addEventListener('click', async () => { await db.auth.signOut(); }));
@@ -76,6 +79,7 @@
   async function route() {
     if (!user) {
       profile = null; setAuthMode(authMode); show('auth');
+      if (authNotice) { msg('authMsg', authNotice, 'info'); authNotice = null; return; }
       if (!linkNoticeShown && (LINK.error || LINK.fromEmail)) {
         linkNoticeShown = true;
         msg('authMsg', LINK.error ? t('linkExpired') : t('emailConfirmed'), LINK.error ? 'error' : 'ok');
@@ -87,12 +91,20 @@
     show('loading');
     const ok = await loadEverything();
     if (!ok) { show('auth'); msg('authMsg', t('genericError'), 'error'); return; }
+    // Logging in again within the 14 days keeps the account.
+    let welcomeBack = false;
+    if (profile.deletion_requested_at && !deleting) {
+      const { data: kept } = await db.rpc('cancel_account_deletion');
+      if (kept) { profile.deletion_requested_at = null; welcomeBack = true; }
+    }
+    if (deleting) return;
     const missing = OC_SIGNUP_REQUIRED.filter(k => !(consents[k] && consents[k].choice === 'accepted' && consents[k].doc_version === OC_LEGAL[k]));
     if (missing.length) { renderConsentTexts(); show('consent'); return; }
     if (!(profile.sports || []).length) { msg('sportsMsg', ''); show('sports'); return; }
     fillForm();
     renderHome();
     show('app');
+    msg('appMsg', welcomeBack ? t('deleteCancelled') : '', 'info');
   }
 
   async function loadEverything() {
@@ -110,6 +122,36 @@
     consents = {};
     (c || []).forEach(r => { consents[r.doc_key] = r; });
     return true;
+  }
+
+  // ---------- Delete account ----------
+  function wireDelete() {
+    const form = $('#deleteForm'), open = $('#deleteOpen');
+    const close = () => { form.hidden = true; open.hidden = false; open.setAttribute('aria-expanded', 'false'); $('#deleteWord').value = ''; msg('deleteMsg', ''); };
+    open.addEventListener('click', () => {
+      form.hidden = false; open.hidden = true; open.setAttribute('aria-expanded', 'true'); $('#deleteWord').focus();
+    });
+    $('#deleteCancel').addEventListener('click', () => { close(); open.focus(); });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const word = $('#deleteWord').value.trim();
+      if (word !== 'DELETE') { msg('deleteMsg', t('deleteErrWord'), 'error'); $('#deleteWord').focus(); return; }
+      const btn = $('#deleteConfirm'); btn.disabled = true;
+      deleting = true;
+      const { data, error } = await db.rpc('request_account_deletion', { p_confirm: word });
+      if (error) {
+        deleting = false; btn.disabled = false;
+        const m = (error.message || '') + ' ' + (error.hint || '');
+        msg('deleteMsg', /login_again/.test(m) ? t('deleteErrLogin') : /captain_of_active_team/.test(m) ? t('deleteErrCaptain')
+          : /on_team_after_deadline/.test(m) ? t('deleteErrDeadline') : /confirm_word/.test(m) ? t('deleteErrWord') : ocErrorMessage(error), 'error');
+        return;
+      }
+      const date = new Date(data).toLocaleDateString(ocLang() === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Dhaka' });
+      authNotice = t('deleteDone', { date });
+      close(); btn.disabled = false;
+      await db.auth.signOut();
+      deleting = false;
+    });
   }
 
   // ---------- Log in / sign up ----------
@@ -209,6 +251,10 @@
         if (authMode === 'signup') {
           const { data, error } = await db.auth.signUp({ email, password, options: { emailRedirectTo: PAGE, captchaToken: captchaTok } });
           if (error) throw error;
+          // Supabase hides whether an email is taken: an existing account comes back with no identities.
+          if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+            setAuthMode('login'); msg('authMsg', t('errExists'), 'error'); return;
+          }
           if (data.session) return;              // email confirmation switched off: already logged in
           $('#checkEmailBody').textContent = t('checkEmailBody', { email });
           show('checkemail');

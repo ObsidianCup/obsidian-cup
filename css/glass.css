@@ -283,3 +283,11 @@ body.theme-glass {
   .g-event::before { top: var(--s6); bottom: var(--s6); }
   .g-event .g-champ, .g-event .g-champ + .g-champ { padding: var(--s4); border-bottom: 1px solid var(--line); }
 }
+
+/* Header login button: full words on wider screens, short on phones */
+.g-login { white-space: nowrap; }
+.g-login-short { display: none; }
+@media (max-width: 480px) {
+  .g-login-long { display: none; }
+  .g-login-short { display: inline; }
+}

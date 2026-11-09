@@ -21,17 +21,17 @@ This is the English source for every legal text players will see in the Obsidian
 
 Shown once at sign-up. A player must agree before creating a profile.
 
-**Obsidian Cup Account Terms of Use — version 1.1**
+**Obsidian Cup Account Terms of Use — version 1.2**
 
 1. **Who we are.** Obsidian Cup is a sports tournament organiser based in Bangladesh, run by its founder and head organiser, Uriana Faiha, trading as Obsidian Cup ("Obsidian Cup", "we", "us"). These terms apply to your Obsidian Cup account and to your use of obsidiancup.vercel.app and any domain we later use.
 2. **Your account.** You sign in with your own Google account, or with your own email address and a password you choose. Keep your password private; Obsidian Cup will never ask for it. You may hold only one Obsidian Cup account. You must not create an account for someone else, share your account, or let anyone else use it.
 3. **Accurate information.** You must give true, complete and current information, including your full name, date of birth and contact details. You must update it if it changes. Giving false information, including a false date of birth or another person's identity, may lead to your account being suspended and to disqualification from any event, without refund.
 4. **Age.** You may create an account yourself from age 13. Under 13, your account can be used only after your parent or legal guardian has given consent. If you are 13 to 17, you can create and use your account, but you cannot join a team for a tournament, upload ID documents or take part in any event until your parent or legal guardian has given consent through the guardian consent process.
-5. **Captains.** Only a person given a valid captain code by Obsidian Cup may create a team. A captain code is personal, works once, and is tied to the account that uses it first.
+5. **Captains.** A team captain must be a player on that team. A captain under 18 needs consent from their parent or legal guardian before submitting the team. Captains see whether each player is eligible for the category, not their date of birth.
 6. **Acceptable use.** You must not: misuse the website or try to access data that is not yours; try to get around limits, rules or security; upload false, offensive or someone else's documents; harass other players or our staff; or use the platform for any unlawful purpose.
 7. **Our rights.** We may refuse, suspend or close an account, remove a player from a team, or cancel a registration if these terms, the tournament rules or the law are broken. Where reasonable, we will tell you why.
 8. **Availability.** We aim to keep the website working, but it may sometimes be unavailable. Registration deadlines are not extended because of a temporary outage unless we announce an extension.
-9. **Closing your account.** You may ask us to close your account at any time by emailing obsidiancup.official@gmail.com. Some records may be kept for the periods set out in our Privacy Notice.
+9. **Deleting your account.** You can delete your account yourself from your account page, or ask us by emailing obsidiancup.official@gmail.com. Your account is deleted 14 days after you ask; logging in during those 14 days cancels the deletion. You cannot delete your account while you are the captain of a team in an event that has not finished, or while you are on a team after its registration deadline; ask us to remove you first. Your player code is retired and never given to anyone else. Some records are kept for the periods set out in our Privacy Notice.
 10. **Changes to these terms.** We may update these terms. If a change is important, you will be asked to agree to the new version the next time you sign in. If you do not agree, you may close your account.
 11. **Law.** These terms are governed by the laws of Bangladesh. Any dispute will be handled by the courts of Dhaka, Bangladesh, after first trying to settle it with us in good faith.
 12. **Contact.** obsidiancup.official@gmail.com. Formal notices to us must be sent to this address.
@@ -40,7 +40,7 @@ Shown once at sign-up. A player must agree before creating a profile.
 
 Shown at sign-up, and linked in the footer of every page. Written to cover what Bangladesh's [Personal Data Protection Ordinance 2025](https://www.thedailystar.net/tech-startup/news/bangladeshs-personal-data-protection-ordinance-2025-key-takeaways-4015401) asks for: why data is collected, how it is used, who sees it, how long it is kept, and the right to withdraw consent.
 
-**Obsidian Cup Privacy Notice — version 1.3**
+**Obsidian Cup Privacy Notice — version 1.4**
 
 **What we collect**
 
@@ -81,13 +81,13 @@ Your data is stored with our service provider Supabase, on servers in Singapore,
 | --- | --- |
 | ID photos | Deleted 30 days after the event you registered for. We keep only a note that your ID was checked |
 | Medical notes | Deleted 30 days after each event, unless you choose to keep them on your profile |
-| Profile, sports profile, profile photo and contact details | Until you close your account, or 3 years after your last event. You can clear any sports detail or remove your photo yourself at any time |
+| Profile, sports profile, profile photo and contact details | Until your account is deleted (14 days after you ask), or 3 years after your last event. You can clear any sports detail or remove your photo yourself at any time |
 | Results, team names and rosters | Kept permanently as part of the tournament history |
 | Payment records and consent records | 6 years, to meet legal and accounting needs |
 
 **Your rights**
 
-You can: see the data we hold about you; correct it; download a copy; withdraw a consent you gave; and ask us to delete your data. Email obsidiancup.official@gmail.com and we will reply within 30 days. If you withdraw consent needed to take part, such as the ID check, you cannot play in upcoming events, but past results stay in the tournament history.
+You can: see the data we hold about you; correct it; download a copy; withdraw a consent you gave; and delete your account yourself from your account page, or ask us to delete your data. Email obsidiancup.official@gmail.com and we will reply within 30 days. If you withdraw consent needed to take part, such as the ID check, you cannot play in upcoming events, but past results stay in the tournament history.
 
 **If something goes wrong**
 
@@ -274,14 +274,13 @@ This consent covers all Obsidian Cup events until the player turns 18, unless I 
 
 The code terms are shown when a captain enters a code. The declaration is agreed when the captain submits the team's registration.
 
-**Captain Code Terms — version 1.1**
+**Captain Code Terms — version 1.0**
 
-1. A captain must be at least 18 years old on the first day of the event.
-2. Captain codes are given only by Obsidian Cup, by request to obsidiancup.official@gmail.com or our official Instagram.
-3. Each code works once, for one team in one event, and expires on the date shown with it.
-4. The code becomes tied to the account that uses it first. Do not share it. If someone else uses your code, contact us immediately and we will cancel it.
-5. Obsidian Cup may refuse or cancel a code at any time, for example if a category is full or the request appears false.
-6. Captaincy can be moved to another player in the team only by Obsidian Cup, on request.
+1. Captain codes are given only by Obsidian Cup, by request to obsidiancup.official@gmail.com or our official Instagram.
+2. Each code works once, for one team in one event, and expires on the date shown with it.
+3. The code becomes tied to the account that uses it first. Do not share it. If someone else uses your code, contact us immediately and we will cancel it.
+4. Obsidian Cup may refuse or cancel a code at any time, for example if a category is full or the request appears false.
+5. Captaincy can be moved to another player in the team only by Obsidian Cup, on request.
 
 **Captain Declaration — version 1.0**
 

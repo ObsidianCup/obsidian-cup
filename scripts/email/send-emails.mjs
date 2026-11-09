@@ -17,7 +17,6 @@ const MODE = (process.env.EMAIL_MODE || 'test').toLowerCase();
 const TEST_TO = (process.env.EMAIL_TEST_TO || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
 
 export async function run({ fetchImpl = fetch, transport, log = console.log } = {}) {
-  if (MODE === 'off') { log('Email sending is switched off (EMAIL_MODE=off).'); return { sent: 0, failed: 0, skipped: true }; }
   if (!URL_ || !KEY || !GMAIL_USER || !GMAIL_PASS) {
     log('Email sender is not set up yet (missing secrets). Nothing sent.');
     return { sent: 0, failed: 0, skipped: true };
@@ -29,6 +28,25 @@ export async function run({ fetchImpl = fetch, transport, log = console.log } = 
     if (!r.ok) throw new Error(`${fn} failed with status ${r.status}`);
     return r.status === 204 ? null : r.json();
   };
+
+  // Accounts whose 14 days are up: retire the code, queue the goodbye email,
+  // remove the photo, then delete the login (the profile goes with it).
+  // Runs whatever the email mode is. Logs only counts.
+  let deleted = 0;
+  try {
+    const due = (await rpc('due_account_deletions', {})) || [];
+    for (const id of due) {
+      try {
+        if (!(await rpc('finish_account_deletion', { p_user: id }))) continue;
+        await fetchImpl(`${URL_}/storage/v1/object/avatars/${id}/avatar.webp`, { method: 'DELETE', headers }).catch(() => {});
+        const r = await fetchImpl(`${URL_}/auth/v1/admin/users/${id}`, { method: 'DELETE', headers });
+        if (!r.ok) throw new Error(`status ${r.status}`);
+        deleted++;
+      } catch (e) { log(`An account deletion failed (${(e && e.message) || 'error'}); it will be tried again.`); }
+    }
+  } catch (e) { log(`Account deletions skipped: ${(e && e.message) || 'error'}`); }
+  if (deleted) log(`Deleted ${deleted} account(s).`);
+  if (MODE === 'off') { log('Email sending is switched off (EMAIL_MODE=off).'); return { sent: 0, failed: 0, skipped: true }; }
 
   if (MODE !== 'live' && !TEST_TO.length) { log('Test mode with no test addresses: nothing sent.'); return { sent: 0, failed: 0, skipped: true }; }
   let rows = await rpc('email_claim', { p_limit: BATCH });

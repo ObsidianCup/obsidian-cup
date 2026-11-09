@@ -31,7 +31,7 @@ function injectNav() {
         ${SITE_CONFIG.tournamentActive ? `<li><a href="${p('pages/fixtures.html')}" data-key="navFixtures">Fixtures</a></li>` : ''}
         ${SITE_CONFIG.registrationOpen ? `<li><a href="${p('pages/register.html')}" class="nav-register-btn" data-key="navRegister">Register</a></li>` : ''}
         ${SITE_CONFIG.rulesVisible ? `<li><a href="${p('pages/rules.html')}">Rules</a></li>` : ''}
-        ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/account.html')}" data-key="navAccount">Log in</a></li>` : ''}
+        ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/account.html')}" data-key="navAccount">Log in or sign up</a></li>` : ''}
       </ul>
     </nav>
     <div class="lang-toggle" role="group" aria-label="Language toggle">
@@ -64,7 +64,7 @@ function injectNav() {
     ${SITE_CONFIG.tournamentActive ? `<a href="${p('pages/fixtures.html')}">Fixtures</a>` : ''}
     ${SITE_CONFIG.registrationOpen ? `<a href="${p('pages/register.html')}" data-key="navRegister">Register</a>` : ''}
     ${SITE_CONFIG.rulesVisible ? `<a href="${p('pages/rules.html')}">Rules</a>` : ''}
-    ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/account.html')}" data-key="navAccount">Log in</a>` : ''}
+    ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/account.html')}" data-key="navAccount">Log in or sign up</a>` : ''}
     <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Language toggle">
       <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
       <span class="lang-sep">|</span>
@@ -134,7 +134,7 @@ function injectGlassChrome() {
       <button type="button" class="lang-btn" data-lang="bn" lang="bn">বাংলা</button>
     </div>`;
   const login = SITE_CONFIG.accountsEnabled
-    ? `<a class="g-btn g-btn-second g-btn-small" href="${p('pages/account.html')}" data-key="navAccount">Log in</a>` : '';
+    ? `<a class="g-btn g-btn-second g-btn-small g-login" href="${p('pages/account.html')}"><span class="g-login-long" data-key="navAccount">Log in or sign up</span><span class="g-login-short" data-key="navAccountShort" aria-hidden="true">Log in</span></a>` : '';
 
   const header = document.createElement('header');
   header.className = 'g-header';

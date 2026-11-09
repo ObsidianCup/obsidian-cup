@@ -8,8 +8,8 @@
 // Bump a version here (and in docs/legal + scripts/split_legal.py output)
 // to make every player agree again.
 const OC_LEGAL = {
-  terms: '1.1',
-  privacy: '1.3',
+  terms: '1.2',
+  privacy: '1.4',
   media: '1.0',
   dob_declaration: '1.2',
   media_feature: '1.0',
@@ -80,7 +80,7 @@ const OC_TEXT = {
     linkExpired: 'This link has expired or was already used. Log in if your email is confirmed, or create your account again to get a new link.',
     errCaptcha: 'Please complete the check above the button (it proves you are not a robot), then try again.',
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
-    errExists: 'An account with this email already exists. Try logging in.',
+    errExists: "An account with this email already exists. Log in instead, or use \"Forgot password?\" if you cannot remember your password.",
     // consent
     consentLabel: 'Before you start',
     consentTitle: 'Your agreement',
@@ -129,7 +129,7 @@ const OC_TEXT = {
     laterAgreement: 'Event agreement and media consent for that event',
     laterAgreementWhy: 'The rules, safety and photo terms for that specific tournament.',
     laterGuardian: 'Parent or guardian consent',
-    laterGuardianWhy: 'Needed because you are under 18. We send your parent or guardian a private link; they fill it in themselves.',
+    laterGuardianWhy: "Needed because you are under 18. We email your parent or guardian a private link; they fill it in themselves. Ask them to check their spam folder too.",
     laterId: 'A photo of your ID',
     laterIdWhy: 'To confirm your age for the category. It is private and deleted 30 days after the event.',
     laterTeam: 'Join a team',
@@ -354,6 +354,21 @@ const OC_TEXT = {
     adminLiveTurnOn: "Turn on",
     adminLiveTurnOff: "Turn off",
     legalOnThisPage: "On this page",
+    // delete account
+    deleteTitle: "Delete account",
+    deleteIntro: "Your account is deleted 14 days after you ask. Log in during those 14 days and it stays.",
+    deleteOpen: "Delete my account",
+    deleteGone: "Deleted: your profile, photo, contact details, emergency contact and sports details. Your player code is retired and never given to anyone else.",
+    deleteKept: "Kept: past results and team lists, and the records of what you agreed to, as the Privacy Notice explains.",
+    deleteTeams: "If you are on a team in an event that is still open for registration, you leave it.",
+    deleteConfirmLabel: "Type DELETE to confirm",
+    deleteConfirmBtn: "Delete my account",
+    deleteErrWord: "Type DELETE in capital letters.",
+    deleteErrLogin: "For your safety, log out and log in again, then delete your account within 15 minutes.",
+    deleteErrCaptain: "You are the captain of a team in an event that has not finished. Hand the captaincy to another player or withdraw the team first.",
+    deleteErrDeadline: "You are on a team after its registration deadline. Ask the organisers to remove you first: obsidiancup.official@gmail.com.",
+    deleteDone: "Your account will be deleted on {date}. We sent you an email; check your spam folder too. Log in before then if you want to keep it.",
+    deleteCancelled: "Welcome back. You logged in, so your account will not be deleted.",
   },
   bn: {
     // Translated by the organiser, Nov 2026. Same keys as above.

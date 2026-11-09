@@ -1248,7 +1248,7 @@
  {
   "id": "acct.errExists",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "An account with this email already exists. Try logging in.",
+  "en": "An account with this email already exists. Log in instead, or use \"Forgot password?\" if you cannot remember your password.",
   "bn": "এই ইমেইল দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রয়েছে। লগ ইন করার চেষ্টা করুন।",
   "placeholder": false
  },
@@ -1577,7 +1577,7 @@
  {
   "id": "acct.laterGuardianWhy",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Needed because you are under 18. We send your parent or guardian a private link; they fill it in themselves.",
+  "en": "Needed because you are under 18. We email your parent or guardian a private link; they fill it in themselves. Ask them to check their spam folder too.",
   "bn": "আপনার বয়স ১৮ বছরের কম হওয়ায় এটি প্রয়োজন। আমরা আপনার অভিভাবককে একটি ব্যক্তিগত লিংক পাঠাব; তিনি নিজেই সেটি পূরণ করবেন।",
   "placeholder": false
  },
@@ -3040,7 +3040,7 @@
  {
   "id": "rules-05",
   "section": "Rules page",
-  "en": "All participating players must meet the eligibility criteria specified for the tournament category listed on the registration page for that event (for example, age limits for interschool or U19 categories). Team managers or captains are responsible for ensuring all players are eligible. The team captain must be at least 18 years old.",
+  "en": "All participating players must meet the eligibility criteria specified for the tournament category listed on the registration page for that event (for example, age limits for interschool or U19 categories). Team managers or captains are responsible for ensuring all players are eligible. The team captain must be a player on the team; a captain under 18 needs consent from a parent or guardian. Each team names a vice-captain, and may also have one coach who does not play.",
   "bn": "",
   "placeholder": false
  },
@@ -3054,7 +3054,7 @@
  {
   "id": "rules-07",
   "section": "Rules page",
-  "en": "Teams must register a minimum of 6 and a maximum of 12 players, with up to 2 liberos. A valid team roster must be submitted during registration with identification documents for each player.",
+  "en": "Teams must register 6 to 12 players. A team may name up to 2 liberos, with only 1 on court at a time, and must have 6 players besides its liberos. A valid team roster must be submitted during registration with identification documents for each player.",
   "bn": "",
   "placeholder": false
  },
@@ -3587,6 +3587,104 @@
   "id": "acct.adminLiveTurnOff",
   "section": "Player account pages (log in, profile, admin)",
   "en": "Turn off",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Delete account",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteIntro",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Your account is deleted 14 days after you ask. Log in during those 14 days and it stays.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteOpen",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Delete my account",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteGone",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Deleted: your profile, photo, contact details, emergency contact and sports details. Your player code is retired and never given to anyone else.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteKept",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Kept: past results and team lists, and the records of what you agreed to, as the Privacy Notice explains.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteTeams",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "If you are on a team in an event that is still open for registration, you leave it.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteConfirmLabel",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Type DELETE to confirm",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteConfirmBtn",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Delete my account",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteErrWord",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Type DELETE in capital letters.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteErrLogin",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "For your safety, log out and log in again, then delete your account within 15 minutes.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteErrCaptain",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "You are the captain of a team in an event that has not finished. Hand the captaincy to another player or withdraw the team first.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteErrDeadline",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "You are on a team after its registration deadline. Ask the organisers to remove you first: obsidiancup.official@gmail.com.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteDone",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Your account will be deleted on {date}. We sent you an email; check your spam folder too. Log in before then if you want to keep it.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteCancelled",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Welcome back. You logged in, so your account will not be deleted.",
   "bn": "",
   "placeholder": false
  }

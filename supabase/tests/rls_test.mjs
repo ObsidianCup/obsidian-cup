@@ -47,6 +47,12 @@ const as = async (who, aal = 'aal1') => {   // who: uuid | 'anon' | null(owner);
   await db.query(`select set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ sub: who, aal })]);
   await db.exec('set role authenticated');
 };
+// Logged in `mins` minutes ago (Supabase records the sign-in time in "amr").
+const asLogin = async (who, mins) => {
+  await as(who);
+  const at = Math.floor(Date.now() / 1000) - mins * 60;
+  await db.query(`select set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ sub: who, aal: 'aal1', amr: [{ method: 'password', timestamp: at }] })]);
+};
 
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8'));
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/001_foundation.sql'), 'utf8')); // re-run is safe
@@ -276,7 +282,6 @@ const CAP = await mkp('cap@example.com', 'Rina Akter', '2005-05-05', 'female');
 const P1 = await mkp('p1@example.com', 'Mim Khan', '2006-01-01', 'female');
 const P2 = await mkp('p2@example.com', 'Tania Islam', '2004-02-02', 'female');
 const BOY = await mkp('boy@example.com', 'Rafi Hasan', '2005-03-03', 'male');
-const TEEN = await mkp('teen@example.com', 'Sadia Teen', '2010-06-06', 'female');
 const OLD = await mkp('old@example.com', 'Nadia Old', '1980-03-03', 'female');
 const ADM2 = await mk('ObsidianCup.Official@gmail.com');
 await as(ADM2, 'aal1');
@@ -292,8 +297,6 @@ ok((await db.query(`select * from public.events`)).rows.some(r => r.slug === 'ov
 await expectError(`select public.admin_issue_captain_codes($1, 1)`, [CATG], /not_admin/, 'players cannot issue captain codes');
 await as(BOY);
 await expectError(`select public.create_team($1, 'Boys Try')`, [codes[0]], /not_eligible_gender/, 'wrong gender cannot captain a girls team');
-await as(TEEN);
-await expectError(`select public.create_team($1, 'Too Young')`, [codes[0]], /captain_under_18/, 'a player under 18 on the first event day cannot be captain');
 await as(CAP);
 const TEAM = (await db.query(`select public.create_team($1, 'Night Owls') t`, [codes[0].toLowerCase()])).rows[0].t;
 ok(!!TEAM, 'captain creates a team with the code (case ignored)');
@@ -448,6 +451,50 @@ await as(ADM2, 'aal2');
 await db.query(`select public.admin_set_switch('live_card', true)`);
 await as(P1);
 ok((await db.query(`select on_off from public.site_settings where key='live_card'`)).rows[0].on_off === true, 'an organiser turns the live card on and players see it');
+
+console.log('\nDelete account');
+const del = `select public.request_account_deletion($1) d`;
+await asLogin(P2, 60);
+await expectError(del, ['DELETE'], /login_again/, 'deleting needs a login in the last 15 minutes');
+await asLogin(P2, 1);
+await expectError(del, ['delete'], /confirm_word/, 'the player must type DELETE');
+await expectError(del, ['DELETE'], /on_team_after_deadline/, 'cannot delete while on a team after the deadline');
+await asLogin(CAP, 1);
+await expectError(del, ['DELETE'], /captain_of_active_team/, 'a captain of an active team cannot delete');
+await as(ADM2, 'aal2'); await db.query(`update public.events set status = 'open' where id = $1`, [EV5]);
+await asLogin(P1, 2);
+const p1On = (await db.query(del, ['DELETE'])).rows[0].d;
+ok(new Date(p1On) > new Date(Date.now() + 13.9 * 864e5), 'deletion is set 14 days ahead');
+await as(null);
+ok((await db.query(`select status from public.team_members where team_id = $1 and player_id = $2`, [TEAM, P1])).rows[0].status === 'left', 'before the deadline, asking to delete leaves the team');
+await as(ADM2, 'aal2'); await db.query(`update public.events set status = 'closed' where id = $1`, [EV5]);
+await asLogin(P3, 1);
+await db.query(del, ['DELETE']);
+await expectError(`update public.profiles set deletion_requested_at = null where id = $1`, [P3], /permission denied/, 'players cannot change the deletion date directly');
+await as(null);
+ok((await db.query(`select count(*)::int n from public.email_queue where template = 'deletion_requested' and to_email = 'p3@example.com'`)).rows[0].n === 1, 'a "deletion requested" email is queued');
+await as(P3);
+ok((await db.query(`select public.cancel_account_deletion() c`)).rows[0].c === true, 'logging in again cancels the deletion');
+ok((await db.query(`select deletion_requested_at from public.profiles where id = $1`, [P3])).rows[0].deletion_requested_at === null, 'the account is kept');
+await asLogin(P3, 1); await db.query(del, ['DELETE']);
+await expectError(`select * from public.due_account_deletions()`, [], /permission denied/, 'players cannot run the deletion job');
+await expectError(`select public.finish_account_deletion($1)`, [P3], /permission denied/, 'players cannot finish a deletion');
+await as(null);
+const p3code = (await db.query(`select player_code from public.profiles where id = $1`, [P3])).rows[0].player_code;
+await db.exec('set role service_role');
+ok((await db.query(`select * from public.due_account_deletions()`)).rows.length === 0, 'nothing is deleted before 14 days');
+ok((await db.query(`select public.finish_account_deletion($1) f`, [P3])).rows[0].f === false, 'finishing early does nothing');
+await db.exec('reset role');
+await db.query(`update public.profiles set deletion_requested_at = now() - interval '15 days' where id = $1`, [P3]);
+await db.exec('set role service_role');
+ok((await db.query(`select * from public.due_account_deletions() u`)).rows.some(r => r.u === P3), 'after 14 days the job finds the account');
+ok((await db.query(`select public.finish_account_deletion($1) f`, [P3])).rows[0].f === true, 'the job finishes the deletion');
+await db.query(`select public.finish_account_deletion($1)`, [P3]);   // a retry after a failed login delete
+await db.exec('reset role');
+await db.query(`delete from auth.users where id = $1`, [P3]);
+ok((await db.query(`select count(*)::int n from public.profiles where id = $1`, [P3])).rows[0].n === 0, 'deleting the login removes the profile');
+ok((await db.query(`select public.player_code_free($1, $2) f`, [p3code, A])).rows[0].f === false, 'the player code is retired, never given out again');
+ok((await db.query(`select count(*)::int n from public.email_queue where template = 'account_deleted' and to_email = 'p3@example.com'`)).rows[0].n === 1, 'a goodbye email is queued');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

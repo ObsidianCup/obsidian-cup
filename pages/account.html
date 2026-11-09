@@ -169,6 +169,7 @@
         </div>
         <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" data-action="signout" data-t="signOut">Log out</button>
       </div>
+      <div id="appMsg"></div>
 
       <div class="acct-card">
         <p class="acct-label" style="margin-bottom:0.6rem;" data-t="codeLabel">Your player code</p>
@@ -481,6 +482,28 @@
           </label>
         </div>
       </form>
+
+      <div class="acct-card acct-delete" id="deleteCard">
+        <h2 data-t="deleteTitle">Delete account</h2>
+        <p class="acct-muted" data-t="deleteIntro"></p>
+        <button class="acct-btn acct-btn-danger acct-btn-small" type="button" id="deleteOpen" data-t="deleteOpen" aria-expanded="false" aria-controls="deleteForm">Delete my account</button>
+        <form id="deleteForm" novalidate hidden>
+          <ul class="acct-delete-list">
+            <li data-t="deleteGone"></li>
+            <li data-t="deleteKept"></li>
+            <li data-t="deleteTeams"></li>
+          </ul>
+          <div class="acct-field">
+            <label for="deleteWord" data-t="deleteConfirmLabel">Type DELETE to confirm</label>
+            <input class="acct-input" id="deleteWord" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="10" />
+          </div>
+          <div id="deleteMsg" aria-live="polite"></div>
+          <div class="acct-delete-actions">
+            <button class="acct-btn acct-btn-danger acct-btn-small" type="submit" id="deleteConfirm" data-t="deleteConfirmBtn">Delete my account</button>
+            <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="deleteCancel" data-t="cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
     </section>
   </main>
 

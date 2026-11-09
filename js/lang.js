@@ -31,7 +31,7 @@ const TRANSLATIONS = {
     gSeasonsMeta: "Five events, 48 teams and more than 575 players since January 2026",
     gPartnersTitle: "Partners who believed early",
     navHome: "Home", navFutsal: "Futsal", navVolleyball: "Volleyball", navTournaments: "Tournaments", navAbout: "About",
-    navFaq: "FAQ", navRegister: "Register", navAccount: "Log in",
+    navFaq: "FAQ", navRegister: "Register", navAccount: "Log in or sign up", navAccountShort: "Log in",
     heroEst: "Est. 2026", heroLocation: "Bangladesh",
     heroTitle: "Obsidian Cup",
     heroTagline: "Carved by Legacy · Crowned in Obsidian",
@@ -232,6 +232,7 @@ const TRANSLATIONS = {
     gSeasonsMeta: "জানুয়ারি ২০২৬ থেকে ৫টি ইভেন্ট, ৪৮টি দল এবং ৫৭৫ জনেরও বেশি খেলোয়াড়",
     gPartnersTitle: "শুরুর দিকেই যারা পাশে ছিল",
     navAccount: "লগ ইন",
+    navAccountShort: "লগ ইন",
   }
 };
 

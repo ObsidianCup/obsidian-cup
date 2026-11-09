@@ -136,6 +136,25 @@ Vercel support replied in writing: the site counts as organisational and commerc
 
 Update 9 Nov (replaces the 3 Nov note): owner agreed to pay for Vercel Pro ($20/month) only during each registration and tournament period, then downgrade to Hobby. During Pro months the site runs full team registration, payment and parent consent; the rest of the year it shows stats, teams and rosters only. So build registration features behind one on/off setting in js/config.js. When she upgrades: set a low spend limit (default alert is $200). Pro includes one free first-year domain on some endings (.live, .co, .app; not .com). Not confirmed by Vercel that the stats-only months fit Hobby.
 
+## Stage 1 (9 Nov): built, waiting for the owner's Supabase step
+
+- Delete account: card at the bottom of the account page; type DELETE; must have
+  logged in within 15 minutes (token "amr" time); 14 days, logging in cancels;
+  blocked for captains of active teams and players on a team after the deadline
+  (event status 'closed'); teams in open events are left. Migration 013, emails
+  in scripts/email/templates.mjs, deletion run by scripts/email/send-emails.mjs.
+  The live deletion (Auth admin API with the new secret key) is untested.
+- "Log in or sign up" menu label ("Log in" on phones); sign-up with a used email
+  now says so and switches to Log in.
+- Rules page: captain (player, under-18 with parent consent, vice-captain, coach)
+  and liberos. The 013 captain-18 migration was dropped (never ran live).
+- Terms 1.2 and Privacy 1.4 (deleting, captains); everyone agrees again.
+- Owner must run: 013_delete_account.sql, then seed/legal_documents.sql
+  (supabase/README.md step 6e). Until then the live account page shows the new
+  agreement but cannot save it, so do this before anyone tests.
+- Bangla out of date (owner translates): rules-05, rules-07, acct.errExists,
+  acct.laterGuardianWhy; new acct.delete* keys have no Bangla.
+
 ## Next steps (suggested order)
 
 1. Private test run of accounts with a few friends on the live site; collect
@@ -146,8 +165,6 @@ Update 9 Nov (replaces the 3 Nov note): owner agreed to pay for Vercel Pro ($20/
    team pages on top of 009, guardian consent, per-event consents, ID upload, bKash payment,
    verification queue, reminders, handbook (see SEASON-5-LAUNCH-PLAN.md).
 3. Legal: participation 1.0 still mentions football; fix in the next version.
-   Waiting to be run in Supabase, together with the consent changes once decided:
-   migration 013 (captain 18+) and the seed (Payment 1.1, Captain code terms 1.1).
 4. Public launch: `accountsEnabled: true` in js/config.js.
 
 ## Handy tools Claude used (rebuild in a new session if needed)
