@@ -291,3 +291,4 @@ body.theme-glass {
   .g-login-long { display: none; }
   .g-login-short { display: inline; }
 }
+@media (pointer: coarse) { .g-btn-small { min-height: 44px; } }

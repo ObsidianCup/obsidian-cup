@@ -132,6 +132,13 @@
       form.hidden = false; open.hidden = true; open.setAttribute('aria-expanded', 'true'); $('#deleteWord').focus();
     });
     $('#deleteCancel').addEventListener('click', () => { close(); open.focus(); });
+    // Check the word when leaving the field; clear the message as soon as it is edited.
+    $('#deleteWord').addEventListener('blur', () => {
+      const v = $('#deleteWord').value.trim();
+      if (v && v !== 'DELETE') msg('deleteMsg', t('deleteErrWord'), 'error');
+    });
+    $('#deleteWord').addEventListener('input', () => msg('deleteMsg', ''));
+    form.addEventListener('keydown', (e) => { if (e.key === 'Escape') { close(); open.focus(); } });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const word = $('#deleteWord').value.trim();
