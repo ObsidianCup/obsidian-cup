@@ -26,15 +26,28 @@
 
   <main id="main">
 
-    <section class="g-hero" aria-labelledby="heroTitle">
-      <div class="g-stack">
-        <span class="g-stack-ghost" aria-hidden="true">OBSIDIAN OBSIDIAN</span>
-        <h1 id="heroTitle">OBSIDIAN CUP</h1>
-        <span class="g-stack-ghost" aria-hidden="true">OBSIDIAN OBSIDIAN</span>
-      </div>
-      <div class="g-wrap g-hero-foot">
-        <p class="g-lead" data-key="gHeroLead">A stage for players from every corner of Bangladesh, at every level. Carved by legacy, crowned in obsidian.</p>
-        <a class="g-btn g-btn-main" href="/pages/tournaments.html" data-key="gHeroCta">See Season 4 results</a>
+    <section class="g-hero2" aria-labelledby="heroTitle">
+      <div class="g-wrap g-hero2-grid">
+        <div>
+          <h1 id="heroTitle">A stage for players from every corner of Bangladesh</h1>
+          <p class="g-lead">Volleyball and futsal tournaments at every level, from school teams to open age.</p>
+          <div class="g-actions">
+            <a class="g-btn g-btn-main" href="/pages/tournaments.html" data-key="gHeroCta">See Season 4 results</a>
+            <a class="g-btn g-btn-second" href="/pages/account.html" data-needs-accounts hidden>Create your player account</a>
+          </div>
+        </div>
+        <aside class="g-nextcard" aria-labelledby="nextTitle">
+          <p class="g-nextup">Next up</p>
+          <div class="g-nextnum">
+            <b aria-hidden="true">5</b>
+            <div>
+              <h2 id="nextTitle"><strong>Obsidian Volleyball Cup</strong></h2>
+              <p class="g-meta">Season 5</p>
+            </div>
+          </div>
+          <p class="g-prose" data-key="gNextBody">Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts open before registration, so your team can sign up in minutes.</p>
+          <a class="g-btn g-btn-second" href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener">Follow @obsidian.volleyball</a>
+        </aside>
       </div>
     </section>
 
@@ -52,14 +65,37 @@
       </div>
     </section>
 
-    <section class="g-section" aria-labelledby="nextTitle">
-      <div class="g-wrap">
-        <div class="g-panel">
+    <section class="g-band" aria-labelledby="sportsTitle">
+      <div class="g-wrap g-band-inner">
+        <h2 class="g-h2" id="sportsTitle" style="margin-bottom: var(--s8)">Two sports, one stage</h2>
+        <div class="g-tabs" role="tablist" aria-label="Sport">
+          <button type="button" class="g-tab" role="tab" id="tabVolleyball" aria-controls="panelVolleyball" aria-selected="true" data-key="navVolleyball">Volleyball</button>
+          <button type="button" class="g-tab" role="tab" id="tabFutsal" aria-controls="panelFutsal" aria-selected="false" tabindex="-1" data-key="navFutsal">Futsal</button>
+          <span class="g-tabbar" aria-hidden="true"></span>
+        </div>
+        <div class="g-tabpanel" role="tabpanel" id="panelVolleyball" aria-labelledby="tabVolleyball">
           <div>
-            <h2 id="nextTitle" data-key="gNextTitle">Season 5 is next</h2>
-            <p class="g-prose" data-key="gNextBody">Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts open before registration, so your team can sign up in minutes.</p>
+            <p class="g-lead">Where Obsidian Cup started. Four volleyball tournaments since January 2026, for school, under-19 and open-age teams.</p>
+            <p style="margin-top: var(--s4)"><a class="g-link" href="/pages/volleyball.html">Volleyball results</a></p>
           </div>
-          <a class="g-btn g-btn-second" href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener">Follow @obsidian.volleyball</a>
+          <ul class="g-facts">
+            <li><span>Latest</span><span>Volleyball Cup, Season 4</span></li>
+            <li><span>Dates</span><span>1 to 4 July 2026</span></li>
+            <li><span>Teams</span><span>17, in three categories</span></li>
+            <li><span>Instagram</span><a href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener">@obsidian.volleyball</a></li>
+          </ul>
+        </div>
+        <div class="g-tabpanel" role="tabpanel" id="panelFutsal" aria-labelledby="tabFutsal" hidden>
+          <div>
+            <p class="g-lead">Our first futsal tournament was girls only, won by Thaelor at JAFF Arena and Academy, Bashundhara.</p>
+            <p style="margin-top: var(--s4)"><a class="g-link" href="/pages/futsal.html">Futsal results</a></p>
+          </div>
+          <ul class="g-facts">
+            <li><span>Latest</span><span>Futsal Cup, Season 1</span></li>
+            <li><span>Date</span><span>23 June 2026</span></li>
+            <li><span>Champions</span><span>Thaelor</span></li>
+            <li><span>Instagram</span><a href="https://www.instagram.com/obsidian.futsal/" target="_blank" rel="noopener">@obsidian.futsal</a></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -102,6 +138,17 @@
             <span class="g-season-go" aria-hidden="true">Results</span>
           </a></li>
         </ul>
+      </div>
+    </section>
+
+    <section class="g-section" aria-labelledby="flowTitle" data-needs-accounts hidden>
+      <div class="g-wrap">
+        <div class="g-section-head"><h2 class="g-h2" id="flowTitle">From sign-up to match day</h2></div>
+        <ol class="g-flow">
+          <li><b aria-hidden="true">1</b><h3>Create your account</h3><p>Fill in your profile once. It stays ready for every season.</p></li>
+          <li><b aria-hidden="true">2</b><h3>Join your team</h3><p>Your captain shares one link in the team's group. Tap it to join.</p></li>
+          <li><b aria-hidden="true">3</b><h3>Play on match day</h3><p>Bring your ID. Your name is already on the gate list.</p></li>
+        </ol>
       </div>
     </section>
 
@@ -156,5 +203,6 @@
   <script src="js/lang.js"></script>
   <script src="/js/lang-site.js"></script>
   <script src="js/components.js"></script>
+  <script src="js/page-home.js"></script>
 </body>
 </html>

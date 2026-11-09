@@ -96,7 +96,8 @@ body.theme-glass {
 .g-lang { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
 .g-lang button { background: none; border: 0; color: var(--mist); font: 500 0.875rem/1 var(--font-text); padding: var(--s2) var(--s3); min-height: 40px; cursor: pointer; }
 .g-lang button.lang-btn-active { background: var(--ice-tint); color: var(--bone); }
-.g-menu-btn { display: none; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--facet); border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--bone); cursor: pointer; }
+.g-menu-wrap { display: none; }
+.g-menu-btn { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; background: var(--facet); border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--bone); cursor: pointer; }
 
 /* Phone menu: a panel under the header. Opacity + small slide; reduced motion = opacity only. */
 .g-menu { position: fixed; inset: 72px 0 auto 0; z-index: 49; background: var(--glass); border-bottom: 1px solid var(--line); padding: var(--s6) var(--gutter) var(--s8);
@@ -109,7 +110,7 @@ body.theme-glass {
 
 @media (max-width: 960px) {
   .g-nav, .g-tools .g-lang { display: none; }
-  .g-menu-btn { display: inline-flex; }
+  .g-menu-wrap { display: inline-flex; }
   .g-header-inner { min-height: 64px; }
   .g-menu { inset: 64px 0 auto 0; }
 }
@@ -292,3 +293,99 @@ body.theme-glass {
   .g-login-short { display: inline; }
 }
 @media (pointer: coarse) { .g-btn-small { min-height: 44px; } }
+
+/* ============================================
+   Redesign, Nov 2026: same brand, refreshed.
+   Amber marks only "next up" and live status. Every transition answers an action,
+   except a 200ms fade when a page opens; all of them switch off for reduced motion.
+   ============================================ */
+:root { --amber: #f2b84b; --panel-deep: #0e1416; --danger: #b85c5c; --danger-edge: rgba(192, 96, 96, 0.6); --danger-text: #f0c4c4; }
+
+.theme-glass main { animation: g-fade var(--motion) ease-out both; }
+@keyframes g-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Bordered things brighten on hover; nothing lifts */
+.g-season a, .g-partner, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: border-color 120ms ease-out, background-color 120ms ease-out; }
+.g-partner:hover, .g-contact li:hover, .g-quote-card:hover { border-color: var(--line-strong); }
+
+/* ---------- Phone menu: a panel sliding in from the right ---------- */
+.g-scrim { position: fixed; inset: 0; z-index: 59; background: rgba(5, 8, 9, 0.72); opacity: 0; visibility: hidden;
+  transition: opacity 160ms ease-out, visibility 0s linear 160ms; }
+.g-scrim[data-open="true"] { opacity: 1; visibility: visible; transition: opacity 200ms ease-out, visibility 0s; }
+.theme-glass .g-menu { position: fixed; inset: 0 0 0 auto; width: min(340px, 88vw); z-index: 60; overflow-y: auto;
+  background: var(--facet); border-left: 1px solid var(--line); border-bottom: 0; padding: var(--s4) var(--s6) var(--s8);
+  opacity: 1; transform: translateX(100%); visibility: hidden;
+  transition: transform 160ms ease-in, visibility 0s linear 160ms; }
+.theme-glass .g-menu[data-open="true"] { transform: translateX(0); visibility: visible;
+  transition: transform 220ms var(--ease-out), visibility 0s; }
+.g-menu-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s6); }
+.g-menu-head span { font-family: var(--font-display); font-weight: 500; }
+.g-menu-close { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--line); border-radius: var(--radius); color: var(--bone); cursor: pointer; }
+.theme-glass .g-menu li a { font-size: 1.25rem; padding: var(--s3) 0; }
+.theme-glass .g-menu .g-lang { display: inline-flex; }
+
+/* ---------- Tooltips on icon-only buttons (hover and keyboard focus) ---------- */
+.g-tipwrap { position: relative; display: inline-flex; }
+.g-tipwrap.g-menu-wrap { display: none; }
+@media (max-width: 960px) { .g-tipwrap.g-menu-wrap { display: inline-flex; } }
+.g-tip { position: absolute; top: calc(100% + 8px); right: 0; z-index: 70; white-space: nowrap; padding: 6px 10px; border-radius: 6px;
+  background: var(--bone); color: var(--glass); font: 500 0.875rem/1.3 var(--font-text); opacity: 0; pointer-events: none; transition: opacity 120ms ease-out; }
+.g-tip kbd { font: inherit; color: var(--line-strong); margin-left: var(--s2); }
+.g-tipwrap button:hover + .g-tip, .g-tipwrap button:focus-visible + .g-tip { opacity: 1; }
+@media (hover: none) { .g-tipwrap button:hover + .g-tip { opacity: 0; } }
+
+/* ---------- Home ---------- */
+.g-hero2 { padding: var(--s24) 0 var(--s16); }
+.g-hero2-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s12); align-items: end; }
+.g-hero2 h1 { font-weight: 600; font-size: clamp(2.5rem, 5.4vw, 4.25rem); line-height: 1.08; letter-spacing: -0.01em; max-width: 13ch; margin-bottom: var(--s6); }
+.g-hero2 .g-lead { margin-bottom: var(--s8); }
+.g-actions { display: flex; gap: var(--s3); flex-wrap: wrap; }
+.g-nextcard { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s8); display: grid; gap: var(--s6); }
+.g-nextup { display: flex; align-items: center; gap: 10px; color: var(--amber); font-weight: 500; font-size: 0.9375rem; }
+.g-nextup::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+.g-nextnum { display: flex; align-items: baseline; gap: var(--s6); }
+.g-nextnum b { font-family: var(--font-display); font-weight: 600; font-size: 6rem; line-height: 0.9; }
+.g-nextnum strong { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; line-height: 1.25; }
+.g-nextcard .g-prose { border-top: 1px solid var(--line); padding-top: var(--s6); }
+@media (max-width: 860px) {
+  .g-hero2 { padding: var(--s12) 0 var(--s12); }
+  .g-hero2-grid { grid-template-columns: 1fr; gap: var(--s8); }
+  .g-nextcard { padding: var(--s6); }
+  .g-nextnum b { font-size: 4.5rem; }
+}
+
+/* Sport tabs: the underline slides, the panel fades */
+.g-band-inner { padding-top: var(--s16); padding-bottom: var(--s16); }
+.g-band { background: var(--panel-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.g-tabs { position: relative; display: flex; gap: var(--s8); border-bottom: 1px solid var(--line); margin-bottom: var(--s8); }
+.g-tab { min-height: 48px; padding: 0 0 var(--s3); background: none; border: 0; cursor: pointer; font: 500 1.125rem/1.2 var(--font-display); color: var(--mist); transition: color 120ms ease-out; }
+.g-tab[aria-selected="true"] { color: var(--bone); }
+.g-tab:hover { color: var(--bone); }
+.g-tabbar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--ice); transition: transform 220ms var(--ease-out), width 220ms var(--ease-out); }
+.g-tabpanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s12); animation: g-fade 180ms ease-out both; }
+.g-tabpanel .g-lead { color: var(--bone); }
+.g-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+.g-facts li { display: flex; justify-content: space-between; gap: var(--s4); padding: var(--s4) var(--s6); background: var(--facet); border: 1px solid var(--line); border-radius: 12px; }
+.g-facts li > :first-child { font-weight: 500; }
+.g-facts li > :last-child { color: var(--soft); text-align: right; }
+
+/* Seasons list sits in one framed panel */
+.theme-glass .g-seasons { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--facet); overflow: hidden; }
+.theme-glass .g-season a { padding: var(--s6); }
+.theme-glass .g-season:last-child a { border-bottom: 0; }
+.theme-glass .g-season a:hover { background: rgba(215, 233, 236, 0.04); }
+@media (max-width: 860px) { .theme-glass .g-season a { padding: var(--s4) var(--s6); } }
+
+/* Numbered steps (a real sequence) */
+.g-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--s6); }
+.g-flow li { border-top: 2px solid var(--line-strong); padding-top: var(--s6); display: grid; gap: var(--s2); }
+.g-flow li:first-child { border-top-color: var(--ice); }
+.g-flow b { font-family: var(--font-display); font-weight: 600; font-size: 2.5rem; line-height: 1; color: var(--line-strong); }
+.g-flow h3 { font-family: var(--font-text); font-weight: 500; font-size: 1.25rem; margin-top: var(--s2); }
+.g-flow p { color: var(--soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-glass main, .g-tabpanel { animation: none; }
+  .g-scrim, .g-scrim[data-open="true"], .theme-glass .g-menu, .theme-glass .g-menu[data-open="true"], .g-tabbar, .g-tab, .g-tip,
+  .g-season a, .g-partner, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: none; }
+}

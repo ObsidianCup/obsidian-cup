@@ -3694,5 +3694,187 @@
   "en": "Deleting…",
   "bn": "",
   "placeholder": false
+ },
+ {
+  "id": "home-40",
+  "section": "Home page",
+  "en": "A stage for players from every corner of Bangladesh",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-41",
+  "section": "Home page",
+  "en": "Volleyball and futsal tournaments at every level, from school teams to open age.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-42",
+  "section": "Home page",
+  "en": "Create your player account",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-43",
+  "section": "Home page",
+  "en": "Next up",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-44",
+  "section": "Home page",
+  "en": "Season 5",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-45",
+  "section": "Home page",
+  "en": "Two sports, one stage",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-46",
+  "section": "Home page",
+  "en": "Where Obsidian Cup started. Four volleyball tournaments since January 2026, for school, under-19 and open-age teams.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-47",
+  "section": "Home page",
+  "en": "Volleyball results",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-48",
+  "section": "Home page",
+  "en": "Latest",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-49",
+  "section": "Home page",
+  "en": "Dates",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-50",
+  "section": "Home page",
+  "en": "Teams",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-51",
+  "section": "Home page",
+  "en": "17, in three categories",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-52",
+  "section": "Home page",
+  "en": "Instagram",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-53",
+  "section": "Home page",
+  "en": "Our first futsal tournament was girls only, won by Thaelor at JAFF Arena and Academy, Bashundhara.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-54",
+  "section": "Home page",
+  "en": "Futsal results",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-55",
+  "section": "Home page",
+  "en": "Date",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-56",
+  "section": "Home page",
+  "en": "Champions",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-57",
+  "section": "Home page",
+  "en": "From sign-up to match day",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-58",
+  "section": "Home page",
+  "en": "Fill in your profile once. It stays ready for every season.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-59",
+  "section": "Home page",
+  "en": "Join your team",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-60",
+  "section": "Home page",
+  "en": "Your captain shares one link in the team's group. Tap it to join.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-61",
+  "section": "Home page",
+  "en": "Play on match day",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-62",
+  "section": "Home page",
+  "en": "Bring your ID. Your name is already on the gate list.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "chrome-menu",
+  "section": "Menu and footer (every page)",
+  "en": "Menu",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "chrome-openmenu",
+  "section": "Menu and footer (every page)",
+  "en": "Open menu",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "chrome-closemenu",
+  "section": "Menu and footer (every page)",
+  "en": "Close menu",
+  "bn": "",
+  "placeholder": false
  }
 ]

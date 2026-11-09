@@ -149,31 +149,70 @@ function injectGlassChrome() {
       <div class="g-tools">
         ${lang}
         ${login}
-        <button type="button" class="g-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="gMenu">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h14M3 13h14"/></svg>
-        </button>
+        <span class="g-tipwrap g-menu-wrap">
+          <button type="button" class="g-menu-btn" aria-label="Open menu" aria-describedby="gTipMenu" aria-expanded="false" aria-controls="gMenu">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h14M3 13h14"/></svg>
+          </button>
+          <span class="g-tip" role="tooltip" id="gTipMenu" data-key="navOpenMenu">Open menu</span>
+        </span>
       </div>
     </div>`;
   document.body.insertBefore(header, document.body.firstChild);
 
+  // Phone menu: slides in from the right over a dimmed page. Escape, the close
+  // button or tapping outside closes it; focus stays inside while it is open.
+  const scrim = document.createElement('div');
+  scrim.className = 'g-scrim';
+  scrim.setAttribute('data-open', 'false');
+  scrim.setAttribute('aria-hidden', 'true');
   const menu = document.createElement('div');
   menu.className = 'g-menu';
   menu.id = 'gMenu';
+  menu.setAttribute('role', 'dialog');
+  menu.setAttribute('aria-modal', 'true');
+  menu.setAttribute('aria-label', 'Menu');
   menu.setAttribute('data-open', 'false');
-  menu.innerHTML = `<nav aria-label="Main"><ul>${glassLinks()}</ul></nav>${lang}`;
+  menu.innerHTML = `
+    <div class="g-menu-head">
+      <span data-key="navMenu">Menu</span>
+      <span class="g-tipwrap">
+        <button type="button" class="g-menu-close" aria-label="Close menu" aria-describedby="gTipClose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <span class="g-tip" role="tooltip" id="gTipClose"><span data-key="navCloseMenu">Close menu</span><kbd>Esc</kbd></span>
+      </span>
+    </div>
+    <nav aria-label="Main"><ul>${glassLinks()}</ul></nav>${lang}`;
   header.after(menu);
+  menu.before(scrim);
 
   const btn = header.querySelector('.g-menu-btn');
+  const isOpen = () => menu.getAttribute('data-open') === 'true';
   const setOpen = (open, returnFocus) => {
     menu.setAttribute('data-open', String(open));
+    scrim.setAttribute('data-open', String(open));
     btn.setAttribute('aria-expanded', String(open));
-    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    if (open) { const first = menu.querySelector('a'); if (first) first.focus(); }
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) { const first = menu.querySelector('.g-menu-close'); if (first) first.focus(); }
     else if (returnFocus) btn.focus();
   };
-  btn.addEventListener('click', () => setOpen(menu.getAttribute('data-open') !== 'true', true));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false, true); });
+  btn.addEventListener('click', () => setOpen(true));
+  menu.querySelector('.g-menu-close').addEventListener('click', () => setOpen(false, true));
+  scrim.addEventListener('click', () => setOpen(false, true));
+  document.addEventListener('keydown', (e) => {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') { setOpen(false, true); return; }
+    if (e.key === 'Tab') {
+      const items = [...menu.querySelectorAll('a[href], button')].filter(el => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
   menu.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false, false); });
+  // Leaving phone width with the menu open: close it.
+  window.matchMedia('(min-width: 961px)').addEventListener('change', (m) => { if (m.matches && isOpen()) setOpen(false, false); });
 
   const year = new Date().getFullYear();
   const footer = document.createElement('footer');
