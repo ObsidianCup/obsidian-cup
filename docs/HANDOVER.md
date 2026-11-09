@@ -155,9 +155,9 @@ Update 9 Nov (replaces the 3 Nov note): owner agreed to pay for Vercel Pro ($20/
 - Bangla out of date (owner translates): rules-05, rules-07, acct.errExists,
   acct.laterGuardianWhy; new acct.delete* keys have no Bangla.
 
-## Redesign (9 Nov): design canvas waiting for the owner's "build it"
+## Redesign (9 Nov): built and live
 
-Canvas: https://claude.ai/artifact/FHR5zYpRnzXft3ZqKYeXJy (home computer, home phone, player account). Same brand refreshed: dark, ice actions, amber only for "Next up"/live, Unbounded + Figtree. The owner wants transitions (short, tied to actions, reduced-motion off). When building, also bring the live site in line with the UX rules the canvas follows: delete account becomes a confirmation dialog naming the account with Cancel focused (now an inline form); buttons never disabled while busy (show "Deleting…" instead); icon-only buttons get real tooltips; long profile form keeps unsent typing if the page closes; selects pre-filled where a guess exists.
+Canvas: https://claude.ai/artifact/FHR5zYpRnzXft3ZqKYeXJy. Built: home (hero with amber "Next up" card, Volleyball/Futsal tabs in js/page-home.js, framed seasons list, sign-up steps shown only when accounts are on), phone menu as a slide-over (tooltips, Escape, focus kept inside), page fade and hover transitions (all off for reduced motion), account page (player card beside the profile on wide screens, delete as a native dialog naming the account, buttons never disabled: ocBusy/ocIsBusy), inner pages' headings and season cards. New English on the home page has no Bangla yet (site-text.json home-NN entries). Live site follows the owner's Instagram facts; no placeholders.
 
 ## Next steps (suggested order)
 
