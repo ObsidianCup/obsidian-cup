@@ -143,11 +143,13 @@
       e.preventDefault();
       const word = $('#deleteWord').value.trim();
       if (word !== 'DELETE') { msg('deleteMsg', t('deleteErrWord'), 'error'); $('#deleteWord').focus(); return; }
-      const btn = $('#deleteConfirm'); btn.disabled = true;
+      const btn = $('#deleteConfirm'); btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+      const busy = setTimeout(() => { btn.textContent = t('deleteBusy'); }, 100);   // only if it takes a moment
+      const done = () => { clearTimeout(busy); btn.removeAttribute('aria-busy'); btn.textContent = t('deleteConfirmBtn'); };
       deleting = true;
       const { data, error } = await db.rpc('request_account_deletion', { p_confirm: word });
       if (error) {
-        deleting = false; btn.disabled = false;
+        deleting = false; btn.disabled = false; done();
         const m = (error.message || '') + ' ' + (error.hint || '');
         msg('deleteMsg', /login_again/.test(m) ? t('deleteErrLogin') : /captain_of_active_team/.test(m) ? t('deleteErrCaptain')
           : /on_team_after_deadline/.test(m) ? t('deleteErrDeadline') : /confirm_word/.test(m) ? t('deleteErrWord') : ocErrorMessage(error), 'error');
@@ -155,7 +157,7 @@
       }
       const date = new Date(data).toLocaleDateString(ocLang() === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Dhaka' });
       authNotice = t('deleteDone', { date });
-      close(); btn.disabled = false;
+      close(); btn.disabled = false; done();
       await db.auth.signOut();
       deleting = false;
     });

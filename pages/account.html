@@ -16,8 +16,12 @@
   <main id="main" class="acct-wrap">
 
     <!-- Loading -->
-    <section data-view="loading">
-      <p class="acct-muted" data-t="loading">Loading…</p>
+    <section data-view="loading" aria-busy="true">
+      <p class="acct-visually-hidden" data-t="loading">Loading…</p>
+      <div class="acct-skel" aria-hidden="true">
+        <span class="s-label"></span><span class="s-title"></span>
+        <span class="s-card"></span><span class="s-card tall"></span>
+      </div>
     </section>
 
     <!-- Not configured -->

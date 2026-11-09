@@ -3687,5 +3687,12 @@
   "en": "Welcome back. You logged in, so your account will not be deleted.",
   "bn": "",
   "placeholder": false
+ },
+ {
+  "id": "acct.deleteBusy",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Deleting…",
+  "bn": "",
+  "placeholder": false
  }
 ]

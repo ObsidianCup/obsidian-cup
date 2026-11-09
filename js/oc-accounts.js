@@ -363,6 +363,7 @@ const OC_TEXT = {
     deleteTeams: "If you are on a team in an event that is still open for registration, you leave it.",
     deleteConfirmLabel: "Type DELETE to confirm",
     deleteConfirmBtn: "Delete my account",
+    deleteBusy: "Deleting…",
     deleteErrWord: "Type DELETE in capital letters.",
     deleteErrLogin: "For your safety, log out and log in again, then delete your account within 15 minutes.",
     deleteErrCaptain: "You are the captain of a team in an event that has not finished. Hand the captaincy to another player or withdraw the team first.",
