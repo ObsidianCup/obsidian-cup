@@ -29,6 +29,7 @@
   // ---------- Views ----------
   function show(view) {
     $$('[data-view]').forEach(el => { el.hidden = el.dataset.view !== view; });
+    $('#main').classList.toggle('acct-wrap-app', view === 'app');   // player card beside the profile on wide screens
     window.scrollTo(0, 0);
   }
   const msgTimers = {};
@@ -125,31 +126,42 @@
   }
 
   // ---------- Delete account ----------
+  // A confirmation box that names the account. Cancel has focus first; Escape,
+  // Cancel or a click outside closes it and focus goes back to the button.
   function wireDelete() {
-    const form = $('#deleteForm'), open = $('#deleteOpen');
-    const close = () => { form.hidden = true; open.hidden = false; open.setAttribute('aria-expanded', 'false'); $('#deleteWord').value = ''; msg('deleteMsg', ''); };
+    const dlg = $('#deleteDialog'), open = $('#deleteOpen'), btn = $('#deleteConfirm');
+    const word = $('#deleteWord');
+    const shut = () => { if (dlg.open) dlg.close(); };
+    dlg.addEventListener('close', () => { word.value = ''; msg('deleteMsg', ''); word.removeAttribute('aria-invalid'); open.focus(); });
     open.addEventListener('click', () => {
-      form.hidden = false; open.hidden = true; open.setAttribute('aria-expanded', 'true'); $('#deleteWord').focus();
+      const name = (profile && (profile.legal_name || profile.display_name)) || (user && user.email) || '';
+      const code = (profile && profile.player_code) || '';
+      $('#deleteDlgTitle').textContent = code ? t('deleteDlgTitle', { name, code }) : t('deleteDlgTitle', { name, code: '—' }).replace(' (—)', '');
+      $('#deleteDlgWhen').textContent = t('deleteDlgWhen');
+      dlg.showModal();
+      $('#deleteCancel').focus();
     });
-    $('#deleteCancel').addEventListener('click', () => { close(); open.focus(); });
-    // Check the word when leaving the field; clear the message as soon as it is edited.
-    $('#deleteWord').addEventListener('blur', () => {
-      const v = $('#deleteWord').value.trim();
-      if (v && v !== 'DELETE') msg('deleteMsg', t('deleteErrWord'), 'error');
+    $('#deleteCancel').addEventListener('click', shut);
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) shut(); });   // the dimmed area outside the box
+    // Check the word when leaving the box; clear the message as soon as it is edited.
+    word.addEventListener('blur', () => {
+      const v = word.value.trim();
+      if (v && v !== 'DELETE') { msg('deleteMsg', t('deleteErrWord'), 'error'); word.setAttribute('aria-invalid', 'true'); }
     });
-    $('#deleteWord').addEventListener('input', () => msg('deleteMsg', ''));
-    form.addEventListener('keydown', (e) => { if (e.key === 'Escape') { close(); open.focus(); } });
-    form.addEventListener('submit', async (e) => {
+    word.addEventListener('input', () => { msg('deleteMsg', ''); word.removeAttribute('aria-invalid'); });
+    $('#deleteForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const word = $('#deleteWord').value.trim();
-      if (word !== 'DELETE') { msg('deleteMsg', t('deleteErrWord'), 'error'); $('#deleteWord').focus(); return; }
-      const btn = $('#deleteConfirm'); btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-      const busy = setTimeout(() => { btn.textContent = t('deleteBusy'); }, 100);   // only if it takes a moment
-      const done = () => { clearTimeout(busy); btn.removeAttribute('aria-busy'); btn.textContent = t('deleteConfirmBtn'); };
+      if (ocIsBusy(btn)) return;
+      const v = word.value.trim();
+      if (v !== 'DELETE') { msg('deleteMsg', t('deleteErrWord'), 'error'); word.setAttribute('aria-invalid', 'true'); word.focus(); return; }
+      ocBusy(btn, true);
+      const busyText = setTimeout(() => { btn.textContent = t('deleteBusy'); }, 100);   // only if it takes a moment
+      const done = () => { clearTimeout(busyText); ocBusy(btn, false); btn.textContent = t('deleteConfirmBtn'); };
       deleting = true;
-      const { data, error } = await db.rpc('request_account_deletion', { p_confirm: word });
+      const { data, error } = await db.rpc('request_account_deletion', { p_confirm: v });
+      done();
       if (error) {
-        deleting = false; btn.disabled = false; done();
+        deleting = false;
         const m = (error.message || '') + ' ' + (error.hint || '');
         msg('deleteMsg', /login_again/.test(m) ? t('deleteErrLogin') : /captain_of_active_team/.test(m) ? t('deleteErrCaptain')
           : /on_team_after_deadline/.test(m) ? t('deleteErrDeadline') : /confirm_word/.test(m) ? t('deleteErrWord') : ocErrorMessage(error), 'error');
@@ -157,7 +169,7 @@
       }
       const date = new Date(data).toLocaleDateString(ocLang() === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Dhaka' });
       authNotice = t('deleteDone', { date });
-      close(); btn.disabled = false; done();
+      shut();
       await db.auth.signOut();
       deleting = false;
     });
@@ -254,7 +266,9 @@
       if (!byCode && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg('authMsg', t(authMode === 'login' ? 'errEmailOrCode' : 'errEmail'), 'error'); return; }
       if (password.length < 8) { msg('authMsg', t('errPassword'), 'error'); return; }
       if (authMode === 'signup' && password !== $('#authPassword2').value) { msg('authMsg', t('errPasswordMatch'), 'error'); return; }
-      const btn = $('#authSubmit'); btn.disabled = true;
+      const btn = $('#authSubmit');
+      if (ocIsBusy(btn)) return;
+      ocBusy(btn, true);
       try {
         const captchaTok = await captchaToken('captchaAuth');
         if (authMode === 'signup') {
@@ -277,7 +291,7 @@
         const m = (err && err.message) || '';
         msg('authMsg', /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
           : byCode ? t('errLoginCode') : authMode === 'login' ? t('errLogin') : t('genericError'), 'error');
-      } finally { btn.disabled = false; captchaReset('captchaAuth'); }
+      } finally { ocBusy(btn, false); captchaReset('captchaAuth'); }
     });
 
     $('#googleBtn').addEventListener('click', async () => {
@@ -326,13 +340,15 @@
   function wireConsent() {
     $('#consentBtn').addEventListener('click', async () => {
       if (!($('#cTerms').checked && $('#cPrivacy').checked && $('#cDob').checked)) { msg('consentMsg', t('consentNeedAll'), 'error'); return; }
-      const btn = $('#consentBtn'); btn.disabled = true;
+      const btn = $('#consentBtn');
+      if (ocIsBusy(btn)) return;
+      ocBusy(btn, true);
       const rows = OC_SIGNUP_REQUIRED.map(k => ({
         doc_key: k, doc_version: OC_LEGAL[k], doc_lang: LEGAL_LANG, choice: 'accepted',
         context: 'signup', user_agent: navigator.userAgent.slice(0, 400),
       }));
       const { error } = await db.from('consent_records').insert(rows);
-      btn.disabled = false;
+      ocBusy(btn, false);
       if (error) { msg('consentMsg', t('genericError'), 'error'); return; }
       msg('consentMsg', '');
       await route();
@@ -458,7 +474,7 @@
     return i || 'X';
   }
   function wireCodePicker() {
-    let checkTimer = null, lastChecked = '';
+    let checkTimer = null, lastChecked = '', codeFree = '';
     const prefix = () => 'OC-' + initialsOf(profile.legal_name);
     const left = () => Math.max(0, 2 - (profile.code_changes || 0));
     const status = (text, kind) => { const el = $('#codeStatus'); el.textContent = text; el.className = 'acct-hint' + (kind ? ' is-' + kind : ''); };
@@ -466,7 +482,7 @@
     async function check() {
       const digits = $('#codeDigits').value;
       const code = prefix() + digits;
-      $('#codeSave').disabled = true;
+      codeFree = '';
       $$('#codeSuggestions input').forEach(r => { r.checked = r.value === code; });
       if (!/^[0-9]{3,4}$/.test(digits)) { status(digits ? t('codeFormat') : '', digits ? 'bad' : ''); return; }
       if (code === profile.player_code) { status(t('codeCurrent')); return; }
@@ -475,7 +491,7 @@
       const { data, error } = await db.rpc('player_code_status', { p_code: code });
       if (lastChecked !== code) return;                 // they kept typing
       if (error) { status(t('genericError'), 'bad'); return; }
-      if (data === 'ok') { status(t('codeOk', { code }), 'ok'); $('#codeSave').disabled = false; }
+      if (data === 'ok') { status(t('codeOk', { code }), 'ok'); codeFree = code; }
       else if (data === 'limit') status(t('codeNoChangesLeft'), 'bad');
       else if (data === 'format') status(t('codeFormat'), 'bad');
       else status(t('codeTaken', { code }), 'bad');
@@ -486,8 +502,7 @@
       $('#codePicker').hidden = false; $('#codeChangeWrap').hidden = true;
       msg('codeMsg', '');
       $('#codePrefix').textContent = prefix();
-      $('#codeDigits').value = ''; status('');
-      $('#codeSave').disabled = true;
+      $('#codeDigits').value = ''; status(''); codeFree = '';
       const none = left() === 0;
       $('#codePickerIntro').textContent = none ? t('codeNoChangesLeft') : t('codeChangesLeft', { n: left() });
       ['#codeSuggestions', '#codeDigits', '#codeSave'].forEach(sel => { $(sel).closest('.acct-field, .acct-chips, button').hidden = none; });
@@ -510,9 +525,13 @@
     });
     $('#codeSave').addEventListener('click', async () => {
       const code = prefix() + $('#codeDigits').value;
+      const save = $('#codeSave');
+      if (ocIsBusy(save)) return;
+      if (code !== codeFree) { status(t('codeNeedOk'), 'bad'); $('#codeDigits').focus(); return; }
       if (!confirm(t('codeConfirm', { code, n: left() - 1 }))) return;
-      $('#codeSave').disabled = true;
+      ocBusy(save, true);
       const { data, error } = await db.rpc('choose_player_code', { p_code: code });
+      ocBusy(save, false);
       if (error) {
         const m = error.message || '';
         msg('codeMsg', /code_taken/.test(m) ? t('codeTaken', { code }) : /code_limit/.test(m) ? t('codeNoChangesLeft') : t('genericError'), 'error');
@@ -680,16 +699,18 @@
     $('#levelValue').hidden = !lv;
     $('#levelValue').textContent = lv ? t(LEVELS[lv] || 'levelNotSet') : '';
     $('#levelHint').textContent = t(lv ? 'levelSetByUs' : 'levelChooseOnce');
-    if (!lv) { $('#f_playing_level').value = ''; $('#levelSave').disabled = true; }
+    if (!lv) $('#f_playing_level').value = '';
   }
   function wireLevel() {
     const sel = $('#f_playing_level'), btn = $('#levelSave');
-    sel.addEventListener('change', () => { btn.disabled = !sel.value; fieldErr('playing_level', ''); });
+    sel.addEventListener('change', () => fieldErr('playing_level', ''));
     btn.addEventListener('click', async () => {
-      if (!sel.value) return;
-      btn.disabled = true;
+      if (ocIsBusy(btn)) return;
+      if (!sel.value) { fieldErr('playing_level', t('levelNeed')); sel.focus(); return; }
+      ocBusy(btn, true);
       const { data, error } = await db.from('profiles').update({ playing_level: sel.value }).eq('id', user.id).select().single();
-      if (error) { fieldErr('playing_level', ocErrorMessage(error)); btn.disabled = false; return; }
+      ocBusy(btn, false);
+      if (error) { fieldErr('playing_level', ocErrorMessage(error)); return; }
       profile = data;
       renderLevel(); renderHome();
       showStatus(t('saved'));
@@ -705,10 +726,12 @@
     box.innerHTML = mine.map(sp => `<span class="acct-sportchip">${ocEscape(sportName(sp))}</span>`).join('') +
       others.map(sp => `<button type="button" class="acct-btn acct-btn-ghost acct-btn-small" data-add-sport="${sp}">${ocEscape(t('sportsAdd', { sport: sportName(sp) }))}</button>`).join('');
     $$('[data-add-sport]', box).forEach(b => b.addEventListener('click', async () => {
-      b.disabled = true;
+      if (ocIsBusy(b)) return;
+      ocBusy(b, true);
       const next = mine.concat(b.dataset.addSport);
       const { data, error } = await db.from('profiles').update({ sports: next }).eq('id', user.id).select().single();
-      if (error) { fieldErr('sports', ocErrorMessage(error)); b.disabled = false; return; }
+      ocBusy(b, false);
+      if (error) { fieldErr('sports', ocErrorMessage(error)); return; }
       profile = data;
       renderMySports(); renderPositions(); renderHome();
       showStatus(t('saved'));
@@ -720,9 +743,10 @@
     $('#sportsBtn').addEventListener('click', async () => {
       const chosen = boxes().filter(b => b.checked).map(b => b.value);
       if (!chosen.length) { msg('sportsMsg', t('sportsPickNeed'), 'error'); return; }
-      $('#sportsBtn').disabled = true;
+      if (ocIsBusy($('#sportsBtn'))) return;
+      ocBusy($('#sportsBtn'), true);
       const { data, error } = await db.from('profiles').update({ sports: chosen }).eq('id', user.id).select().single();
-      $('#sportsBtn').disabled = false;
+      ocBusy($('#sportsBtn'), false);
       if (error) { msg('sportsMsg', ocErrorMessage(error), 'error'); return; }
       profile = data;
       await route();

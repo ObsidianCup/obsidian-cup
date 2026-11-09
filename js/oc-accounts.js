@@ -362,7 +362,11 @@ const OC_TEXT = {
     deleteKept: "Kept: past results and team lists, and the records of what you agreed to, as the Privacy Notice explains.",
     deleteTeams: "If you are on a team in an event that is still open for registration, you leave it.",
     deleteConfirmLabel: "Type DELETE to confirm",
-    deleteConfirmBtn: "Delete my account",
+    deleteConfirmBtn: "Delete account",
+    deleteDlgTitle: "Delete the account of {name} ({code})?",
+    deleteDlgWhen: "It is deleted 14 days after you confirm. Log in during those 14 days to keep it.",
+    levelNeed: "Choose your level first.",
+    codeNeedOk: "Type 3 or 4 numbers that are free first.",
     deleteBusy: "Deleting…",
     deleteErrWord: "Type DELETE in capital letters.",
     deleteErrLogin: "For your safety, log out and log in again, then delete your account within 15 minutes.",
@@ -653,6 +657,14 @@ function ocAge(dob) {
   if (n.getMonth() < b.getMonth() || (n.getMonth() === b.getMonth() && n.getDate() < b.getDate())) a--;
   return a;
 }
+
+// Busy buttons stay clickable (never greyed out): a second click while busy does nothing.
+function ocBusy(btn, on) {
+  if (!btn) return;
+  if (on) { btn.setAttribute('aria-busy', 'true'); btn.dataset.busy = '1'; }
+  else { btn.removeAttribute('aria-busy'); delete btn.dataset.busy; }
+}
+function ocIsBusy(btn) { return !!(btn && btn.dataset.busy); }
 
 function ocEscape(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

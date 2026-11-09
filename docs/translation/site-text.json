@@ -3642,7 +3642,7 @@
  {
   "id": "acct.deleteConfirmBtn",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Delete my account",
+  "en": "Delete account",
   "bn": "",
   "placeholder": false
  },
@@ -3874,6 +3874,34 @@
   "id": "chrome-closemenu",
   "section": "Menu and footer (every page)",
   "en": "Close menu",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteDlgTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Delete the account of {name} ({code})?",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.deleteDlgWhen",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "It is deleted 14 days after you confirm. Log in during those 14 days to keep it.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.levelNeed",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Choose your level first.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.codeNeedOk",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Type 3 or 4 numbers that are free first.",
   "bn": "",
   "placeholder": false
  }
