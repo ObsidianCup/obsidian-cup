@@ -155,6 +155,10 @@ Update 9 Nov (replaces the 3 Nov note): owner agreed to pay for Vercel Pro ($20/
 - Bangla out of date (owner translates): rules-05, rules-07, acct.errExists,
   acct.laterGuardianWhy; new acct.delete* keys have no Bangla.
 
+## Redesign (9 Nov): design canvas waiting for the owner's "build it"
+
+Canvas: https://claude.ai/artifact/FHR5zYpRnzXft3ZqKYeXJy (home computer, home phone, player account). Same brand refreshed: dark, ice actions, amber only for "Next up"/live, Unbounded + Figtree. The owner wants transitions (short, tied to actions, reduced-motion off). When building, also bring the live site in line with the UX rules the canvas follows: delete account becomes a confirmation dialog naming the account with Cancel focused (now an inline form); buttons never disabled while busy (show "Deleting…" instead); icon-only buttons get real tooltips; long profile form keeps unsent typing if the page closes; selects pre-filled where a guess exists.
+
 ## Next steps (suggested order)
 
 1. Private test run of accounts with a few friends on the live site; collect
