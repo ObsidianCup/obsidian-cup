@@ -343,7 +343,8 @@ body.theme-glass {
 .g-nextcard { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s8); display: grid; gap: var(--s6); }
 .g-nextup { display: flex; align-items: center; gap: 10px; color: var(--amber); font-weight: 500; font-size: 0.9375rem; }
 .g-nextup::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
-.g-nextnum { display: flex; align-items: baseline; gap: var(--s6); }
+.g-nextnum { display: flex; align-items: center; gap: var(--s6); }
+.g-nextnum > div { display: grid; gap: var(--s1); }
 .g-nextnum b { font-family: var(--font-display); font-weight: 600; font-size: 6rem; line-height: 0.9; }
 .g-nextnum strong { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; line-height: 1.25; }
 .g-nextcard .g-prose { border-top: 1px solid var(--line); padding-top: var(--s6); }

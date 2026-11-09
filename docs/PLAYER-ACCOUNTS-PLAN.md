@@ -64,7 +64,7 @@ events, and the organiser verifies everything from one admin page.
 | Delete account (2 Nov, not built yet) | Button in settings: warning, type DELETE plus password or Google, 14-day grace period, emails. Blocked while on a team after the deadline or as captain of an active team. Past results, consent and payment records stay |
 | Lawyer | No lawyer review: the owner cannot afford it. Do not suggest it again |
 | Jerseys | Not supplied by Obsidian Cup. Teams must wear matching numbered jerseys; jersey number stored per team, unique within the team |
-| Logo | For now: the OC monogram from logo round 2 (O in front of C, chip on the C), in `assets/logo-oc.svg` (masked, works on any background). Favicon (`favicon.svg` + `.ico`), `apple-touch-icon.png`, `og-image.jpg` and `email-logo.png` are made from it. The organiser may redesign it later; swap those files and the email templates |
+| Logo | For now: the OC monogram from logo round 2 (O in front of C, chip on the C), in `assets/logo-oc.svg` (masked, works on any background). Favicon (`favicon.svg` + `.ico`), `apple-touch-icon.png`, `og-image-v2.jpg` and `email-logo.png` are made from it. The organiser may redesign it later; swap those files and the email templates |
 
 ## Legal texts
 

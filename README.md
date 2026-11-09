@@ -44,7 +44,7 @@ obsidian-cup/
 ├── 404.html                # Custom error page
 ├── robots.txt / sitemap.xml
 ├── vercel.json             # Redirects from old URLs + headers
-├── assets/                 # Logos, partner logos, icons, og-image.jpg (share preview)
+├── assets/                 # Logos, partner logos, icons, og-image-v2.jpg (share preview)
 ├── css/style.css           # All styles, organised by component
 ├── js/
 │   ├── config.js           # Season control panel (no-code edits)
