@@ -133,6 +133,17 @@ owner's to-do list, to be given **one task at a time**). In short:
   GitHub / Supabase / Vercel / Gmail, GitHub secret scanning, Supabase password
   rules and redirect addresses).
 
+Later the same night: owner ran 014 and redeployed `login-with-code`; code
+log in works live. Fixed the account page's side card (it was taller than the
+screen and stayed cut off until the end of the page; `ocStickyFit` in
+`js/oc-accounts.js`, also used for the legal contents list), in-page links now
+stop below the header, home title now names the sports and country, home has
+`SportsOrganization` structured data, `llms.txt` added. Still open from the
+audit: `SportsEvent` data per tournament (needs facts checked against
+Instagram), Bangla pages not indexable, short descriptions on About and
+Fixtures. The account page still says "captain code" under "Join a team",
+which no longer matches the decision (no captain codes); ask her for wording.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Not yet diagnosed.

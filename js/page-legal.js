@@ -127,5 +127,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', render);
+  document.addEventListener('DOMContentLoaded', () => ocStickyFit(document.querySelector('.legal-toc'), 96));
   document.addEventListener('oc:language', render);
 })();

@@ -55,6 +55,7 @@
     wireSportsPick();
     wireLevel();
     wireDelete();
+    ocStickyFit($('#playerCard'), 96);
     // Pick up the organiser's live-card switch when the player comes back to the page.
     document.addEventListener('visibilitychange', () => { if (!document.hidden && profile) { liveOn = null; renderLive(); } });
     $$('[data-action="signout"]').forEach(b => b.addEventListener('click', async () => { await db.auth.signOut(); }));

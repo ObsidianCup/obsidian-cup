@@ -661,6 +661,20 @@ function ocAge(dob) {
 }
 
 // Busy buttons stay clickable (never greyed out): a second click while busy does nothing.
+// A panel that stays beside the page while it scrolls ("sticky"). When the
+// panel is taller than the screen it would stay cut off until the very end of
+// the page; instead let it scroll up until its last line shows, then hold.
+function ocStickyFit(el, top) {
+  if (!el || !window.ResizeObserver) return;
+  const fit = () => {
+    const room = window.innerHeight - top - 16;
+    el.style.top = (el.offsetHeight > room ? window.innerHeight - el.offsetHeight - 16 : top) + 'px';
+  };
+  new ResizeObserver(fit).observe(el);
+  window.addEventListener('resize', fit);
+  fit();
+}
+
 function ocBusy(btn, on) {
   if (!btn) return;
   if (on) { btn.setAttribute('aria-busy', 'true'); btn.dataset.busy = '1'; }

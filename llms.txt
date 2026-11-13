@@ -1,0 +1,22 @@
+# Obsidian Cup
+
+> Obsidian Cup organises volleyball and futsal tournaments in Bangladesh, for players from every corner of the country and at every level.
+
+Tournament news is posted first on Instagram: @obsidian.volleyball and @obsidian.futsal. Dates, venues and fees for a coming season are final only once they appear there or on this site.
+
+## Pages
+
+- [Home](https://obsidiancup.vercel.app/): what is coming next and recent champions
+- [Volleyball](https://obsidiancup.vercel.app/pages/volleyball.html): the volleyball tournaments
+- [Futsal](https://obsidiancup.vercel.app/pages/futsal.html): the futsal tournaments
+- [Past seasons](https://obsidiancup.vercel.app/pages/tournaments.html): results and champions of earlier seasons
+- [Fixtures](https://obsidiancup.vercel.app/pages/fixtures.html): schedules and results while a tournament is running
+- [Register](https://obsidiancup.vercel.app/pages/register.html): how teams register when a season opens
+- [Rules](https://obsidiancup.vercel.app/pages/rules.html): tournament rules
+- [Questions](https://obsidiancup.vercel.app/pages/faq.html): common questions
+- [About](https://obsidiancup.vercel.app/pages/about.html): who runs Obsidian Cup and why
+- [Player stories](https://obsidiancup.vercel.app/pages/experiences.html): players on their experience
+
+## Contact
+
+- Email: obsidiancup.official@gmail.com

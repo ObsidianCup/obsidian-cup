@@ -46,6 +46,8 @@
 .theme-glass, .theme-glass * , .theme-glass *::before, .theme-glass *::after { box-sizing: border-box; }
 /* the hidden attribute always wins over layout classes */
 .theme-glass [hidden] { display: none !important; }
+/* links to a place on the page stop below the fixed header, never under it */
+html:has(body.theme-glass) { scroll-padding-top: 96px; }
 body.theme-glass {
   margin: 0;
   background: var(--glass);
