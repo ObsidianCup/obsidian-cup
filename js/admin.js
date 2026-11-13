@@ -233,7 +233,7 @@
                   'emergency_name', 'emergency_relationship', 'emergency_phone', 'language', 'media_feature', 'sports', 'playing_level', 'verified_at', 'created_at'];
     const cell = v => {
       let s = v == null ? '' : (typeof v === 'object' ? JSON.stringify(v) : String(v));
-      if (/^[=+\-@]/.test(s)) s = "'" + s;          // stop spreadsheet formula injection
+      if (/^[\s]*[=+\-@|]|^[\t\r\n]/.test(s)) s = "'" + s;   // stop spreadsheet formula injection (also behind spaces or a tab)
       return '"' + s.replace(/"/g, '""') + '"';
     };
     const lines = [cols.join(',')].concat(filtered().map(p => cols.map(c => cell(p[c])).join(',')));

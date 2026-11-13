@@ -16,6 +16,9 @@ const BATCH = Number(process.env.EMAIL_BATCH || 50);
 const MODE = (process.env.EMAIL_MODE || 'test').toLowerCase();
 const TEST_TO = (process.env.EMAIL_TEST_TO || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
 
+export const plainAddress = (a) => typeof a === 'string' && a.length <= 254
+  && /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(a);
+
 export async function run({ fetchImpl = fetch, transport, log = console.log } = {}) {
   if (!URL_ || !KEY || !GMAIL_USER || !GMAIL_PASS) {
     log('Email sender is not set up yet (missing secrets). Nothing sent.');
@@ -65,10 +68,14 @@ export async function run({ fetchImpl = fetch, transport, log = console.log } = 
   let sent = 0, failed = 0;
   for (const row of rows) {
     try {
+      // One plain address and nothing else: no lists, names, comments, quotes
+      // or line breaks that a mail server could read as a second recipient.
+      if (!plainAddress(row.to_email)) throw Object.assign(new Error('address not accepted'), { code: 'EADDRESS' });
       const m = render(row.template, row.lang, row.data);
       await mailer.sendMail({
         from: { name: 'Obsidian Cup', address: GMAIL_USER },
-        to: row.to_email, subject: m.subject, html: m.html, text: m.text,
+        to: row.to_email, subject: String(m.subject).replace(/[\r\n]+/g, ' ').slice(0, 200), html: m.html, text: m.text,
+        disableFileAccess: true, disableUrlAccess: true,
       });
       await rpc('email_done', { p_id: row.id, p_ok: true });
       sent++;

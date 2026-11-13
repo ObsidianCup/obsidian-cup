@@ -63,5 +63,15 @@ for (const name of ['welcome', 'deletion_requested', 'deletion_cancelled', 'acco
   }
 }
 
+console.log('Addresses');
+{
+  const { plainAddress } = await import('./send-emails.mjs');
+  ok(plainAddress('rina.akter+cup@example.com') && plainAddress('a@sub.example.co.uk'), 'ordinary addresses are accepted');
+  for (const bad of ['a@example.com, b@evil.test', 'Rina <a@example.com>', '"a@evil.test"@example.com', 'a@example.com\nBcc: b@evil.test',
+    'a(comment)@example.com', 'a@example', 'a@@example.com', ' a@example.com', '', null, 'a@example.com;b@evil.test']) {
+    ok(!plainAddress(bad), `refused: ${JSON.stringify(bad)}`);
+  }
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

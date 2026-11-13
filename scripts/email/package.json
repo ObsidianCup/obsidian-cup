@@ -4,6 +4,6 @@
   "type": "module",
   "description": "Sends queued emails from Supabase through Gmail. Run by .github/workflows/send-emails.yml.",
   "dependencies": {
-    "nodemailer": "6.9.16"
+    "nodemailer": "10.5.0"
   }
 }

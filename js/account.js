@@ -293,7 +293,7 @@
         }
       } catch (err) {
         const m = (err && err.message) || '';
-        msg('authMsg', /captcha_unavailable/.test(m) ? t('errCaptchaLoad') : /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
+        msg('authMsg', /captcha_unavailable/.test(m) ? t('errCaptchaLoad') : /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : /email_domain_not_allowed|database error saving new user/i.test(m) ? t('errEmailNotAllowed') : /already registered|exists/i.test(m) ? t('errExists')
           : byCode ? t('errLoginCode') : authMode === 'login' ? t('errLogin') : t('genericError'), 'error');
       } finally { ocBusy(btn, false); captchaReset('captchaAuth'); }
     });

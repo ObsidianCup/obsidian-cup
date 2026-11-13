@@ -1,6 +1,6 @@
 # Obsidian Cup — handover for a new Claude chat
 
-Last updated 13 Nov 2026, 22:45 (Helsinki time). Attach this file to a new chat,
+Last updated 13 Nov 2026, 23:55 (Helsinki time). Attach this file to a new chat,
 or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
 
 ## How to start the new chat
@@ -93,7 +93,7 @@ Bangla (rules-05, rules-07, rules-09, acct.errExists, acct.laterGuardianWhy).
 ## Player accounts (Supabase)
 
 Live in the database: migrations **001–013** and the legal seed (owner ran 013
-and the seed on 9 Nov). Accounts are **not public** (`accountsEnabled: false`);
+and the seed on 9 Nov). **014 (security hardening) is written but not yet run.** Accounts are **not public** (`accountsEnabled: false`);
 `/pages/account.html` works by direct link. Organiser page `/pages/admin.html`
 (two-step login) works live (seen 13 Nov).
 
@@ -115,6 +115,24 @@ What exists:
   `scripts/email/send-emails.mjs`; **not yet seen working live**.
 - Events / categories / teams tables exist (009) but there is no team UI.
 
+## Security pass (13 Nov, late)
+
+Everything is in `docs/SECURITY.md` (what was checked, what changed, and the
+owner's to-do list, to be given **one task at a time**). In short:
+- Pushed and live with the site: tighter security headers (no inline style
+  blocks or inline event handlers), legal documents are cleaned before they
+  are shown, safer CSV export, clear message for refused email addresses,
+  `/.well-known/security.txt`, email library updated (nodemailer 6.9.16 had
+  known holes → 10.5.0), recipient addresses checked, workflow actions pinned,
+  Dependabot, `scripts/check_vendor.py` (vendor files match official npm).
+- **Waiting for the owner:** run `supabase/migrations/014_security_hardening.sql`
+  (not yet in the live database), then redeploy the `login-with-code` Edge
+  Function from the repository. Until she says "done", the live database still
+  has the old rules and the old function.
+- Then the dashboard settings in `docs/SECURITY.md` (two-step login on
+  GitHub / Supabase / Vercel / Gmail, GitHub secret scanning, Supabase password
+  rules and redirect addresses).
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Not yet diagnosed.
@@ -125,8 +143,8 @@ What exists:
 2. **An unknown account** (a throwaway-email address, joined 10 Nov) is in the
    player list. Claude did not create it and has no database access. The account
    page is reachable by anyone with the link (the repo is public). Suggest she
-   deletes it in Supabase → Authentication → Users, and consider blocking
-   throwaway email domains before launch.
+   deletes it in Supabase → Authentication → Users. Migration 014 blocks
+   throwaway email domains once she has run it.
 3. The organiser account itself shows in the player list with no profile; fine,
    but could be hidden from the list.
 
@@ -164,13 +182,13 @@ All in the decisions table of `docs/PLAYER-ACCOUNTS-PLAN.md`:
 
 ## Tests (all passing 13 Nov)
 
-- `supabase/tests/rls_test.mjs`: 184 database rule checks (PGlite; run with
+- `supabase/tests/rls_test.mjs`: 201 database rule checks (PGlite; run with
   `node rls_test.mjs <repo path>` from a folder with `@electric-sql/pglite`).
-- `scripts/email/sender_test.mjs`: email sender and scheduled deletion (18).
+- `scripts/email/sender_test.mjs`: email sender and scheduled deletion (30).
 - `scripts/site-tests/` (README inside): every page EN/BN at four widths and all
   links; account flows with a stand-in database (51); accounts-on, reduced
   motion, keyboard, menu.
-- `python3 scripts/build_host_files.py --check`.
+- `python3 scripts/build_host_files.py --check`, `python3 scripts/check_vendor.py`.
 - Not testable from a Claude session: real Supabase login, Google, Turnstile,
   real emails, live deletion, Google Fonts (previews use stand-in fonts).
 

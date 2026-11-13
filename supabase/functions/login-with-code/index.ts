@@ -13,7 +13,11 @@
 
 import { createClient } from 'npm:@supabase/supabase-js@2';
 
-const ALLOWED = ['https://obsidiancup.vercel.app', 'http://localhost:8765'];
+// Only the live site may call this from a browser. (A local preview cannot
+// log in with a code; use email + password there.)
+const ALLOWED = ['https://obsidiancup.vercel.app'];
+const MAX_BODY = 8 * 1024;          // a real request is a few hundred bytes
+const MIN_ANSWER_MS = 450;          // every "no" takes at least this long
 
 function key(names: string[], jsonName: string): string {
   for (const n of names) { const v = Deno.env.get(n); if (v) return v; }
@@ -32,6 +36,9 @@ function cors(origin: string | null) {
     'Access-Control-Allow-Headers': 'content-type, apikey, authorization, x-client-info',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Vary': 'Origin',
+    'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'no-referrer',
   };
 }
 const reply = (body: unknown, status: number, origin: string | null) =>
@@ -41,15 +48,35 @@ Deno.serve(async (req) => {
   const origin = req.headers.get('origin');
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(origin) });
   if (req.method !== 'POST') return reply({ error: 'method' }, 405, origin);
+  // A browser always says which site the request came from. Another website
+  // may not use this function with a visitor's browser.
+  if (origin && !ALLOWED.includes(origin)) return reply({ error: 'origin' }, 403, origin);
+  if (!/^application\/json\b/i.test(req.headers.get('content-type') || '')) return reply({ error: 'bad_request' }, 415, origin);
+  if (Number(req.headers.get('content-length') || 0) > MAX_BODY) return reply({ error: 'bad_request' }, 413, origin);
+  const started = Date.now();
+  // "No such code" answers faster than "wrong password" unless both wait the
+  // same time, and that difference would reveal which codes exist.
+  const no = async (body: unknown, status: number) => {
+    const wait = MIN_ANSWER_MS - (Date.now() - started) + Math.floor(Math.random() * 120);
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    return reply(body, status, origin);
+  };
 
   let code = '', password = '', captchaToken: string | undefined;
   try {
-    const b = await req.json();
-    code = String(b.code || '').slice(0, 20);
+    const raw = await req.text();
+    if (raw.length > MAX_BODY) return reply({ error: 'bad_request' }, 413, origin);
+    const b = JSON.parse(raw);
+    if (!b || typeof b !== 'object' || typeof b.code !== 'string' || typeof b.password !== 'string') return reply({ error: 'bad_request' }, 400, origin);
+    code = String(b.code || '').trim().slice(0, 20);
     password = String(b.password || '').slice(0, 200);
     if (b.captchaToken) captchaToken = String(b.captchaToken).slice(0, 4096);
   } catch { return reply({ error: 'bad_request' }, 400, origin); }
   if (!code || password.length < 8) return reply({ error: 'invalid' }, 400, origin);
+  // Player codes are letters, digits, dashes and spaces as people type them.
+  // Anything else is not a code: same answer as a wrong one, without
+  // touching the database.
+  if (!/^[A-Za-z0-9 -]{3,20}$/.test(code)) return no({ error: 'invalid' }, 401);
 
   const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
   const admin = createClient(URL_, SECRET, { auth: { persistSession: false, autoRefreshToken: false } });
@@ -72,6 +99,6 @@ Deno.serve(async (req) => {
 
   // Same answer for "no such code", "wrong password" and a failed anti-bot
   // check, so the answer never reveals whether a code exists.
-  if (!session) return reply({ error: 'invalid' }, 401, origin);
+  if (!session) return no({ error: 'invalid' }, 401);
   return reply({ access_token: session.access_token, refresh_token: session.refresh_token }, 200, origin);
 });

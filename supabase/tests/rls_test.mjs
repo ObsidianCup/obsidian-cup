@@ -496,5 +496,54 @@ ok((await db.query(`select count(*)::int n from public.profiles where id = $1`, 
 ok((await db.query(`select public.player_code_free($1, $2) f`, [p3code, A])).rows[0].f === false, 'the player code is retired, never given out again');
 ok((await db.query(`select count(*)::int n from public.email_queue where template = 'account_deleted' and to_email = 'p3@example.com'`)).rows[0].n === 1, 'a goodbye email is queued');
 
+console.log('\nSecurity hardening (014)');
+await as(null);
+const open = (await db.query(`
+  select p.oid::regprocedure::text sig from pg_proc p
+   where p.pronamespace = 'public'::regnamespace and p.prokind = 'f'
+     and has_function_privilege('anon', p.oid, 'execute')`)).rows.map(r => r.sig);
+ok(open.length === 0, 'visitors who are not logged in can run no database function' + (open.length ? ' — open: ' + open.join(', ') : ''));
+const tablesOpen = (await db.query(`
+  select c.relname from pg_class c
+   where c.relnamespace = 'public'::regnamespace and c.relkind = 'r' and not c.relrowsecurity`)).rows.map(r => r.relname);
+ok(tablesOpen.length === 0, 'every table has row level security on' + (tablesOpen.length ? ' — off: ' + tablesOpen.join(', ') : ''));
+const anonWrite = (await db.query(`
+  select c.relname from pg_class c
+   where c.relnamespace = 'public'::regnamespace and c.relkind in ('r', 'v')
+     and (has_table_privilege('anon', c.oid, 'insert') or has_table_privilege('anon', c.oid, 'update')
+          or has_table_privilege('anon', c.oid, 'delete') or has_table_privilege('anon', c.oid, 'truncate'))`)).rows.map(r => r.relname);
+ok(anonWrite.length === 0, 'visitors can write to no table' + (anonWrite.length ? ' — writable: ' + anonWrite.join(', ') : ''));
+const loose = (await db.query(`
+  select p.oid::regprocedure::text sig from pg_proc p
+   where p.pronamespace = 'public'::regnamespace and p.prosecdef
+     and not exists (select 1 from unnest(coalesce(p.proconfig, '{}')) c where c like 'search_path=%')`)).rows.map(r => r.sig);
+ok(loose.length === 0, 'every owner-rights function pins its search path' + (loose.length ? ' — loose: ' + loose.join(', ') : ''));
+await db.query(`insert into public.events (slug, name, sport, status) values ('hard-draft', 'Draft event', 'volleyball', 'draft'), ('hard-open', 'Open event', 'volleyball', 'open')`).catch(async () => {
+  // column names differ: fall back to whatever the events table requires
+  throw new Error('014 test needs updating for the events table');
+});
+await as('anon');
+const seen = (await db.query(`select slug from public.events where slug like 'hard-%'`)).rows.map(r => r.slug);
+ok(seen.length === 1 && seen[0] === 'hard-open', 'visitors can read published events, never drafts');
+ok(Array.isArray((await db.query(`select id from public.event_categories`)).rows), 'visitors can read categories of published events');
+await expectError(`select public.is_admin()`, [], /permission denied/, 'visitors cannot ask who is an organiser');
+await expectError(`select * from public.blocked_email_domains`, [], /permission denied/, 'visitors cannot read the blocked email list');
+await as(P1);
+await expectError(`select * from public.blocked_email_domains`, [], /permission denied/, 'players cannot read the blocked email list');
+await expectError(`select public.email_domain_blocked('a@mailinator.com')`, [], /permission denied/, 'players cannot probe the blocked email list');
+ok((await db.query(`select public.is_admin() a`)).rows[0].a === false, 'players keep the functions they had');
+await as(null);
+await expectError(`insert into auth.users (email) values ('someone@mailinator.com')`, [], /email_domain_not_allowed/, 'a throwaway email address cannot sign up');
+await expectError(`insert into auth.users (email) values ('Someone@Sub.YOPmail.com')`, [], /email_domain_not_allowed/, 'nor a sub-domain or capital letters of one');
+const okUser = (await db.query(`insert into auth.users (email, email_confirmed_at) values ('fine@example.com', now()) returning id`)).rows[0].id;
+ok(!!okUser, 'a normal email address signs up');
+await expectError(`update auth.users set email = 'x@guerrillamail.com' where id = $1`, [okUser], /email_domain_not_allowed/, 'an account cannot switch to a throwaway address');
+ok((await db.query(`update auth.users set email = 'fine2@example.com' where id = $1 returning id`, [okUser])).rows.length === 1, 'a normal email change still works');
+await db.query(`delete from auth.users where id = $1`, [okUser]);
+await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/014_security_hardening.sql'), 'utf8'));   // re-run is safe
+await db.exec('set role service_role');
+ok((await db.query(`select * from public.due_account_deletions()`)).rows.length >= 0, 'the email job keeps its functions after 014');
+await db.exec('reset role');
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

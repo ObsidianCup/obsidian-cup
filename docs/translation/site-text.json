@@ -1253,6 +1253,13 @@
   "placeholder": false
  },
  {
+  "id": "acct.errEmailNotAllowed",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "We could not make an account with this email address. Use your everyday email (temporary inboxes are not accepted), or write to us if this keeps happening.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
   "id": "acct.consentLabel",
   "section": "Player account pages (log in, profile, admin)",
   "en": "Before you start",

@@ -70,6 +70,15 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    `seed/legal_documents.sql` → Run (Terms 1.2, Privacy 1.4, Payment 1.1).
    Accounts are deleted 14 days after the player asks, by the scheduled
    "Send emails" GitHub job (it needs the SUPABASE_SECRET_KEY secret).
+6f. **Security hardening (014):** SQL Editor → New query → paste all of
+   `migrations/014_security_hardening.sql` → Run. Then run
+   `notify pgrst, 'reload schema';`. Visitors who are not logged in can no
+   longer run any database function, and throwaway email addresses cannot
+   sign up (the list is the table `blocked_email_domains`; add or delete a
+   row to change it). Then redeploy the Edge Function: Edge Functions →
+   `login-with-code` → Code → replace everything with
+   `functions/login-with-code/index.ts` → Deploy ("Verify JWT" stays off).
+   Full list of security settings: `docs/SECURITY.md`.
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:

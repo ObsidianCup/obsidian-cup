@@ -30,13 +30,51 @@
       const res = await fetch(`/legal/${lang}/${doc}-${VERSIONS[doc]}.md`, { cache: 'no-cache' });
       if (!res.ok) throw new Error(res.status);
       const md = await res.text();
-      body.innerHTML = window.marked ? marked.parse(md) : `<pre style="white-space:pre-wrap">${ocEscape(md)}</pre>`;
+      if (window.marked) body.replaceChildren(clean(marked.parse(md)));
+      else { const pre = document.createElement('pre'); pre.style.whiteSpace = 'pre-wrap'; pre.textContent = md; body.replaceChildren(pre); }
       shape(body);
     } catch (e) {
       $('legalTitle').textContent = t('legalNotFound');
       body.innerHTML = '';
       $('legalTocWrap').hidden = true;
     }
+  }
+
+  // The documents are our own files, but nothing they contain may ever run:
+  // keep plain text formatting only, drop everything else (scripts, frames,
+  // forms, event handlers, links that are not ordinary web or email links).
+  const KEEP = new Set(['P', 'BR', 'HR', 'STRONG', 'EM', 'B', 'I', 'DEL', 'CODE', 'PRE', 'BLOCKQUOTE', 'UL', 'OL', 'LI',
+    'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD', 'A']);
+  const DROP_WHOLE = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'OBJECT', 'EMBED', 'TEMPLATE', 'NOSCRIPT', 'FORM', 'SVG', 'MATH', 'LINK', 'META', 'BASE']);
+  function clean(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');   // parsed, never run
+    const out = document.createDocumentFragment();
+    const copy = (from, to) => {
+      from.childNodes.forEach(n => {
+        if (n.nodeType === 3) { to.appendChild(document.createTextNode(n.nodeValue)); return; }
+        if (n.nodeType !== 1) return;
+        const tag = n.tagName.toUpperCase();
+        if (DROP_WHOLE.has(tag)) return;
+        if (tag === 'INPUT') {                                   // "- [ ]" lines: a tick box that only shows, never sends
+          if ((n.getAttribute('type') || '').toLowerCase() !== 'checkbox') return;
+          const box = document.createElement('input');
+          box.type = 'checkbox'; box.disabled = true; box.checked = n.hasAttribute('checked');
+          to.appendChild(box); return;
+        }
+        if (!KEEP.has(tag)) { copy(n, to); return; }            // unknown tag: keep its words only
+        const el = document.createElement(tag);
+        if (tag === 'A') {
+          const href = (n.getAttribute('href') || '').trim();
+          if (/^(https:\/\/|mailto:|#|\/(?!\/)|[a-z0-9._-]+\.html)/i.test(href)) el.setAttribute('href', href);
+          if (/^https:\/\//i.test(href)) el.setAttribute('rel', 'noopener noreferrer');
+        }
+        if ((tag === 'TH' || tag === 'TD') && /^(left|right|center)$/.test(n.getAttribute('align') || '')) el.style.textAlign = n.getAttribute('align');
+        copy(n, el);
+        to.appendChild(el);
+      });
+    };
+    copy(doc.body, out);
+    return out;
   }
 
   // Turn the plain document into a readable page: title on top, bold-only

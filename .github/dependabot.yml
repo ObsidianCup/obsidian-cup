@@ -1,0 +1,15 @@
+# GitHub opens a pull request when the email sender's library or a workflow
+# action has a newer (or security-fixed) version. Nothing changes until an
+# organiser merges it.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/scripts/email"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3

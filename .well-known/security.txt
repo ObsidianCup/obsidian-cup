@@ -1,0 +1,5 @@
+# Found a security problem on the Obsidian Cup website? Please tell us
+# privately first, and give us time to fix it before sharing it.
+Contact: mailto:obsidiancup.official@gmail.com
+Expires: 2027-11-01T00:00:00.000Z
+Preferred-Languages: en, bn

@@ -81,6 +81,7 @@ const OC_TEXT = {
     errCaptcha: 'Please complete the check above the button (it proves you are not a robot), then try again.',
     errCaptchaLoad: "The security check did not load. Turn off any ad blocker for this page, check your connection, then reload the page.",
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
+    errEmailNotAllowed: 'We could not make an account with this email address. Use your everyday email (temporary inboxes are not accepted), or write to us if this keeps happening.',
     errExists: "An account with this email already exists. Log in instead, or use \"Forgot password?\" if you cannot remember your password.",
     // consent
     consentLabel: 'Before you start',
