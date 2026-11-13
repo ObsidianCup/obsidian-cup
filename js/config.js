@@ -37,6 +37,13 @@ const SITE_CONFIG = {
   facebookUrl: "https://www.facebook.com/share/1Cb8jWH5Gy/",
   contactEmail: "obsidiancup.official@gmail.com",
 
+  // ---- VISITOR COUNTING (Google Analytics) ----
+  // false = the site sets no cookies and sends nothing to Google.
+  // Before turning this on, the Privacy notice must mention it and visitors
+  // must be asked first (a cookie choice); ask Claude to build that.
+  analyticsEnabled: false,
+  analyticsId: "G-C1KZSFD68V",
+
   // ---- PLAYER ACCOUNTS ----
   // accountsEnabled: true shows "Log in" in the menu and the Privacy/Terms
   // links in the footer. Keep false until accounts are tested and launched.

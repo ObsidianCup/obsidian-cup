@@ -9,7 +9,22 @@
    - no scroll-triggered motion; every transition has a reduced-motion path
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Figtree:wght@400;500&family=Noto+Sans+Bengali:wght@400;500&display=swap');
+/* Fonts are served from this site (assets/fonts, open licences inside), so a
+   visit sends nothing to Google and works the same on any host. */
+@font-face { font-family: 'Unbounded'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/unbounded-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Unbounded'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/unbounded-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Unbounded'; font-style: normal; font-weight: 600; font-display: swap; src: url('../assets/fonts/unbounded-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Unbounded'; font-style: normal; font-weight: 600; font-display: swap; src: url('../assets/fonts/unbounded-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Figtree'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/figtree-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Figtree'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/figtree-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Figtree'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/figtree-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Figtree'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/figtree-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Noto Sans Bengali'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/noto-sans-bengali-bengali-400-normal.woff2') format('woff2'); unicode-range: U+0951-0952,U+0964-0965,U+0980-09FE,U+1CD0,U+1CD2,U+1CD5-1CD6,U+1CD8,U+1CE1,U+1CEA,U+1CED,U+1CF2,U+1CF5-1CF7,U+200C-200D,U+20B9,U+25CC,U+A8F1; }
+@font-face { font-family: 'Noto Sans Bengali'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/noto-sans-bengali-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Noto Sans Bengali'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/noto-sans-bengali-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Noto Sans Bengali'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/noto-sans-bengali-bengali-500-normal.woff2') format('woff2'); unicode-range: U+0951-0952,U+0964-0965,U+0980-09FE,U+1CD0,U+1CD2,U+1CD5-1CD6,U+1CD8,U+1CE1,U+1CEA,U+1CED,U+1CF2,U+1CF5-1CF7,U+200C-200D,U+20B9,U+25CC,U+A8F1; }
+@font-face { font-family: 'Noto Sans Bengali'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/noto-sans-bengali-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Noto Sans Bengali'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/noto-sans-bengali-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 
 :root {
   --glass: #0b1012;     /* 60%: page */
@@ -175,8 +190,9 @@ body.theme-glass {
 }
 
 /* Partners */
-.g-partners { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s4); list-style: none; margin: 0; padding: 0; }
-.g-partner { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s6); display: flex; flex-direction: column; gap: var(--s3); }
+.g-partners { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s8) var(--s6); list-style: none; margin: 0; padding: 0; }
+/* partners: logo, name and role on the page itself, no box around each */
+.g-partner { display: flex; flex-direction: column; gap: var(--s2); padding-top: var(--s4); border-top: 1px solid var(--line); }
 .g-partner-logo { height: 72px; display: flex; align-items: center; }
 .g-partner-logo img { max-height: 72px; max-width: 100%; width: auto; height: auto; object-fit: contain; }
 /* Wordmark logos (wide and short) fill the card width so they read at the same size as square marks */
@@ -307,8 +323,8 @@ body.theme-glass {
 @keyframes g-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Bordered things brighten on hover; nothing lifts */
-.g-season a, .g-partner, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: border-color 120ms ease-out, background-color 120ms ease-out; }
-.g-partner:hover, .g-contact li:hover, .g-quote-card:hover { border-color: var(--line-strong); }
+.g-season a, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: border-color 120ms ease-out, background-color 120ms ease-out; }
+.g-contact li:hover, .g-quote-card:hover { border-color: var(--line-strong); }
 
 /* ---------- Phone menu: a panel sliding in from the right ---------- */
 .g-scrim { position: fixed; inset: 0; z-index: 59; background: rgba(5, 8, 9, 0.72); opacity: 0; visibility: hidden;
@@ -367,8 +383,8 @@ body.theme-glass {
 .g-tabbar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--ice); transition: transform 220ms var(--ease-out), width 220ms var(--ease-out); }
 .g-tabpanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s12); animation: g-fade 180ms ease-out both; }
 .g-tabpanel .g-lead { color: var(--bone); }
-.g-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
-.g-facts li { display: flex; justify-content: space-between; gap: var(--s4); padding: var(--s4) var(--s6); background: var(--facet); border: 1px solid var(--line); border-radius: 12px; }
+.g-facts { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.g-facts li { display: flex; justify-content: space-between; gap: var(--s4); padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
 .g-facts li > :first-child { font-weight: 500; }
 .g-facts li > :last-child { color: var(--soft); text-align: right; }
 
@@ -390,7 +406,7 @@ body.theme-glass {
 @media (prefers-reduced-motion: reduce) {
   .theme-glass main, .g-tabpanel { animation: none; }
   .g-scrim, .g-scrim[data-open="true"], .theme-glass .g-menu, .theme-glass .g-menu[data-open="true"], .g-tabbar, .g-tab, .g-tip,
-  .g-season a, .g-partner, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: none; }
+  .g-season a, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: none; }
 }
 
 /* Inner pages, refreshed to match the home page */

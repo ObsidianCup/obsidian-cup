@@ -144,6 +144,14 @@ Instagram), Bangla pages not indexable, short descriptions on About and
 Fixtures. The account page still says "captain code" under "Join a team",
 which no longer matches the decision (no captain codes); ask her for wording.
 
+Cookies and privacy (13 Nov, 23:50): Google Analytics is **off** behind
+`analyticsEnabled` in `js/config.js` (it ran with cookies and no notice); fonts
+are self-hosted in `assets/fonts`; the public site now sets no cookies and
+makes no outside requests. Details in `docs/SECURITY.md`. Team wording on the
+account and register pages now says "team link" (Bangla for those two lines
+emptied; she translates). Home: partner logos and the sport facts lost their
+boxes (plain rows with hairlines). Previews now show the real fonts.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Not yet diagnosed.
@@ -201,7 +209,7 @@ All in the decisions table of `docs/PLAYER-ACCOUNTS-PLAN.md`:
   motion, keyboard, menu.
 - `python3 scripts/build_host_files.py --check`, `python3 scripts/check_vendor.py`.
 - Not testable from a Claude session: real Supabase login, Google, Turnstile,
-  real emails, live deletion, Google Fonts (previews use stand-in fonts).
+  real emails, live deletion.
 
 ## Other documents
 

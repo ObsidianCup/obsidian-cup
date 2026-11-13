@@ -1612,8 +1612,8 @@
  {
   "id": "acct.laterTeamWhy",
   "section": "Player account pages (log in, profile, admin)",
-  "en": "Your captain shares a join code, or you create a team with a captain code from us.",
-  "bn": "আপনার অধিনায়ক একটি যোগদানের কোড দেবেন, অথবা আমাদের কাছ থেকে অধিনায়ক কোড নিয়ে আপনি একটি দল তৈরি করতে পারবেন।",
+  "en": "Your captain shares the team link, or you create a team yourself and share its link.",
+  "bn": "",
   "placeholder": false
  },
  {
@@ -2977,7 +2977,7 @@
  {
   "id": "reg2-08",
   "section": "Register page",
-  "en": "Captains get a captain code from us, create the team, and players join it with the team's join code.",
+  "en": "Any player with a confirmed account can create a team and becomes its captain. Players join with the team's link.",
   "bn": "",
   "placeholder": false
  },

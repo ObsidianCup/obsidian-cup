@@ -32,6 +32,23 @@ Written 13 Nov 2026 after a full security pass. Plain words on purpose.
 | GitHub | Workflow actions pinned to exact versions; the email job never runs in a copy of the repository; Dependabot proposes updates. |
 | Reporting | `/.well-known/security.txt` tells researchers where to write. Its date must be renewed before 1 Nov 2027. |
 
+## Cookies and visitor privacy (13 Nov, late)
+
+- The public site sets **no cookies** and contacts **no other company** when
+  a page opens. Checked in a test browser: zero cookies, zero outside requests.
+- Google Analytics is switched off (`analyticsEnabled: false` in
+  `js/config.js`). It had been running with cookies and without telling
+  visitors, and the Privacy notice did not mention it. With it off there is
+  nothing to ask permission for, so no cookie banner is needed.
+  Turning it back on needs two things first: a line in the Privacy notice (a
+  new version) and a cookie choice for visitors.
+- Fonts are served from the site itself (`assets/fonts`), no longer from
+  Google. Google is gone from the security policy for styles and fonts.
+- What the browser remembers on the visitor's own device, never sent anywhere:
+  the language choice, and for logged-in players the login itself and whether
+  the checklist was closed. The anti-bot check (Cloudflare Turnstile) loads
+  only on the account page.
+
 ## To do, by the owner (one at a time, in this order)
 
 1. **Run migration 014.** Supabase → SQL Editor → New query → paste all of

@@ -135,7 +135,7 @@ const OC_TEXT = {
     laterId: 'A photo of your ID',
     laterIdWhy: 'To confirm your age for the category. It is private and deleted 30 days after the event.',
     laterTeam: 'Join a team',
-    laterTeamWhy: 'Your captain shares a join code, or you create a team with a captain code from us.',
+    laterTeamWhy: 'Your captain shares the team link, or you create a team yourself and share its link.',
     checkConsent: 'Agreed to the terms and privacy notice',
     checkBasics: 'Basic details: name, date of birth, gender',
     checkContact: 'Contact and emergency details',
