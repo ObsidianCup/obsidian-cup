@@ -3904,5 +3904,12 @@
   "en": "Type 3 or 4 numbers that are free first.",
   "bn": "",
   "placeholder": false
+ },
+ {
+  "id": "acct.errCaptchaLoad",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "The security check did not load. Turn off any ad blocker for this page, check your connection, then reload the page.",
+  "bn": "",
+  "placeholder": false
  }
 ]

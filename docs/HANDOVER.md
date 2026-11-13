@@ -159,6 +159,10 @@ Update 13 Nov: no host chosen yet. Options on the table: Vercel Pro only in regi
 
 Canvas: https://claude.ai/artifact/FHR5zYpRnzXft3ZqKYeXJy. Built: home (hero with amber "Next up" card, Volleyball/Futsal tabs in js/page-home.js, framed seasons list, sign-up steps shown only when accounts are on), phone menu as a slide-over (tooltips, Escape, focus kept inside), page fade and hover transitions (all off for reduced motion), account page (player card beside the profile on wide screens, delete as a native dialog naming the account, buttons never disabled: ocBusy/ocIsBusy), inner pages' headings and season cards. New English on the home page has no Bangla yet (site-text.json home-NN entries). Live site follows the owner's Instagram facts; no placeholders.
 
+## Self-test pass (13 Nov)
+
+Tests now live in the repo: `scripts/site-tests/` (browser tests with a stand-in database, see its README), `scripts/email/sender_test.mjs`, `supabase/tests/rls_test.mjs` (184). All pass. Bugs found and fixed: (1) in Bangla the page translator wrote text over labels and buttons that held tick boxes or icons, deleting them, so Bangla users could not choose a sport (js/lang.js now skips elements holding controls); (2) log in hung for ever if the Turnstile script was blocked (now a clear message); (3) home page account sections never appeared with accountsEnabled on (`window.SITE_CONFIG` is undefined for a const); (4) header was see-through over scrolling text; (5) logo link tap area under 44px. Not testable here: real Supabase login, Google, Turnstile, real emails, the live scheduled deletion, fonts from Google.
+
 ## Next steps (suggested order)
 
 1. Private test run of accounts with a few friends on the live site; collect

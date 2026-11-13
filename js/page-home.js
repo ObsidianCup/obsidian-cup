@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   document.addEventListener('DOMContentLoaded', () => {
-    if (window.SITE_CONFIG && SITE_CONFIG.accountsEnabled) {
+    if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.accountsEnabled) {   // a const is not on window
       document.querySelectorAll('[data-needs-accounts]').forEach(el => { el.hidden = false; });
     }
 

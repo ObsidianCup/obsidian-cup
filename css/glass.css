@@ -84,9 +84,9 @@ body.theme-glass {
 .g-link { font-weight: 500; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
 
 /* ---------- Header ---------- */
-.g-header { position: sticky; top: 0; z-index: 50; background: rgba(11, 16, 18, 0.96); border-bottom: 1px solid var(--line); }
+.g-header { position: sticky; top: 0; z-index: 50; background: var(--glass); border-bottom: 1px solid var(--line); }
 .g-header-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--s6); min-height: 72px; }
-.g-brand { display: inline-flex; align-items: center; gap: var(--s3); text-decoration: none; }
+.g-brand { display: inline-flex; align-items: center; gap: var(--s3); min-height: 44px; text-decoration: none; }
 .g-brand img { width: 42px; height: 30px; }
 .g-brand span { font-family: var(--font-display); font-weight: 600; font-size: 1.125rem; line-height: 1.2; }
 .g-nav ul { display: flex; gap: var(--s8); list-style: none; margin: 0; padding: 0; }

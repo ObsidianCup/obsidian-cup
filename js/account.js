@@ -212,11 +212,14 @@
   const captcha = { ready: null, ids: {} };
   function loadCaptcha() {
     if (!SITE_CONFIG.turnstileSiteKey) return;
-    captcha.ready = new Promise((resolve) => {
+    captcha.ready = new Promise((resolve, reject) => {
       window.ocTurnstileLoaded = resolve;
       const s = document.createElement('script');
       s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=ocTurnstileLoaded';
       s.async = true;
+      // Blocked by an ad blocker or a bad connection: say so instead of waiting for ever.
+      s.onerror = () => reject(new Error('captcha_unavailable'));
+      setTimeout(() => reject(new Error('captcha_unavailable')), 15000);
       document.head.appendChild(s);
     }).then(() => {
       ['captchaAuth', 'captchaForgot'].forEach(id => {
@@ -226,6 +229,7 @@
         });
       });
     });
+    captcha.ready.catch(() => {});   // reported when the visitor submits a form
   }
   async function captchaToken(id) {
     if (!captcha.ready) return undefined;
@@ -289,7 +293,7 @@
         }
       } catch (err) {
         const m = (err && err.message) || '';
-        msg('authMsg', /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
+        msg('authMsg', /captcha_unavailable/.test(m) ? t('errCaptchaLoad') : /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : /already registered|exists/i.test(m) ? t('errExists')
           : byCode ? t('errLoginCode') : authMode === 'login' ? t('errLogin') : t('genericError'), 'error');
       } finally { ocBusy(btn, false); captchaReset('captchaAuth'); }
     });
@@ -310,7 +314,7 @@
       captchaReset('captchaForgot');
       // Same message either way, so nobody can test which emails have accounts.
       const m = (error && error.message) || '';
-      msg('forgotMsg', /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : t('resetSent'),
+      msg('forgotMsg', /captcha_unavailable/.test(m) ? t('errCaptchaLoad') : /captcha/i.test(m) ? t('errCaptcha') : /rate|too many/i.test(m) ? t('errRateLimit') : t('resetSent'),
         /captcha|rate|too many/i.test(m) ? 'error' : 'ok');
     });
 

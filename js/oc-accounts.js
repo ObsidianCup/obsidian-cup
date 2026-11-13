@@ -79,6 +79,7 @@ const OC_TEXT = {
     emailConfirmed: 'Your email is confirmed. Log in to continue.',
     linkExpired: 'This link has expired or was already used. Log in if your email is confirmed, or create your account again to get a new link.',
     errCaptcha: 'Please complete the check above the button (it proves you are not a robot), then try again.',
+    errCaptchaLoad: "The security check did not load. Turn off any ad blocker for this page, check your connection, then reload the page.",
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
     errExists: "An account with this email already exists. Log in instead, or use \"Forgot password?\" if you cannot remember your password.",
     // consent

@@ -289,6 +289,10 @@ function setLanguage(lang) {
   if (bn) {
     document.querySelectorAll(OC_TEXT_TARGETS).forEach(el => {
       if (el.closest('[data-key], [data-oc-tr], script, style, svg, .g-lang')) return;
+      // Never replace an element that holds a form control, picture or separately translated part:
+      // writing text into it would delete them (a tick box inside its label, an icon in a button).
+      // Their inner text elements are translated on their own.
+      if (el.querySelector('input, select, textarea, button, svg, img, label, [data-t], [data-key]')) return;
       const o = ocOrig(el);
       const tr = byText[o.text];
       if (!tr) return;
