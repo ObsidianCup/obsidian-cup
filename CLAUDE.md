@@ -27,6 +27,15 @@ Legal/consent texts (English source): `docs/legal/legal-texts-en-v1.md`.
 Season 5 launch plan (research, emails, history, handbook, setup steps): `docs/SEASON-5-LAUNCH-PLAN.md`.
 Keep both files updated as work progresses and decisions change.
 
+## Moving hosts
+
+The site must stay easy to move (owner, 13 Nov 2026). The address lives in
+`site.json`; `python3 scripts/move_site.py <new address>` changes it everywhere.
+`vercel.json` is the one place for redirects and security headers; after editing
+it run `python3 scripts/build_host_files.py` (writes `_headers`, `_redirects`,
+`.htaccess`). Never hard-code the address in page scripts (use `location.origin`),
+and do not add anything that only works on one host. Steps: `docs/MOVING-HOSTS.md`.
+
 ## Rules
 
 - This repo is **public**. Never commit secrets, the Supabase `service_role`

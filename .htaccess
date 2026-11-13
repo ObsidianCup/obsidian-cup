@@ -1,0 +1,46 @@
+# Made by scripts/build_host_files.py from vercel.json. Do not edit by hand.
+
+# Always use https
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# The page shown for addresses that do not exist
+ErrorDocument 404 /404.html
+
+# Old addresses
+<IfModule mod_alias.c>
+Redirect 301 /about.html /pages/about.html
+Redirect 301 /experiences.html /pages/experiences.html
+Redirect 301 /faq.html /pages/faq.html
+Redirect 301 /fixtures.html /pages/fixtures.html
+Redirect 301 /football.html /pages/futsal.html
+Redirect 301 /register.html /pages/register.html
+Redirect 301 /rules.html /pages/rules.html
+Redirect 301 /tournaments.html /pages/tournaments.html
+Redirect 301 /volleyball.html /pages/volleyball.html
+Redirect 301 /futsal.html /pages/futsal.html
+Redirect 301 /pages/football.html /pages/futsal.html
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://mpxcoipozjnqkjwtondm.supabase.co wss://mpxcoipozjnqkjwtondm.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "DENY"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+Header always set Cross-Origin-Opener-Policy "same-origin"
+<FilesMatch "^(account\.html|admin\.html)$">
+  Header always set Cache-Control "no-store"
+</FilesMatch>
+</IfModule>
+
+# Folders that are not part of the website
+<IfModule mod_alias.c>
+RedirectMatch 404 ^/(docs|scripts|supabase|\.git|\.github)(/|$)
+</IfModule>

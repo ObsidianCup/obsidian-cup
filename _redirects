@@ -1,0 +1,12 @@
+# Made by scripts/build_host_files.py from vercel.json. Do not edit by hand.
+/about.html /pages/about.html 301
+/experiences.html /pages/experiences.html 301
+/faq.html /pages/faq.html 301
+/fixtures.html /pages/fixtures.html 301
+/football.html /pages/futsal.html 301
+/register.html /pages/register.html 301
+/rules.html /pages/rules.html 301
+/tournaments.html /pages/tournaments.html 301
+/volleyball.html /pages/volleyball.html 301
+/futsal.html /pages/futsal.html 301
+/pages/football.html /pages/futsal.html 301

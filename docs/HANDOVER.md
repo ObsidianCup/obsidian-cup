@@ -134,7 +134,7 @@ Setup steps for a fresh database: `supabase/README.md` (steps 1–7, 6b–6d).
 
 Vercel support replied in writing: the site counts as organisational and commercial use, needs Pro, off-site or hidden payment does not change that, and there are no discounts. Plan: buy a domain, test a copy on Cloudflare with Vercel left running, switch only after everything passes. Waiting for the owner to buy the domain. Check Cloudflare's own terms first (only a third-party review was read).
 
-Update 9 Nov (replaces the 3 Nov note): owner agreed to pay for Vercel Pro ($20/month) only during each registration and tournament period, then downgrade to Hobby. During Pro months the site runs full team registration, payment and parent consent; the rest of the year it shows stats, teams and rosters only. So build registration features behind one on/off setting in js/config.js. When she upgrades: set a low spend limit (default alert is $200). Pro includes one free first-year domain on some endings (.live, .co, .app; not .com). Not confirmed by Vercel that the stats-only months fit Hobby.
+Update 13 Nov: no host chosen yet. Options on the table: Vercel Pro only in registration months ($20/month, agreed 9 Nov), or Hostinger Premium (about $96 upfront for 4 years; figures from review sites). The owner asked to make the site easy to move meanwhile: done, see docs/MOVING-HOSTS.md (site.json, scripts/move_site.py, scripts/build_host_files.py, _headers/_redirects/.htaccess made from vercel.json). Registration features still go behind one on/off setting.
 
 ## Stage 1 (9 Nov): built, waiting for the owner's Supabase step
 
