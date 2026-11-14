@@ -81,7 +81,7 @@ body.theme-glass {
 .theme-glass h1, .theme-glass h2, .theme-glass h3 { margin: 0; font-family: var(--font-display); font-weight: 500; line-height: 1.2; }
 
 .g-wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-.g-skip { position: absolute; left: var(--s4); top: -100px; background: var(--ice); color: var(--glass); padding: var(--s2) var(--s4); border-radius: var(--radius); z-index: 100; }
+.g-skip { position: absolute; left: var(--s4); top: -100px; background: var(--ice); color: var(--glass); padding: var(--s3) var(--s4); min-height: 44px; border-radius: var(--radius); z-index: 100; }
 .g-skip:focus { top: var(--s4); }
 
 /* ---------- Buttons ---------- */
@@ -111,7 +111,7 @@ body.theme-glass {
 .g-nav a:hover, .g-nav a[aria-current="page"] { border-bottom-color: var(--ice); color: #ffffff; }
 .g-tools { display: flex; align-items: center; gap: var(--s4); }
 .g-lang { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
-.g-lang button { background: none; border: 0; color: var(--mist); font: 500 0.875rem/1 var(--font-text); padding: var(--s2) var(--s3); min-height: 40px; cursor: pointer; }
+.g-lang button { background: none; border: 0; color: var(--mist); font: 500 0.875rem/1 var(--font-text); padding: var(--s2) var(--s3); min-height: 44px; cursor: pointer; }
 .g-lang button.lang-btn-active { background: var(--ice-tint); color: var(--bone); }
 .g-menu-wrap { display: none; }
 .g-menu-btn { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; background: var(--facet); border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--bone); cursor: pointer; }
@@ -323,19 +323,19 @@ body.theme-glass {
 @keyframes g-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Bordered things brighten on hover; nothing lifts */
-.g-season a, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: border-color 120ms ease-out, background-color 120ms ease-out; }
+.g-season a, .g-contact li, .g-quote-card, .g-steps > div, .g-event .g-champ { transition: border-color 150ms ease-out, background-color 150ms ease-out; }
 .g-contact li:hover, .g-quote-card:hover { border-color: var(--line-strong); }
 
 /* ---------- Phone menu: a panel sliding in from the right ---------- */
 .g-scrim { position: fixed; inset: 0; z-index: 59; background: rgba(5, 8, 9, 0.72); opacity: 0; visibility: hidden;
-  transition: opacity 160ms ease-out, visibility 0s linear 160ms; }
+  transition: opacity 150ms ease-out, visibility 0s linear 150ms; }
 .g-scrim[data-open="true"] { opacity: 1; visibility: visible; transition: opacity 200ms ease-out, visibility 0s; }
 .theme-glass .g-menu { position: fixed; inset: 0 0 0 auto; width: min(340px, 88vw); z-index: 60; overflow-y: auto;
   background: var(--facet); border-left: 1px solid var(--line); border-bottom: 0; padding: var(--s4) var(--s6) var(--s8);
   opacity: 1; transform: translateX(100%); visibility: hidden;
-  transition: transform 160ms ease-in, visibility 0s linear 160ms; }
+  transition: transform 150ms ease-in, visibility 0s linear 150ms; }
 .theme-glass .g-menu[data-open="true"] { transform: translateX(0); visibility: visible;
-  transition: transform 220ms var(--ease-out), visibility 0s; }
+  transition: transform 200ms var(--ease-out), visibility 0s; }
 .g-menu-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s6); }
 .g-menu-head span { font-family: var(--font-display); font-weight: 500; }
 .g-menu-close { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--line); border-radius: var(--radius); color: var(--bone); cursor: pointer; }
@@ -347,7 +347,7 @@ body.theme-glass {
 .g-tipwrap.g-menu-wrap { display: none; }
 @media (max-width: 960px) { .g-tipwrap.g-menu-wrap { display: inline-flex; } }
 .g-tip { position: absolute; top: calc(100% + 8px); right: 0; z-index: 70; white-space: nowrap; padding: 6px 10px; border-radius: 6px;
-  background: var(--bone); color: var(--glass); font: 500 0.875rem/1.3 var(--font-text); opacity: 0; pointer-events: none; transition: opacity 120ms ease-out; }
+  background: var(--bone); color: var(--glass); font: 500 0.875rem/1.3 var(--font-text); opacity: 0; pointer-events: none; transition: opacity 150ms ease-out; }
 .g-tip kbd { font: inherit; color: var(--line-strong); margin-left: var(--s2); }
 .g-tipwrap button:hover + .g-tip, .g-tipwrap button:focus-visible + .g-tip { opacity: 1; }
 @media (hover: none) { .g-tipwrap button:hover + .g-tip { opacity: 0; } }
@@ -377,11 +377,11 @@ body.theme-glass {
 .g-band-inner { padding-top: var(--s16); padding-bottom: var(--s16); }
 .g-band { background: var(--panel-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .g-tabs { position: relative; display: flex; gap: var(--s8); border-bottom: 1px solid var(--line); margin-bottom: var(--s8); }
-.g-tab { min-height: 48px; padding: 0 0 var(--s3); background: none; border: 0; cursor: pointer; font: 500 1.125rem/1.2 var(--font-display); color: var(--mist); transition: color 120ms ease-out; }
+.g-tab { min-height: 48px; padding: 0 0 var(--s3); background: none; border: 0; cursor: pointer; font: 500 1.125rem/1.2 var(--font-display); color: var(--mist); transition: color 150ms ease-out; }
 .g-tab[aria-selected="true"] { color: var(--bone); }
 .g-tab:hover { color: var(--bone); }
-.g-tabbar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--ice); transition: transform 220ms var(--ease-out), width 220ms var(--ease-out); }
-.g-tabpanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s12); animation: g-fade 180ms ease-out both; }
+.g-tabbar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--ice); transition: transform 200ms var(--ease-out), width 200ms var(--ease-out); }
+.g-tabpanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s12); animation: g-fade 150ms ease-out both; }
 .g-tabpanel .g-lead { color: var(--bone); }
 .g-facts { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
 .g-facts li { display: flex; justify-content: space-between; gap: var(--s4); padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
@@ -413,7 +413,7 @@ body.theme-glass {
 .g-pagehead h1 { font-size: clamp(2.5rem, 5.4vw, 4.25rem); line-height: 1.08; letter-spacing: -0.01em; }
 .g-event::before { content: none; }   /* no coloured side bar: the card border is enough */
 .g-event:hover { border-color: var(--line-strong); }
-.g-event { transition: border-color 120ms ease-out; }
+.g-event { transition: border-color 150ms ease-out; }
 @media (prefers-reduced-motion: reduce) { .g-event { transition: none; } }
 
 /* Story text on laptops: heading on the left, text filling the rest of the width.

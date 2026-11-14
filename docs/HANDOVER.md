@@ -164,6 +164,13 @@ Organiser list now shows a small photo (or initials) beside each name; before,
 a photo appeared only after "Look up". A failed photo load now says so.
 Not yet confirmed live by the owner.
 
+UX profile written 14 Nov: `.ux-profile.md` (from her existing decisions) and a
+"UI/UX skills" section in `CLAUDE.md`. Audit that evening: durations moved to the
+100/150/200/300 scale, language switch and skip link raised to 44px. She asked
+for "motion graphics like nice websites"; proposal given (one composed home
+opening, drawn once, no scroll effects); **wait for her choice before building,
+and show a moving preview first.**
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
