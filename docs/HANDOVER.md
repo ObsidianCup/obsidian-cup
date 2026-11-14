@@ -35,6 +35,8 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
   by the owner. No Supabase MCP / direct AI database access. No AI photos of
   players. Permissions live in the database (RLS), never only in page code.
   If she sends a screenshot with player details, do not copy them anywhere.
+- **Two-step login (2FA) is already on everywhere** (GitHub, Supabase and her
+  other accounts; owner, 14 Nov). Never ask her to enable it again.
 - **Do not suggest a lawyer** (she cannot afford one; said 2 Nov).
 - Do not trace or copy other people's drawings or artwork.
 - Tournament facts must match the owner's Instagram (@obsidian.volleyball,
@@ -152,6 +154,9 @@ account and register pages now says "team link" (Bangla for those two lines
 emptied; she translates). Home: partner logos and the sport facts lost their
 boxes (plain rows with hairlines). Previews now show the real fonts.
 
+14 Nov: owner deleted the unknown throwaway account. Next owner task from
+`docs/SECURITY.md`: step 5 (GitHub secret scanning and push protection).
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Not yet diagnosed.
@@ -159,7 +164,7 @@ boxes (plain rows with hairlines). Previews now show the real fonts.
    in `EMAIL_TEST_TO`; the GitHub secrets are missing; the scheduled workflow
    is disabled or late. Ask her to open GitHub → Actions → "Send emails" →
    latest run and read the log line (it says which case). One step at a time.
-2. **An unknown account** (a throwaway-email address, joined 10 Nov) is in the
+2. (Solved 14 Nov: deleted, and 014 blocks such addresses.) **An unknown account** (a throwaway-email address, joined 10 Nov) was in the
    player list. Claude did not create it and has no database access. The account
    page is reachable by anyone with the link (the repo is public). Suggest she
    deletes it in Supabase → Authentication → Users. Migration 014 blocks

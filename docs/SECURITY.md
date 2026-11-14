@@ -51,18 +51,17 @@ Written 13 Nov 2026 after a full security pass. Plain words on purpose.
 
 ## To do, by the owner (one at a time, in this order)
 
-1. **Run migration 014.** Supabase → SQL Editor → New query → paste all of
+1. (Done 13 Nov.) **Run migration 014.** Supabase → SQL Editor → New query → paste all of
    <https://raw.githubusercontent.com/ObsidianCup/obsidian-cup/main/supabase/migrations/014_security_hardening.sql>
    → Run. Then a new query: `notify pgrst, 'reload schema';` → Run.
-2. **Redeploy the log-in function.** Supabase → Edge Functions →
+2. (Done 13 Nov.) **Redeploy the log-in function.** Supabase → Edge Functions →
    `login-with-code` → Code → replace everything with
    <https://raw.githubusercontent.com/ObsidianCup/obsidian-cup/main/supabase/functions/login-with-code/index.ts>
    → Deploy. "Verify JWT" stays off.
-3. **Delete the unknown account** (the throwaway-email one from 10 Nov):
-   Supabase → Authentication → Users → the three dots on its row → Delete user.
-4. **Two-step login on every account that can change the site.** GitHub,
-   Supabase, Vercel, and the Obsidian Cup Gmail. One stolen password on any of
-   these is worse than any hole in the website.
+3. ~~Delete the unknown account~~ Done 14 Nov.
+4. ~~Two-step login on every account that can change the site.~~ Already on
+   everywhere (owner, 14 Nov: GitHub, Supabase and her other accounts). Do
+   not ask her to set it up again.
 5. **GitHub → the repository → Settings → Advanced Security** (may be called
    "Code security"): turn on Secret Protection with Push protection (a key
    pasted by mistake is refused before it is public), Dependabot alerts, and
