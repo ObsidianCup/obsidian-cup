@@ -62,12 +62,14 @@ Written 13 Nov 2026 after a full security pass. Plain words on purpose.
 4. ~~Two-step login on every account that can change the site.~~ Already on
    everywhere (owner, 14 Nov: GitHub, Supabase and her other accounts). Do
    not ask her to set it up again.
-5. **GitHub → the repository → Settings → Advanced Security** (may be called
-   "Code security"): turn on Secret Protection with Push protection (a key
-   pasted by mistake is refused before it is public), Dependabot alerts, and
-   Code scanning → Default setup.
-6. **GitHub → Settings → Branches → Add a ruleset for `main`:** block force
-   pushes and deletion.
+5. ~~GitHub Advanced Security~~ Done 14 Nov: secret scanning and push
+   protection on, private vulnerability reporting, dependency graph,
+   Dependabot alerts and security updates, CodeQL default setup. AI Scan and
+   agentic autofix left off on purpose (they use paid credits). A Claude
+   session cannot read the code scanning or Dependabot alert lists; she has
+   to look at the "Security and quality" tab and send a screenshot.
+6. ~~Ruleset for `main`~~ Done 14 Nov: "Protect main", active, blocks
+   deletion and force pushes only (checked through the GitHub API).
 7. **Supabase → Authentication → URL Configuration:** Site URL is the live
    address, and Redirect URLs lists only the live account page. Remove
    anything else (old previews, localhost).

@@ -154,8 +154,9 @@ account and register pages now says "team link" (Bangla for those two lines
 emptied; she translates). Home: partner logos and the sport facts lost their
 boxes (plain rows with hairlines). Previews now show the real fonts.
 
-14 Nov: owner deleted the unknown throwaway account. Next owner task from
-`docs/SECURITY.md`: step 5 (GitHub secret scanning and push protection).
+14 Nov: owner deleted the unknown throwaway account. Same evening she finished the GitHub settings
+(steps 5 and 6). Next owner task from `docs/SECURITY.md`: step 7 (Supabase
+redirect addresses).
 
 ## Open problems (13 Nov)
 
