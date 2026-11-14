@@ -156,7 +156,9 @@ boxes (plain rows with hairlines). Previews now show the real fonts.
 
 14 Nov: owner deleted the unknown throwaway account. Same evening she finished the GitHub settings
 (steps 5 and 6). Supabase URL and sign-in settings checked too (steps 7
-and 8). Left: step 9 (confirm the anti-bot check is on).
+and 8). Anti-bot check confirmed on: the whole `docs/SECURITY.md` list is finished.
+Two Dependabot pull requests (#1 checkout v7.0.1, #2 setup-node v7.1.0) are
+open; the commit ids match the official tags; waiting for her yes.
 
 Organiser list now shows a small photo (or initials) beside each name; before,
 a photo appeared only after "Look up". A failed photo load now says so.
@@ -164,7 +166,14 @@ Not yet confirmed live by the owner.
 
 ## Open problems (13 Nov)
 
-1. **The "account will be deleted" email did not arrive.** Not yet diagnosed.
+1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
+   from the job log (readable through the GitHub API): every run since 1 Nov
+   says "Email sender is not set up yet (missing secrets)"; all six values
+   arrive empty. So **no email has ever been sent by the job, and scheduled
+   account deletions are not carried out either.** The job also runs only
+   every 6 to 7 hours, not every 15 minutes (GitHub delays scheduled jobs).
+   Next: she checks Settings → Secrets and variables → Actions for the names.
+   Older note:
    Likely causes, in order: `EMAIL_MODE` is still `test` and the address is not
    in `EMAIL_TEST_TO`; the GitHub secrets are missing; the scheduled workflow
    is disabled or late. Ask her to open GitHub → Actions → "Send emails" →

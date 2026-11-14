@@ -79,11 +79,10 @@ Written 13 Nov 2026 after a full security pass. Plain words on purpose.
    site changes passwords through the forgot-password link); magic links are
    not used by the site. Forgot-password works live. The owner chose to keep
    "Allow new users to sign up" on before launch.
-9. **Supabase → Authentication → Attack Protection:** the anti-bot check
-   (Turnstile) is on. "Leaked password protection" needs the paid plan; turn
-   it on if the project is ever upgraded.
-10. **Supabase → Authentication → Rate Limits:** leave the defaults; do not
-    raise them.
+9. ~~Attack Protection~~ Confirmed on (Turnstile), 14 Nov. Rate limits left
+   at the defaults.
+
+The list is finished.
 
 ## If something goes wrong
 
