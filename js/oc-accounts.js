@@ -341,6 +341,7 @@ const OC_TEXT = {
     adminLevel: "Level",
     adminTodayColour: "Today's live-card colour: {colour}",
     adminLookup: "Look up",
+    adminPhotoFail: "This player has a photo, but it could not be loaded. Reload the page and try again.",
     adminLookupTitle: "Player look-up",
     adminClose: "Close",
     legalKicker: "Terms and policies",

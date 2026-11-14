@@ -158,6 +158,10 @@ boxes (plain rows with hairlines). Previews now show the real fonts.
 (steps 5 and 6). Next owner task from `docs/SECURITY.md`: step 7 (Supabase
 redirect addresses).
 
+Organiser list now shows a small photo (or initials) beside each name; before,
+a photo appeared only after "Look up". A failed photo load now says so.
+Not yet confirmed live by the owner.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Not yet diagnosed.

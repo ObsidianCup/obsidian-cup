@@ -265,6 +265,10 @@ textarea.acct-input { resize: vertical; min-height: 5.5rem; font-family: var(--f
 .adm-swatch { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); flex: 0 0 auto; }
 .adm-look-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .adm-look-photo { width: 120px; height: 120px; border-radius: 12px; }
+/* organiser list: small photo (or initials) beside the name */
+.adm-name { display: flex; align-items: center; gap: 12px; }
+.adm-thumb { position: relative; flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: #1d2629; border: 1px solid #2a3337; font-size: 0.875rem; font-weight: 500; color: #c9cfd0; }
+.adm-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .adm-level { min-width: 9rem; min-height: 40px; padding: 0.3rem 0.5rem; }
 
 /* ---------- Legal pages: readable layout ---------- */

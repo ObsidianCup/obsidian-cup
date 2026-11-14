@@ -104,6 +104,32 @@
     } finally { btn.disabled = false; }
   }
 
+  const initialsOf = p => (p.display_name || p.legal_name || '').trim().split(/\s+/).slice(0, 2).map(w => (w[0] || '').toUpperCase()).join('');
+
+  // Small photos in the list. Each is fetched only when its row comes into
+  // view, once, and kept for the rest of the visit (photos are private files,
+  // so they are fetched with the organiser's login, not a public link).
+  const thumbCache = new Map();          // "<id>:<version>" -> Promise of an object URL (or null)
+  const photoOf = (id, v) => {
+    const key = id + ':' + v;
+    if (!thumbCache.has(key)) thumbCache.set(key, db.storage.from('avatars').download(id + '/avatar.webp')
+      .then(({ data }) => data ? URL.createObjectURL(data) : null).catch(() => null));
+    return thumbCache.get(key);
+  };
+  let thumbWatch = null;
+  function showThumbs() {
+    if (thumbWatch) thumbWatch.disconnect();
+    const fill = async el => {
+      const url = await photoOf(el.dataset.thumb, el.dataset.v);
+      if (!url || !el.isConnected || el.querySelector('img')) return;
+      const img = document.createElement('img'); img.alt = ''; img.src = url; el.appendChild(img);
+    };
+    const els = document.querySelectorAll('[data-thumb]');
+    if (!window.IntersectionObserver) { els.forEach(fill); return; }
+    thumbWatch = new IntersectionObserver(list => list.forEach(e => { if (e.isIntersecting) { thumbWatch.unobserve(e.target); fill(e.target); } }), { rootMargin: '200px' });
+    els.forEach(el => thumbWatch.observe(el));
+  }
+
   async function load() {
     const { data, error } = await db.from('profiles').select('*').order('created_at', { ascending: false });
     if (error) { $('#admMsg').innerHTML = `<p class="acct-msg acct-msg-error">${ocEscape(t('genericError'))}</p>`; return; }
@@ -128,7 +154,7 @@
     $('#admRows').innerHTML = list.map(p => `
       <tr>
         <td><code>${ocEscape(p.player_code || '—')}</code></td>
-        <td>${ocEscape(p.legal_name || '—')}${p.display_name ? `<br><span class="acct-hint">${ocEscape(p.display_name)}</span>` : ''}</td>
+        <td><div class="adm-name"><span class="adm-thumb"${p.avatar_version ? ` data-thumb="${p.id}" data-v="${Number(p.avatar_version)}"` : ''}><span aria-hidden="true">${ocEscape(initialsOf(p))}</span></span><div>${ocEscape(p.legal_name || '—')}${p.display_name ? `<br><span class="acct-hint">${ocEscape(p.display_name)}</span>` : ''}</div></div></td>
         <td>${ocEscape(p.email || '')}</td>
         <td>${ocAge(p.date_of_birth) ?? '—'}</td>
         <td>${ocEscape(p.gender ? t('gender' + p.gender[0].toUpperCase() + p.gender.slice(1)) : '—')}</td>
@@ -140,6 +166,7 @@
           : `<button class="acct-btn acct-btn-ghost acct-btn-small" data-verify="${p.id}" data-on="1">${ocEscape(t('adminVerify'))}</button>`}</td>
         <td><button class="acct-btn acct-btn-ghost acct-btn-small" data-look="${p.id}">${ocEscape(t('adminLookup'))}</button></td>
       </tr>`).join('');
+    showThumbs();
     document.querySelectorAll('[data-level]').forEach(sel => sel.addEventListener('change', async () => {
       sel.disabled = true;
       const { error } = await db.rpc('admin_set_level', { p_player: sel.dataset.level, p_level: sel.value });
@@ -192,14 +219,13 @@
   }
 
   // Quick check of one player: photo, name on ID, date of birth, age, ID status, team.
-  let lookUrl = null;
   async function lookUp(id) {
     const p = players.find(x => x.id === id);
     if (!p) return;
     const box = $('#admLookBody');
     const age = ocAge(p.date_of_birth);
     const dob = p.date_of_birth ? new Date(p.date_of_birth + 'T00:00:00').toLocaleDateString(ocLang() === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
-    const initials = (p.display_name || p.legal_name || '').trim().split(/\s+/).slice(0, 2).map(w => (w[0] || '').toUpperCase()).join('');
+    const initials = initialsOf(p);
     box.innerHTML = `
       <div class="acct-pc-id">
         <div class="acct-pc-photo adm-look-photo"><span>${ocEscape(initials)}</span><img id="admLookImg" alt="" hidden /></div>
@@ -223,8 +249,10 @@
       ? '<ul class="acct-pc-teams">' + list.map(x => `<li><strong>${ocEscape(x.team)}</strong><span>${ocEscape(x.event)} · ${ocEscape(x.category)}${x.jersey != null ? ' · #' + ocEscape(String(x.jersey)) : ''}</span>${x.status === 'approved' ? '' : `<span class="acct-tag">${ocEscape(t('cardWaiting'))}</span>`}</li>`).join('') + '</ul>'
       : `<p class="acct-muted">${ocEscape(t('cardNoTournament'))}</p>`;
     if (p.avatar_version) {
-      const { data } = await db.storage.from('avatars').download(p.id + '/avatar.webp');
-      if (data) { if (lookUrl) URL.revokeObjectURL(lookUrl); lookUrl = URL.createObjectURL(data); const img = $('#admLookImg'); img.src = lookUrl; img.hidden = false; }
+      const url = await photoOf(p.id, Number(p.avatar_version));
+      const img = $('#admLookImg');
+      if (url && img) { img.src = url; img.hidden = false; }
+      else if (img) img.closest('.adm-look-photo').insertAdjacentHTML('afterend', `<p class="acct-msg acct-msg-error" role="status">${ocEscape(t('adminPhotoFail'))}</p>`);
     }
   }
 
