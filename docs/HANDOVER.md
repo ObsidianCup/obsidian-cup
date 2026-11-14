@@ -155,8 +155,8 @@ emptied; she translates). Home: partner logos and the sport facts lost their
 boxes (plain rows with hairlines). Previews now show the real fonts.
 
 14 Nov: owner deleted the unknown throwaway account. Same evening she finished the GitHub settings
-(steps 5 and 6). Next owner task from `docs/SECURITY.md`: step 7 (Supabase
-redirect addresses).
+(steps 5 and 6). Supabase URL and sign-in settings checked too (steps 7
+and 8). Left: step 9 (confirm the anti-bot check is on).
 
 Organiser list now shows a small photo (or initials) beside each name; before,
 a photo appeared only after "Look up". A failed photo load now says so.

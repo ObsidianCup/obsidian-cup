@@ -70,12 +70,15 @@ Written 13 Nov 2026 after a full security pass. Plain words on purpose.
    to look at the "Security and quality" tab and send a screenshot.
 6. ~~Ruleset for `main`~~ Done 14 Nov: "Protect main", active, blocks
    deletion and force pushes only (checked through the GitHub API).
-7. **Supabase → Authentication → URL Configuration:** Site URL is the live
-   address, and Redirect URLs lists only the live account page. Remove
-   anything else (old previews, localhost).
-8. **Supabase → Authentication → Sign In / Providers → Email:** minimum
-   password length 8 or more, "Confirm email" on, "Secure email change" on.
-   Switch off any provider that is not used (only Email and Google are).
+7. ~~URL Configuration~~ Checked 14 Nov: Site URL is the live address and the
+   only redirect address is the live account page. (A new host's address
+   must be added here when the site moves.)
+8. ~~Sign In / Providers~~ Checked 14 Nov: only Email and Google enabled;
+   confirm email on; manual linking and anonymous sign-ins off; minimum
+   password 8; "Require current password when updating" must stay off (the
+   site changes passwords through the forgot-password link); magic links are
+   not used by the site. Forgot-password works live. The owner chose to keep
+   "Allow new users to sign up" on before launch.
 9. **Supabase → Authentication → Attack Protection:** the anti-bot check
    (Turnstile) is on. "Leaked password protection" needs the paid plan; turn
    it on if the project is ever upgraded.
