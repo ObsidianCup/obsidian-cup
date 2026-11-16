@@ -300,9 +300,8 @@ body.theme-glass {
 /* ---------- Photo slideshow (home) ----------
    A row of photos that can be swiped; every photo is shown whole at its own
    shape, as tall as the row allows and never wider than the screen. */
-.g-hero2 + .g-gallery { padding-top: 0; }
 .g-gallery { --gh: clamp(260px, 58vh, 560px); }
-@media (max-width: 700px) { .g-gallery { --gh: min(58vh, 82vw); } .g-gallery-track { align-items: flex-start; } }   /* phones: keep wide and tall photos close in height */
+@media (max-width: 700px) { .g-gallery { --gh: min(58vh, 82vw); } .g-gallery-track { align-items: flex-start; } .g-gallery .g-section-head { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: var(--s4); } .g-gallery [data-gallery] { display: none; } }   /* phones: keep wide and tall photos close in height */
 .g-gallery .g-section-head { align-items: center; }
 .g-gallery-tools { display: flex; align-items: center; gap: var(--s2); }
 .g-gallery-tools .g-meta { margin-right: var(--s2); font-variant-numeric: tabular-nums; }
@@ -386,23 +385,20 @@ body.theme-glass {
 
 /* ---------- Home ---------- */
 .g-hero2 { padding: var(--s24) 0 var(--s16); }
-.g-hero2-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s12); align-items: end; }
-.g-hero2 h1 { font-weight: 600; font-size: clamp(2.5rem, 5.4vw, 4.25rem); line-height: 1.08; letter-spacing: -0.01em; max-width: 13ch; margin-bottom: var(--s6); }
+.g-hero2-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--s12); align-items: start; }
+.g-hero2 h1 { font-weight: 600; font-size: clamp(2.25rem, 4.4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; margin-bottom: var(--s6); }
 .g-hero2 .g-lead { margin-bottom: var(--s8); }
 .g-actions { display: flex; gap: var(--s3); flex-wrap: wrap; }
-.g-nextcard { background: var(--facet); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s8); display: grid; gap: var(--s6); }
+.g-heroside { display: grid; gap: var(--s6); }
+.g-heroshot { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); background: var(--facet); }
+.g-next2 { display: grid; gap: var(--s3); justify-items: start; }
+.g-next2 h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; line-height: 1.25; margin: 0; }
+.g-next2 .g-prose { color: var(--soft); max-width: 52ch; margin: 0; }
 .g-nextup { display: flex; align-items: center; gap: 10px; color: var(--amber); font-weight: 500; font-size: 0.9375rem; }
 .g-nextup::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
-.g-nextnum { display: flex; align-items: center; gap: var(--s6); }
-.g-nextnum > div { display: grid; gap: var(--s1); }
-.g-nextnum b { font-family: var(--font-display); font-weight: 600; font-size: 6rem; line-height: 0.9; }
-.g-nextnum strong { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; line-height: 1.25; }
-.g-nextcard .g-prose { border-top: 1px solid var(--line); padding-top: var(--s6); }
 @media (max-width: 860px) {
   .g-hero2 { padding: var(--s12) 0 var(--s12); }
   .g-hero2-grid { grid-template-columns: 1fr; gap: var(--s8); }
-  .g-nextcard { padding: var(--s6); }
-  .g-nextnum b { font-size: 4.5rem; }
 }
 
 /* Sport tabs: the underline slides, the panel fades */

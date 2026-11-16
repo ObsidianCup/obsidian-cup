@@ -228,6 +228,18 @@ English words spelled in Bangla letters such as সিজন); style proposal se
 **wait for her answer before rewriting.** The old "translation is on hold, she
 does it by hand" rule no longer holds: she asked Claude to fix it.
 
+Design pass (16 Nov, afternoon, frontend-design skill): the home opening is now
+built around a real photo (`assets/photos/hero-setter.webp`, a player seen from
+behind) with "Next up" as plain text under it; the boxed card with the big "5"
+is gone. The slideshow moved below "Season 4 champions" and has 14 photos (the
+setter photo opens the page instead). On phones the slideshow shows the
+counter beside its heading and no arrows (swipe). The ball's trail now fades
+out after landing. Headline is a little smaller so it sets in four lines.
+Bangla research: Prothom Alo sports and bKash (read through Firecrawl at her
+request; news18 Bengali is blocked) both write everyday English loanwords in
+Bangla letters (টুর্নামেন্ট, চ্যাম্পিয়ন, রানার-আপ, ক্যাশ আউট) and use অনূর্ধ্ব-১৯;
+two style options sent to her; **wait for her pick before rewriting.**
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
