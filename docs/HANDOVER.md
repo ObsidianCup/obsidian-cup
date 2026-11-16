@@ -177,6 +177,20 @@ for the tab; `?motion=calm` turns it off). Files: `js/motion-boot.js`,
 `scripts/site-tests/motion-checks.js`. **Go live only when she says so** (change
 `MOTION_DEFAULT` to `'showy'`). Not tested on a real cheap phone.
 
+Notion (16 Nov): she connected Notion and asked for a check of "Obsidian
+Volleyball Database" (Season 1 to 4 pages). Read only; nothing copied except
+team counts. Added to the season descriptions: S1 6 boys + 4 girls teams, All
+Stars 7 boys teams, Super Cup 5 girls + 4 boys teams (these add up to the
+site's 43 with Season 4's 17). **Not added, waiting for her:** award winners
+(MVP and so on: named players, many under 18), and anything from the Notion
+"Season 4" page, which is a copy of Season 3 (same teams, champions and
+awards) and contradicts the site. Other mismatches reported to her: Super Cup
+boys runner-up (Notion "Nexhai", not in that season's teams; site "Zenith"),
+"Teams: N" labels that disagree with the lists, spellings (Silhoutte /
+Silhouette, Zenit / Zenith, Colonizers / Colonisers), empty U19 roster.
+The Notion roster pages hold phone numbers, emails and emergency contacts,
+including minors: never copy them into the repo or chat.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
