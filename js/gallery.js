@@ -1,6 +1,6 @@
 // Home page photo slideshow. The photos sit in a row that can be swiped or
-// scrolled sideways; this adds the arrows, the pause button, the counter and
-// the slow automatic change. Without this script the row still works by hand.
+// scrolled sideways; this adds the arrows, the counter and the automatic
+// change every few seconds. Without this script the row still works by hand.
 (function () {
   'use strict';
   document.addEventListener('DOMContentLoaded', function () {
@@ -8,10 +8,9 @@
     if (!track) return;
     var slides = Array.prototype.slice.call(track.children);
     var count = document.getElementById('galleryCount');
-    var toggle = document.querySelector('[data-gallery="toggle"]');
     var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var EVERY = 5000;
-    var index = 0, playing = !calm, onScreen = false, held = false, timer = null;
+    var EVERY = 4000, REST = 8000;      // change every 4 seconds; after someone moves it by hand, wait 8 seconds
+    var index = 0, onScreen = false, held = false, restUntil = 0;
 
     function edge() { return parseFloat(getComputedStyle(track).paddingLeft) || 0; }
 
@@ -32,36 +31,27 @@
       show();
     }
 
-    function setPlaying(on) {
-      playing = on;
-      if (!toggle) return;
-      var label = on ? 'Pause slideshow' : 'Play slideshow';
-      toggle.setAttribute('aria-label', label);
-      toggle.setAttribute('title', label);
-      toggle.setAttribute('data-state', on ? 'playing' : 'paused');
-    }
+    function rest() { restUntil = Date.now() + REST; }
     function tick() {
-      if (playing && onScreen && !held && !document.hidden) go(index + 1);
+      if (!calm && onScreen && !held && !document.hidden && Date.now() >= restUntil) go(index + 1);
     }
 
-    // Arrows, pause, keyboard. Once someone takes over by hand, the automatic
-    // change stops until they press play.
+    // Arrows and keyboard. When someone moves it by hand, the automatic
+    // change waits a little so it never fights them.
     document.querySelectorAll('[data-gallery]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var what = btn.getAttribute('data-gallery');
-        if (what === 'toggle') { setPlaying(!playing); return; }
-        setPlaying(false);
-        go(index + (what === 'next' ? 1 : -1));
+        rest();
+        go(index + (btn.getAttribute('data-gallery') === 'next' ? 1 : -1));
       });
     });
     track.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
       e.preventDefault();
-      setPlaying(false);
+      rest();
       go(index + (e.key === 'ArrowRight' ? 1 : -1));
     });
-    ['pointerdown', 'wheel', 'touchstart'].forEach(function (name) {
-      track.addEventListener(name, function () { setPlaying(false); }, { passive: true });
+    ['pointerdown', 'wheel', 'touchstart', 'touchmove'].forEach(function (name) {
+      track.addEventListener(name, rest, { passive: true });
     });
 
     // Keep the counter right while the row is moved by hand.
@@ -82,8 +72,7 @@
       new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; }, { threshold: 0.5 }).observe(track);
     } else { onScreen = true; }
 
-    setPlaying(playing);
     show();
-    timer = setInterval(tick, EVERY);
+    setInterval(tick, EVERY);
   });
 })();

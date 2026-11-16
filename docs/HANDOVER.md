@@ -95,8 +95,8 @@ Bangla (rules-05, rules-07, rules-09, acct.errExists, acct.laterGuardianWhy).
 ## Player accounts (Supabase)
 
 Live in the database: migrations **001–013** and the legal seed (owner ran 013
-and the seed on 9 Nov). **014 (security hardening) is written but not yet run.** Accounts are **not public** (`accountsEnabled: false`);
-`/pages/account.html` works by direct link. Organiser page `/pages/admin.html`
+and the seed on 9 Nov). **014 (security hardening) is written but not yet run.** Accounts are **public since 16 Nov** (`accountsEnabled: true`; owner's
+decision, made knowing the email job does not work yet). Organiser page `/pages/admin.html`
 (two-step login) works live (seen 13 Nov).
 
 What exists:
@@ -214,6 +214,19 @@ Team lists (16 Nov): added per category under Season 1, All Stars Cup and Super
 Cup on the Volleyball and Past seasons pages, from Notion. **Season 4 has no
 team list on the site**: Notion only has the six boys open age teams (girls
 list is a copy of Season 3, U19 roster is empty); waiting for her lists.
+
+16 Nov, 12:45: accounts switched on (menu shows "Log in or sign up", home shows
+"Create your player account"). **Still broken behind it:** the GitHub email
+job has no secrets, so no welcome emails and scheduled deletions are never
+carried out; and Supabase's built-in sender may limit confirmation emails.
+Slideshow: pause button removed at her request, changes every 4 seconds and
+waits 8 seconds after someone moves it by hand. Home has a closing block
+"Were you there?" (share your experience, email us). Hosting unchanged until
+she decides. Bangla: she finds the current text unnatural (word for word,
+English words spelled in Bangla letters such as সিজন); style proposal sent
+(names and sport terms stay in English letters, the rest in everyday Bangla);
+**wait for her answer before rewriting.** The old "translation is on hold, she
+does it by hand" rule no longer holds: she asked Claude to fix it.
 
 ## Open problems (13 Nov)
 

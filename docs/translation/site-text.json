@@ -3913,6 +3913,27 @@
   "placeholder": false
  },
  {
+  "id": "home-talk1",
+  "section": "Home page",
+  "en": "Were you there?",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-talk2",
+  "section": "Home page",
+  "en": "Tell us how it went, or write to us with a question.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-talk3",
+  "section": "Home page",
+  "en": "Share your experience",
+  "bn": "",
+  "placeholder": false
+ },
+ {
   "id": "chrome-menu",
   "section": "Menu and footer (every page)",
   "en": "Menu",

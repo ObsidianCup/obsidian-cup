@@ -308,7 +308,6 @@ body.theme-glass {
 .g-gallery-tools .g-meta { margin-right: var(--s2); font-variant-numeric: tabular-nums; }
 .g-iconbtn { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; background: var(--facet); border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--bone); cursor: pointer; transition: background-color var(--motion-fast) ease, border-color var(--motion-fast) ease; }
 .g-iconbtn:hover { border-color: var(--ice); }
-.g-iconbtn[data-state="playing"] .g-ico-play, .g-iconbtn[data-state="paused"] .g-ico-pause { display: none; }
 .g-gallery-track { list-style: none; margin: 0; display: flex; align-items: center; gap: var(--s4); height: var(--gh);
   padding: 0 max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); scroll-padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
@@ -327,6 +326,8 @@ body.theme-glass {
 .g-award-col dt { font-size: 0.875rem; color: var(--mist); flex: 0 0 auto; }
 .g-award-col dd { margin: 0; text-align: right; }
 .g-teams { margin-top: var(--s6); }
+.g-talk .g-h2 { margin-bottom: var(--s4); }
+.g-talk .g-lead { max-width: 60ch; margin-bottom: var(--s8); }
 .g-teamlist { margin: 0; color: var(--soft); line-height: 1.6; }
 @media (max-width: 720px) {
   .g-event { padding: var(--s6) var(--s4) var(--s6) var(--s6); margin-top: var(--s6); }

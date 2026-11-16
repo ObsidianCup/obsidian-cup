@@ -52,7 +52,7 @@ const SITE_CONFIG = {
   // ---- PLAYER ACCOUNTS ----
   // accountsEnabled: true shows "Log in" in the menu and the Privacy/Terms
   // links in the footer. Keep false until accounts are tested and launched.
-  accountsEnabled: false,
+  accountsEnabled: true,   // public since 16 Nov 2026 (owner: players can make their accounts now)
   // googleLogin: true shows "Continue with Google" (after Google is set up in Supabase).
   googleLogin: true,
   // Cloudflare Turnstile anti-bot check on sign-up, log in and password reset.
