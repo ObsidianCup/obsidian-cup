@@ -3906,6 +3906,13 @@
   "placeholder": false
  },
  {
+  "id": "home-gallery1",
+  "section": "Home page",
+  "en": "From the court",
+  "bn": "",
+  "placeholder": false
+ },
+ {
   "id": "chrome-menu",
   "section": "Menu and footer (every page)",
   "en": "Menu",

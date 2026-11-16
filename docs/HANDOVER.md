@@ -201,6 +201,16 @@ the site). Still open: Super Cup boys runner-up (she is checking Zenith).
 She asked to use "Claude Motion" (motion-graphics artifact type): **not
 available on this account** (no Motion type listed, 16 Nov).
 
+Photo slideshow (16 Nov): home page, under the opening section ("From the
+court"), 15 photos the owner sent in chat (she said they are hers to use).
+Files `assets/photos/*.webp` (re-encoded, no camera or location data, max
+1100px tall), `js/gallery.js`, styles in `css/glass.css` ("Photo slideshow").
+Every photo is shown whole at its own shape; arrows, pause/play, counter,
+swipe, arrow keys; changes every 5 seconds, stops when someone takes over,
+starts paused under reduced motion. Alt text describes the scene and never
+names anyone. To add a photo: convert it the same way and add an `<li>` in
+`index.html` with its width, height and `--ar` (width divided by height).
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
