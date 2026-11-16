@@ -191,6 +191,16 @@ Silhouette, Zenit / Zenith, Colonizers / Colonisers), empty U19 roster.
 The Notion roster pages hold phone numbers, emails and emergency contacts,
 including minors: never copy them into the repo or chat.
 
+Awards (16 Nov): owner approved showing individual award winners (MVP, best
+spiker, setter, receiver). Added under each volleyball season on the
+Volleyball and Past seasons pages; Seasons 1 to 3 from Notion, Season 4 from
+her own text (the Instagram caption). This is the one approved exception to
+"no real player data in the repo": publicly announced award winners' names
+only. Spellings she confirmed: Silhoutte, Zenith, Dhaka Colonizers (fixed on
+the site). Still open: Super Cup boys runner-up (she is checking Zenith).
+She asked to use "Claude Motion" (motion-graphics artifact type): **not
+available on this account** (no Motion type listed, 16 Nov).
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov

@@ -344,7 +344,7 @@ const TOURNAMENTS = {
     teams: '7 Boys teams',
     spectators: '30+',
     results: [
-      { category: 'Boys — Open Age', champion: 'Fearless Flyers', runner: 'Dhaka Colonisers' },
+      { category: 'Boys — Open Age', champion: 'Fearless Flyers', runner: 'Dhaka Colonizers' },
     ]
   },
   ovc_s1: {

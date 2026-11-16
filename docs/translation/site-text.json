@@ -324,7 +324,7 @@
  {
   "id": "home-28",
   "section": "Home page",
-  "en": "Won by Fearless Flyers, runner-up Dhaka Colonisers.",
+  "en": "Won by Fearless Flyers, runner-up Dhaka Colonizers.",
   "bn": "",
   "placeholder": false
  },
@@ -478,7 +478,7 @@
  {
   "id": "volleyball-11",
   "section": "Volleyball page",
-  "en": "Runner-up Dhaka Colonisers",
+  "en": "Runner-up Dhaka Colonizers",
   "bn": "",
   "placeholder": false
  },
@@ -528,6 +528,41 @@
   "id": "volleyball-18",
   "section": "Volleyball page",
   "en": "All seasons",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "volleyball-aw1",
+  "section": "Volleyball page",
+  "en": "Individual awards",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "volleyball-aw2",
+  "section": "Volleyball page",
+  "en": "MVP",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "volleyball-aw3",
+  "section": "Volleyball page",
+  "en": "Best spiker",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "volleyball-aw4",
+  "section": "Volleyball page",
+  "en": "Best setter",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "volleyball-aw5",
+  "section": "Volleyball page",
+  "en": "Best receiver",
   "bn": "",
   "placeholder": false
  },

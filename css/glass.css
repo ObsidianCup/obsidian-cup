@@ -297,6 +297,15 @@ body.theme-glass {
 .g-event .g-champ, .g-event .g-champ + .g-champ { padding: var(--s4) var(--s6); border: 1px solid var(--line); border-left: 1px solid var(--line); border-radius: var(--radius); background: var(--glass); }
 .g-event .g-champ-name { font-size: 1.375rem; }
 .g-event .g-champ-cat { color: var(--soft); }
+/* individual awards under a season's champions */
+.g-awards { margin-top: var(--s8); padding-top: var(--s6); border-top: 1px solid var(--line); }
+.g-awards h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.125rem; line-height: 1.3; margin: 0 0 var(--s4); }
+.g-award-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--s6) var(--s8); }
+.g-award-col h4 { font: 500 0.875rem/1.4 var(--font-text); color: var(--soft); margin: 0 0 var(--s2); }
+.g-award-col dl { margin: 0; display: grid; }
+.g-award-col dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--line); }
+.g-award-col dt { font-size: 0.875rem; color: var(--mist); flex: 0 0 auto; }
+.g-award-col dd { margin: 0; text-align: right; }
 @media (max-width: 720px) {
   .g-event { padding: var(--s6) var(--s4) var(--s6) var(--s6); margin-top: var(--s6); }
   .g-event::before { top: var(--s6); bottom: var(--s6); }
