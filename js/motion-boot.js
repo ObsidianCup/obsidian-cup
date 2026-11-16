@@ -9,7 +9,7 @@
 // ?motion=calm) at the end of the address; the choice lasts until the tab is
 // closed. Visitors who have "reduce motion" switched on always get calm.
 (function () {
-  var MOTION_DEFAULT = 'calm';
+  var MOTION_DEFAULT = 'showy';   // owner said go live, 16 Nov 2026
 
   var root = document.documentElement, mode = null;
   var asked = /[?&]motion=(showy|calm)\b/.exec(location.search);

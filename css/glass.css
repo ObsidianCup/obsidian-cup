@@ -326,6 +326,8 @@ body.theme-glass {
 .g-award-col dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--line); }
 .g-award-col dt { font-size: 0.875rem; color: var(--mist); flex: 0 0 auto; }
 .g-award-col dd { margin: 0; text-align: right; }
+.g-teams { margin-top: var(--s6); }
+.g-teamlist { margin: 0; color: var(--soft); line-height: 1.6; }
 @media (max-width: 720px) {
   .g-event { padding: var(--s6) var(--s4) var(--s6) var(--s6); margin-top: var(--s6); }
   .g-event::before { top: var(--s6); bottom: var(--s6); }

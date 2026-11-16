@@ -170,12 +170,11 @@ UX profile written 14 Nov: `.ux-profile.md` (from her existing decisions) and a
 for "motion graphics like nice websites"; she chose the full showy option on 16 Nov (see below).
 
 Showy motion (16 Nov): she chose "full showy site", lifting her no-scroll-effects
-rule. Built and pushed but **switched off for visitors**: `MOTION_DEFAULT = 'calm'`
-in `js/motion-boot.js`. Preview: add `?motion=showy` to any public page (lasts
+rule. **Live for everyone since 16 Nov** (she said "apply all the motion"):
+`MOTION_DEFAULT = 'showy'` in `js/motion-boot.js`. Preview: add `?motion=showy` to any public page (lasts
 for the tab; `?motion=calm` turns it off). Files: `js/motion-boot.js`,
 `js/motion.js`, `css/motion.css`; rules in `.ux-profile.md` ("Motion"); test
-`scripts/site-tests/motion-checks.js`. **Go live only when she says so** (change
-`MOTION_DEFAULT` to `'showy'`). Not tested on a real cheap phone.
+`scripts/site-tests/motion-checks.js`. To go back, set it to `'calm'`. Not tested on a real cheap phone.
 
 Notion (16 Nov): she connected Notion and asked for a check of "Obsidian
 Volleyball Database" (Season 1 to 4 pages). Read only; nothing copied except
@@ -210,6 +209,11 @@ swipe, arrow keys; changes every 5 seconds, stops when someone takes over,
 starts paused under reduced motion. Alt text describes the scene and never
 names anyone. To add a photo: convert it the same way and add an `<li>` in
 `index.html` with its width, height and `--ar` (width divided by height).
+
+Team lists (16 Nov): added per category under Season 1, All Stars Cup and Super
+Cup on the Volleyball and Past seasons pages, from Notion. **Season 4 has no
+team list on the site**: Notion only has the six boys open age teams (girls
+list is a copy of Season 3, U19 roster is empty); waiting for her lists.
 
 ## Open problems (13 Nov)
 

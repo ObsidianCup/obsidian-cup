@@ -20,10 +20,12 @@ for(const lang of ['en','bn']) for(const w of [375,1280]) for(const pg of pages)
    dim:[...document.querySelectorAll('main *')].filter(e=>e.getClientRects().length&&+getComputedStyle(e).opacity<1&&!e.closest('.m-arc,.m-facets')).map(e=>e.tagName+'.'+e.className).slice(0,4)}));
  say(r.left===0,`${pg} ${lang} ${w}: ${r.left} still tagged`);say(r.over<=0,`${pg} ${lang} ${w}: overflow ${r.over}`);say(r.dim.length===0,`${pg} ${lang} ${w}: dim ${r.dim}`);say(errs.length===0,`${pg} ${lang} ${w}: ${errs}`);
  await c.close();}
-// calm default: untouched
-{const c=await b.newContext();const p=await c.newPage();await p.goto('http://localhost:8765/index.html');await p.waitForTimeout(600);
+// showy is the default; ?motion=calm leaves the page untouched
+{const c0=await b.newContext();const p0=await c0.newPage();await p0.goto('http://localhost:8765/index.html');await p0.waitForTimeout(600);
+ say(await p0.evaluate(()=>document.documentElement.classList.contains('m-on')),'showy is not the default');await c0.close();}
+{const c=await b.newContext();const p=await c.newPage();await p.goto('http://localhost:8765/index.html?motion=calm');await p.waitForTimeout(600);
  const r=await p.evaluate(()=>({cls:document.documentElement.className,extra:document.querySelectorAll('.m-facets,.m-arc,.m-progress,[data-m]').length,anim:getComputedStyle(document.querySelector('.g-hero2 h1')).animationName}));
- say(r.cls===''&&r.extra===0&&r.anim==='none','calm default changed: '+JSON.stringify(r));
+ say(r.cls===''&&r.extra===0&&r.anim==='none','calm mode changed the page: '+JSON.stringify(r));
  await p.goto('http://localhost:8765/index.html?motion=showy');await p.waitForTimeout(300);await p.goto('http://localhost:8765/pages/about.html');await p.waitForTimeout(400);
  say(await p.evaluate(()=>document.documentElement.classList.contains('m-on')),'preview choice not kept on next page');
  await p.goto('http://localhost:8765/pages/about.html?motion=calm');await p.waitForTimeout(300);
