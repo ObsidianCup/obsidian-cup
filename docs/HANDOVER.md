@@ -57,7 +57,7 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
   no all-caps, 44px tap areas, buttons never disabled (`ocBusy` / `ocIsBusy`),
   icon-only buttons need a tooltip, destructive actions use a dialog that names
   the thing. **Transitions are wanted** (owner, 9 Nov): short, tied to an action,
-  plus a 200ms page fade; all off for reduced motion. No scroll-triggered effects.
+  plus a 200ms page fade; all off for reduced motion. Scroll effects: see "Showy motion" below (her rule changed 16 Nov).
 - Story text on laptops: heading left, text right (about 75 characters a line).
 - Sports: **Volleyball** and **Futsal** (never "football" in wording; the
   database id stays `football`).
@@ -167,9 +167,15 @@ Not yet confirmed live by the owner.
 UX profile written 14 Nov: `.ux-profile.md` (from her existing decisions) and a
 "UI/UX skills" section in `CLAUDE.md`. Audit that evening: durations moved to the
 100/150/200/300 scale, language switch and skip link raised to 44px. She asked
-for "motion graphics like nice websites"; proposal given (one composed home
-opening, drawn once, no scroll effects); **wait for her choice before building,
-and show a moving preview first.**
+for "motion graphics like nice websites"; she chose the full showy option on 16 Nov (see below).
+
+Showy motion (16 Nov): she chose "full showy site", lifting her no-scroll-effects
+rule. Built and pushed but **switched off for visitors**: `MOTION_DEFAULT = 'calm'`
+in `js/motion-boot.js`. Preview: add `?motion=showy` to any public page (lasts
+for the tab; `?motion=calm` turns it off). Files: `js/motion-boot.js`,
+`js/motion.js`, `css/motion.css`; rules in `.ux-profile.md` ("Motion"); test
+`scripts/site-tests/motion-checks.js`. **Go live only when she says so** (change
+`MOTION_DEFAULT` to `'showy'`). Not tested on a real cheap phone.
 
 ## Open problems (13 Nov)
 

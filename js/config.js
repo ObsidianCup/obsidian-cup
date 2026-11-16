@@ -37,6 +37,11 @@ const SITE_CONFIG = {
   facebookUrl: "https://www.facebook.com/share/1Cb8jWH5Gy/",
   contactEmail: "obsidiancup.official@gmail.com",
 
+  // ---- MOTION ----
+  // "calm" or "showy" is set in js/motion-boot.js (MOTION_DEFAULT), because it
+  // has to be read before the page is drawn. Preview the other mode on any
+  // page by adding ?motion=showy or ?motion=calm to the address.
+
   // ---- VISITOR COUNTING (Google Analytics) ----
   // false = the site sets no cookies and sends nothing to Google.
   // Before turning this on, the Privacy notice must mention it and visitors

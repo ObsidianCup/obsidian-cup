@@ -18,3 +18,8 @@ They need Playwright (`npm i -g playwright`, or set `NODE_PATH` to where it is).
 Other tests: `supabase/tests/rls_test.mjs` (database rules),
 `scripts/email/sender_test.mjs` (emails and scheduled account deletion),
 `python3 scripts/build_host_files.py --check` (host files match vercel.json).
+
+`motion-checks.js`: the "showy" motion mode (`?motion=showy`) on every public
+page in both languages at 375 and 1280: nothing stays hidden, no sideways
+scroll, calm mode untouched, off under reduced motion, falls back if the
+script is missing. Run it like the others, with the site on localhost:8765.

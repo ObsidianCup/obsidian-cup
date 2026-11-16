@@ -52,7 +52,9 @@ Before finishing UI, run `ux-audit`.
 - Enforce permissions in the database (Supabase Row Level Security), never
   only in page code.
 - Keep images small (logos under ~420px); compress new assets.
-- Avoid decorative motion and scroll-triggered fade-ins; keep text readable.
+- Motion follows `.ux-profile.md` ("Motion"): calm and showy modes for the public
+  pages, switched in `js/motion-boot.js`. Keep text readable; account, organiser
+  and legal pages stay calm; everything off under reduced motion.
 - Tournament facts (dates, venues, results) must match the owner's Instagram
   @obsidian.volleyball and @obsidian.futsal (before Nov 2026: @obsidiancup); ask when unsure instead of guessing.
 - Commit messages end with the co-author line the session provides.

@@ -1,0 +1,72 @@
+/* "Showy" motion for the public pages. Nothing here applies unless
+   js/motion-boot.js has put the class m-on on <html>, and it never does that
+   for visitors who ask for reduced motion. Movement uses transform, opacity
+   and clip-path only, so text never reflows while something animates.
+
+   Timings (owner-approved exception to the 100-300ms scale, marketing pages
+   only): 600ms for a section arriving and for the ball's flight, 60ms between
+   items of a list. */
+
+html.m-on { --m-ease: cubic-bezier(0.16, 1, 0.3, 1); --m-reveal: 600ms; --m-step: 60ms; }
+
+/* the plain page fade is replaced by the opening below */
+html.m-on body.theme-glass main { animation: none; }
+
+@keyframes m-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes m-mask { from { clip-path: inset(0 0 100% 0); transform: translateY(16%); } to { clip-path: inset(-12% -6% -12% -6%); transform: none; } }
+@keyframes m-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes m-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Opening: home ---------- */
+html.m-on .g-hero2 { position: relative; }
+html.m-on .g-hero2 h1 { animation: m-mask var(--m-reveal) var(--m-ease) both; }
+html.m-on .g-hero2 .g-lead { animation: m-rise var(--m-reveal) var(--m-ease) 120ms both; }
+html.m-on .g-hero2 .g-actions { animation: m-rise var(--m-reveal) var(--m-ease) 200ms both; }
+html.m-on .g-hero2 .g-nextcard { animation: m-rise var(--m-reveal) var(--m-ease) 280ms both; }
+html.m-on .g-hero2 .g-nextnum b { animation: m-rise var(--m-reveal) var(--m-ease) 520ms both; }
+
+/* The ball: it flies in over the headline and lands as the "Next up" dot. */
+.m-arc { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.m-arc svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.m-arc-line { fill: none; stroke: var(--ice); stroke-width: 1.5; stroke-linecap: round; opacity: 0; }
+.m-arc-line.m-go { opacity: 0.5; transition: stroke-dashoffset 600ms cubic-bezier(0.3, 0.1, 0.5, 1); }
+.m-arc-line.m-rest { opacity: 0.16; transition: opacity 300ms ease-out; }
+.m-ball { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--amber); offset-rotate: 0deg; offset-distance: 0%; opacity: 0; }
+.m-ball.m-go { opacity: 1; animation: m-fly 600ms cubic-bezier(0.3, 0.1, 0.5, 1) both; }
+@keyframes m-fly { to { offset-distance: 100%; } }
+html.m-on .g-nextup.m-wait::before { opacity: 0; }
+html.m-on .g-nextup.m-land::before { animation: m-land 300ms var(--m-ease) both; }
+@keyframes m-land { from { transform: scale(2.4); } to { transform: none; } }
+
+/* ---------- Opening: inner pages ---------- */
+html.m-on .g-pagehead { position: relative; border-bottom-color: transparent; }
+html.m-on .g-pagehead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--line); transform-origin: left; animation: m-draw var(--m-reveal) var(--m-ease) 260ms both; }
+html.m-on .g-pagehead .g-kicker { animation: m-rise var(--m-reveal) var(--m-ease) both; }
+html.m-on .g-pagehead h1 { animation: m-mask var(--m-reveal) var(--m-ease) 60ms both; }
+html.m-on .g-pagehead .g-lead { animation: m-rise var(--m-reveal) var(--m-ease) 180ms both; }
+
+/* ---------- Arriving on scroll ---------- */
+html.m-on [data-m] { opacity: 0; transform: translateY(28px); transition: opacity var(--m-reveal) var(--m-ease), transform var(--m-reveal) var(--m-ease); transition-delay: calc(var(--i, 0) * var(--m-step)); will-change: opacity, transform; }
+html.m-on [data-m].m-in { opacity: 1; transform: none; }
+
+/* ---------- Moving background: facets of the stone ---------- */
+.m-facets { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; animation: m-fade var(--m-reveal) ease-out 200ms both; }
+.m-facet { position: absolute; overflow: visible; will-change: transform; }
+.m-facet polygon { fill: rgba(215, 233, 236, 0.018); stroke: rgba(215, 233, 236, 0.075); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.m-facets.m-smooth .m-facet { transition: transform 300ms ease-out; }
+
+/* ---------- How far down the page ---------- */
+.m-progress { position: fixed; left: 0; right: 0; top: 0; height: 2px; background: var(--ice); transform-origin: left; transform: scaleX(0); z-index: 60; pointer-events: none; }
+
+/* ---------- Small answers to the pointer ---------- */
+html.m-on .g-season-go { display: inline-block; transition: transform 150ms ease-out; }
+html.m-on .g-season a:hover .g-season-go { transform: translateX(4px); }
+
+/* Belt and braces: never hide content from print or from reduced motion. */
+@media print, (prefers-reduced-motion: reduce) {
+  html.m-on [data-m] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html.m-on .g-hero2 *, html.m-on .g-pagehead *, html.m-on .g-pagehead::after { animation: none !important; }
+  html.m-on .g-pagehead { border-bottom-color: var(--line); }
+  html.m-on .g-pagehead::after, .m-facets, .m-arc, .m-progress { display: none; }
+  html.m-on .g-nextup.m-wait::before { opacity: 1; }
+}
