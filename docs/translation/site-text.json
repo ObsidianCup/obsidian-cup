@@ -3995,5 +3995,68 @@
   "en": "The security check did not load. Turn off any ad blocker for this page, check your connection, then reload the page.",
   "bn": "",
   "placeholder": false
+ },
+ {
+  "id": "acct.signupName",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Full name, as on your ID card",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.errName",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Type your full name, as it is written on your ID card.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.unfinishedTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Your account is not finished yet",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.unfinishedBody",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Add your {missing} to finish it. Organisers can only add finished accounts to a team.",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.unfinishedGo",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Finish my profile",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.missingName",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "full name",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.missingDob",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "date of birth",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.missingGender",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "gender",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.and",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "and",
+  "bn": "",
+  "placeholder": false
  }
 ]

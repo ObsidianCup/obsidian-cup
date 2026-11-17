@@ -101,6 +101,14 @@
       if (kept) { profile.deletion_requested_at = null; welcomeBack = true; }
     }
     if (deleting) return;
+    if (!(profile.legal_name || '').trim()) {
+      const meta = (user && user.user_metadata) || {};
+      const given = String(meta.full_name || meta.name || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+      if (given) {
+        const { error } = await db.from('profiles').update({ legal_name: given }).eq('id', user.id);
+        if (!error) profile.legal_name = given;
+      }
+    }
     const missing = OC_SIGNUP_REQUIRED.filter(k => !(consents[k] && consents[k].choice === 'accepted' && consents[k].doc_version === OC_LEGAL[k]));
     if (missing.length) { renderConsentTexts(); show('consent'); return; }
     if (!(profile.sports || []).length) { msg('sportsMsg', ''); show('sports'); return; }
@@ -189,6 +197,7 @@
     $('#authEmail').autocomplete = signup ? 'email' : 'username';
     $('#authEmail').inputMode = signup ? 'email' : 'text';
     $('#passwordHint').hidden = !signup;
+    $('#nameField').hidden = !signup;
     $('#password2Field').hidden = !signup;
     $('#forgotBtn').parentElement.hidden = signup;
   }
@@ -268,6 +277,8 @@
       const email = raw.toLowerCase();
       const password = $('#authPassword').value;
       const byCode = authMode === 'login' && !raw.includes('@');
+      const fullName = $('#authName').value.trim().replace(/\s+/g, ' ');
+      if (authMode === 'signup' && (fullName.length < 2 || !/\p{L}/u.test(fullName))) { msg('authMsg', t('errName'), 'error'); $('#authName').focus(); return; }
       if (byCode && !/^(OC)?-?[A-Z]{1,3}[0-9]{3,6}$/i.test(raw.replace(/\s/g, ''))) { msg('authMsg', t('errEmailOrCode'), 'error'); return; }
       if (!byCode && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg('authMsg', t(authMode === 'login' ? 'errEmailOrCode' : 'errEmail'), 'error'); return; }
       if (password.length < 8) { msg('authMsg', t('errPassword'), 'error'); return; }
@@ -278,7 +289,7 @@
       try {
         const captchaTok = await captchaToken('captchaAuth');
         if (authMode === 'signup') {
-          const { data, error } = await db.auth.signUp({ email, password, options: { emailRedirectTo: PAGE, captchaToken: captchaTok } });
+          const { data, error } = await db.auth.signUp({ email, password, options: { emailRedirectTo: PAGE, captchaToken: captchaTok, data: { full_name: fullName.slice(0, 120) } } });
           if (error) throw error;
           // Supabase hides whether an email is taken: an existing account comes back with no identities.
           if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
@@ -778,6 +789,13 @@
       : (age !== null && age < 18 ? `<p class="acct-msg acct-msg-info">${ocEscape(t('under18'))}</p>` : '');
 
     const basics = !!(profile.legal_name && profile.date_of_birth && profile.gender);
+    const gaps = [[!profile.legal_name, 'missingName'], [!profile.date_of_birth, 'missingDob'], [!profile.gender, 'missingGender']]
+      .filter(g => g[0]).map(g => t(g[1]));
+    $('#unfinishedCard').hidden = basics;
+    if (!basics) {
+      const list = gaps.length > 1 ? gaps.slice(0, -1).join(', ') + ' ' + t('and') + ' ' + gaps[gaps.length - 1] : gaps[0];
+      $('#unfinishedBody').textContent = t('unfinishedBody', { missing: list });
+    }
     const contact = !!(profile.phone && profile.emergency_name && profile.emergency_relationship && profile.emergency_phone);
     const plays = (profile.sports || []);
     const sports = !!(profile.height_cm && profile.playing_level &&
@@ -979,6 +997,12 @@
     cardBound = true;
     $('#photoInput').addEventListener('change', e => savePhoto(e.target.files && e.target.files[0]));
     $('#photoRemove').addEventListener('click', removePhoto);
+    $('#unfinishedGo').addEventListener('click', () => {
+      const first = ['#f_legal_name', '#f_date_of_birth', '#f_gender'].map(q => $(q)).find(el => el && !el.value);
+      const target = first || $('#profileForm');
+      target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      if (first) setTimeout(() => first.focus({ preventScroll: true }), 300);
+    });
     $('#checklistOk').addEventListener('click', () => {
       try { localStorage.setItem('oc_checklist_ok_' + user.id, '1'); } catch (e) { /* private mode */ }
       $('#checklistCard').hidden = true;

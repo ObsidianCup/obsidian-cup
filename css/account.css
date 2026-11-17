@@ -395,3 +395,9 @@ html[lang="bn"] .legal-body, html[lang="bn"] .acct-intro, html[lang="bn"] .acct-
 .adm-table-wrap::-webkit-scrollbar, .legal-table-wrap::-webkit-scrollbar { height: 10px; }
 .adm-table-wrap::-webkit-scrollbar-track, .legal-table-wrap::-webkit-scrollbar-track { background: #151c1f; }
 .adm-table-wrap::-webkit-scrollbar-thumb, .legal-table-wrap::-webkit-scrollbar-thumb { background: #3d484c; border-radius: 5px; }
+
+/* "Your account is not finished yet": the one amber-free attention card,
+   marked by an Ice edge so it reads before the rest of the page. */
+.acct-unfinished { border-color: #d7e9ec; }
+.acct-unfinished h2 { margin-bottom: 8px; }
+.acct-unfinished p { margin: 0 0 16px; color: #c9cfd0; }

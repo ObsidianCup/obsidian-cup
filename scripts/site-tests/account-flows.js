@@ -26,10 +26,10 @@ for(const lang of ['en','bn']){
  // sign up
  p=await open(b,{scn:{session:false},lang});await p.waitForSelector('[data-view="auth"]:not([hidden])');
  await p.click('[data-tab="signup"]');
- await p.fill('#authEmail','taken@example.com');await p.fill('#authPassword','goodpass12');await p.fill('#authPassword2','goodpass13');await p.click('#authSubmit');ok((await txt(p,'#authMsg')).length>5,`${lang} password mismatch message`);
+ await p.fill('#authName','Test Player');await p.fill('#authEmail','taken@example.com');await p.fill('#authPassword','goodpass12');await p.fill('#authPassword2','goodpass13');await p.click('#authSubmit');ok((await txt(p,'#authMsg')).length>5,`${lang} password mismatch message`);
  await p.fill('#authPassword2','goodpass12');await p.click('#authSubmit');await p.waitForTimeout(200);
  ok(await view(p)==='auth'&&await p.$eval('[data-tab="login"]',e=>e.getAttribute('aria-selected')==='true')&&(await txt(p,'#authMsg')).length>10,`${lang} used email switches to log in with a message`);
- await p.click('[data-tab="signup"]');await p.fill('#authEmail','new@example.com');await p.fill('#authPassword','goodpass12');await p.fill('#authPassword2','goodpass12');await p.click('#authSubmit');await p.waitForSelector('[data-view="checkemail"]:not([hidden])');
+ await p.click('[data-tab="signup"]');await p.fill('#authName','Test Player');await p.fill('#authEmail','new@example.com');await p.fill('#authPassword','goodpass12');await p.fill('#authPassword2','goodpass12');await p.click('#authSubmit');await p.waitForSelector('[data-view="checkemail"]:not([hidden])');
  const ce=await txt(p,'#checkEmailBody');ok(ce.includes('new@example.com'),`${lang} check-email screen names the address`);
  if(lang==='en')ok(/spam/i.test(ce),'en check-email mentions spam folder',ce);
  await p.context().close();

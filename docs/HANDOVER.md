@@ -94,7 +94,7 @@ Bangla (rules-05, rules-07, rules-09, acct.errExists, acct.laterGuardianWhy).
 
 ## Player accounts (Supabase)
 
-Live in the database: migrations **001–013** and the legal seed (owner ran 013
+Live in the database: migrations **001–014** and the legal seed (owner ran 013
 and the seed on 9 Nov). **014 (security hardening) is written but not yet run.** Accounts are **public since 16 Nov** (`accountsEnabled: true`; owner's
 decision, made knowing the email job does not work yet). Organiser page `/pages/admin.html`
 (two-step login) works live (seen 13 Nov).
@@ -240,6 +240,18 @@ request; news18 Bengali is blocked) both write everyday English loanwords in
 Bangla letters (টুর্নামেন্ট, চ্যাম্পিয়ন, রানার-আপ, ক্যাশ আউট) and use অনূর্ধ্ব-১৯;
 two style options sent to her; **wait for her pick before rewriting.**
 
+17 Nov: opening photo is now the trophies table (`hero-trophies.webp`; setter
+photo back in the slideshow). Every result reads "Champions" then
+"Runners-up" (home, Volleyball, Past seasons, Futsal, season list, popups).
+Menu button says "My account" when someone is logged in on that device (read
+from the login library's saved session; `ocSignedIn` in `js/components.js`).
+Sign-up now asks for the full name first (sent as `full_name` with the
+sign-up); accounts missing name, date of birth or gender see "Your account
+is not finished yet" with a button to the first missing field. **Migration
+015 written, not yet run by her:** copies the sign-up name into the profile
+and deletes unconfirmed sign-ups older than 7 days every night (pg_cron).
+Test added: `scripts/site-tests/signup-checks.js`; DB checks now 213.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
@@ -296,7 +308,7 @@ All in the decisions table of `docs/PLAYER-ACCOUNTS-PLAN.md`:
 
 ## Tests (all passing 13 Nov)
 
-- `supabase/tests/rls_test.mjs`: 201 database rule checks (PGlite; run with
+- `supabase/tests/rls_test.mjs`: 213 database rule checks (PGlite; run with
   `node rls_test.mjs <repo path>` from a folder with `@electric-sql/pglite`).
 - `scripts/email/sender_test.mjs`: email sender and scheduled deletion (30).
 - `scripts/site-tests/` (README inside): every page EN/BN at four widths and all

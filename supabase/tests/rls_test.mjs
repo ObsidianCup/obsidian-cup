@@ -18,7 +18,8 @@ const expectError = async (sql, params, pattern, name) => {
 await db.exec(`
   create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;
   create schema auth;
-  create table auth.users (id uuid primary key default gen_random_uuid(), email text, email_confirmed_at timestamptz);
+  create table auth.users (id uuid primary key default gen_random_uuid(), email text, email_confirmed_at timestamptz,
+    raw_user_meta_data jsonb default '{}'::jsonb, created_at timestamptz default now());
   create function auth.uid() returns uuid language sql stable as
     $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
   create function auth.jwt() returns jsonb language sql stable as
@@ -544,6 +545,34 @@ await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/014_security_
 await db.exec('set role service_role');
 ok((await db.query(`select * from public.due_account_deletions()`)).rows.length >= 0, 'the email job keeps its functions after 014');
 await db.exec('reset role');
+
+console.log('\nName at sign-up, unconfirmed clean-up (015)');
+await as(null);
+const named = (await db.query(`insert into auth.users (email, raw_user_meta_data) values ('named@example.com', '{"full_name":"  Rina   Akter "}') returning id`)).rows[0].id;
+const np = (await db.query(`select legal_name, player_code from public.profiles where id = $1`, [named])).rows[0];
+ok(np.legal_name === 'Rina Akter', 'the name typed at sign-up goes into the new profile, tidied');
+ok(!!np.player_code, 'so the new player gets a player code straight away');
+const g = (await db.query(`insert into auth.users (email, email_confirmed_at, raw_user_meta_data) values ('g@example.com', now(), '{"name":"Google Name"}') returning id`)).rows[0].id;
+ok((await db.query(`select legal_name from public.profiles where id = $1`, [g])).rows[0].legal_name === 'Google Name', 'a Google sign-up brings its Google name');
+const long = (await db.query(`insert into auth.users (email, raw_user_meta_data) values ('long@example.com', $1) returning id`, [JSON.stringify({ full_name: 'x'.repeat(300) })])).rows[0].id;
+ok((await db.query(`select char_length(legal_name) n from public.profiles where id = $1`, [long])).rows[0].n === 120, 'an over-long name is cut to 120 characters, not refused');
+const old1 = (await db.query(`insert into auth.users (email, created_at) values ('old-unconfirmed@example.com', now() - interval '8 days') returning id`)).rows[0].id;
+const old2 = (await db.query(`insert into auth.users (email, email_confirmed_at, created_at) values ('old-confirmed@example.com', now() - interval '8 days', now() - interval '9 days') returning id`)).rows[0].id;
+const fresh = (await db.query(`insert into auth.users (email, created_at) values ('fresh-unconfirmed@example.com', now() - interval '2 days') returning id`)).rows[0].id;
+await as(P1);
+await expectError(`select public.delete_unconfirmed_accounts(7)`, [], /permission denied/, 'players cannot run the clean-up');
+await as('anon');
+await expectError(`select public.delete_unconfirmed_accounts(7)`, [], /permission denied/, 'visitors cannot run the clean-up');
+await as(null);
+await expectError(`select public.delete_unconfirmed_accounts(1)`, [], /at least 2 days/, 'the clean-up refuses a window shorter than 2 days');
+const gone = (await db.query(`select public.delete_unconfirmed_accounts(7) n`)).rows[0].n;
+const left = (await db.query(`select id from auth.users where id = any($1)`, [[old1, old2, fresh]])).rows.map(r => r.id);
+ok(!left.includes(old1) && gone >= 1, 'an unconfirmed sign-up older than 7 days is deleted');
+ok(!(await db.query(`select 1 from public.profiles where id = $1`, [old1])).rows.length, 'and its empty profile with it');
+ok(left.includes(old2), 'a confirmed account is never deleted by the clean-up, however old');
+ok(left.includes(fresh), 'an unconfirmed sign-up younger than 7 days is kept (time to find the email)');
+await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/015_signup_name_and_cleanup.sql'), 'utf8'));   // re-run is safe
+ok((await db.query(`select count(*)::int n from public.profiles where id = $1`, [named])).rows[0].n === 1, '015 can be run again');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

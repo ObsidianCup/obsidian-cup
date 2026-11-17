@@ -50,6 +50,10 @@
         <div class="acct-or" id="googleOr" hidden><span data-t="or">or</span></div>
 
         <form id="authForm" novalidate>
+          <div class="acct-field" id="nameField" hidden>
+            <label for="authName" data-t="signupName">Full name, as on your ID card</label>
+            <input class="acct-input" id="authName" type="text" autocomplete="name" autocapitalize="words" maxlength="120" />
+          </div>
           <div class="acct-field">
             <label for="authEmail" id="authEmailLabel" data-t="emailOrCode">Email or player code</label>
             <input class="acct-input" id="authEmail" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required />
@@ -174,6 +178,12 @@
         <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" data-action="signout" data-t="signOut">Log out</button>
       </div>
       <div id="appMsg"></div>
+
+      <div class="acct-card acct-unfinished" id="unfinishedCard" hidden>
+        <h2 data-t="unfinishedTitle">Your account is not finished yet</h2>
+        <p id="unfinishedBody"></p>
+        <button class="acct-btn acct-btn-small" type="button" id="unfinishedGo" data-t="unfinishedGo">Finish my profile</button>
+      </div>
 
       <div class="acct-card">
         <p class="acct-label" style="margin-bottom:0.6rem;" data-t="codeLabel">Your player code</p>

@@ -79,6 +79,12 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    `login-with-code` → Code → replace everything with
    `functions/login-with-code/index.ts` → Deploy ("Verify JWT" stays off).
    Full list of security settings: `docs/SECURITY.md`.
+6g. **Name at sign-up and clean-up (015):** SQL Editor → New query → paste
+   all of `migrations/015_signup_name_and_cleanup.sql` → Run. The results
+   should end with "Nightly clean-up scheduled." If they say pg_cron is not
+   available instead: Database → Extensions → search "pg_cron" → enable →
+   run the file again. Unconfirmed sign-ups older than 7 days are then
+   deleted every night at 03:17 UTC; confirmed accounts are never touched.
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:
