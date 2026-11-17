@@ -304,11 +304,11 @@ body.theme-glass {
 /* ---------- Photo slideshow (home) ----------
    A row of photos that can be swiped; every photo is shown whole at its own
    shape, as tall as the row allows and never wider than the screen. */
-.g-gallery { --gh: clamp(300px, 68vh, 640px); background: #070a0b; border-block: 1px solid var(--line); padding-block: var(--s16); }
+.g-gallery { --gh: clamp(300px, 62vh, 600px); background: #070a0b; border-block: 1px solid var(--line); padding-block: var(--s16); }
 .g-gallery .g-h2 { font-size: clamp(2rem, 4.6vw, 3.5rem); line-height: 1.05; }
 .g-gallery .g-section-head { margin-bottom: var(--s8); }
 /* the photo in front is bright and full size; the ones beside it wait in the dark */
-.g-gallery-track > li { opacity: 0.32; transform: scale(0.94); transition: opacity 300ms ease-out, transform 300ms ease-out; }
+.g-gallery-track > li { opacity: 0.4; transform: scale(0.96); transition: opacity 300ms ease-out, transform 300ms ease-out; }
 .g-gallery-track > li.is-active { opacity: 1; transform: none; }
 .g-gallery-track > li:hover { opacity: 0.7; }
 .g-gallery-track > li.is-active:hover { opacity: 1; }
@@ -321,18 +321,30 @@ body.theme-glass {
   .g-gallery-track > li { transition: none; }
   .g-gallery-time { display: none; }
 }
-@media (max-width: 700px) { .g-gallery { --gh: min(64vh, 118vw); padding-block: var(--s12); } .g-gallery-track { align-items: flex-start; } .g-gallery .g-section-head { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: var(--s4); } .g-gallery [data-gallery] { display: none; } }   /* phones: keep wide and tall photos close in height */
+@media (max-width: 700px) {
+  .g-gallery { padding-block: var(--s12); }
+  .g-gallery .g-gallery-track > li { width: calc(100vw - 2 * var(--gutter) - 24px); height: auto; aspect-ratio: 1 / 1; }
+  .g-gallery .g-h2 { font-size: 1.75rem; }
+  .g-gallery .g-section-head { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s6); }
+  .g-gallery [data-gallery] { display: none; }
+}
 .g-gallery .g-section-head { align-items: center; }
 .g-gallery-tools { display: flex; align-items: center; gap: var(--s2); }
-.g-gallery-tools .g-meta { margin-right: var(--s3); font-variant-numeric: tabular-nums; font-family: var(--font-display); font-size: 1.125rem; color: var(--bone); }
+.g-gallery-tools .g-meta { white-space: nowrap; margin-right: var(--s3); font-variant-numeric: tabular-nums; font-family: var(--font-display); font-size: 1.125rem; color: var(--bone); }
 .g-iconbtn { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; background: var(--facet); border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--bone); cursor: pointer; transition: background-color var(--motion-fast) ease, border-color var(--motion-fast) ease; }
 .g-iconbtn:hover { border-color: var(--ice); }
-.g-gallery-track { list-style: none; margin: 0; display: flex; align-items: center; gap: var(--s4); height: var(--gh);
+.g-gallery-track { list-style: none; margin: 0; display: flex; gap: var(--s4);
   padding: 0 max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); scroll-padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
 .g-gallery-track::-webkit-scrollbar { display: none; }
-.g-gallery-track > li { flex: 0 0 auto; scroll-snap-align: start; }
-.g-gallery-track img { display: block; height: min(var(--gh), calc((100vw - 2 * var(--gutter)) / var(--ar))); width: auto; aspect-ratio: var(--ar); border-radius: var(--radius-lg); background: var(--facet); }
+/* Every photo sits in the same frame (3:2 on laptops, 4:5 on phones), so the row
+   keeps one rhythm. The photo is shown whole; a darkened, blurred copy of itself
+   fills the edges instead of empty bars. */
+.g-gallery-track > li { position: relative; flex: 0 0 auto; scroll-snap-align: start; overflow: hidden;
+  height: var(--gh); width: min(calc(var(--gh) * 1.5), calc(100vw - 2 * var(--gutter)));
+  border-radius: var(--radius-lg); background: var(--facet); }
+.g-gl-fill { position: absolute; inset: -24px; width: calc(100% + 48px); height: calc(100% + 48px); object-fit: cover; filter: blur(22px) brightness(0.45) saturate(1.1); }
+.g-gl-photo { position: relative; display: block; width: 100%; height: 100%; object-fit: contain; }
 @media (prefers-reduced-motion: reduce) { .g-iconbtn { transition: none; } }
 
 /* individual awards under a season's champions */

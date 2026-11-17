@@ -1,0 +1,36 @@
+/* SAMPLE ONLY (not live): sharper hero and "Glimpse of us", after lusion.co.
+   Oversized type, crisp image cards, no blur, no dimming, lots of air. */
+
+/* ---------- Hero: big type, the photo in a crisp frame at its real size ---------- */
+.sample .g-hero-full { display: block; min-height: 0; padding: var(--s16) 0 var(--s12); align-items: initial; }
+.sample .g-hero-full::before { display: none; }
+.sample .g-herobg { position: static; display: block; width: min(100% - 2 * var(--gutter), var(--max) - 2 * var(--gutter)); margin: var(--s12) auto 0; aspect-ratio: 21 / 9; border-radius: 20px; overflow: hidden; }
+.sample .g-herobg img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 35%; }
+.sample .g-hero-full .g-hero2-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.7fr); align-items: end; gap: var(--s12); }
+.sample .g-hero-full h1 { font-size: clamp(2.5rem, 5.6vw, 5.25rem); line-height: 1; letter-spacing: -0.02em; max-width: 15ch; text-shadow: none; margin-bottom: var(--s6); }
+.sample .g-hero-full .g-lead { color: var(--soft); }
+.sample .g-hero-full .g-next2 { border-left: 0; padding-left: 0; }
+@media (max-width: 700px) {
+  .sample .g-hero-full { padding-top: var(--s10); }
+  .sample .g-herobg { aspect-ratio: 4 / 3; margin-top: var(--s8); border-radius: 16px; }
+  .sample .g-hero-full .g-hero2-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Glimpse of us, option A: an editorial grid of crisp cards ---------- */
+.sa .g-gallery { background: transparent; border: 0; }
+.sa .g-gallery-track { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s6);
+  width: min(100% - 2 * var(--gutter), var(--max) - 2 * var(--gutter)); margin: 0 auto; padding: 0; overflow: visible; scroll-snap-type: none; }
+.sa .g-gallery-track > li { width: auto; height: auto; aspect-ratio: 4 / 3; opacity: 1; transform: none; border-radius: 16px; }
+.sa .g-gallery-track > li:nth-child(n+7) { display: none; }
+.sa .g-gl-fill { display: none; }
+.sa .g-gl-photo { object-fit: cover; }
+.sa [data-gallery], .sa .g-gallery-time { display: none; }
+.sa #galleryCount { display: none; }
+@media (max-width: 700px) { .sa .g-gallery-track { grid-template-columns: 1fr; gap: var(--s4); } }
+
+/* ---------- option B: the moving strip, but crisp ---------- */
+.sb .g-gallery { background: transparent; border: 0; }
+.sb .g-gallery-track > li { width: min(calc(var(--gh) * 4 / 3), calc(100vw - 2 * var(--gutter))); opacity: 1; transform: none; border-radius: 16px; }
+.sb .g-gl-fill { display: none; }
+.sb .g-gl-photo { object-fit: cover; }
+@media (max-width: 700px) { .sb .g-gallery .g-gallery-track > li { aspect-ratio: 4 / 3; width: calc(100vw - 2 * var(--gutter) - 24px); } }
