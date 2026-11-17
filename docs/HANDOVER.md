@@ -1,366 +1,235 @@
 # Obsidian Cup — handover for a new Claude chat
 
-Last updated 13 Nov 2026, 23:55 (Helsinki time). Attach this file to a new chat,
+Last updated 18 Nov 2026, 02:00 (Helsinki time). Attach this file to a new chat,
 or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
 
 ## How to start the new chat
 
 1. Attach the GitHub repo **ObsidianCup/obsidian-cup** (push access) and clone it
-   with enough history (`--depth=1000`, a shallow clone breaks merges).
-2. Read, in this order: `CLAUDE.md`, this file, `docs/PLAYER-ACCOUNTS-PLAN.md`
-   (decisions table), `docs/REGISTRATION-WHAT-IF-AUDIT.md`, `docs/MOVING-HOSTS.md`,
-   `supabase/README.md`, `docs/SEASON-5-LAUNCH-PLAN.md`.
-3. Work on `main` (live). Keep `redesign` level with `main` after every push
-   (`git push origin main && git push origin main:redesign`).
+   with history (`--depth=1000`; a shallow clone breaks merges).
+2. Read, in this order: `CLAUDE.md`, `.ux-profile.md`, this file,
+   `docs/SECURITY.md`, `supabase/README.md`, `docs/PLAYER-ACCOUNTS-PLAN.md`
+   (decisions table), `docs/REGISTRATION-WHAT-IF-AUDIT.md`, `docs/MOVING-HOSTS.md`.
+3. Work on `main` (live). Keep `redesign` level with `main` after every push:
+   `git push origin main && git push origin main:redesign`.
+4. `main` is protected by the "Protect main" ruleset: no force push, no deletion.
+   Normal pushes work.
+
+## Where we stopped (18 Nov, 02:00)
+
+1. **"Glimpse of us" and the opening photo: waiting for her.** She said the
+   slideshow proportions are off and the opening photo looks low quality, and
+   asked for something "sharper", inspired by https://lusion.co. Then she said
+   **"stop, first show me a sample, then commit"**. Nothing of that is live.
+   - The sample work is on the branch **`glimpse-sample`** (pushed, not merged):
+     `sample.html`, `sample-a.html` (editorial grid of same-shape crisp photos),
+     `sample-b.html` (moving strip, same-shape crisp photos), `css/sample.css`
+     (very large headline, opening photo in a sharp 21:9 frame under the text),
+     plus two fixes she asked for before "stop": the opening uses the **original
+     photo file** (`assets/photos/hero-spike.jpg`, no recompression; the live
+     `.webp` was recompressed and colour-boosted, which made it look soft) and
+     every slideshow photo sits in the same frame.
+   - Claude cannot watch videos and cannot open lusion.co from the session
+     (blocked). What is known from articles: real-time 3D scenes, cinematic,
+     consistent; their own lesson: consistency matters more than flashy moments.
+   - **Next step:** ask her for 3 to 5 screenshots of the lusion.co parts she
+     likes, then show sample images (send screenshots first), and only merge
+     after her yes. Do not push design changes to `main` without her approval.
+2. **Emails: in test mode.** All GitHub secrets and the variable exist (see
+   "Emails" below). A test email arrived on 17 Nov ("Sent 1, failed 0"). She
+   has **not yet** switched `EMAIL_MODE` from `test` to `live`. Last instruction
+   given: GitHub → Settings → Secrets and variables → Actions → Variables →
+   `EMAIL_MODE` → pencil → `live`. After that, run the job once by hand and read
+   the log (see "Emails").
+3. **Migration 015 maybe not run.** She said "i think that one is run". Check:
+   Supabase SQL Editor, `select public.delete_unconfirmed_accounts(7);` should
+   return a number, not "function does not exist". If missing, give her the raw
+   link to `015_signup_name_and_cleanup.sql`. The nightly clean-up needs the
+   `pg_cron` extension (Database → Extensions).
+4. **Bangla: on hold** (owner, 17 Nov). Do not rewrite it until she says so.
+   Background below.
 
 ## Who and how to work
 
-- Owner: Uriana, founder and head organiser (an adult; her test account used
-  an under-18 birth date only to see the minors' screens). Not a developer: plain
+- Owner: Uriana, founder and head organiser (an adult). Not a developer: plain
   words, show previews (screenshots), confirm before big or irreversible changes.
-- **Give the owner ONE task at a time**, wait for "done", then the next.
-- When the owner must paste SQL, give **raw GitHub links**, e.g.
+- **Give the owner ONE task at a time**, wait for "done", then the next. She
+  often writes "don" for "done".
+- When she must paste SQL, give **raw GitHub links**:
   `https://raw.githubusercontent.com/ObsidianCup/obsidian-cup/main/supabase/migrations/<file>.sql`
-  (she selects all, copies, pastes into Supabase SQL Editor → New query → Run).
-- The owner writes Bangla; Claude writes English. **Translation is on hold: she
-  does it by hand.** Do not write Bangla for her unless asked.
-- She often says "dont make changes yet": discuss first, build only on "go" / "build".
-- She likes to run the UX skills (vectorlab-ux-skills: ux-audit, anti-slop,
-  typography, colour-palette, keyboard, loaders, forms, defaults, icon-buttons,
-  page-patterns, surfaces, transitions). Follow their rules in new UI.
+  (she selects all, copies, pastes into Supabase → SQL Editor → New query → Run;
+  then `notify pgrst, 'reload schema';`). She once pasted an Edge Function into
+  the SQL Editor: say exactly where each thing goes.
+- She often says "dont make changes yet" or "show me first": discuss or sample
+  first, build only on "go". **Design changes: sample first, then commit.**
+- She runs the UX skills (vectorlab-ux-skills, `ux-audit`, frontend-design,
+  site-audit). Follow `.ux-profile.md` in all UI.
 - Security, no compromises: the repo is public. Never put secrets, the Supabase
-  secret/service_role key, real player data or personal email addresses in the
-  repo or chat. Only the Supabase Project URL and publishable key may appear in
-  chat. Passwords and secret keys go straight into Supabase / GitHub settings
-  by the owner. No Supabase MCP / direct AI database access. No AI photos of
-  players. Permissions live in the database (RLS), never only in page code.
-  If she sends a screenshot with player details, do not copy them anywhere.
-- **Two-step login (2FA) is already on everywhere** (GitHub, Supabase and her
-  other accounts; owner, 14 Nov). Never ask her to enable it again.
-- **Do not suggest a lawyer** (she cannot afford one; said 2 Nov).
+  secret key, real player data or personal email addresses in the repo or chat.
+  Only the Supabase Project URL and publishable key may appear in chat. Secret
+  keys and passwords go straight into Supabase / GitHub settings by her.
+  No direct AI database access. No AI photos of players. Permissions live in
+  the database (RLS). Screenshots with player details: never copy them anywhere.
+  The Notion roster pages hold phone numbers, emails and emergency contacts
+  (including minors): never copy them.
+- **2FA is already on everywhere** (GitHub, Supabase, her other accounts). Never
+  ask again.
+- **Do not suggest a lawyer** (she cannot afford one).
 - Do not trace or copy other people's drawings or artwork.
-- Tournament facts must match the owner's Instagram (@obsidian.volleyball,
+- Tournament facts must match her Instagram (@obsidian.volleyball,
   @obsidian.futsal); ask when unsure. No placeholders on the live site.
 - Commit messages end with the co-author lines the session provides.
 
 ## Site basics
 
 - Static HTML/CSS/vanilla JS. `main` = https://obsidiancup.vercel.app (every
-  push deploys). Strict security policy: **no inline scripts**, each page has
-  its own `js/page-*.js`.
-- Design: "Obsidian Glass", refreshed 9 Nov (`css/glass.css`, `css/account.css`,
+  push deploys). Strict security policy: **no inline scripts**, no inline
+  `<style>` blocks; each page has its own `js/page-*.js`.
+- Design "Obsidian Glass" (`css/glass.css`, `css/account.css`,
   `js/components.js`). Colours: page #0b1012, panels #151c1f, lines #2a3337 /
   #3d484c, text #eeeae3, soft #c9cfd0, mist #a7b0b2, Ice #d7e9ec (main button,
-  focus), **amber #f2b84b only for "Next up" / live status**. Fonts: Unbounded
-  500/600, Figtree 400/500, Noto Sans Bengali. Rules: max 3 weights (none over
-  600), body 16px, secondary 14px, nothing under 12px, 8px grid, sentence case,
-  no all-caps, 44px tap areas, buttons never disabled (`ocBusy` / `ocIsBusy`),
-  icon-only buttons need a tooltip, destructive actions use a dialog that names
-  the thing. **Transitions are wanted** (owner, 9 Nov): short, tied to an action,
-  plus a 200ms page fade; all off for reduced motion. Scroll effects: see "Showy motion" below (her rule changed 16 Nov).
-- Story text on laptops: heading left, text right (about 75 characters a line).
-- Sports: **Volleyball** and **Futsal** (never "football" in wording; the
-  database id stays `football`).
-- Taglines are nationwide: "Bangladesh's stage for volleyball and futsal",
-  "A stage for players from every corner of Bangladesh". No "the leading".
-- Share image: `assets/og-image-v2.jpg` (rename again if it changes, apps cache it).
-
-## Bangla
-
-Source files in `docs/translation/`: `site-text.json` (every id → English),
-`bn-received.json` (Bangla by id), `bn-claude-drafts.json`. After changing them
-run `python3 scripts/build_bn.py` → regenerates `js/lang-site.js`. New page text
-is matched by its English wording; add it to site-text.json with `"bn": ""`.
-New account strings: English in `js/oc-accounts.js` (`OC_TEXT.en`) + id
-`acct.<key>` in site-text.json. Many strings added since 2 Nov have no Bangla
-(home page, delete account, new errors); a few changed English lines have stale
-Bangla (rules-05, rules-07, rules-09, acct.errExists, acct.laterGuardianWhy).
-`js/lang.js` must never write text into an element that holds a control or icon
-(fixed 13 Nov; it deleted the sport tick boxes in Bangla).
-
-## Hosting
-
-- Vercel support said in writing (2 Nov): the site is organisational/commercial,
-  the free plan is not allowed, hiding or moving payment does not change that.
-- Owner's current plan (9 Nov): **Vercel Pro ($20/month) only during registration
-  and tournament months**, free plan the rest of the year with stats and rosters
-  only. She also asked about Hostinger (13 Nov: about $96 upfront for 4 years,
-  figures from review sites); **no decision yet**.
-- The site is ready to move at any time: `docs/MOVING-HOSTS.md`, `site.json`,
-  `scripts/move_site.py`, `scripts/build_host_files.py` (`_headers`, `_redirects`,
-  `.htaccess` made from `vercel.json`). The other hosts' files are untested on a
-  real host.
-- Registration features must sit behind one on/off setting in `js/config.js`.
+  focus), **amber #f2b84b only for "Next up" / live status**. Fonts (self-hosted
+  in `assets/fonts`, no Google): Unbounded 500/600, Figtree 400/500, Noto Sans
+  Bengali. Rules in `.ux-profile.md`: ≤3 weights, body 16px, nothing under
+  12px, 8px grid, sentence case, 44px tap areas, buttons never disabled.
+- **Motion:** "showy" mode is **live for everyone** since 16 Nov
+  (`MOTION_DEFAULT = 'showy'` in `js/motion-boot.js`; `?motion=calm` previews
+  the calm site; back to calm = set it to `'calm'`). Files `js/motion.js`,
+  `css/motion.css`. Off under reduced motion; account, organiser and legal
+  pages stay calm. Test: `scripts/site-tests/motion-checks.js`.
+- **Home page now:** full-width opening photo `assets/photos/hero-spike.webp`
+  (phone crop `hero-spike-tall.webp`) with the headline on top; "Season 4
+  champions" with **Champions / Runners-up** labels; **"Glimpse of us"**
+  slideshow (18 photos, dark band, front photo bright, others dimmed, changes
+  every 4 s, waits 8 s after a manual move, no pause button by her choice;
+  `js/gallery.js`); closing block "Were you there?" (share your experience,
+  email us).
+- **Volleyball seasons are numbered 1 to 4 in date order** (her numbering, as in
+  Notion): S1 Obsidian Volleyball Cup (Jan 2026), S2 All Stars Cup (Feb), S3
+  Super Cup (Apr), S4 Obsidian Volleyball Cup (1–4 Jul). Each heading says
+  "Season N" with the tournament name underneath. Anchor ids `ovasc-s1`,
+  `ovsc-s2` kept so old links work. **Unconfirmed:** whether Instagram counts
+  the same way.
+- Each season on Volleyball / Past seasons shows champions, runners-up,
+  individual awards (MVP, best spiker, setter, receiver; she approved showing
+  these names) and team lists (S1–S3; **Season 4 team lists missing**: she has
+  to send U19 boys (5) and girls open age (6) team names).
+- Team spellings she confirmed: **Silhoutte, Zenith, Dhaka Colonizers.**
+- Analytics: Google Analytics **off** (`analyticsEnabled: false`); the public
+  site sets no cookies and makes no outside requests. Turning it on needs a
+  Privacy notice update and a cookie choice first.
+- SEO: home title names the sports and country; `SportsOrganization` JSON-LD;
+  `llms.txt`; `/.well-known/security.txt` (renew before 1 Nov 2027).
+- Photos: `assets/photos/*.webp`, re-encoded, no camera or location data, max
+  1100px tall. Her 21 extra photos from 17 Nov are in the chat history only;
+  unused good ones: Season 1 indoor photos, warm-ups.
 
 ## Player accounts (Supabase)
 
-Live in the database: migrations **001–014** and the legal seed (owner ran 013
-and the seed on 9 Nov). **014 (security hardening) is written but not yet run.** Accounts are **public since 16 Nov** (`accountsEnabled: true`; owner's
-decision, made knowing the email job does not work yet). Organiser page `/pages/admin.html`
-(two-step login) works live (seen 13 Nov).
+Database: migrations **001–016** written. She ran 001–014, 008 (late, 17 Nov)
+and 016; **015 uncertain** (see "Where we stopped"). Accounts are **public**
+(`accountsEnabled: true`, 16 Nov). Organiser page `/pages/admin.html` (two-step
+login) works.
 
 What exists:
-- Sign up / log in (email+password, Google, player code via Edge Function
-  `login-with-code`), Turnstile, Gmail sender (GitHub Action every 15 min),
-  admin two-step.
-- Consents: Terms **1.2**, Privacy **1.4**, DOB declaration 1.2 (`OC_LEGAL`).
-  Legal source `docs/legal/legal-texts-en-v1.md` → `python3 scripts/split_legal.py`.
-  The legal page lists only Terms, Privacy, Media consent. Tournament documents
-  (participation 1.0, payment 1.1, guardian, captain) show only inside
-  registration when built; captain ones to captains only.
-- Sports chooser, profile form (auto-save), private photo, player card, live card
-  switch, checklist, organiser list / CSV / backup / level / look-up.
-- **Delete account** (9 Nov): dialog naming the account, type DELETE, login
-  within 15 minutes (`amr` time in the token), 14 days, logging in cancels,
-  blocked for captains of active teams and members after the deadline. The
-  request works live (owner saw the date, 13 Nov). Final deletion is done by
-  `scripts/email/send-emails.mjs`; **not yet seen working live**.
-- Events / categories / teams tables exist (009) but there is no team UI.
+- Sign up (asks **full name first**, then email and password; name sent as
+  `full_name`), log in (email+password, Google, player code via Edge Function
+  `login-with-code`), Turnstile, throwaway email domains blocked
+  (`blocked_email_domains` table).
+- "Your account is not finished yet" card when name, date of birth or gender is
+  missing, with a button to the first empty field.
+- Menu says **"My account"** (phones: "Account") when someone is logged in on
+  that device (`ocSignedIn` in `js/components.js` reads the saved session).
+- Player card shows **"Jersey 23"** (it said "#23" and she took it for an error).
+- Profile, private photo (organiser list shows small photos too), consents
+  (Terms 1.2, Privacy 1.4, DOB 1.2), delete account (14 days; the email job
+  carries out the deletion).
+- Events / categories / teams tables exist (009) but there is **no team UI**.
 
-## Security pass (13 Nov, late)
+## Emails
 
-Everything is in `docs/SECURITY.md` (what was checked, what changed, and the
-owner's to-do list, to be given **one task at a time**). In short:
-- Pushed and live with the site: tighter security headers (no inline style
-  blocks or inline event handlers), legal documents are cleaned before they
-  are shown, safer CSV export, clear message for refused email addresses,
-  `/.well-known/security.txt`, email library updated (nodemailer 6.9.16 had
-  known holes → 10.5.0), recipient addresses checked, workflow actions pinned,
-  Dependabot, `scripts/check_vendor.py` (vendor files match official npm).
-- **Waiting for the owner:** run `supabase/migrations/014_security_hardening.sql`
-  (not yet in the live database), then redeploy the `login-with-code` Edge
-  Function from the repository. Until she says "done", the live database still
-  has the old rules and the old function.
-- Then the dashboard settings in `docs/SECURITY.md` (two-step login on
-  GitHub / Supabase / Vercel / Gmail, GitHub secret scanning, Supabase password
-  rules and redirect addresses).
+- GitHub Action `send-emails.yml` (timer every 15 min; GitHub often runs it
+  hours late). Claude can start it and read the log:
+  `gh workflow run send-emails.yml -R ObsidianCup/obsidian-cup --ref main`,
+  then read the job log with `gh api` (hide addresses with sed).
+- GitHub secrets (all set 17 Nov): `SUPABASE_URL`, `SUPABASE_SECRET_KEY` (a new
+  key named `github-email-job`), `GMAIL_USER` (obsidiancup.official),
+  `GMAIL_APP_PASSWORD` (a new app password "GitHub email job"), `EMAIL_TEST_TO`.
+  Variable: `EMAIL_MODE` = **test** (switch to `live` is pending).
+- **Do not delete** the older Google app password "Obsidian Cup Website": it is
+  in use elsewhere (probably Supabase's sign-up confirmation emails).
+- Templates allowed: welcome, code_changed, deletion_requested,
+  deletion_cancelled, account_deleted (016 fixed the last three being thrown
+  away, and a code change after an expired welcome sending nothing).
+- Emails older than 7 days are never sent. Supabase itself sends confirm-email
+  and reset-password messages; its built-in sender has low hourly limits (not
+  checked: Authentication → Emails → SMTP Settings).
 
-Later the same night: owner ran 014 and redeployed `login-with-code`; code
-log in works live. Fixed the account page's side card (it was taller than the
-screen and stayed cut off until the end of the page; `ocStickyFit` in
-`js/oc-accounts.js`, also used for the legal contents list), in-page links now
-stop below the header, home title now names the sports and country, home has
-`SportsOrganization` structured data, `llms.txt` added. Still open from the
-audit: `SportsEvent` data per tournament (needs facts checked against
-Instagram), Bangla pages not indexable, short descriptions on About and
-Fixtures. The account page still says "captain code" under "Join a team",
-which no longer matches the decision (no captain codes); ask her for wording.
+## Security
 
-Cookies and privacy (13 Nov, 23:50): Google Analytics is **off** behind
-`analyticsEnabled` in `js/config.js` (it ran with cookies and no notice); fonts
-are self-hosted in `assets/fonts`; the public site now sets no cookies and
-makes no outside requests. Details in `docs/SECURITY.md`. Team wording on the
-account and register pages now says "team link" (Bangla for those two lines
-emptied; she translates). Home: partner logos and the sport facts lost their
-boxes (plain rows with hairlines). Previews now show the real fonts.
+All of `docs/SECURITY.md` is done: migration 014, Edge Function redeployed,
+security headers, vendor fingerprints, Dependabot, CodeQL (0 alerts), secret
+scanning + push protection, private vulnerability reporting, "Protect main",
+Supabase URL / sign-in / Turnstile settings checked. She keeps "Allow new users
+to sign up" on. Two Dependabot PRs (#1 checkout v7.0.1, #2 setup-node v7.1.0)
+are open; commit ids match the official tags; merge after emails are live and
+re-check the job runs.
 
-14 Nov: owner deleted the unknown throwaway account. Same evening she finished the GitHub settings
-(steps 5 and 6). Supabase URL and sign-in settings checked too (steps 7
-and 8). Anti-bot check confirmed on: the whole `docs/SECURITY.md` list is finished.
-Two Dependabot pull requests (#1 checkout v7.0.1, #2 setup-node v7.1.0) are
-open; the commit ids match the official tags; waiting for her yes.
+## Bangla (on hold)
 
-Organiser list now shows a small photo (or initials) beside each name; before,
-a photo appeared only after "Look up". A failed photo load now says so.
-Not yet confirmed live by the owner.
+Source files in `docs/translation/`; after changes run
+`python3 scripts/build_bn.py` (regenerates `js/lang-site.js`). Many lines
+changed since Nov have **empty Bangla** (English shows). She finds the current
+Bangla stiff (word for word, odd loanwords). Research (Prothom Alo sports, bKash,
+read with Firecrawl): Bangladeshi sites write everyday English loanwords in
+Bangla letters (টুর্নামেন্ট, চ্যাম্পিয়ন, রানার-আপ) and use অনূর্ধ্ব-১৯. Two
+styles were offered (A: like Prothom Alo, "আসর" for season; B: mixed with
+English letters for names and terms), plus আপনি or তুমি. **No answer; on hold.**
 
-UX profile written 14 Nov: `.ux-profile.md` (from her existing decisions) and a
-"UI/UX skills" section in `CLAUDE.md`. Audit that evening: durations moved to the
-100/150/200/300 scale, language switch and skip link raised to 44px. She asked
-for "motion graphics like nice websites"; she chose the full showy option on 16 Nov (see below).
+## Hosting
 
-Showy motion (16 Nov): she chose "full showy site", lifting her no-scroll-effects
-rule. **Live for everyone since 16 Nov** (she said "apply all the motion"):
-`MOTION_DEFAULT = 'showy'` in `js/motion-boot.js`. Preview: add `?motion=showy` to any public page (lasts
-for the tab; `?motion=calm` turns it off). Files: `js/motion-boot.js`,
-`js/motion.js`, `css/motion.css`; rules in `.ux-profile.md` ("Motion"); test
-`scripts/site-tests/motion-checks.js`. To go back, set it to `'calm'`. Not tested on a real cheap phone.
+Vercel says the free plan is not allowed for this site. Her plan: Vercel Pro
+only in registration and tournament months, or Hostinger; **no decision yet**.
+The site moves easily: `docs/MOVING-HOSTS.md`, `site.json`,
+`scripts/move_site.py`, `scripts/build_host_files.py`. A new host's address
+must also be added in Supabase → Authentication → URL Configuration.
 
-Notion (16 Nov): she connected Notion and asked for a check of "Obsidian
-Volleyball Database" (Season 1 to 4 pages). Read only; nothing copied except
-team counts. Added to the season descriptions: S1 6 boys + 4 girls teams, All
-Stars 7 boys teams, Super Cup 5 girls + 4 boys teams (these add up to the
-site's 43 with Season 4's 17). **Not added, waiting for her:** award winners
-(MVP and so on: named players, many under 18), and anything from the Notion
-"Season 4" page, which is a copy of Season 3 (same teams, champions and
-awards) and contradicts the site. Other mismatches reported to her: Super Cup
-boys runner-up (Notion "Nexhai", not in that season's teams; site "Zenith"),
-"Teams: N" labels that disagree with the lists, spellings (Silhoutte /
-Silhouette, Zenit / Zenith, Colonizers / Colonisers), empty U19 roster.
-The Notion roster pages hold phone numbers, emails and emergency contacts,
-including minors: never copy them into the repo or chat.
+## Decided, not built (wait for "go")
 
-Awards (16 Nov): owner approved showing individual award winners (MVP, best
-spiker, setter, receiver). Added under each volleyball season on the
-Volleyball and Past seasons pages; Seasons 1 to 3 from Notion, Season 4 from
-her own text (the Instagram caption). This is the one approved exception to
-"no real player data in the repo": publicly announced award winners' names
-only. Spellings she confirmed: Silhoutte, Zenith, Dhaka Colonizers (fixed on
-the site). Still open: Super Cup boys runner-up (she is checking Zenith).
-She asked to use "Claude Motion" (motion-graphics artifact type): **not
-available on this account** (no Motion type listed, 16 Nov).
-
-Photo slideshow (16 Nov): home page, under the opening section ("From the
-court"), 15 photos the owner sent in chat (she said they are hers to use).
-Files `assets/photos/*.webp` (re-encoded, no camera or location data, max
-1100px tall), `js/gallery.js`, styles in `css/glass.css` ("Photo slideshow").
-Every photo is shown whole at its own shape; arrows, pause/play, counter,
-swipe, arrow keys; changes every 5 seconds, stops when someone takes over,
-starts paused under reduced motion. Alt text describes the scene and never
-names anyone. To add a photo: convert it the same way and add an `<li>` in
-`index.html` with its width, height and `--ar` (width divided by height).
-
-Team lists (16 Nov): added per category under Season 1, All Stars Cup and Super
-Cup on the Volleyball and Past seasons pages, from Notion. **Season 4 has no
-team list on the site**: Notion only has the six boys open age teams (girls
-list is a copy of Season 3, U19 roster is empty); waiting for her lists.
-
-16 Nov, 12:45: accounts switched on (menu shows "Log in or sign up", home shows
-"Create your player account"). **Still broken behind it:** the GitHub email
-job has no secrets, so no welcome emails and scheduled deletions are never
-carried out; and Supabase's built-in sender may limit confirmation emails.
-Slideshow: pause button removed at her request, changes every 4 seconds and
-waits 8 seconds after someone moves it by hand. Home has a closing block
-"Were you there?" (share your experience, email us). Hosting unchanged until
-she decides. Bangla: she finds the current text unnatural (word for word,
-English words spelled in Bangla letters such as সিজন); style proposal sent
-(names and sport terms stay in English letters, the rest in everyday Bangla);
-**wait for her answer before rewriting.** The old "translation is on hold, she
-does it by hand" rule no longer holds: she asked Claude to fix it.
-
-Design pass (16 Nov, afternoon, frontend-design skill): the home opening is now
-built around a real photo (`assets/photos/hero-setter.webp`, a player seen from
-behind) with "Next up" as plain text under it; the boxed card with the big "5"
-is gone. The slideshow moved below "Season 4 champions" and has 14 photos (the
-setter photo opens the page instead). On phones the slideshow shows the
-counter beside its heading and no arrows (swipe). The ball's trail now fades
-out after landing. Headline is a little smaller so it sets in four lines.
-Bangla research: Prothom Alo sports and bKash (read through Firecrawl at her
-request; news18 Bengali is blocked) both write everyday English loanwords in
-Bangla letters (টুর্নামেন্ট, চ্যাম্পিয়ন, রানার-আপ, ক্যাশ আউট) and use অনূর্ধ্ব-১৯;
-two style options sent to her; **on hold (owner, 17 Nov): do not rewrite the Bangla until she says so.**
-
-17 Nov: opening photo is now the trophies table (`hero-trophies.webp`; setter
-photo back in the slideshow). Every result reads "Champions" then
-"Runners-up" (home, Volleyball, Past seasons, Futsal, season list, popups).
-Menu button says "My account" when someone is logged in on that device (read
-from the login library's saved session; `ocSignedIn` in `js/components.js`).
-Sign-up now asks for the full name first (sent as `full_name` with the
-sign-up); accounts missing name, date of birth or gender see "Your account
-is not finished yet" with a button to the first missing field. **Migration
-015 written, not yet run by her:** copies the sign-up name into the profile
-and deletes unconfirmed sign-ups older than 7 days every night (pg_cron).
-Test added: `scripts/site-tests/signup-checks.js`; DB checks now 213.
-
-17 Nov, evening: she sent 21 more photos (4 batches). Opening is now a
-full-width photo of the stadium at sunset (`hero-hall.webp`, phone crop
-`hero-hall-tall.webp`), darkened toward the bottom and left; the photo settles
-once on load in showy mode. Slideshow has 18 photos (7 new: jump at the net,
-ball over the net, spike over the block, face-off, huddle, handshake,
-trophy and shoes); removed bench, match-wide, watching, award-trophy as
-weaker or duplicate. Volleyball seasons are now numbered **Season 1 to 4 in
-date order** (owner's numbering, same as her Notion): S1 Obsidian Volleyball
-Cup (Jan), S2 All Stars Cup (Feb), S3 Super Cup (Apr), S4 Obsidian
-Volleyball Cup (Jul). The tournament name sits under each heading. Anchor ids
-(ovasc-s1, ovsc-s2) were kept so old links work. The old "OVC/OVASC/OVSC
-Season N" labels are gone from the site; Bangla for changed lines emptied.
-
-Emails (17 Nov, evening): she added all GitHub secrets (SUPABASE_URL,
-SUPABASE_SECRET_KEY = a new `github-email-job` key, GMAIL_USER, GMAIL_APP_PASSWORD =
-a new "GitHub email job" app password; the older "Obsidian Cup Website" app
-password is in use elsewhere, probably Supabase sign-in emails, do not delete
-it), EMAIL_TEST_TO, and the variable EMAIL_MODE=test. 008 had never been run:
-she ran it. The job now runs (Claude can start it with `gh workflow run` and
-read its log). Found and fixed in **016 (written, waiting for her to run)**:
-deletion emails were thrown away as unknown templates; a code change folded
-into an expired welcome and sent nothing. After 016: test, then EMAIL_MODE=live.
-
-17 Nov, 18:00: 016 run by her; test email arrived ("Sent 1, failed 0").
-Opening photo is now the spike over the block (`hero-spike.webp`, phone crop
-`hero-spike-tall.webp`), her choice. Slideshow renamed "Glimpse of us": dark
-band, larger title, the front photo bright and the others dimmed, a thin line
-fills while the next photo comes; the sunset hall moved into it. Player card
-shows "Jersey 23" instead of "#23" (she read the number as an error).
-Next: EMAIL_MODE from test to live.
-
-## Open problems (13 Nov)
-
-1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov
-   from the job log (readable through the GitHub API): every run since 1 Nov
-   says "Email sender is not set up yet (missing secrets)"; all six values
-   arrive empty. So **no email has ever been sent by the job, and scheduled
-   account deletions are not carried out either.** The job also runs only
-   every 6 to 7 hours, not every 15 minutes (GitHub delays scheduled jobs).
-   Next: she checks Settings → Secrets and variables → Actions for the names.
-   Older note:
-   Likely causes, in order: `EMAIL_MODE` is still `test` and the address is not
-   in `EMAIL_TEST_TO`; the GitHub secrets are missing; the scheduled workflow
-   is disabled or late. Ask her to open GitHub → Actions → "Send emails" →
-   latest run and read the log line (it says which case). One step at a time.
-2. (Solved 14 Nov: deleted, and 014 blocks such addresses.) **An unknown account** (a throwaway-email address, joined 10 Nov) was in the
-   player list. Claude did not create it and has no database access. The account
-   page is reachable by anyone with the link (the repo is public). Suggest she
-   deletes it in Supabase → Authentication → Users. Migration 014 blocks
-   throwaway email domains once she has run it.
-3. The organiser account itself shows in the player list with no profile; fine,
-   but could be hidden from the list.
-
-## Decided, not built (wait for "go" / "start teams")
-
-All in the decisions table of `docs/PLAYER-ACCOUNTS-PLAN.md`:
-- **Teams:** no captain codes; any confirmed player creates a team; one team link;
-  eligible players join directly; captain can remove; captain must be a player
-  (under-18 captain allowed with parent consent); vice-captain required; optional
-  non-playing coach; captains see age eligibility, never date of birth; leave /
-  remove freely until the deadline, then organisers only.
-- **Parent consent:** parent email + phone (not the player's), page with tick
-  boxes and typed name; siblings may share an email; flag 3+ children or
-  mismatches; paper form as backup; spam-folder note wherever an email is sent.
-- **Payment:** bKash to one dedicated number, captain enters the transaction ID,
-  also allowed from a parent's number; no event credit; refunds only.
-- **ID:** any government or institution ID card showing photo and date of birth.
-- Build order: teams → parent consent → payment, approve lists, waitlist, reminders.
-- Read `docs/REGISTRATION-WHAT-IF-AUDIT.md` first: it lists clashes with the
-  current database (one team per event, slot taken on create, lock on submit,
-  emails only to accounts, no payment/waitlist/ban tables) and her unanswered
-  questions (player in both U19 and open age; birth certificate + photo ID for
-  under-18s; helpers; slot order by transaction time; waitlist pays when offered).
+From `docs/PLAYER-ACCOUNTS-PLAN.md`: teams (one team link, any confirmed player
+creates a team, captain must be a player, vice-captain required), parent consent,
+bKash payment with transaction ID, ID check. Build order: teams → parent consent
+→ payment, approve lists, waitlist, reminders. Read
+`docs/REGISTRATION-WHAT-IF-AUDIT.md` first.
 
 ## Open questions for the owner
 
-- Host: Vercel Pro for registration months, or Hostinger?
-- Rules page: slot order ("first come" vs "order of verified payment") and
-  forfeit timing disagree between pages; no futsal rules yet.
-- Refund and payment rules that used to say "(new)" need her yes (Payment 1.1).
-- Season 5: dates, venue, categories, squad sizes, fee, slots.
-- "Silhoutte" and "Team 01": real team spellings?
-- "Midfielder" as a normal futsal position? "Anonymous Player" quotes real?
-- Legal page lines are about 95 characters wide (her choice to fill the page).
+- Lusion-style redesign: screenshots of what she likes, then sample approval.
+- Switch emails to live.
+- Instagram season numbering the same as the site's Season 1–4?
+- Super Cup (Season 3) boys runner-up: Zenith? (she is checking)
+- Season 4 team lists (U19 boys, girls open age).
+- Host decision. Season 5 dates, venue, fee, slots.
+- Rules page: slot order and forfeit timing disagree; no futsal rules yet.
 
-## Tests (all passing 13 Nov)
+## Tests (all passing 17 Nov)
 
-- `supabase/tests/rls_test.mjs`: 213 database rule checks (PGlite; run with
+- `supabase/tests/rls_test.mjs`: 218 database checks (PGlite; run
   `node rls_test.mjs <repo path>` from a folder with `@electric-sql/pglite`).
-- `scripts/email/sender_test.mjs`: email sender and scheduled deletion (30).
-- `scripts/site-tests/` (README inside): every page EN/BN at four widths and all
-  links; account flows with a stand-in database (51); accounts-on, reduced
-  motion, keyboard, menu.
+- `scripts/email/sender_test.mjs` (30).
+- `scripts/site-tests/` (serve the site on localhost:8765 first):
+  `full-audit.js`, `account-flows.js`, `more-checks.js`, `motion-checks.js`,
+  `signup-checks.js`. Test browser: `NODE_PATH=/opt/npm-tools/node_modules`.
 - `python3 scripts/build_host_files.py --check`, `python3 scripts/check_vendor.py`.
-- Not testable from a Claude session: real Supabase login, Google, Turnstile,
-  real emails, live deletion.
-
-## Other documents
-
-- `docs/WEBSITE-AUDIT-2026-11.md`: content, SEO and accessibility findings
-  (Bangla not indexable, no structured data, weak home title).
-- `docs/translation/BANGLA-STYLE-NOTES.md`: style notes for her translation.
-- `docs/SEASON-5-LAUNCH-PLAN.md`: launch research and handbook plan.
+- Not testable from a session: real logins, Google, Turnstile, live sites
+  outside the allowlist (lusion.co was blocked).
 
 ## Links
 
 - Live site: https://obsidiancup.vercel.app
 - Account page: https://obsidiancup.vercel.app/pages/account.html
 - Organiser page: https://obsidiancup.vercel.app/pages/admin.html
-- Redesign canvas (Nov 2026): https://claude.ai/artifact/FHR5zYpRnzXft3ZqKYeXJy
-- Older canvases: https://claude.ai/artifact/5yGTcp4ErvHb8ZZiA2yrpQ (redesign),
-  https://claude.ai/artifact/Jua7GRA96cR3rvqHXe8pko (logo)
+- GitHub secrets: https://github.com/ObsidianCup/obsidian-cup/settings/secrets/actions
+- Notion source for past seasons: "Obsidian Volleyball Database" (Season 1–4
+  pages; Notion's "Season 4" page was a copy of Season 3, her own text is the
+  source for Season 4 awards).
