@@ -238,7 +238,7 @@ out after landing. Headline is a little smaller so it sets in four lines.
 Bangla research: Prothom Alo sports and bKash (read through Firecrawl at her
 request; news18 Bengali is blocked) both write everyday English loanwords in
 Bangla letters (টুর্নামেন্ট, চ্যাম্পিয়ন, রানার-আপ, ক্যাশ আউট) and use অনূর্ধ্ব-১৯;
-two style options sent to her; **wait for her pick before rewriting.**
+two style options sent to her; **on hold (owner, 17 Nov): do not rewrite the Bangla until she says so.**
 
 17 Nov: opening photo is now the trophies table (`hero-trophies.webp`; setter
 photo back in the slideshow). Every result reads "Champions" then
