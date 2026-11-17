@@ -66,6 +66,7 @@
     // the login library's "recovery" signal arrives late or not at all.
     if (LINK.recovery && !LINK.error) { recovering = true; show('loading'); }
     db.auth.onAuthStateChange((event, session) => {
+      setTimeout(() => { if (typeof ocRefreshAccountWords === 'function') ocRefreshAccountWords(); }, 0);   // menu: "My account" / "Log in"
       if (event === 'PASSWORD_RECOVERY') { recovering = true; show('newpass'); return; }
       user = session ? session.user : null;
       if (recovering) {

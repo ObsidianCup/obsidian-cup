@@ -31,7 +31,7 @@ function injectNav() {
         ${SITE_CONFIG.tournamentActive ? `<li><a href="${p('pages/fixtures.html')}" data-key="navFixtures">Fixtures</a></li>` : ''}
         ${SITE_CONFIG.registrationOpen ? `<li><a href="${p('pages/register.html')}" class="nav-register-btn" data-key="navRegister">Register</a></li>` : ''}
         ${SITE_CONFIG.rulesVisible ? `<li><a href="${p('pages/rules.html')}">Rules</a></li>` : ''}
-        ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/account.html')}" data-key="navAccount">Log in or sign up</a></li>` : ''}
+        ${SITE_CONFIG.accountsEnabled ? `<li><a href="${p('pages/account.html')}" data-key="${ocAccountWords(ocSignedIn()).long}">${ocAccountWords(ocSignedIn()).longText}</a></li>` : ''}
       </ul>
     </nav>
     <div class="lang-toggle" role="group" aria-label="Language toggle">
@@ -64,7 +64,7 @@ function injectNav() {
     ${SITE_CONFIG.tournamentActive ? `<a href="${p('pages/fixtures.html')}">Fixtures</a>` : ''}
     ${SITE_CONFIG.registrationOpen ? `<a href="${p('pages/register.html')}" data-key="navRegister">Register</a>` : ''}
     ${SITE_CONFIG.rulesVisible ? `<a href="${p('pages/rules.html')}">Rules</a>` : ''}
-    ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/account.html')}" data-key="navAccount">Log in or sign up</a>` : ''}
+    ${SITE_CONFIG.accountsEnabled ? `<a href="${p('pages/account.html')}" data-key="${ocAccountWords(ocSignedIn()).long}">${ocAccountWords(ocSignedIn()).longText}</a>` : ''}
     <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Language toggle">
       <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
       <span class="lang-sep">|</span>
@@ -127,14 +127,34 @@ function glassLinks() {
     `<li><a href="${p(f)}" data-key="${key}"${here.endsWith(f) ? ' aria-current="page"' : ''}>${label}</a></li>`).join('');
 }
 
+// Is someone logged in on this device? The public pages do not load the
+// login library, so read what it keeps in the browser: a saved session with a
+// refresh token means the account page will open logged in. Nothing is sent
+// anywhere; this only changes the words on the menu button.
+function ocSignedIn() {
+  try {
+    if (!SITE_CONFIG.supabaseUrl) return false;
+    const key = 'sb-' + new URL(SITE_CONFIG.supabaseUrl).hostname.split('.')[0] + '-auth-token';
+    const saved = JSON.parse(localStorage.getItem(key) || 'null');
+    return !!(saved && (saved.refresh_token || (saved.currentSession && saved.currentSession.refresh_token)));
+  } catch (e) { return false; }
+}
+
+function ocAccountWords(signedIn) {
+  return signedIn
+    ? { long: 'navMyAccount', longText: 'My account', short: 'navMyAccountShort', shortText: 'Account' }
+    : { long: 'navAccount', longText: 'Log in or sign up', short: 'navAccountShort', shortText: 'Log in' };
+}
+
 function injectGlassChrome() {
   const p = (f) => getNavPath(f);
   const lang = `<div class="g-lang lang-toggle" role="group" aria-label="Language">
       <button type="button" class="lang-btn" data-lang="en">English</button>
       <button type="button" class="lang-btn" data-lang="bn" lang="bn">বাংলা</button>
     </div>`;
+  const w = ocAccountWords(ocSignedIn());
   const login = SITE_CONFIG.accountsEnabled
-    ? `<a class="g-btn g-btn-second g-btn-small g-login" href="${p('pages/account.html')}"><span class="g-login-long" data-key="navAccount">Log in or sign up</span><span class="g-login-short" data-key="navAccountShort" aria-hidden="true">Log in</span></a>` : '';
+    ? `<a class="g-btn g-btn-second g-btn-small g-login" href="${p('pages/account.html')}"><span class="g-login-long" data-key="${w.long}">${w.longText}</span><span class="g-login-short" data-key="${w.short}" aria-hidden="true">${w.shortText}</span></a>` : '';
 
   const header = document.createElement('header');
   header.className = 'g-header';
@@ -255,3 +275,17 @@ document.addEventListener('DOMContentLoaded', () => {
   injectBackToTop();
   if (typeof initLanguage === 'function') initLanguage();
 });
+
+// Log in or out in another tab (or on the account page): update the menu words.
+function ocRefreshAccountWords() {
+  const w = ocAccountWords(ocSignedIn());
+  document.querySelectorAll('[data-key="navAccount"],[data-key="navMyAccount"]').forEach(el => { el.dataset.key = w.long; el.textContent = w.longText; });
+  document.querySelectorAll('[data-key="navAccountShort"],[data-key="navMyAccountShort"]').forEach(el => { el.dataset.key = w.short; el.textContent = w.shortText; });
+  if (typeof setLanguage === 'function') { try { setLanguage(localStorage.getItem('oc_lang') || 'en'); } catch (e) { /* language stays as it is */ } }
+}
+// Home: someone already logged in does not need "Create your player account".
+document.addEventListener('DOMContentLoaded', () => {
+  if (!ocSignedIn()) return;
+  document.querySelectorAll('.g-hero2 a[href*="account.html"]').forEach(a => { a.textContent = 'Open my account'; });
+});
+window.addEventListener('storage', e => { if (!e.key || /-auth-token$/.test(e.key)) ocRefreshAccountWords(); });

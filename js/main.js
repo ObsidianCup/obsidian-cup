@@ -402,11 +402,11 @@ function populateModal(data) {
       <div class="modal-podium">
         <p class="modal-result-category">${r.category}</p>
         <div class="podium-row podium-row-champion">
-          <span>Champion</span>
+          <span>Champions</span>
           <strong>${r.champion}</strong>
         </div>
         <div class="podium-row">
-          <span>Runner-up</span>
+          <span>Runners-up</span>
           <strong>${r.runner}</strong>
         </div>
       </div>

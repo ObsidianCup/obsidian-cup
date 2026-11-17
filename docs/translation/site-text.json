@@ -303,7 +303,7 @@
  {
   "id": "home-25",
   "section": "Home page",
-  "en": "Won by Pythons (girls, runner-up Net Ninjas) and Pagla Baburchi (boys, runner-up Zenith).",
+  "en": "Champions: Pythons (girls) and Pagla Baburchi (boys). Runners-up: Net Ninjas and Zenith.",
   "bn": "",
   "placeholder": false
  },
@@ -324,7 +324,7 @@
  {
   "id": "home-28",
   "section": "Home page",
-  "en": "Won by Fearless Flyers, runner-up Dhaka Colonizers.",
+  "en": "Champions: Fearless Flyers. Runners-up: Dhaka Colonizers.",
   "bn": "",
   "placeholder": false
  },
@@ -345,7 +345,7 @@
  {
   "id": "home-31",
   "section": "Home page",
-  "en": "Where it started. Won by Galactic Ganjas (interschool boys) and Pythons (open age girls).",
+  "en": "Where it started. Champions: Galactic Ganjas (interschool boys) and Pythons (open age girls).",
   "bn": "",
   "placeholder": false
  },
@@ -3930,6 +3930,13 @@
   "id": "home-talk3",
   "section": "Home page",
   "en": "Share your experience",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "home-myacct",
+  "section": "Home page",
+  "en": "Open my account",
   "bn": "",
   "placeholder": false
  },

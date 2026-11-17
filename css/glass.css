@@ -159,11 +159,14 @@ body.theme-glass {
 
 /* Champions: a ruled row, not cards */
 .g-champs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.g-champ { padding: var(--s8) var(--s8) var(--s8) 0; display: flex; flex-direction: column; gap: var(--s2); }
+.g-champ { padding: var(--s8) var(--s8) var(--s8) 0; display: flex; flex-direction: column; gap: 2px; }
+.g-champ-cat { margin-bottom: var(--s3); }
 .g-champ + .g-champ { padding-left: var(--s8); border-left: 1px solid var(--line); }
 .g-champ-cat { font-size: 0.875rem; color: var(--mist); }
 .g-champ-name { font-family: var(--font-display); font-weight: 500; font-size: 1.75rem; line-height: 1.2; }
-.g-champ-runner { font-size: 0.875rem; color: var(--mist); }
+.g-champ-label { font-size: 0.75rem; line-height: 1.3; color: var(--mist); }
+.g-champ-runner { display: flex; flex-direction: column; gap: 2px; margin-top: var(--s2); padding-top: var(--s3); border-top: 1px solid var(--line); }
+.g-champ-rname { font-size: 1rem; color: var(--soft); }
 @media (max-width: 720px) {
   .g-champs { grid-template-columns: 1fr; border-bottom: 0; }
   .g-champ, .g-champ + .g-champ { padding: var(--s4) 0; border-left: 0; border-bottom: 1px solid var(--line); }
