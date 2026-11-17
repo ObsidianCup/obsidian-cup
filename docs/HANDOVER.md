@@ -275,6 +275,14 @@ read its log). Found and fixed in **016 (written, waiting for her to run)**:
 deletion emails were thrown away as unknown templates; a code change folded
 into an expired welcome and sent nothing. After 016: test, then EMAIL_MODE=live.
 
+17 Nov, 18:00: 016 run by her; test email arrived ("Sent 1, failed 0").
+Opening photo is now the spike over the block (`hero-spike.webp`, phone crop
+`hero-spike-tall.webp`), her choice. Slideshow renamed "Glimpse of us": dark
+band, larger title, the front photo bright and the others dimmed, a thin line
+fills while the next photo comes; the sunset hall moved into it. Player card
+shows "Jersey 23" instead of "#23" (she read the number as an error).
+Next: EMAIL_MODE from test to live.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov

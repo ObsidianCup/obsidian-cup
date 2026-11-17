@@ -304,11 +304,27 @@ body.theme-glass {
 /* ---------- Photo slideshow (home) ----------
    A row of photos that can be swiped; every photo is shown whole at its own
    shape, as tall as the row allows and never wider than the screen. */
-.g-gallery { --gh: clamp(260px, 58vh, 560px); }
-@media (max-width: 700px) { .g-gallery { --gh: min(58vh, 82vw); } .g-gallery-track { align-items: flex-start; } .g-gallery .g-section-head { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: var(--s4); } .g-gallery [data-gallery] { display: none; } }   /* phones: keep wide and tall photos close in height */
+.g-gallery { --gh: clamp(300px, 68vh, 640px); background: #070a0b; border-block: 1px solid var(--line); padding-block: var(--s16); }
+.g-gallery .g-h2 { font-size: clamp(2rem, 4.6vw, 3.5rem); line-height: 1.05; }
+.g-gallery .g-section-head { margin-bottom: var(--s8); }
+/* the photo in front is bright and full size; the ones beside it wait in the dark */
+.g-gallery-track > li { opacity: 0.32; transform: scale(0.94); transition: opacity 300ms ease-out, transform 300ms ease-out; }
+.g-gallery-track > li.is-active { opacity: 1; transform: none; }
+.g-gallery-track > li:hover { opacity: 0.7; }
+.g-gallery-track > li.is-active:hover { opacity: 1; }
+/* a thin line fills while the next photo is on its way */
+.g-gallery-time { height: 2px; margin-top: var(--s6); background: var(--line); overflow: hidden; }
+.g-gallery-time span { display: block; height: 100%; width: 100%; background: var(--ice); transform: scaleX(0); transform-origin: left; }
+.g-gallery-time.is-running span { animation: g-gallery-fill var(--gallery-every, 4000ms) linear both; }
+@keyframes g-gallery-fill { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .g-gallery-track > li { transition: none; }
+  .g-gallery-time { display: none; }
+}
+@media (max-width: 700px) { .g-gallery { --gh: min(64vh, 118vw); padding-block: var(--s12); } .g-gallery-track { align-items: flex-start; } .g-gallery .g-section-head { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: var(--s4); } .g-gallery [data-gallery] { display: none; } }   /* phones: keep wide and tall photos close in height */
 .g-gallery .g-section-head { align-items: center; }
 .g-gallery-tools { display: flex; align-items: center; gap: var(--s2); }
-.g-gallery-tools .g-meta { margin-right: var(--s2); font-variant-numeric: tabular-nums; }
+.g-gallery-tools .g-meta { margin-right: var(--s3); font-variant-numeric: tabular-nums; font-family: var(--font-display); font-size: 1.125rem; color: var(--bone); }
 .g-iconbtn { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; background: var(--facet); border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--bone); cursor: pointer; transition: background-color var(--motion-fast) ease, border-color var(--motion-fast) ease; }
 .g-iconbtn:hover { border-color: var(--ice); }
 .g-gallery-track { list-style: none; margin: 0; display: flex; align-items: center; gap: var(--s4); height: var(--gh);

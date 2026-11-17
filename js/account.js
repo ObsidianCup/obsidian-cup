@@ -837,7 +837,8 @@
     $('#pcName').textContent = p.display_name || p.legal_name || t('welcomeNoName');
     $('#pcCode').textContent = p.player_code || '';
     $('#pcJersey').hidden = p.preferred_jersey == null;
-    $('#pcJersey').textContent = p.preferred_jersey == null ? '' : '#' + p.preferred_jersey;
+    $('#pcJersey').textContent = p.preferred_jersey == null ? '' : t('cardJersey', { n: p.preferred_jersey });
+    $('#pcJersey').title = t('jersey');
     $('#pcDob').textContent = p.date_of_birth
       ? new Date(p.date_of_birth + 'T00:00:00').toLocaleDateString(ocLang() === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
       : '—';

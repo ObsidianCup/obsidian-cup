@@ -3908,7 +3908,7 @@
  {
   "id": "home-gallery1",
   "section": "Home page",
-  "en": "From the court",
+  "en": "Glimpse of us",
   "bn": "",
   "placeholder": false
  },
@@ -4056,6 +4056,13 @@
   "id": "acct.and",
   "section": "Player account pages (log in, profile, admin)",
   "en": "and",
+  "bn": "",
+  "placeholder": false
+ },
+ {
+  "id": "acct.cardJersey",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Jersey {n}",
   "bn": "",
   "placeholder": false
  }

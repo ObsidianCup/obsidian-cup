@@ -14,8 +14,18 @@
 
     function edge() { return parseFloat(getComputedStyle(track).paddingLeft) || 0; }
 
+    var line = document.querySelector('.g-gallery-time');
     function show() {
       if (count) count.textContent = (index + 1) + ' / ' + slides.length;
+      slides.forEach(function (s, i) { s.classList.toggle('is-active', i === index); });
+    }
+    // Start the thin timing line again for the next photo (only while it moves on its own).
+    function restartLine() {
+      if (!line) return;
+      line.classList.remove('is-running');
+      if (calm || !onScreen || held || Date.now() < restUntil) return;
+      void line.offsetWidth;
+      line.classList.add('is-running');
     }
     function nearest() {
       var at = track.scrollLeft + edge(), best = 0, gap = Infinity;
@@ -31,9 +41,10 @@
       show();
     }
 
-    function rest() { restUntil = Date.now() + REST; }
+    function rest() { restUntil = Date.now() + REST; if (line) line.classList.remove('is-running'); }
     function tick() {
       if (!calm && onScreen && !held && !document.hidden && Date.now() >= restUntil) go(index + 1);
+      restartLine();
     }
 
     // Arrows and keyboard. When someone moves it by hand, the automatic
@@ -64,14 +75,15 @@
 
     // Wait while the pointer or the keyboard is on the slideshow, and while it is off screen.
     var box = track.closest('.g-gallery') || track;
-    box.addEventListener('mouseenter', function () { held = true; });
+    box.addEventListener('mouseenter', function () { held = true; if (line) line.classList.remove('is-running'); });
     box.addEventListener('mouseleave', function () { held = false; });
     box.addEventListener('focusin', function () { held = true; });
     box.addEventListener('focusout', function () { held = false; });
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; }, { threshold: 0.5 }).observe(track);
+      new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; restartLine(); }, { threshold: 0.5 }).observe(track);
     } else { onScreen = true; }
 
+    if (line) line.style.setProperty('--gallery-every', EVERY + 'ms');
     show();
     setInterval(tick, EVERY);
   });

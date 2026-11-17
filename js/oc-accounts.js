@@ -82,6 +82,7 @@ const OC_TEXT = {
     errCaptchaLoad: "The security check did not load. Turn off any ad blocker for this page, check your connection, then reload the page.",
     errRateLimit: 'Too many attempts. Please wait a few minutes and try again.',
     signupName: "Full name, as on your ID card",
+    cardJersey: "Jersey {n}",
     errName: "Type your full name, as it is written on your ID card.",
     unfinishedTitle: "Your account is not finished yet",
     unfinishedBody: "Add your {missing} to finish it. Organisers can only add finished accounts to a team.",
