@@ -281,14 +281,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---- Tournament data ----
 const TOURNAMENTS = {
   ovc_s4: {
-    season: 'OVC — Season 4 · July 2026',
-    name: 'Obsidian Volleyball Cup Season 4',
+    season: 'Volleyball Season 4, July 2026',
+    name: 'Obsidian Volleyball Cup',
     type: 'U19 Boys · Boys Open Age · Girls Open Age',
     date: 'U19 Boys: 1–2 July · All Age: 3–4 July 2026',
     venue: 'Shaheed Noor Hossain National Volleyball Stadium',
     venueAddress: 'Purana Paltan, Dhaka 1000',
     summary: 'Our fourth volleyball season, completed across three categories with federation-backed support.',
-    description: 'Held at the National Volleyball Stadium, with U19 Boys on 1–2 July and the All Age categories on 3–4 July 2026, OVC Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported by the Bangladesh Volleyball Federation.',
+    description: 'Held at the National Volleyball Stadium, with U19 Boys on 1–2 July and the All Age categories on 3–4 July 2026, Volleyball Season 4 closed with three competitive categories and a sharper community atmosphere. Silhoutte took the U19 Boys crown, Fearless Flyers won Boys Open Age, and Pythons claimed Girls Open Age. The season was endorsed and supported by the Bangladesh Volleyball Federation.',
     sponsors: 'Stall Partner PHEEZES · Gifting Partner CROKETOPIA · Fragrance Partner HI. TALHA',
     teams: '17 teams · 5 U19 Boys, 6 Boys Open Age, 6 Girls Open Age',
     spectators: '60+',
@@ -299,14 +299,14 @@ const TOURNAMENTS = {
     ]
   },
   ofc_s1: {
-    season: 'OFC — Season 1 · 23 June 2026',
-    name: 'Obsidian Futsal Cup Season 1',
+    season: 'Futsal Season 1, 23 June 2026',
+    name: 'Obsidian Futsal Cup',
     type: 'Girls-only futsal',
     date: '23 June 2026',
     venue: 'JAFF Arena and Academy Bashundhara',
     venueAddress: 'Bashundhara, Dhaka',
     summary: 'The first futsal chapter of Obsidian Cup, hosted as a girls-only season.',
-    description: 'OFC Season 1 brought girls-only futsal into the Obsidian Cup story at JAFF Arena and Academy Bashundhara on 23 June 2026, with five teams competing in the first season. Thaelor became the first Obsidian Futsal Cup champion, with Team 01 finishing as runner-up. The spotlight stayed on the teams, the game, and the first step into a new format.',
+    description: 'Futsal Season 1 brought girls-only futsal into the Obsidian Cup story at JAFF Arena and Academy Bashundhara on 23 June 2026, with five teams competing in the first season. Thaelor became the first Obsidian Futsal Cup champion, with Team 01 finishing as runner-up. The spotlight stayed on the teams, the game, and the first step into a new format.',
     sponsors: null,
     teams: '5 teams',
     spectators: '15+',
@@ -315,13 +315,13 @@ const TOURNAMENTS = {
     ]
   },
   ovsc_s2: {
-    season: 'OVSC — Season 2 · April 2026',
-    name: 'Obsidian Volleyball Super Cup Season 2',
-    type: 'OVC × OVASC — Girls & Boys Open Age',
+    season: 'Volleyball Season 3, April 2026',
+    name: 'Obsidian Volleyball Super Cup',
+    type: 'Girls and boys, open age',
     date: '3rd & 4th April 2026',
     venue: 'Shaheed Noor Hossain National Volleyball Stadium',
     venueAddress: 'Purana Paltan, Dhaka 1000',
-    summary: 'Our third tournament, and the first time OVC and OVASC shared one stage.',
+    summary: 'Our third volleyball tournament, the first time girls and boys open age shared one stage.',
     description: 'The Super Cup brought the girls open-age and boys open-age brackets together at the National Volleyball Stadium for two full days. It felt bigger, sharper, and more alive than anything before it: nine teams, a stronger crowd, and a standard that finally matched the ambition of Obsidian Cup.',
     sponsors: 'The Punch Company',
     teams: '9 teams · 5 Girls, 4 Boys',
@@ -332,8 +332,8 @@ const TOURNAMENTS = {
     ]
   },
   ovasc_s1: {
-    season: 'OVASC — Season 1 · February 2026',
-    name: 'Obsidian Volleyball All Stars Cup Season 1',
+    season: 'Volleyball Season 2, February 2026',
+    name: 'Obsidian Volleyball All Stars Cup',
     type: 'All Stars — Boys Open Age',
     date: '6th & 7th February 2026',
     venue: 'Shaheed Noor Hossain National Volleyball Stadium',
@@ -348,8 +348,8 @@ const TOURNAMENTS = {
     ]
   },
   ovc_s1: {
-    season: 'OVC — Season 1 · January 2026',
-    name: 'Obsidian Volleyball Cup Season 1',
+    season: 'Volleyball Season 1, January 2026',
+    name: 'Obsidian Volleyball Cup',
     type: 'Boys Interschool · Girls Open Age',
     date: '11th & 12th January 2026',
     venue: 'DBox Sports Complex',

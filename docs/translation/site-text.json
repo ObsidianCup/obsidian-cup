@@ -156,8 +156,8 @@
  {
   "id": "home-04",
   "section": "Home page",
-  "en": "Volleyball, 1 to 4 July 2026, 17 teams, supported by the Bangladesh Volleyball Federation",
-  "bn": "ভলিবল, ১–৪ জুলাই ২০২৬, ১৭টি দল, বাংলাদেশ ভলিবল ফেডারেশনের সহযোগিতায়",
+  "en": "Volleyball, Obsidian Volleyball Cup, 1 to 4 July 2026, 17 teams, supported by the Bangladesh Volleyball Federation",
+  "bn": "",
   "placeholder": false
  },
  {
@@ -240,21 +240,21 @@
  {
   "id": "home-16",
   "section": "Home page",
-  "en": "Five events, 48 teams and more than 575 players since January 2026",
-  "bn": "জানুয়ারি ২০২৬ থেকে ৫টি ইভেন্ট, ৪৮টি দল এবং ৫৭৫ জনেরও বেশি খেলোয়াড়",
+  "en": "Five events, 48 teams and more than 575 players since Obsidian Volleyball Cup, January 2026",
+  "bn": "",
   "placeholder": false
  },
  {
   "id": "home-17",
   "section": "Home page",
-  "en": "Volleyball Cup, Season 4",
+  "en": "Volleyball Season 4",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-18",
   "section": "Home page",
-  "en": "1 to 4 July 2026",
+  "en": "Obsidian Volleyball Cup, 1 to 4 July 2026",
   "bn": "",
   "placeholder": false
  },
@@ -268,14 +268,14 @@
  {
   "id": "home-20",
   "section": "Home page",
-  "en": "Futsal Cup, Season 1",
+  "en": "Futsal Season 1",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-21",
   "section": "Home page",
-  "en": "23 June 2026",
+  "en": "Obsidian Futsal Cup, 23 June 2026",
   "bn": "",
   "placeholder": false
  },
@@ -289,14 +289,14 @@
  {
   "id": "home-23",
   "section": "Home page",
-  "en": "Volleyball Super Cup, Season 2",
+  "en": "Volleyball Season 3",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-24",
   "section": "Home page",
-  "en": "April 2026",
+  "en": "Obsidian Volleyball Super Cup, April 2026",
   "bn": "",
   "placeholder": false
  },
@@ -310,14 +310,14 @@
  {
   "id": "home-26",
   "section": "Home page",
-  "en": "Volleyball All Stars Cup, Season 1",
+  "en": "Volleyball Season 2",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-27",
   "section": "Home page",
-  "en": "February 2026",
+  "en": "Obsidian Volleyball All Stars Cup, February 2026",
   "bn": "",
   "placeholder": false
  },
@@ -331,14 +331,14 @@
  {
   "id": "home-29",
   "section": "Home page",
-  "en": "Volleyball Cup, Season 1",
+  "en": "Volleyball Season 1",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-30",
   "section": "Home page",
-  "en": "January 2026",
+  "en": "Obsidian Volleyball Cup, January 2026",
   "bn": "",
   "placeholder": false
  },
@@ -359,49 +359,49 @@
  {
   "id": "home-33",
   "section": "Home page",
-  "en": "Stall partner, OVC Season 4",
+  "en": "Stall partner, Volleyball Season 4",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-34",
   "section": "Home page",
-  "en": "Gifting partner, OVC Season 4",
+  "en": "Gifting partner, Volleyball Season 4",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-35",
   "section": "Home page",
-  "en": "Fragrance partner, OVC Season 4",
+  "en": "Fragrance partner, Volleyball Season 4",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-36",
   "section": "Home page",
-  "en": "Support, OVC Season 4",
+  "en": "Support, Volleyball Season 4",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-37",
   "section": "Home page",
-  "en": "Hydration partner, OVASC Season 1",
+  "en": "Hydration partner, Volleyball Season 2",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-38",
   "section": "Home page",
-  "en": "Apparel partner, OVASC Season 1",
+  "en": "Apparel partner, Volleyball Season 2",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "home-39",
   "section": "Home page",
-  "en": "Performance partner, OVSC Season 2",
+  "en": "Performance partner, Volleyball Season 3",
   "bn": "",
   "placeholder": false
  },
@@ -415,14 +415,14 @@
  {
   "id": "volleyball-02",
   "section": "Volleyball page",
-  "en": "The court where Obsidian started. Four events since January 2026, latest first, with 43 teams and support from the Bangladesh Volleyball Federation.",
+  "en": "The court where Obsidian started. Four events since Obsidian Volleyball Cup, January 2026, latest first, with 43 teams and support from the Bangladesh Volleyball Federation.",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "volleyball-03",
   "section": "Volleyball page",
-  "en": "1 to 4 July 2026, Shaheed Noor Hossain National Volleyball Stadium",
+  "en": "Obsidian Volleyball Cup, 1 to 4 July 2026, Shaheed Noor Hossain National Volleyball Stadium",
   "bn": "",
   "placeholder": false
  },
@@ -436,7 +436,7 @@
  {
   "id": "volleyball-05",
   "section": "Volleyball page",
-  "en": "3 and 4 April 2026, Shaheed Noor Hossain National Volleyball Stadium",
+  "en": "3 and 4 Obsidian Volleyball Super Cup, April 2026, Shaheed Noor Hossain National Volleyball Stadium",
   "bn": "",
   "placeholder": false
  },
@@ -464,7 +464,7 @@
  {
   "id": "volleyball-09",
   "section": "Volleyball page",
-  "en": "6 and 7 February 2026, Shaheed Noor Hossain National Volleyball Stadium",
+  "en": "6 and 7 Obsidian Volleyball All Stars Cup, February 2026, Shaheed Noor Hossain National Volleyball Stadium",
   "bn": "",
   "placeholder": false
  },
@@ -485,7 +485,7 @@
  {
   "id": "volleyball-12",
   "section": "Volleyball page",
-  "en": "11 and 12 January 2026, DBox Sports Complex",
+  "en": "11 and 12 Obsidian Volleyball Cup, January 2026, DBox Sports Complex",
   "bn": "",
   "placeholder": false
  },
@@ -576,14 +576,14 @@
  {
   "id": "futsal-02",
   "section": "Futsal page",
-  "en": "Futsal joined the story on 23 June 2026 with a girls-only tournament at JAFF Arena and Academy, Bashundhara: five teams and our first futsal final.",
+  "en": "Futsal joined the story on Obsidian Futsal Cup, 23 June 2026 with a girls-only tournament at JAFF Arena and Academy, Bashundhara: five teams and our first futsal final.",
   "bn": "",
   "placeholder": false
  },
  {
   "id": "futsal-03",
   "section": "Futsal page",
-  "en": "23 June 2026, JAFF Arena and Academy, Bashundhara",
+  "en": "Obsidian Futsal Cup, 23 June 2026, JAFF Arena and Academy, Bashundhara",
   "bn": "",
   "placeholder": false
  },
@@ -632,7 +632,7 @@
  {
   "id": "seasons-02",
   "section": "Past seasons page",
-  "en": "Five events, 48 teams and more than 575 players since January 2026. Latest first.",
+  "en": "Five events, 48 teams and more than 575 players since Obsidian Volleyball Cup, January 2026. Latest first.",
   "bn": "",
   "placeholder": false
  },
@@ -779,7 +779,7 @@
  {
   "id": "faq-08",
   "section": "Questions page",
-  "en": "Five events so far: OVC Season 1, OVASC Season 1, OVSC Season 2, the girls-only Obsidian Futsal Cup Season 1 on 23 June 2026, and Obsidian Volleyball Cup Season 4.",
+  "en": "Five events so far: Volleyball Season 1, Volleyball Season 2, Volleyball Season 3, the girls-only Obsidian Futsal Cup Season 1 on Obsidian Futsal Cup, 23 June 2026, and Obsidian Volleyball Cup Season 4.",
   "bn": "",
   "placeholder": false
  },
@@ -2816,7 +2816,7 @@
  {
   "id": "stories-06",
   "section": "Player stories page",
-  "en": "OVASC Season 1",
+  "en": "Volleyball Season 2",
   "bn": "",
   "placeholder": false
  },
@@ -2830,7 +2830,7 @@
  {
   "id": "stories-08",
   "section": "Player stories page",
-  "en": "OVC Season 1",
+  "en": "Volleyball Season 1",
   "bn": "",
   "placeholder": false
  },
@@ -3264,7 +3264,7 @@
  {
   "id": "vb-story-03",
   "section": "Volleyball page",
-  "en": "In January 2026 that wish became the first Obsidian Volleyball Cup, with school teams and a girls open-age category at DBox Sports Complex. By July, Season 4 brought 17 teams to the Shaheed Noor Hossain National Volleyball Stadium, with support from the Bangladesh Volleyball Federation.",
+  "en": "In Obsidian Volleyball Cup, January 2026 that wish became the first Obsidian Volleyball Cup, with school teams and a girls open-age category at DBox Sports Complex. By July, Season 4 brought 17 teams to the Shaheed Noor Hossain National Volleyball Stadium, with support from the Bangladesh Volleyball Federation.",
   "bn": "",
   "placeholder": false
  },
@@ -3789,7 +3789,7 @@
  {
   "id": "home-46",
   "section": "Home page",
-  "en": "Where Obsidian Cup started. Four volleyball tournaments since January 2026, for school, under-19 and open-age teams.",
+  "en": "Where Obsidian Cup started. Four volleyball tournaments since Obsidian Volleyball Cup, January 2026, for school, under-19 and open-age teams.",
   "bn": "",
   "placeholder": false
  },

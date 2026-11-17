@@ -46,7 +46,11 @@
 
   <main id="main">
 
-    <section class="g-hero2" aria-labelledby="heroTitle">
+    <section class="g-hero2 g-hero-full" aria-labelledby="heroTitle">
+      <picture class="g-herobg">
+        <source media="(max-width: 700px)" srcset="assets/photos/hero-hall-tall.webp" width="900" height="1200" />
+        <img src="assets/photos/hero-hall.webp" alt="A match at the indoor stadium in the late afternoon, with sunlight coming in under the roof" width="1920" height="1440" fetchpriority="high" decoding="async" />
+      </picture>
       <div class="g-wrap g-hero2-grid">
         <div>
           <h1 id="heroTitle">A stage for players from every corner of Bangladesh</h1>
@@ -56,15 +60,12 @@
             <a class="g-btn g-btn-second" href="/pages/account.html" data-needs-accounts hidden>Create your player account</a>
           </div>
         </div>
-        <div class="g-heroside">
-          <img class="g-heroshot" src="assets/photos/hero-trophies.webp" alt="Trophies and medals laid out on a table before the prize giving" width="1500" height="1000" fetchpriority="high" decoding="async" />
-          <aside class="g-next2" aria-labelledby="nextTitle">
-            <p class="g-nextup">Next up</p>
-            <h2 id="nextTitle">Obsidian Volleyball Cup, Season 5</h2>
-            <p class="g-prose" data-key="gNextBody">Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts open before registration, so your team can sign up in minutes.</p>
-            <a class="g-link" href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener">Follow @obsidian.volleyball</a>
-          </aside>
-        </div>
+        <aside class="g-next2" aria-labelledby="nextTitle">
+          <p class="g-nextup">Next up</p>
+          <h2 id="nextTitle">Obsidian Volleyball Cup, Season 5</h2>
+          <p class="g-prose" data-key="gNextBody">Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts open before registration, so your team can sign up in minutes.</p>
+          <a class="g-link" href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener">Follow @obsidian.volleyball</a>
+        </aside>
       </div>
     </section>
 
@@ -87,27 +88,31 @@
         <div class="g-section-head">
           <h2 class="g-h2" id="galleryTitle">From the court</h2>
           <div class="g-gallery-tools">
-            <span class="g-meta" id="galleryCount">1 / 14</span>
+            <span class="g-meta" id="galleryCount">1 / 18</span>
             <button type="button" class="g-iconbtn" data-gallery="prev" aria-label="Previous photo" title="Previous photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
             <button type="button" class="g-iconbtn" data-gallery="next" aria-label="Next photo" title="Next photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
           </div>
         </div>
       </div>
       <ul class="g-gallery-track" tabindex="0" aria-label="Photos from Obsidian Cup tournaments">
-        <li><img src="assets/photos/ball-on-court.webp" alt="A volleyball resting on the wooden court" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/champion.webp" alt="A player smiling with the champions trophy behind a Season 4 champions board" width="825" height="1100" style="--ar: 0.7500" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/indoor-match.webp" alt="Players in position at the net during a match at an indoor court" width="1467" height="1100" style="--ar: 1.3336" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/bench.webp" alt="Players laughing together on the bench beside the court" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/match-wide.webp" alt="A match seen from the sideline, with players watching from the floor" width="825" height="1100" style="--ar: 0.7500" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/jump-at-net.webp" alt="A player jumps for the ball at the net while a teammate watches from behind" width="1280" height="853" style="--ar: 1.5006" decoding="async" /></li>
+        <li><img src="assets/photos/champion.webp" alt="A player smiling with the champions trophy behind a Season 4 champions board" width="825" height="1100" style="--ar: 0.7500" decoding="async" /></li>
+        <li><img src="assets/photos/ball-over-net.webp" alt="The ball hangs above the net as a player waits to receive it" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
         <li><img src="assets/photos/boys-champions.webp" alt="A team with gold medals behind the Season 4 champions board" width="1467" height="1100" style="--ar: 1.3336" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/face-off.webp" alt="Two players face each other across the net" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/trophy-shoes.webp" alt="A runners-up trophy, a medal, a best setter award and a pair of volleyball shoes on the court" width="1920" height="1080" style="--ar: 1.7778" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/huddle.webp" alt="A team huddles on the court before a match" width="825" height="1100" style="--ar: 0.7500" loading="lazy" decoding="async" /></li>
         <li><img src="assets/photos/setter.webp" alt="A player sets the ball above the net during a match" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
         <li><img src="assets/photos/champions-team.webp" alt="A team sitting on the court with their medals and trophies" width="825" height="1100" style="--ar: 0.7500" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/watching.webp" alt="Players smiling as they watch a match from the side" width="825" height="1100" style="--ar: 0.7500" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/spike-block.webp" alt="A player spikes the ball over two blockers" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/trophies.webp" alt="Trophies and medals laid out on a table before the prize giving" width="1467" height="1100" style="--ar: 1.3336" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/handshake.webp" alt="Players shake hands under the net after a match" width="1600" height="900" style="--ar: 1.7778" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/team-celebrating.webp" alt="A team celebrating on the court floor with a trophy" width="827" height="620" style="--ar: 1.3339" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/ball-on-court.webp" alt="A volleyball resting on the wooden court" width="1280" height="853" style="--ar: 1.5006" loading="lazy" decoding="async" /></li>
         <li><img src="assets/photos/runners-up.webp" alt="A team with medals behind the Season 4 runners-up board" width="1467" height="1100" style="--ar: 1.3336" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/award-trophy.webp" alt="A best receiver trophy held next to a small gift box" width="825" height="1100" style="--ar: 0.7500" loading="lazy" decoding="async" /></li>
+        <li><img src="assets/photos/indoor-match.webp" alt="Players in position at the net during a match at an indoor court" width="1467" height="1100" style="--ar: 1.3336" loading="lazy" decoding="async" /></li>
         <li><img src="assets/photos/girls-team-coach.webp" alt="A team and their coach holding a trophy on court" width="1280" height="960" style="--ar: 1.3333" loading="lazy" decoding="async" /></li>
         <li><img src="assets/photos/award-winners.webp" alt="Seven players standing in a line with a trophy and individual awards" width="1280" height="960" style="--ar: 1.3333" loading="lazy" decoding="async" /></li>
-        <li><img src="assets/photos/team-celebrating.webp" alt="A team celebrating on the court floor with a trophy" width="827" height="620" style="--ar: 1.3339" loading="lazy" decoding="async" /></li>
       </ul>
     </section>
 
@@ -125,7 +130,7 @@
             <p style="margin-top: var(--s4)"><a class="g-link" href="/pages/volleyball.html">Volleyball results</a></p>
           </div>
           <ul class="g-facts">
-            <li><span>Latest</span><span>Volleyball Cup, Season 4</span></li>
+            <li><span>Latest</span><span>Volleyball Season 4</span></li>
             <li><span>Dates</span><span>1 to 4 July 2026</span></li>
             <li><span>Teams</span><span>17, in three categories</span></li>
             <li><span>Instagram</span><a href="https://www.instagram.com/obsidian.volleyball/" target="_blank" rel="noopener">@obsidian.volleyball</a></li>
@@ -137,7 +142,7 @@
             <p style="margin-top: var(--s4)"><a class="g-link" href="/pages/futsal.html">Futsal results</a></p>
           </div>
           <ul class="g-facts">
-            <li><span>Latest</span><span>Futsal Cup, Season 1</span></li>
+            <li><span>Latest</span><span>Futsal Season 1</span></li>
             <li><span>Date</span><span>23 June 2026</span></li>
             <li><span>Champions</span><span>Thaelor</span></li>
             <li><span>Instagram</span><a href="https://www.instagram.com/obsidian.futsal/" target="_blank" rel="noopener">@obsidian.futsal</a></li>
@@ -154,32 +159,32 @@
         </div>
         <ul class="g-seasons">
           <li class="g-season"><a href="/pages/volleyball.html">
-            <span class="g-season-name">Volleyball Cup, Season 4</span>
-            <span class="g-season-date">1 to 4 July 2026</span>
+            <span class="g-season-name">Volleyball Season 4</span>
+            <span class="g-season-date">Obsidian Volleyball Cup, 1 to 4 July 2026</span>
             <span class="g-season-sum">Three categories and 17 teams, with support from the Bangladesh Volleyball Federation.</span>
             <span class="g-season-go" aria-hidden="true">Results</span>
           </a></li>
           <li class="g-season"><a href="/pages/futsal.html">
-            <span class="g-season-name">Futsal Cup, Season 1</span>
-            <span class="g-season-date">23 June 2026</span>
+            <span class="g-season-name">Futsal Season 1</span>
+            <span class="g-season-date">Obsidian Futsal Cup, 23 June 2026</span>
             <span class="g-season-sum">Our first futsal tournament, girls only, won by Thaelor at JAFF Arena and Academy, Bashundhara.</span>
             <span class="g-season-go" aria-hidden="true">Results</span>
           </a></li>
           <li class="g-season"><a href="/pages/tournaments.html">
-            <span class="g-season-name">Volleyball Super Cup, Season 2</span>
-            <span class="g-season-date">April 2026</span>
+            <span class="g-season-name">Volleyball Season 3</span>
+            <span class="g-season-date">Obsidian Volleyball Super Cup, April 2026</span>
             <span class="g-season-sum">Champions: Pythons (girls) and Pagla Baburchi (boys). Runners-up: Net Ninjas and Zenith.</span>
             <span class="g-season-go" aria-hidden="true">Results</span>
           </a></li>
           <li class="g-season"><a href="/pages/tournaments.html">
-            <span class="g-season-name">Volleyball All Stars Cup, Season 1</span>
-            <span class="g-season-date">February 2026</span>
+            <span class="g-season-name">Volleyball Season 2</span>
+            <span class="g-season-date">Obsidian Volleyball All Stars Cup, February 2026</span>
             <span class="g-season-sum">Champions: Fearless Flyers. Runners-up: Dhaka Colonizers.</span>
             <span class="g-season-go" aria-hidden="true">Results</span>
           </a></li>
           <li class="g-season"><a href="/pages/tournaments.html">
-            <span class="g-season-name">Volleyball Cup, Season 1</span>
-            <span class="g-season-date">January 2026</span>
+            <span class="g-season-name">Volleyball Season 1</span>
+            <span class="g-season-date">Obsidian Volleyball Cup, January 2026</span>
             <span class="g-season-sum">Where it started. Champions: Galactic Ganjas (interschool boys) and Pythons (open age girls).</span>
             <span class="g-season-go" aria-hidden="true">Results</span>
           </a></li>
@@ -207,37 +212,37 @@
           <li class="g-partner">
             <div class="g-partner-logo g-partner-logo-wide"><img src="assets/partner-pheezes.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">PHEEZES</p>
-            <p class="g-partner-role">Stall partner, OVC Season 4</p>
+            <p class="g-partner-role">Stall partner, Volleyball Season 4</p>
           </li>
           <li class="g-partner">
             <div class="g-partner-logo g-partner-logo-wide"><img src="assets/partner-croketopia.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">CROKETOPIA</p>
-            <p class="g-partner-role">Gifting partner, OVC Season 4</p>
+            <p class="g-partner-role">Gifting partner, Volleyball Season 4</p>
           </li>
           <li class="g-partner">
             <div class="g-partner-logo"><img src="assets/partner-hi-talha.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">HI. TALHA</p>
-            <p class="g-partner-role">Fragrance partner, OVC Season 4</p>
+            <p class="g-partner-role">Fragrance partner, Volleyball Season 4</p>
           </li>
           <li class="g-partner">
             <div class="g-partner-logo"><img src="assets/partner-bvf.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">Bangladesh Volleyball Federation</p>
-            <p class="g-partner-role">Support, OVC Season 4</p>
+            <p class="g-partner-role">Support, Volleyball Season 4</p>
           </li>
           <li class="g-partner">
             <div class="g-partner-logo"><img src="assets/partner-smc.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">SMC Fruity</p>
-            <p class="g-partner-role">Hydration partner, OVASC Season 1</p>
+            <p class="g-partner-role">Hydration partner, Volleyball Season 2</p>
           </li>
           <li class="g-partner">
             <div class="g-partner-logo"><img src="assets/partner-olyve.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">OLYVE</p>
-            <p class="g-partner-role">Apparel partner, OVASC Season 1</p>
+            <p class="g-partner-role">Apparel partner, Volleyball Season 2</p>
           </li>
           <li class="g-partner">
             <div class="g-partner-logo"><img src="assets/partner-punch.png" alt="" loading="lazy" /></div>
             <p class="g-partner-name">The Punch Company</p>
-            <p class="g-partner-role">Performance partner, OVSC Season 2</p>
+            <p class="g-partner-role">Performance partner, Volleyball Season 3</p>
           </li>
         </ul>
       </div>

@@ -252,6 +252,19 @@ is not finished yet" with a button to the first missing field. **Migration
 and deletes unconfirmed sign-ups older than 7 days every night (pg_cron).
 Test added: `scripts/site-tests/signup-checks.js`; DB checks now 213.
 
+17 Nov, evening: she sent 21 more photos (4 batches). Opening is now a
+full-width photo of the stadium at sunset (`hero-hall.webp`, phone crop
+`hero-hall-tall.webp`), darkened toward the bottom and left; the photo settles
+once on load in showy mode. Slideshow has 18 photos (7 new: jump at the net,
+ball over the net, spike over the block, face-off, huddle, handshake,
+trophy and shoes); removed bench, match-wide, watching, award-trophy as
+weaker or duplicate. Volleyball seasons are now numbered **Season 1 to 4 in
+date order** (owner's numbering, same as her Notion): S1 Obsidian Volleyball
+Cup (Jan), S2 All Stars Cup (Feb), S3 Super Cup (Apr), S4 Obsidian
+Volleyball Cup (Jul). The tournament name sits under each heading. Anchor ids
+(ovasc-s1, ovsc-s2) were kept so old links work. The old "OVC/OVASC/OVSC
+Season N" labels are gone from the site; Bangla for changed lines emptied.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov

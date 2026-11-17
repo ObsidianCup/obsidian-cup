@@ -22,7 +22,8 @@ html.m-on .g-hero2 { position: relative; }
 html.m-on .g-hero2 h1 { animation: m-mask var(--m-reveal) var(--m-ease) both; }
 html.m-on .g-hero2 .g-lead { animation: m-rise var(--m-reveal) var(--m-ease) 120ms both; }
 html.m-on .g-hero2 .g-actions { animation: m-rise var(--m-reveal) var(--m-ease) 200ms both; }
-html.m-on .g-hero2 .g-heroshot { animation: m-mask var(--m-reveal) var(--m-ease) 240ms both; }
+html.m-on .g-herobg img { animation: m-settle 1600ms cubic-bezier(0.22, 1, 0.36, 1) both; }   /* the photo settles once, slowly */
+@keyframes m-settle { from { transform: scale(1.08); opacity: 0.4; } to { transform: none; opacity: 1; } }
 html.m-on .g-hero2 .g-next2 { animation: m-rise var(--m-reveal) var(--m-ease) 360ms both; }
 
 /* The ball: it flies in over the headline and lands as the "Next up" dot. */
@@ -65,7 +66,7 @@ html.m-on .g-season a:hover .g-season-go { transform: translateX(4px); }
 /* Belt and braces: never hide content from print or from reduced motion. */
 @media print, (prefers-reduced-motion: reduce) {
   html.m-on [data-m] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  html.m-on .g-hero2 *, html.m-on .g-pagehead *, html.m-on .g-pagehead::after { animation: none !important; }
+  html.m-on .g-hero2 *, html.m-on .g-herobg img, html.m-on .g-pagehead *, html.m-on .g-pagehead::after { animation: none !important; }
   html.m-on .g-pagehead { border-bottom-color: var(--line); }
   html.m-on .g-pagehead::after, .m-facets, .m-arc, .m-progress { display: none; }
   html.m-on .g-nextup.m-wait::before { opacity: 1; }

@@ -300,6 +300,7 @@ body.theme-glass {
 .g-event .g-champ, .g-event .g-champ + .g-champ { padding: var(--s4) var(--s6); border: 1px solid var(--line); border-left: 1px solid var(--line); border-radius: var(--radius); background: var(--glass); }
 .g-event .g-champ-name { font-size: 1.375rem; }
 .g-event .g-champ-cat { color: var(--soft); }
+.g-event-name { margin: 4px 0 8px; color: var(--soft); font-size: 1rem; }
 /* ---------- Photo slideshow (home) ----------
    A row of photos that can be swiped; every photo is shown whole at its own
    shape, as tall as the row allows and never wider than the screen. */
@@ -392,8 +393,20 @@ body.theme-glass {
 .g-hero2 h1 { font-weight: 600; font-size: clamp(2.25rem, 4.4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; margin-bottom: var(--s6); }
 .g-hero2 .g-lead { margin-bottom: var(--s8); }
 .g-actions { display: flex; gap: var(--s3); flex-wrap: wrap; }
-.g-heroside { display: grid; gap: var(--s6); }
-.g-heroshot { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); background: var(--facet); }
+/* The opening: one photo across the whole width, darkened toward the
+   bottom and the left so the headline reads on top of it. */
+.g-hero-full { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end; min-height: min(88svh, 880px); padding: var(--s24) 0 var(--s12); }
+.g-herobg { position: absolute; inset: 0; z-index: -2; }
+.g-herobg img { width: 100%; height: 100%; object-fit: cover; object-position: 0% 42%; display: block; }
+.g-hero-full::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(to top, var(--glass) 0%, rgba(11, 16, 18, 0.78) 20%, rgba(11, 16, 18, 0.22) 52%, rgba(11, 16, 18, 0.12) 80%, rgba(11, 16, 18, 0.45) 100%),
+    linear-gradient(90deg, rgba(11, 16, 18, 0.55) 0%, rgba(11, 16, 18, 0.1) 50%, rgba(11, 16, 18, 0) 70%); }
+.g-hero-full .g-wrap { width: 100%; }
+.g-hero-full .g-hero2-grid { align-items: end; }
+.g-hero-full h1 { font-size: clamp(2.5rem, 5.6vw, 4.5rem); line-height: 1.04; max-width: 15ch; text-shadow: 0 2px 24px rgba(11, 16, 18, 0.5); }
+.g-hero-full .g-lead { color: var(--bone); max-width: 46ch; }
+.g-hero-full .g-next2 { padding-left: var(--s6); border-left: 1px solid var(--line-strong); }
 .g-next2 { display: grid; gap: var(--s3); justify-items: start; }
 .g-next2 h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; line-height: 1.25; margin: 0; }
 .g-next2 .g-prose { color: var(--soft); max-width: 52ch; margin: 0; }
@@ -401,6 +414,10 @@ body.theme-glass {
 .g-nextup::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
 @media (max-width: 860px) {
   .g-hero2 { padding: var(--s12) 0 var(--s12); }
+  .g-hero-full { min-height: 92svh; padding: var(--s16) 0 var(--s8); }
+  .g-hero-full .g-next2 { padding-left: 0; border-left: 0; padding-top: var(--s6); border-top: 1px solid var(--line-strong); }
+  .g-herobg img { object-position: 0% 50%; }
+  .g-hero-full::before { background: linear-gradient(to top, var(--glass) 0%, rgba(11, 16, 18, 0.86) 38%, rgba(11, 16, 18, 0.6) 68%, rgba(11, 16, 18, 0.5) 100%); }
   .g-hero2-grid { grid-template-columns: 1fr; gap: var(--s8); }
 }
 
