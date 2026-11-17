@@ -265,6 +265,16 @@ Volleyball Cup (Jul). The tournament name sits under each heading. Anchor ids
 (ovasc-s1, ovsc-s2) were kept so old links work. The old "OVC/OVASC/OVSC
 Season N" labels are gone from the site; Bangla for changed lines emptied.
 
+Emails (17 Nov, evening): she added all GitHub secrets (SUPABASE_URL,
+SUPABASE_SECRET_KEY = a new `github-email-job` key, GMAIL_USER, GMAIL_APP_PASSWORD =
+a new "GitHub email job" app password; the older "Obsidian Cup Website" app
+password is in use elsewhere, probably Supabase sign-in emails, do not delete
+it), EMAIL_TEST_TO, and the variable EMAIL_MODE=test. 008 had never been run:
+she ran it. The job now runs (Claude can start it with `gh workflow run` and
+read its log). Found and fixed in **016 (written, waiting for her to run)**:
+deletion emails were thrown away as unknown templates; a code change folded
+into an expired welcome and sent nothing. After 016: test, then EMAIL_MODE=live.
+
 ## Open problems (13 Nov)
 
 1. **The "account will be deleted" email did not arrive.** Diagnosed 14 Nov

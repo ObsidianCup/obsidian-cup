@@ -85,6 +85,10 @@ ObsidianCup GitHub login; invite obsidiancup.official@gmail.com as an Owner too.
    available instead: Database → Extensions → search "pg_cron" → enable →
    run the file again. Unconfirmed sign-ups older than 7 days are then
    deleted every night at 03:17 UTC; confirmed accounts are never touched.
+6h. **Email fixes (016):** SQL Editor → New query → paste all of
+   `migrations/016_email_fixes.sql` → Run, then `notify pgrst, 'reload schema';`.
+   Lets the job send the three account-deletion emails, and makes a code
+   change always send its email.
 7. **Automatic emails (welcome email with player code, code changes, later
    reminders):** GitHub → the repository → Settings → Secrets and variables →
    Actions → New repository secret, four times:

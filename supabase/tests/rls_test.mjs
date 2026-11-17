@@ -574,5 +574,29 @@ ok(left.includes(fresh), 'an unconfirmed sign-up younger than 7 days is kept (ti
 await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/015_signup_name_and_cleanup.sql'), 'utf8'));   // re-run is safe
 ok((await db.query(`select count(*)::int n from public.profiles where id = $1`, [named])).rows[0].n === 1, '015 can be run again');
 
+console.log('\nEmail fixes (016)');
+await as(null);
+await db.exec('reset role');
+// a confirmed player whose welcome email expired without being sent
+const stale = (await db.query(`insert into auth.users (email, email_confirmed_at, raw_user_meta_data) values ('stale@example.com', now(), '{"full_name":"Sara Tahmid"}') returning id`)).rows[0].id;
+await db.query(`update public.email_queue set created_at = now() - interval '9 days', attempts = 5, last_error = 'skipped: older than 7 days' where to_email = 'stale@example.com'`);
+await db.query(`update public.profiles set player_code = 'OC-ST777' where id = $1`, [stale]);
+const st16 = (await db.query(`select template, data->>'player_code' c from public.email_queue where to_email = 'stale@example.com' and sent_at is null and attempts < 5`)).rows;
+ok(st16.length === 1 && st16[0].template === 'code_changed' && st16[0].c === 'OC-ST777', 'a code change after an expired welcome sends a fresh code email');
+await db.exec('set role service_role');
+await db.query(`update public.email_queue set sent_at = now() where sent_at is null`);   // clear the earlier tests' queue
+await db.query(`insert into public.email_queue (to_email, template, data) values
+  ('alice@example.com', 'deletion_requested', '{"delete_on":"1 December 2026"}'),
+  ('alice@example.com', 'deletion_cancelled', '{}'),
+  ('gone@example.com', 'account_deleted', '{}'),
+  ('stranger@nowhere.example', 'deletion_requested', '{}')`);
+const got16 = (await db.query(`select * from public.email_claim(50)`)).rows.map(r => r.to_email + ':' + r.template);
+ok(got16.includes('alice@example.com:deletion_requested') && got16.includes('alice@example.com:deletion_cancelled'), 'deletion emails to a confirmed account are sent');
+ok(got16.includes('gone@example.com:account_deleted'), 'the goodbye email is sent although the account is already gone');
+ok(!got16.includes('stranger@nowhere.example:deletion_requested'), 'a deletion email to an address that is not an account is still refused');
+await db.exec('reset role');
+await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations/016_email_fixes.sql'), 'utf8'));   // re-run is safe
+ok(true, '016 can be run again');
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
