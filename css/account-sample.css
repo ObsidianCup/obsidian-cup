@@ -26,17 +26,16 @@
   border-color: rgba(215, 233, 236, 0.32); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
 .acctx .acct-playercard::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image: url("../assets/photos/grain.png"); background-size: 96px 96px; opacity: 0.12; mix-blend-mode: overlay; }
-.acctx .acctx-art-set { position: absolute; z-index: -1; right: -24px; top: 8px; width: 58%; max-width: 260px; aspect-ratio: 3 / 4; opacity: 0.13; }
+/* the drawing follows the sport: volleyball = the jump, futsal = a kick (waiting for the owner's drawing), both = side by side */
+.acctx #playerCard .acctx-art { position: absolute; z-index: -1; right: -16px; top: 8px; width: 56%; max-width: 250px; aspect-ratio: 3 / 4; opacity: 0.14; }
+.acctx #playerCard .acctx-art-vb { --art: url("../assets/lineart/jump.svg"); }
+.acctx #playerCard .acctx-art-fb { display: none; }
+.acctx #playerCard .acctx-art-both { --art: url("../assets/lineart/jump.svg"); }
 .acctx .acct-pc-name { font-size: clamp(1.9rem, 4vw, 2.5rem); letter-spacing: -0.01em; line-height: 1.05; }
 .acctx .acct-pc-photo { width: 84px; height: 84px; box-shadow: 0 0 0 2px rgba(215, 233, 236, 0.35), 0 0 0 6px rgba(215, 233, 236, 0.06); }
 .acctx .acct-playercard { animation: acctx-forward 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 @keyframes acctx-forward { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
 
-/* ---------- "Before your first tournament": the celebration jump in the corner ---------- */
-.acctx #laterCard { position: relative; overflow: hidden; }
-.acctx .acctx-art-jump { position: absolute; right: 12px; bottom: 8px; width: 120px; height: 172px; opacity: 0.18; }
-.acctx #laterCard .acct-later, .acctx #laterCard .acct-muted { position: relative; padding-right: 96px; }
-@media (max-width: 520px) { .acctx .acctx-art-jump { width: 84px; height: 120px; } .acctx #laterCard .acct-later, .acctx #laterCard .acct-muted { padding-right: 56px; } }
 
 /* ---------- long form: links to each part ---------- */
 .acctx .acctx-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
@@ -53,9 +52,56 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-/* phones: the player card comes right after the welcome, before everything else */
-@media (max-width: 900px) {
-  .acctx [data-view="app"]:not([hidden]) { display: flex; flex-direction: column; }
-  .acctx [data-view="app"] > :nth-child(-n+2) { order: -2; }
-  .acctx #playerCard { order: -1; margin-bottom: 24px; }
+
+/* ---------- player code: in the display face, like jersey lettering ---------- */
+.acctx .acct-code-value, .acctx .acct-pc-code, .acctx .acct-codepick-prefix, .acctx #codeDigits {
+  font-family: var(--font-display); font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+.acctx .acct-code-value { font-size: clamp(1.75rem, 5vw, 2.25rem); letter-spacing: 0.02em; }
+.acctx .acct-pc-code { font-size: 0.9375rem; color: var(--soft); }
+
+/* ---------- sections ---------- */
+.acctx .acctx-tabs { display: flex; gap: 8px; margin: 24px 0 24px; padding: 4px; border: 1px solid var(--line); border-radius: 999px;
+  overflow-x: auto; scrollbar-width: none; background: rgba(11, 16, 18, 0.92); width: max-content; max-width: 100%; }
+.acctx .acctx-tabs::-webkit-scrollbar { display: none; }
+.acctx .acctx-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px;
+  color: var(--soft); text-decoration: none; font-size: 0.9375rem; white-space: nowrap; transition: background-color 150ms ease-out, color 150ms ease-out; }
+.acctx .acctx-tabs a:hover { color: var(--bone); }
+.acctx .acctx-tabs a[aria-current="page"] { background: var(--ice); color: #0b1012; }
+.acctx .acctx-tabs a:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+.acctx .acctx-soon { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor; opacity: 0.8; }
+.acctx .acctx-panel:focus { outline: none; }
+.acctx .acctx-panel > * + * { margin-top: 24px; }
+.acctx .acctx-panel-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 8px; }
+
+/* overview on wide screens: player card on the left, the rest beside it */
+.acctx [data-view="app"]:not([hidden]) { display: block; }
+.acctx #playerCard { order: 0; margin-bottom: 0; }
+@media (min-width: 1000px) {
+  .acctx #p-overview:not([hidden]) { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); column-gap: 32px; row-gap: 24px; align-items: start; }
+  .acctx #p-overview > *, .acctx #p-overview > * + * { grid-column: 2; margin-top: 0; }
+  .acctx #p-overview > #playerCard { grid-column: 1; grid-row: 1 / span 10; position: sticky; top: 160px; margin-top: 0; }
+  .acctx #p-overview > [hidden] { display: none; }
 }
+@media (max-width: 999px) { .acctx #p-overview > #playerCard { order: -1; position: static; grid-row: auto; } .acctx #p-overview:not([hidden]) { display: flex; flex-direction: column; } .acctx #p-overview > * + * { margin-top: 0; } .acctx #p-overview { gap: 24px; } }
+
+/* team: coming soon */
+.acctx .acctx-team { position: relative; overflow: hidden; padding-right: clamp(24px, 30%, 280px); }
+.acctx .acctx-team .acctx-art-set { position: absolute; right: 16px; bottom: 16px; width: min(26%, 220px); aspect-ratio: 3 / 4; opacity: 0.22; }
+.acctx .acctx-badge { display: inline-block; margin: 0 0 12px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--soft); font-size: 0.875rem; }
+.acctx .acctx-lead { font-size: 1.125rem; color: var(--bone); max-width: 46ch; }
+.acctx .acctx-steps { margin: 16px 0; padding-left: 1.25rem; display: grid; gap: 12px; max-width: 52ch; color: var(--soft); }
+.acctx .acctx-steps strong, .acctx .acctx-facts strong { color: var(--bone); font-weight: 500; }
+.acctx .acctx-facts { margin: 12px 0; padding-left: 1.25rem; display: grid; gap: 12px; color: var(--soft); max-width: 60ch; }
+.acctx .acctx-langs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+@media (max-width: 600px) { .acctx .acctx-team { padding-right: 24px; } .acctx .acctx-team .acctx-art-set { width: 72px; opacity: 0.16; top: 16px; right: 16px; bottom: auto; transform: none; } }
+@media (max-width: 960px) { .acctx .acctx-tabs { border-radius: 16px; width: auto; } }
+
+/* buttons that are links keep the button look */
+.acctx a.acct-btn { display: inline-flex; align-items: center; justify-content: center; color: #0b1012; text-decoration: none; margin-top: 16px; }
+.acctx .acctx-team .acctx-art-set { top: 50%; bottom: auto; transform: translateY(-50%); width: min(28%, 240px); }
+/* phones: all five section links visible, in two or three rows */
+@media (max-width: 600px) {
+  .acctx .acctx-tabs { flex-wrap: wrap; overflow: visible; position: static; padding: 6px; }
+  .acctx .acctx-tabs a { padding: 0 14px; }
+}
+@media (max-width: 600px) { .acctx .acctx-team .acctx-art-set { width: 72px; top: 16px; right: 16px; transform: none; } }
