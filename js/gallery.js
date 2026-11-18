@@ -78,33 +78,74 @@
     track.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', queue);
 
-    // Move to a card with our own short, eased glide (the browser's own smooth
-    // scroll is slow and uneven next to scroll snapping). Swipes stay native.
-    var glide = 0;
+    // Move to a card with our own short, eased glide. With motion on, the script
+    // drives the row: each swipe moves exactly one card and lands it in the middle.
+    var glide = 0, target = 0;
     function ease(t) { return 1 - Math.pow(1 - t, 3); }   // fast start, soft landing
-    function go(i) {
-      var n = (i + slides.length) % slides.length;
+    function go(i, wrap) {
+      var n = wrap === false ? Math.max(0, Math.min(slides.length - 1, i)) : (i + slides.length) % slides.length;
+      target = n;
       var to = slideCentre(slides[n]) - track.clientWidth / 2;
       var from = track.scrollLeft, dist = to - from;
       if (calm || Math.abs(dist) < 1) { track.scrollLeft = to; return; }
-      var steps = Math.abs(dist) / (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : 1);
+      var steps = Math.abs(dist) / step();
       var time = Math.min(900, 420 + Math.max(0, steps - 1) * 40);   // one card: 0.42 s; back to the start: under 0.9 s
       var start = 0, id = ++glide;
-      track.style.scrollSnapType = 'none';
-      function step(now) {
+      function frame(now) {
         if (id !== glide) return;
         if (!start) start = now;
         var t = Math.min(1, (now - start) / time);
         track.scrollLeft = from + dist * ease(t);
-        if (t < 1) requestAnimationFrame(step);
-        else track.style.scrollSnapType = '';
+        if (t < 1) requestAnimationFrame(frame);
       }
-      requestAnimationFrame(step);
+      requestAnimationFrame(frame);
     }
-    // a touch or wheel stops a glide at once and hands control back
-    ['pointerdown', 'wheel', 'touchstart'].forEach(function (name) {
-      track.addEventListener(name, function () { glide++; track.style.scrollSnapType = ''; }, { passive: true });
-    });
+    function step() { return (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : slides[0].offsetWidth) || 1; }
+    function moving() { return Math.abs(track.scrollLeft - (slideCentre(slides[target]) - track.clientWidth / 2)) > 1; }
+
+    if (!calm) {
+      // Phones: the row follows the finger, then one swipe = one card.
+      var sx = 0, sy = 0, sLeft = 0, sTime = 0, from0 = 0, axis = '';
+      track.addEventListener('touchstart', function (e) {
+        var t = e.touches[0];
+        glide++;                                  // stop any glide where it is
+        from0 = moving() ? target : nearest();    // the card this swipe starts from
+        sx = t.clientX; sy = t.clientY; sLeft = track.scrollLeft; sTime = Date.now(); axis = '';
+      }, { passive: true });
+      track.addEventListener('touchmove', function (e) {
+        var t = e.touches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+        if (!axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (axis !== 'x') return;                 // up and down still scrolls the page
+        e.preventDefault();
+        track.scrollLeft = sLeft - dx;
+      }, { passive: false });
+      track.addEventListener('touchend', function (e) {
+        if (axis !== 'x') return;
+        var dx = (e.changedTouches[0] ? e.changedTouches[0].clientX : sx) - sx;
+        var quick = Math.abs(dx) / Math.max(1, Date.now() - sTime) > 0.3;   // a flick counts even if short
+        var dir = (Math.abs(dx) > 40 || (quick && Math.abs(dx) > 12)) ? (dx < 0 ? 1 : -1) : 0;
+        go(from0 + dir, false);
+      });
+      track.addEventListener('touchcancel', function () { if (axis === 'x') go(from0, false); });
+
+      // Laptops: one sideways trackpad swipe or shift + wheel = one card.
+      var wheelLock = 0, wheelQuiet = 0;
+      track.addEventListener('wheel', function (e) {
+        var dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+        if (!dx) return;                          // plain up and down scrolls the page
+        e.preventDefault();
+        var now = Date.now();
+        var fresh = now - wheelQuiet > 200;       // a new gesture after a short pause
+        wheelQuiet = now;
+        if (!fresh && now < wheelLock) return;    // the rest of the same swipe
+        if (Math.abs(dx) < 4) return;
+        wheelLock = now + 700;
+        go((moving() ? target : nearest()) + (dx > 0 ? 1 : -1), false);
+      }, { passive: false });
+
+      // keep the front card centred if the window changes size
+      window.addEventListener('resize', function () { glide++; track.scrollLeft = slideCentre(slides[target]) - track.clientWidth / 2; });
+    }
 
     function restartLine() {
       if (!line) return;
@@ -122,14 +163,14 @@
     document.querySelectorAll('[data-gallery]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         rest();
-        go(index + (btn.getAttribute('data-gallery') === 'next' ? 1 : -1));
+        go((moving() ? target : index) + (btn.getAttribute('data-gallery') === 'next' ? 1 : -1));
       });
     });
     track.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
       e.preventDefault();
       rest();
-      go(index + (e.key === 'ArrowRight' ? 1 : -1));
+      go((moving() ? target : index) + (e.key === 'ArrowRight' ? 1 : -1));
     });
     ['pointerdown', 'wheel', 'touchstart', 'touchmove'].forEach(function (name) {
       track.addEventListener(name, rest, { passive: true });
@@ -150,6 +191,7 @@
     if (line) line.style.setProperty('--gallery-every', EVERY + 'ms');
     // start with the first photo in the middle
     track.scrollLeft = slideCentre(slides[0]) - track.clientWidth / 2;
+    target = 0;
     paint();
     setInterval(tick, EVERY);
   });

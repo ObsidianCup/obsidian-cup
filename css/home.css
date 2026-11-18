@@ -87,6 +87,7 @@ html.m-on .hd .g-hero-full::after { animation: hx-grain 900ms steps(3) infinite;
 .sc .g-gl-photo[src*="champion.webp"], .sc .g-gl-photo[src*="huddle"], .sc .g-gl-photo[src*="champions-team"] { object-position: 50% 30%; }
 
 /* 3D only when motion is allowed: the script sets these per card on every frame */
+.sc .g3-on .g-gallery-track { scroll-snap-type: none; touch-action: pan-y; }   /* js/gallery.js moves one card per swipe */
 .sc .g3-on .g-gallery-track > li { will-change: transform, opacity; }
 .sc .g3-on .g-gl-photo { width: 116%; max-width: none; left: -8%; right: auto; will-change: transform; }
 
