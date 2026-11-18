@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Obsidian Cup | Player Account</title>
+  <meta name="description" content="Your Obsidian Cup player account." />
+  <link rel="icon" href="../assets/favicon.ico?v=2" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2" />
+  <link rel="stylesheet" href="../css/glass.css" />
+  <link rel="stylesheet" href="../css/account.css" />
+  <link rel="stylesheet" href="../css/account-sample.css" />
+  <meta name="robots" content="noindex" />
+</head>
+<body class="theme-glass acctx">
+  <main id="main" class="acct-wrap">
+
+    <!-- Loading -->
+    <section data-view="loading" aria-busy="true">
+      <p class="acct-visually-hidden" data-t="loading">Loading…</p>
+      <div class="acct-skel" aria-hidden="true">
+        <span class="s-label"></span><span class="s-title"></span>
+        <span class="s-card"></span><span class="s-card tall"></span>
+      </div>
+    </section>
+
+    <!-- Not configured -->
+    <section data-view="off" hidden>
+      <p class="acct-msg acct-msg-info" data-t="notConfigured">Player accounts are not switched on yet.</p>
+    </section>
+
+    <!-- Log in / create account -->
+    <section data-view="auth" hidden>
+      <p class="acct-label" data-t="authLabel">Player account</p>
+      <span class="acctx-art acctx-art-dig" aria-hidden="true"></span>
+      <h1 class="acct-title" id="authTitle" data-t="authTitleLogin">Log in</h1>
+      <p class="acct-intro" data-t="authIntro">One account for every Obsidian Cup season.</p>
+
+      <div class="acct-card">
+        <div class="acct-tabs" role="tablist">
+          <button class="acct-tab" role="tab" aria-selected="true" data-tab="login" data-t="tabLogin">Log in</button>
+          <button class="acct-tab" role="tab" aria-selected="false" data-tab="signup" data-t="tabSignup">Create account</button>
+        </div>
+
+        <div id="authMsg"></div>
+
+        <button class="acct-btn acct-btn-ghost" id="googleBtn" type="button" hidden>
+          <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+          <span data-t="btnGoogle">Continue with Google</span>
+        </button>
+        <div class="acct-or" id="googleOr" hidden><span data-t="or">or</span></div>
+
+        <form id="authForm" novalidate>
+          <div class="acct-field" id="nameField" hidden>
+            <label for="authName" data-t="signupName">Full name, as on your ID card</label>
+            <input class="acct-input" id="authName" type="text" autocomplete="name" autocapitalize="words" maxlength="120" />
+          </div>
+          <div class="acct-field">
+            <label for="authEmail" id="authEmailLabel" data-t="emailOrCode">Email or player code</label>
+            <input class="acct-input" id="authEmail" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required />
+          </div>
+          <div class="acct-field">
+            <label for="authPassword" data-t="password">Password</label>
+            <div class="acct-pass">
+              <input class="acct-input" id="authPassword" type="password" autocomplete="current-password" minlength="8" required />
+              <button class="acct-eye" type="button" data-toggle="authPassword" aria-pressed="false" data-t="show">Show</button>
+            </div>
+            <span class="acct-hint" id="passwordHint" data-t="passwordHint" hidden>At least 8 characters.</span>
+          </div>
+          <div class="acct-field" id="password2Field" hidden>
+            <label for="authPassword2" data-t="passwordAgain">Type the password again</label>
+            <div class="acct-pass">
+              <input class="acct-input" id="authPassword2" type="password" autocomplete="new-password" minlength="8" />
+              <button class="acct-eye" type="button" data-toggle="authPassword2" aria-pressed="false" data-t="show">Show</button>
+            </div>
+          </div>
+          <div class="acct-captcha" id="captchaAuth"></div>
+          <button class="acct-btn" type="submit" id="authSubmit" data-t="btnLogin">Log in</button>
+        </form>
+        <p style="margin-top:0.75rem;"><button class="acct-link" type="button" id="forgotBtn" data-t="forgot">Forgot your password?</button></p>
+      </div>
+    </section>
+
+    <!-- Forgot password -->
+    <section data-view="forgot" hidden>
+      <p class="acct-label" data-t="authLabel">Player account</p>
+      <h1 class="acct-title" data-t="forgot">Forgot your password?</h1>
+      <div class="acct-card">
+        <p class="acct-muted" style="margin-bottom:1.25rem;" data-t="resetIntro"></p>
+        <div id="forgotMsg"></div>
+        <form id="forgotForm" novalidate>
+          <div class="acct-field">
+            <label for="forgotEmail" data-t="email">Email</label>
+            <input class="acct-input" id="forgotEmail" type="email" autocomplete="email" inputmode="email" required />
+          </div>
+          <div class="acct-captcha" id="captchaForgot"></div>
+          <button class="acct-btn" type="submit" data-t="btnSendReset">Send reset link</button>
+        </form>
+        <p style="margin-top:0.75rem;"><button class="acct-link" type="button" data-go="auth" data-t="backToLogin">Back to log in</button></p>
+      </div>
+    </section>
+
+    <!-- Set new password (after reset link) -->
+    <section data-view="newpass" hidden>
+      <p class="acct-label" data-t="authLabel">Player account</p>
+      <h1 class="acct-title" data-t="setNewTitle">Set a new password</h1>
+      <div class="acct-card">
+        <div id="newpassMsg"></div>
+        <form id="newpassForm" novalidate>
+          <div class="acct-field">
+            <label for="newPassword" data-t="newPassword">New password</label>
+            <div class="acct-pass">
+              <input class="acct-input" id="newPassword" type="password" autocomplete="new-password" minlength="8" required />
+              <button class="acct-eye" type="button" data-toggle="newPassword" aria-pressed="false" data-t="show">Show</button>
+            </div>
+            <span class="acct-hint" data-t="passwordHint">At least 8 characters.</span>
+          </div>
+          <div class="acct-field">
+            <label for="newPassword2" data-t="passwordAgain">Type the password again</label>
+            <div class="acct-pass">
+              <input class="acct-input" id="newPassword2" type="password" autocomplete="new-password" minlength="8" required />
+              <button class="acct-eye" type="button" data-toggle="newPassword2" aria-pressed="false" data-t="show">Show</button>
+            </div>
+          </div>
+          <button class="acct-btn" type="submit" data-t="btnSetPassword">Save new password</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Check email -->
+    <section data-view="checkemail" hidden>
+      <p class="acct-label" data-t="authLabel">Player account</p>
+      <h1 class="acct-title" data-t="checkEmailTitle">Check your email</h1>
+      <div class="acct-card">
+        <p class="acct-muted" id="checkEmailBody"></p>
+        <p style="margin-top:1rem;"><button class="acct-link" type="button" data-go="auth" data-t="backToLogin">Back to log in</button></p>
+      </div>
+    </section>
+
+    <!-- Consent -->
+    <section data-view="consent" hidden>
+      <p class="acct-label" data-t="consentLabel">Before you start</p>
+      <h1 class="acct-title" data-t="consentTitle">Your agreement</h1>
+      <p class="acct-intro" data-t="consentIntro"></p>
+      <div class="acct-card">
+        <div id="consentMsg"></div>
+        <label class="acct-check"><input type="checkbox" id="cTerms" /><span id="cTermsText"></span></label>
+        <label class="acct-check"><input type="checkbox" id="cPrivacy" /><span id="cPrivacyText"></span></label>
+        <label class="acct-check"><input type="checkbox" id="cDob" /><span data-t="agreeDob"></span></label>
+        <button class="acct-btn" type="button" id="consentBtn" style="margin-top:1rem;" data-t="btnAgree">Agree and continue</button>
+      </div>
+      <p><button class="acct-link" type="button" data-action="signout" data-t="signOut">Log out</button></p>
+    </section>
+
+    <!-- Choose sports (before the account opens) -->
+    <section data-view="sports" hidden>
+      <p class="acct-label" data-t="sportsPickLabel">Before you start</p>
+      <h1 class="acct-title" data-t="sportsPickTitle">Which sports do you play?</h1>
+      <p class="acct-muted" data-t="sportsPickIntro"></p>
+      <div class="acct-card">
+        <div class="acct-sportpick" role="group" aria-labelledby="sportsPickHead">
+          <span id="sportsPickHead" class="acct-visually-hidden" data-t="sportsPickTitle"></span>
+          <label class="acct-sportopt"><input type="checkbox" value="volleyball" data-pick-sport /><span class="acct-sportopt-name" data-t="sport_volleyball">Volleyball</span></label>
+          <label class="acct-sportopt"><input type="checkbox" value="football" data-pick-sport /><span class="acct-sportopt-name" data-t="sport_football">Futsal</span></label>
+        </div>
+        <div id="sportsMsg"></div>
+        <button class="acct-btn" type="button" id="sportsBtn" data-t="sportsContinue">Continue</button>
+      </div>
+      <p><button class="acct-link" type="button" data-action="signout" data-t="signOut">Log out</button></p>
+    </section>
+
+    <!-- Signed-in home + profile -->
+    <section data-view="app" hidden>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
+        <div>
+          <p class="acct-label" data-t="authLabel">Player account</p>
+          <h1 class="acct-title" id="welcomeTitle"></h1>
+        </div>
+        <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" data-action="signout" data-t="signOut">Log out</button>
+      </div>
+      <div id="appMsg"></div>
+
+      <div class="acct-card acct-unfinished" id="unfinishedCard" hidden>
+        <h2 data-t="unfinishedTitle">Your account is not finished yet</h2>
+        <p id="unfinishedBody"></p>
+        <button class="acct-btn acct-btn-small" type="button" id="unfinishedGo" data-t="unfinishedGo">Finish my profile</button>
+      </div>
+
+      <div class="acct-card">
+        <p class="acct-label" style="margin-bottom:0.6rem;" data-t="codeLabel">Your player code</p>
+        <div class="acct-code">
+          <span class="acct-code-value" id="codeValue">—</span>
+          <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="copyCode" hidden data-t="copy">Copy</button>
+        </div>
+        <p class="acct-muted" id="codePending" data-t="codePending" style="margin-top:0.5rem;"></p>
+        <p style="margin-top:0.75rem;" id="codeChangeWrap" hidden><button class="acct-link" type="button" id="codeChangeBtn" data-t="codeChange">Choose a different code</button></p>
+        <div id="codeDone"></div>
+        <div id="codePicker" hidden>
+          <p class="acct-muted" id="codePickerIntro" style="margin:1rem 0 0.75rem;"></p>
+          <div class="acct-chips" id="codeSuggestions"></div>
+          <div class="acct-field" style="margin-top:1rem;">
+            <label for="codeDigits" data-t="codeOwn">Or type your own numbers</label>
+            <div class="acct-codepick">
+              <span class="acct-codepick-prefix" id="codePrefix">OC-</span>
+              <input class="acct-input" id="codeDigits" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="777" />
+            </div>
+            <span class="acct-hint" id="codeStatus" aria-live="polite"></span>
+          </div>
+          <div id="codeMsg"></div>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <button class="acct-btn acct-btn-small" type="button" id="codeSave" data-t="codeSave">Use this code</button>
+            <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="codeCancel" data-t="cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="acct-card" id="checklistCard">
+        <h2 data-t="checklistTitle">Your profile</h2>
+        <div class="acct-progress"><div id="progressBar" style="width:0%"></div></div>
+        <p class="acct-muted" id="progressText"></p>
+        <ul class="acct-list" id="checklist"></ul>
+        <div class="acct-alldone" id="checklistDone" hidden>
+          <p data-t="checklistAllDone">All done. Your profile is ready.</p>
+          <button class="acct-btn acct-btn-small" type="button" id="checklistOk" data-t="checklistOk">OK</button>
+        </div>
+      </div>
+
+      <div class="acct-card acct-playercard" id="playerCard">
+        <span class="acctx-art acctx-art-set" aria-hidden="true"></span>
+        <div class="acct-live" id="liveBox" aria-live="off" hidden>
+          <div class="acct-live-mark" id="liveMark" aria-hidden="true">
+            <span class="acct-live-ring"></span>
+            <img src="../assets/logo-oc.svg" alt="" width="56" height="40" />
+          </div>
+          <div class="acct-live-text">
+            <p class="acct-live-title" data-t="cardLive">Live card</p>
+            <p class="acct-live-clock"><time id="liveClock"></time></p>
+            <p class="acct-live-date" id="liveDate"></p>
+          </div>
+        </div>
+
+        <div class="acct-pc-id">
+          <div class="acct-pc-photo" id="pcPhoto"><span id="pcInitials" aria-hidden="true"></span><img id="pcImg" alt="" hidden /></div>
+          <div class="acct-pc-who">
+            <p class="acct-pc-name" id="pcName"></p>
+            <p class="acct-pc-code"><span id="pcCode"></span><span class="acct-pc-jersey" id="pcJersey" hidden></span></p>
+          </div>
+        </div>
+
+        <dl class="acct-pc-facts">
+          <div><dt data-t="cardDob">Date of birth</dt><dd id="pcDob">—</dd></div>
+          <div><dt data-t="colStatus">ID check</dt><dd><span class="acct-badge" id="pcId"></span></dd></div>
+        </dl>
+
+        <div class="acct-pc-now">
+          <p class="acct-pc-sub" data-t="cardNow">Current tournament</p>
+          <div id="pcTeams"></div>
+        </div>
+
+        <dl class="acct-pc-stats" id="pcStats"></dl>
+        <div id="pcSports"></div>
+        <p class="acct-muted" id="pcEmpty" data-t="cardEmpty"></p>
+        <p class="acct-hint" id="liveHint" data-t="cardLiveHint" hidden></p>
+
+        <div class="acct-pc-photoctl" id="photoCtl">
+          <label class="acct-btn acct-btn-ghost acct-btn-small" for="photoInput" id="photoAddLabel" data-t="photoAdd">Add a photo</label>
+          <input type="file" id="photoInput" accept="image/*" class="acct-visually-hidden" />
+          <button class="acct-link" type="button" id="photoRemove" data-t="photoRemove" hidden>Remove photo</button>
+        </div>
+        <p class="acct-hint" data-t="photoHint"></p>
+        <div id="photoMsg"></div>
+      </div>
+
+      <div class="acct-card" id="laterCard">
+        <span class="acctx-art acctx-art-jump" aria-hidden="true"></span>
+        <h2 data-t="laterTitle">Before your first tournament</h2>
+        <p class="acct-muted" data-t="laterIntro"></p>
+        <ul class="acct-later" id="laterList"></ul>
+      </div>
+
+      <div id="ageNote"></div>
+
+      <form class="acct-card" id="profileForm" novalidate autocomplete="on">
+        <h2 data-t="profileTitle">Your profile</h2>
+        <p class="acct-muted" data-t="autosaveNote">Everything saves automatically as you type.</p>
+        <nav class="acctx-jump" aria-label="Sections"><a href="#x-basics" data-t="secBasics"></a><a href="#x-contact" data-t="secContact"></a><a href="#x-sports" data-t="secSports"></a><a href="#x-emergency" data-t="secEmergency"></a><a href="#x-prefs" data-t="secPrefs"></a><a href="#deleteCard" data-t="deleteTitle"></a></nav>
+        <div id="lockedNote"></div>
+
+        <h3 id="x-basics" data-t="secBasics">Basic details</h3>
+        <div class="acct-field">
+          <label for="f_legal_name" data-t="legalName">Full name (as on your ID)</label>
+          <input class="acct-input" id="f_legal_name" name="legal_name" autocomplete="name" maxlength="120" />
+          <span class="acct-err" data-err="legal_name"></span>
+        </div>
+        <div class="acct-field">
+          <label for="f_display_name" data-t="displayName">Name to show publicly</label>
+          <input class="acct-input" id="f_display_name" name="display_name" autocomplete="nickname" maxlength="60" />
+          <span class="acct-hint" data-t="displayNameHint"></span>
+          <span class="acct-err" data-err="display_name"></span>
+        </div>
+        <div class="acct-row">
+          <div class="acct-field">
+            <label for="f_date_of_birth" data-t="dob">Date of birth</label>
+            <input class="acct-input" id="f_date_of_birth" name="date_of_birth" type="date" autocomplete="bday" min="1940-01-01" />
+            <span class="acct-hint" data-t="dobHint">Must match your ID exactly.</span>
+            <span class="acct-hint" id="dobChanges"></span>
+            <span class="acct-err" data-err="date_of_birth"></span>
+          </div>
+          <div class="acct-field">
+            <label for="f_gender" data-t="gender">Gender category</label>
+            <select class="acct-select" id="f_gender" name="gender">
+              <option value="" data-t="choose">Choose…</option>
+              <option value="male" data-t="genderMale">Male</option>
+              <option value="female" data-t="genderFemale">Female</option>
+              <option value="other" data-t="genderOther">Other</option>
+            </select>
+            <span class="acct-err" data-err="gender"></span>
+          </div>
+        </div>
+
+        <div id="extended">
+          <h3 id="x-contact" data-t="secContact">Contact</h3>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_phone" data-t="phone">Phone number</label>
+              <div class="acct-phone">
+                <select class="acct-select" id="f_phone_cc" aria-label="Country code"></select>
+                <input class="acct-input" id="f_phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="24" />
+              </div>
+              <span class="acct-hint" data-t="phoneHint"></span>
+              <span class="acct-err" data-err="phone"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_school_club" data-t="schoolClub">School, college or club</label>
+              <input class="acct-input" id="f_school_club" name="school_club" maxlength="120" />
+              <span class="acct-err" data-err="school_club"></span>
+            </div>
+          </div>
+          <div class="acct-field">
+            <label for="f_instagram" data-t="instagram">Instagram handle (optional)</label>
+            <input class="acct-input" id="f_instagram" name="instagram" maxlength="31" autocapitalize="off" spellcheck="false" />
+            <span class="acct-err" data-err="instagram"></span>
+          </div>
+
+          <h3 data-t="secMySports">Sports you play</h3>
+          <div class="acct-mysports" id="mySports"></div>
+          <span class="acct-err" data-err="sports"></span>
+
+          <h3 id="x-sports" data-t="secSports">Sports profile</h3>
+          <p class="acct-hint" style="margin-bottom:1rem;" data-t="sportsIntro"></p>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_height_cm" data-t="heightCm">Height (cm)</label>
+              <input class="acct-input" id="f_height_cm" name="height_cm" type="number" inputmode="numeric" min="100" max="250" step="1" />
+              <span class="acct-err" data-err="height_cm"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_weight_kg" data-t="weightKg">Weight (kg, optional)</label>
+              <input class="acct-input" id="f_weight_kg" name="weight_kg" type="number" inputmode="numeric" min="25" max="200" step="1" />
+              <span class="acct-hint" data-t="weightHint"></span>
+              <span class="acct-err" data-err="weight_kg"></span>
+            </div>
+          </div>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_playing_level" data-t="level">Highest level you have played</label>
+              <div class="acct-level-pick" id="levelPick">
+                <select class="acct-select" id="f_playing_level" name="playing_level">
+                  <option value="" data-t="choose">Choose…</option>
+                  <option value="new" data-t="levelNew">New to the sport</option>
+                  <option value="amateur" data-t="levelAmateur">Amateur</option>
+                  <option value="club" data-t="levelClub">Club</option>
+                  <option value="league" data-t="levelLeague">League</option>
+                  <option value="national" data-t="levelNational">National</option>
+                </select>
+                <button class="acct-btn acct-btn-small" type="button" id="levelSave" data-t="levelSave">Save level</button>
+              </div>
+              <p class="acct-readonly" id="levelValue" hidden>—</p>
+              <span class="acct-hint" id="levelHint"></span>
+              <span class="acct-err" data-err="playing_level"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_playing_since" data-t="since">Year you started playing</label>
+              <input class="acct-input" id="f_playing_since" name="playing_since" type="number" inputmode="numeric" min="1980" step="1" />
+              <span class="acct-err" data-err="playing_since"></span>
+            </div>
+          </div>
+
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_preferred_jersey" data-t="jersey">Preferred jersey number</label>
+              <input class="acct-input" id="f_preferred_jersey" name="preferred_jersey" type="number" inputmode="numeric" min="0" max="99" step="1" />
+              <span class="acct-hint" data-t="jerseyHint"></span>
+              <span class="acct-err" data-err="preferred_jersey"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_shirt_size" data-t="shirt">Shirt size</label>
+              <select class="acct-select" id="f_shirt_size" name="shirt_size">
+                <option value="" data-t="choose">Choose…</option>
+              </select>
+              <span class="acct-hint" data-t="shirtHint"></span>
+            </div>
+          </div>
+          <div class="acct-field">
+            <label for="f_bio" data-t="bio">About you (short)</label>
+            <textarea class="acct-input" id="f_bio" name="bio" rows="3" maxlength="280"></textarea>
+            <span class="acct-hint" data-t="bioHint"></span>
+            <span class="acct-err" data-err="bio"></span>
+          </div>
+
+          <section class="acct-sportgroup" data-sport-block="volleyball" aria-labelledby="sgVolleyball">
+            <h3 id="sgVolleyball" data-t="sport_volleyball">Volleyball</h3>
+            <p class="acct-label-like" data-t="secPositions">Positions you play</p>
+            <p class="acct-hint" data-t="positionsHint"></p>
+            <div class="acct-chips" id="positions_volleyball"></div>
+            <div class="acct-row">
+              <div class="acct-field">
+              <label for="f_dominant_hand" data-t="hand">Playing hand</label>
+              <select class="acct-select" id="f_dominant_hand" name="dominant_hand">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="right" data-t="sideRight">Right</option>
+                <option value="left" data-t="sideLeft">Left</option>
+                <option value="both" data-t="sideBoth">Both</option>
+              </select>
+              </div>
+              <div class="acct-field"></div>
+            </div>
+            <div class="acct-row">
+              <div class="acct-field">
+                <label for="f_standing_reach_cm" data-t="reachCm">Standing reach (cm)</label>
+                <input class="acct-input" id="f_standing_reach_cm" name="standing_reach_cm" type="number" inputmode="numeric" min="120" max="350" step="1" />
+                <span class="acct-hint" data-t="reachHint"></span>
+                <span class="acct-err" data-err="standing_reach_cm"></span>
+              </div>
+              <div class="acct-field">
+                <label for="f_vertical_jump_cm" data-t="jumpCm">Vertical jump (cm)</label>
+                <input class="acct-input" id="f_vertical_jump_cm" name="vertical_jump_cm" type="number" inputmode="numeric" min="5" max="150" step="1" />
+                <span class="acct-hint" data-t="jumpHint"></span>
+                <span class="acct-err" data-err="vertical_jump_cm"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="acct-sportgroup" data-sport-block="football" aria-labelledby="sgFootball">
+            <h3 id="sgFootball" data-t="sport_football">Futsal</h3>
+            <p class="acct-label-like" data-t="secPositions">Positions you play</p>
+            <p class="acct-hint" data-t="positionsHint"></p>
+            <div class="acct-chips" id="positions_football"></div>
+            <div class="acct-row">
+              <div class="acct-field">
+              <label for="f_dominant_foot" data-t="foot">Stronger foot</label>
+              <select class="acct-select" id="f_dominant_foot" name="dominant_foot">
+                <option value="" data-t="choose">Choose…</option>
+                <option value="right" data-t="sideRight">Right</option>
+                <option value="left" data-t="sideLeft">Left</option>
+                <option value="both" data-t="sideBoth">Both</option>
+              </select>
+              </div>
+              <div class="acct-field"></div>
+            </div>
+          </section>
+          <label class="acct-toggle" style="margin-bottom:1.5rem;">
+            <input type="checkbox" id="f_show_sport_stats" name="show_sport_stats" />
+            <span data-t="showStats"></span>
+          </label>
+
+          <h3 id="x-emergency" data-t="secEmergency">Emergency contact</h3>
+          <div class="acct-row">
+            <div class="acct-field">
+              <label for="f_emergency_name" data-t="emergencyName">Contact name</label>
+              <input class="acct-input" id="f_emergency_name" name="emergency_name" maxlength="120" />
+              <span class="acct-err" data-err="emergency_name"></span>
+            </div>
+            <div class="acct-field">
+              <label for="f_emergency_relationship" data-t="emergencyRel">Relationship to you</label>
+              <input class="acct-input" id="f_emergency_relationship" name="emergency_relationship" maxlength="60" />
+              <span class="acct-err" data-err="emergency_relationship"></span>
+            </div>
+          </div>
+          <div class="acct-field">
+            <label for="f_emergency_phone" data-t="emergencyPhone">Contact phone</label>
+            <div class="acct-phone">
+              <select class="acct-select" id="f_emergency_phone_cc" aria-label="Country code"></select>
+              <input class="acct-input" id="f_emergency_phone" name="emergency_phone" type="tel" inputmode="tel" maxlength="24" />
+            </div>
+            <span class="acct-err" data-err="emergency_phone"></span>
+          </div>
+
+          <h3 id="x-prefs" data-t="secPrefs">Preferences</h3>
+          <div class="acct-field">
+            <label for="f_language" data-t="language">Language for emails</label>
+            <select class="acct-select" id="f_language" name="language">
+              <option value="en">English</option>
+              <option value="bn">বাংলা</option>
+            </select>
+          </div>
+          <label class="acct-toggle">
+            <input type="checkbox" id="f_media_feature" name="media_feature" />
+            <span><span data-t="mediaFeature"></span> <a href="legal.html?doc=media" target="_blank" rel="noopener" data-t="mediaFeatureLink">Media Consent</a></span>
+          </label>
+        </div>
+      </form>
+
+      <div class="acct-card acct-delete" id="deleteCard">
+        <h2 data-t="deleteTitle">Delete account</h2>
+        <p class="acct-muted" data-t="deleteIntro"></p>
+        <button class="acct-btn acct-btn-danger acct-btn-small" type="button" id="deleteOpen" data-t="deleteOpen" aria-haspopup="dialog">Delete my account</button>
+      </div>
+
+      <dialog class="acct-dialog" id="deleteDialog" aria-labelledby="deleteDlgTitle" aria-describedby="deleteDlgBody">
+        <form id="deleteForm" method="dialog" novalidate>
+          <h2 id="deleteDlgTitle"></h2>
+          <div id="deleteDlgBody">
+            <p id="deleteDlgWhen"></p>
+            <ul class="acct-delete-list">
+              <li data-t="deleteGone"></li>
+              <li data-t="deleteKept"></li>
+              <li data-t="deleteTeams"></li>
+            </ul>
+          </div>
+          <div class="acct-field">
+            <label for="deleteWord" data-t="deleteConfirmLabel">Type DELETE to confirm</label>
+            <input class="acct-input" id="deleteWord" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="10" aria-describedby="deleteMsg" />
+          </div>
+          <div id="deleteMsg" aria-live="polite"></div>
+          <div class="acct-delete-actions">
+            <button class="acct-btn acct-btn-ghost acct-btn-small" type="button" id="deleteCancel" data-t="cancel" autofocus>Cancel</button>
+            <button class="acct-btn acct-btn-destroy acct-btn-small" type="submit" id="deleteConfirm" data-t="deleteConfirmBtn">Delete account</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
+  </main>
+
+  <div class="acct-status" id="saveStatus" role="status" aria-live="polite" hidden></div>
+
+  <script src="../js/vendor/supabase-js-2.118.0.js"></script>
+  <script src="../js/vendor/libphonenumber-min-1.13.15.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/lang.js"></script>
+  <script src="../js/lang-site.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/oc-accounts.js"></script>
+  <script src="../js/account.js"></script>
+</body>
+</html>
