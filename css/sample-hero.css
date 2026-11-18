@@ -1,0 +1,81 @@
+/* SAMPLE ONLY (not live): two ways to open the home page with the spike photo.
+   The photo file is small (1280 wide), so both hide that instead of stretching it:
+   a darker film grade and fine film grain, and never more than a little bigger
+   than the file itself.
+   .hd = Cinema: the photo fills the first screen, edges fade to black on wide
+         screens, and while you scroll the photo moves slower than the words.
+   .he = Card:   a huge headline on the left, the photo in a tall straight card on
+         the right (the same card as Glimpse of us) that comes forward as the page
+         opens; the photo drifts a little inside it while you scroll. */
+
+/* ---------- shared: film grain on the photo ---------- */
+.hd .g-hero-full::after, .he .g-herobg::after {
+  content: ""; position: absolute; inset: -50%; pointer-events: none;
+  background-image: url("../assets/photos/grain.png"); background-size: 96px 96px;
+  opacity: 0.22; mix-blend-mode: overlay; animation: hx-grain 900ms steps(3) infinite; }
+@keyframes hx-grain {
+  0% { transform: translate(0, 0); } 33% { transform: translate(-7%, 4%); }
+  66% { transform: translate(5%, -6%); } 100% { transform: translate(0, 0); } }
+
+/* ===================== A. Cinema ===================== */
+.hd .g-hero-full { min-height: min(94svh, 980px); padding: var(--s24) 0 var(--s16); background: #050708; }
+.hd .g-hero-full::after { z-index: -1; }
+.hd .g-herobg { position: absolute; inset: 0; z-index: -3; overflow: hidden;
+  transform: translate3d(0, calc(var(--hp, 0) * 18%), 0) scale(calc(1 + var(--hp, 0) * 0.06)); transform-origin: 50% 0; }
+.hd .g-herobg img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 38%;
+  filter: contrast(1.12) saturate(0.82) brightness(0.86); }
+/* wide screens: the photo stops at 1440px and fades into the dark at the sides */
+@media (min-width: 1441px) {
+  .hd .g-herobg { left: 50%; right: auto; width: 1440px; margin-left: -720px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
+}
+.hd .g-hero-full::before { z-index: -2;
+  background:
+    linear-gradient(to top, #050708 0%, rgba(5, 7, 8, 0.82) 22%, rgba(5, 7, 8, 0.25) 55%, rgba(5, 7, 8, 0.1) 78%, rgba(5, 7, 8, 0.5) 100%),
+    linear-gradient(90deg, rgba(5, 7, 8, 0.7) 0%, rgba(5, 7, 8, 0.15) 52%, rgba(5, 7, 8, 0) 72%); }
+.hd .g-hero-full .g-hero2-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); column-gap: var(--s12); row-gap: 0; }
+.hd .g-hero-full .g-hero2-grid > div:first-child { display: contents; }
+.hd .g-hero-full h1 { grid-column: 1 / -1; }
+.hd .g-hero-full .g-lead { grid-column: 1; align-self: end; }
+.hd .g-hero-full .g-actions { grid-column: 1; align-self: start; }
+.hd .g-hero-full .g-next2 { grid-column: 2; grid-row: 2 / span 2; align-self: end; }
+@media (max-width: 900px) {
+  .hd .g-hero-full .g-hero2-grid { grid-template-columns: 1fr; }
+  .hd .g-hero-full .g-next2 { grid-column: 1; grid-row: auto; margin-top: var(--s12); }
+}
+.hd .g-hero-full .g-hero2-grid { transform: translate3d(0, calc(var(--hp, 0) * -70px), 0); opacity: calc(1 - var(--hp, 0) * 0.9); }
+.hd .g-hero-full h1 { font-size: clamp(2.75rem, 6.6vw, 7.5rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; text-shadow: 0 2px 30px rgba(5, 7, 8, 0.55); }
+
+/* ===================== B. Card ===================== */
+/* first screen: the headline on the left, the photo in a tall straight card on the right.
+   The card is narrower than the photo file, so it stays sharp. */
+.he .g-hero-full { display: block; min-height: 0; padding: var(--s16) 0 var(--s16); align-items: initial; overflow: hidden; }
+.he .g-hero-full::before { display: none; }
+.he .g-hero-full .g-hero2-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); grid-template-areas: "text card" "next card";
+  column-gap: var(--s12); row-gap: var(--s12); align-items: end; }
+.he .g-hero2-grid > div:first-child { grid-area: text; }
+.he .g-hero2-grid > .g-next2 { grid-area: next; align-self: start; border-left: 0; padding-left: 0; max-width: 46ch; }
+.he .hx-stage { grid-area: card; align-self: center; perspective: 1400px; }
+.he .g-hero-full h1 { font-size: clamp(2.75rem, 6.2vw, 6rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 12ch; text-shadow: none; margin-bottom: var(--s6); }
+.he .g-hero-full .g-lead { color: var(--soft); }
+.he .g-herobg { position: relative; inset: auto; z-index: 0; display: block; overflow: hidden; width: 100%; height: auto; max-height: min(76svh, 720px);
+  aspect-ratio: 4 / 5; border-radius: 20px; background: var(--facet); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+  animation: hx-forward 1400ms cubic-bezier(0.16, 1, 0.3, 1) 150ms both; }
+@keyframes hx-forward { from { transform: translate3d(0, 24px, -360px); opacity: 0; } to { transform: none; opacity: 1; } }
+.he .g-herobg::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none; border: 1px solid rgba(215, 233, 236, 0.22); }
+.he .g-herobg img { position: absolute; inset: -6% 0; width: 100%; height: 112%; object-fit: cover; object-position: 66% 30%;
+  filter: contrast(1.1) saturate(0.85) brightness(0.94); transform: translate3d(0, calc(var(--hp, 0) * 5%), 0); }
+.he .g-herobg::after { z-index: 1; }
+
+@media (max-width: 900px) {
+  .he .g-hero-full { padding-top: var(--s12); }
+  .he .g-hero-full .g-hero2-grid { grid-template-columns: 1fr; grid-template-areas: "text" "card" "next"; row-gap: var(--s8); }
+  .he .g-herobg { height: auto; min-height: 0; max-height: none; width: 100%; aspect-ratio: 4 / 5; }
+}
+@media (max-width: 900px) and (min-width: 560px) { .he .g-herobg { aspect-ratio: 16 / 10; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hd .g-hero-full::after, .he .g-herobg::after { animation: none; }
+  .hd .g-herobg, .hd .g-hero-full .g-hero2-grid, .he .g-herobg, .he .g-herobg img { transform: none; opacity: 1; animation: none; }
+}
