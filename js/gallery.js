@@ -61,9 +61,8 @@
         var back = Math.min(a, 1) * 420 + Math.max(a - 1, 0) * 260;
         var pull = -sign * Math.max(a - 1, 0) * 0.30 * w;
         s.style.transform = 'translateX(' + pull.toFixed(1) + 'px) translateZ(' + (-back).toFixed(1) + 'px)';
-        s.style.opacity = (1 - Math.min(a, 2) * 0.34).toFixed(3);
+        s.style.opacity = (1 - Math.min(a, 2) * 0.36).toFixed(3);   // dimmer further away (opacity only: cheap to draw)
         s.style.zIndex = String(100 - Math.round(a * 10));
-        s.style.filter = a > 0.02 ? 'brightness(' + (1 - Math.min(a, 1.5) * 0.4).toFixed(3) + ')' : '';
         // the photo slides a little inside its card while the row moves
         if (photos[i]) photos[i].style.transform = 'translateX(' + (-Math.max(-1, Math.min(1, d)) * 6).toFixed(2) + '%)';
       });
@@ -79,11 +78,33 @@
     track.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', queue);
 
+    // Move to a card with our own short, eased glide (the browser's own smooth
+    // scroll is slow and uneven next to scroll snapping). Swipes stay native.
+    var glide = 0;
+    function ease(t) { return 1 - Math.pow(1 - t, 3); }   // fast start, soft landing
     function go(i) {
       var n = (i + slides.length) % slides.length;
-      var s = slides[n];
-      track.scrollTo({ left: slideCentre(s) - track.clientWidth / 2, behavior: calm ? 'auto' : 'smooth' });
+      var to = slideCentre(slides[n]) - track.clientWidth / 2;
+      var from = track.scrollLeft, dist = to - from;
+      if (calm || Math.abs(dist) < 1) { track.scrollLeft = to; return; }
+      var steps = Math.abs(dist) / (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : 1);
+      var time = Math.min(900, 420 + Math.max(0, steps - 1) * 40);   // one card: 0.42 s; back to the start: under 0.9 s
+      var start = 0, id = ++glide;
+      track.style.scrollSnapType = 'none';
+      function step(now) {
+        if (id !== glide) return;
+        if (!start) start = now;
+        var t = Math.min(1, (now - start) / time);
+        track.scrollLeft = from + dist * ease(t);
+        if (t < 1) requestAnimationFrame(step);
+        else track.style.scrollSnapType = '';
+      }
+      requestAnimationFrame(step);
     }
+    // a touch or wheel stops a glide at once and hands control back
+    ['pointerdown', 'wheel', 'touchstart'].forEach(function (name) {
+      track.addEventListener(name, function () { glide++; track.style.scrollSnapType = ''; }, { passive: true });
+    });
 
     function restartLine() {
       if (!line) return;

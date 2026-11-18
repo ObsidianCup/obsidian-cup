@@ -45,6 +45,9 @@
   // ---------- Start ----------
   document.addEventListener('DOMContentLoaded', async () => {
     ocApplyText();
+    // Someone already logged in on this device: use the wide layout from the start,
+    // so the page does not jump sideways when the account appears.
+    if (typeof ocSignedIn === 'function' && ocSignedIn()) $('#main').classList.add('acct-wrap-app');
     db = ocClient();
     if (!db) { show('off'); return; }
     if (SITE_CONFIG.googleLogin) { $('#googleBtn').hidden = false; $('#googleOr').hidden = false; }

@@ -73,7 +73,7 @@ html.m-on .hd .g-hero-full::after { animation: hx-grain 900ms steps(3) infinite;
 
 /* one card shape for every photo */
 .sc .g-gallery-track > li { position: relative; flex: 0 0 var(--cw); width: var(--cw); height: auto; aspect-ratio: 3 / 2;
-  scroll-snap-align: center; scroll-snap-stop: always; overflow: hidden; border-radius: 20px;
+  scroll-snap-align: center; overflow: hidden; border-radius: 20px;
   background: var(--facet); opacity: 1; transform: none; transition: none;
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); transform-origin: 50% 50%; backface-visibility: hidden; }
 .sc .g-gallery-track > li:hover { opacity: 1; }

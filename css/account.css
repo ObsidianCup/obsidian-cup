@@ -401,3 +401,13 @@ html[lang="bn"] .legal-body, html[lang="bn"] .acct-intro, html[lang="bn"] .acct-
 .acct-unfinished { border-color: #d7e9ec; }
 .acct-unfinished h2 { margin-bottom: 8px; }
 .acct-unfinished p { margin: 0 0 16px; color: #c9cfd0; }
+
+/* 18 Nov 2026 fixes (design check):
+   - keep the footer below the screen while the account loads, so the page does
+     not jump when the account appears (it scored 0.88; good is under 0.1)
+   - every button, link and chip is at least 44px tall to tap (the profile rule) */
+.acct-wrap { min-height: calc(100svh - 72px); }
+.acct-btn-small { min-height: 44px; }
+.acct-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+.acct-eye { min-height: 44px; }
+.acct-chip span { min-height: 44px; }
