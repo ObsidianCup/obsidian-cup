@@ -130,3 +130,7 @@ html { scroll-behavior: smooth; }
 
 .acctx .acct-card .acct-muted + .acct-btn, .acctx .acct-card .acct-muted + .acctx-langs { margin-top: 12px; }
 .acctx .acctx-tabs { position: relative; }
+
+/* sign-up only: one email per player (shown while the name field is visible) */
+.acctx-ownemail { display: none; }
+#authForm:has(#nameField:not([hidden])) .acctx-ownemail { display: block; }

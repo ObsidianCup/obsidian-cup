@@ -219,8 +219,8 @@
  {
   "id": "home-13",
   "section": "Home page",
-  "en": "Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts open before registration, so your team can sign up in minutes.",
-  "bn": "ভলিবল আবারও ফিরছে। তারিখ ও ভেন্যু প্রথমে ইনস্টাগ্রামে জানানো হবে। নিবন্ধন শুরুর আগেই খেলোয়াড়দের অ্যাকাউন্ট খোলা যাবে, যাতে আপনার দল কয়েক মিনিটেই নিবন্ধন করতে পারে।",
+  "en": "Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts are open now, so your team can sign up in minutes when registration starts.",
+  "bn": "আবার ফিরছে ভলিবল। তারিখ ও ভেন্যুর ঘোষণা আসবে প্রথমে ইনস্টাগ্রামে। খেলোয়াড় অ্যাকাউন্ট এখনই খোলা যায়, তাই নিবন্ধন শুরু হলে কয়েক মিনিটেই দল সাইন আপ করা যাবে।",
   "placeholder": false
  },
  {
@@ -751,7 +751,7 @@
  {
   "id": "faq-04",
   "section": "Questions page",
-  "en": "Obsidian Cup is a tournament platform for players from all over Bangladesh. We began with volleyball and have now hosted girls-only futsal through OFC. Every event is built to give players a proper, well-run competitive experience: good venues, real production, a great atmosphere and genuine care.",
+  "en": "Obsidian Cup is a tournament platform for players from all over Bangladesh. We began with volleyball and have now hosted girls-only futsal through the Obsidian Futsal Cup. Every event is built to give players a proper, well-run competitive experience: good venues, real production, a great atmosphere and genuine care.",
   "bn": "Obsidian Cup ঢাকা, বাংলাদেশ ভিত্তিক একটি টুর্নামেন্ট প্ল্যাটফর্ম। আমরা ভলিবল দিয়ে শুরু করেছি এবং এখন OFC-এর মাধ্যমে মেয়েদের ফুটসালও আয়োজন করেছি। প্রতিটি ফরম্যাট খেলোয়াড়দের একটি সঠিক, সুসংগঠিত প্রতিযোগিতামূলক অভিজ্ঞতা দেওয়ার জন্য তৈরি।",
   "placeholder": false
  },
@@ -2781,8 +2781,8 @@
  {
   "id": "stories-01",
   "section": "Player stories page",
-  "en": "Real words, real people",
-  "bn": "",
+  "en": "Player stories",
+  "bn": "খেলোয়াড়দের গল্প",
   "placeholder": false
  },
  {
@@ -4302,6 +4302,13 @@
   "section": "Player account pages (log in, profile, admin)",
   "en": "My account",
   "bn": "অ্যাকাউন্ট",
+  "placeholder": false
+ },
+ {
+  "id": "acct.signupOwnEmail",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Each player needs their own email address, so brothers and sisters cannot share one account.",
+  "bn": "প্রত্যেক খেলোয়াড়ের জন্য আলাদা ইমেইল ঠিকানা লাগবে, তাই ভাইবোনেরা একটি অ্যাকাউন্ট ভাগাভাগি করতে পারবেন না।",
   "placeholder": false
  }
 ]

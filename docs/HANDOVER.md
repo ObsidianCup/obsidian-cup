@@ -57,6 +57,16 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
      components.js, letter saved as `oc_initial`). New texts EN+BN in OC_TEXT.
      Note: `scripts/site-tests/account-flows.js` now stalls (expects the form
      visible on load; it is in the Profile section): update that test.
+   - 18 Nov fixes done from docs/WEBSITE-AUDIT-2026-11.md: OFC/OVC abbreviations
+     gone in English, Season 5 text says accounts are open + "Create your player
+     account" link, Player stories kicker, sign-up says one email per player.
+     Still needs HER decisions (ask one at a time): slot rule (Rules page vs payment
+     policy), forfeit timing, futsal rules text, refund rules confirmed, Silhoutte
+     spelling, "Team 01" futsal runner-up, spectators in photo consent.
+   - NEXT (her request 18 Nov 16:50): make My account look and work like Google's
+     account settings page (left side menu with icons on laptop, rows you tap to
+     edit, clean cards), sample first; UI must be perfect before launch. Team
+     registration fixes in docs/REGISTRATION-WHAT-IF-AUDIT.md come with the teams build.
    - Audit all English writing on every page, then the Bangla rewrite above.
    - Design pass on the other pages (samples first).
 

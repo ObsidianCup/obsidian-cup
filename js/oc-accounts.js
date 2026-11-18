@@ -34,6 +34,7 @@ const OC_OLD_POSITIONS = {
 const OC_TEXT = {
   en: {
     // account sections (18 Nov 2026)
+    signupOwnEmail: "Each player needs their own email address, so brothers and sisters cannot share one account.",
     secOverview: "Overview",
     secProfile: "Profile",
     secTeam: "Team",
@@ -425,6 +426,7 @@ const OC_TEXT = {
   },
   bn: {
     // account sections (18 Nov 2026)
+    signupOwnEmail: "প্রত্যেক খেলোয়াড়ের জন্য আলাদা ইমেইল ঠিকানা লাগবে, তাই ভাইবোনেরা একটি অ্যাকাউন্ট ভাগাভাগি করতে পারবেন না।",
     secOverview: "সারসংক্ষেপ",
     secProfile: "প্রোফাইল",
     secTeam: "দল",

@@ -16,7 +16,7 @@ const SITE_CONFIG = {
   currentSeasonName: "Obsidian Volleyball Cup Season 4",
   currentSeasonDates: "Completed in 2026",
   currentVenue: "Dhaka, Bangladesh",
-  announcementText: "Girls-only OFC Season 1 and OVC Season 4 are complete. Thank you to everyone who showed up.",
+  announcementText: "The girls-only Obsidian Futsal Cup and Volleyball Cup Season 4 are complete. Thank you to everyone who showed up.",
 
   // ---- PLAYER STORIES ----
   // The three "Anonymous Player" quotes on the Player stories page stay hidden

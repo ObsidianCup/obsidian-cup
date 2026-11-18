@@ -126,3 +126,7 @@ html.m-on .hd .g-hero-full::after { animation: hx-grain 900ms steps(3) infinite;
 .sc .g-ring-on .g-gallery-track > li.is-active { cursor: default; }
 .sc .g-ring-on .g-gl-photo { width: 100%; left: 0; }
 @media (max-width: 700px) { .sc .g-ring-on .g-gallery-track { height: calc(var(--cw) + 56px); } }
+
+/* Next up: two links side by side, each a full tap target */
+.g-next2-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 16px 0 0; }
+.g-next2-links .g-link { display: inline-flex; align-items: center; min-height: 44px; }
