@@ -93,7 +93,6 @@ html.m-on .hd .g-hero-full::after { animation: hx-grain 900ms steps(3) infinite;
 
 /* under the row: what the front photo shows, and the timing line */
 .sc .g3-foot { display: flex; flex-direction: column; gap: var(--s4); margin-top: var(--s4); }
-.sc .g3-caption { margin: 0 auto; max-width: 60ch; min-height: 3em; text-align: center; color: var(--soft); font-size: 1rem; line-height: 1.5; }
 .sc .g-gallery-time { margin-top: 0; }
 
 @media (max-width: 700px) {
@@ -118,3 +117,12 @@ html.m-on .hd .g-hero-full::after { animation: hx-grain 900ms steps(3) infinite;
 @keyframes g-gallery-fill { to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) { .g-gallery-time { display: none; } }
 @media (max-width: 700px) { .sc .g-gallery .g-h2 { font-size: 1.75rem; } }
+
+/* "Glimpse of us" as a ring (js/gallery.js): no captions; the photos stand on a
+   circle, all straight, so both sides are filled and it goes round forever. */
+.sc .g-ring-on .g-gallery-track { display: block; position: relative; overflow: hidden; padding: 0; margin: 0;
+  height: calc(var(--cw) * 2 / 3 + 72px); perspective: 1600px; perspective-origin: 50% 50%; scroll-snap-type: none; touch-action: pan-y; }
+.sc .g-ring-on .g-gallery-track > li { position: absolute; left: 50%; top: 50%; margin: 0; cursor: pointer; }
+.sc .g-ring-on .g-gallery-track > li.is-active { cursor: default; }
+.sc .g-ring-on .g-gl-photo { width: 100%; left: 0; }
+@media (max-width: 700px) { .sc .g-ring-on .g-gallery-track { height: calc(var(--cw) + 56px); } }
