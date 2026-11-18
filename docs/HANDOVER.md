@@ -38,8 +38,22 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
    return a number, not "function does not exist". If missing, give her the raw
    link to `015_signup_name_and_cleanup.sql`. The nightly clean-up needs the
    `pg_cron` extension (Database → Extensions).
-4. **Bangla: on hold** (owner, 17 Nov). Do not rewrite it until she says so.
-   Background below.
+4. **Bangla: UNBLOCKED 18 Nov.** Owner's decisions: style like Prothom Alo sports
+   (Bangla, everyday English words in Bangla letters: টুর্নামেন্ট, চ্যাম্পিয়ন), and
+   **no pronouns**: write sentences so they need neither আপনি nor তুমি (impersonal
+   forms, e.g. "অ্যাকাউন্টে লগ ইন করুন" is out; prefer "লগ ইন" / noun phrases /
+   passive). Translate the **idea, not the words**: what is classy in English can be
+   cringe in Bangla (her examples: "our air we breathe", "fragrance partner" →
+   সুগন্ধি পার্টনার sounds cheap). Rewrite all Bangla in `docs/translation/`
+   (581 strings, 306 empty), then `python3 scripts/build_bn.py`.
+5. **Open work she asked for on 18 Nov** (do in this order, samples first for design):
+   - Account page design: sample on branch `account-sample`
+     (`pages/account-sample.html`, `css/account-sample.css`): her own drawings as
+     line art (`assets/lineart/dig|set|jump.svg`, traced from her sketches, she
+     allowed it; use only as line art), film-look player card, section links,
+     14px help text, player card first on phones. Waiting for her yes.
+   - Audit all English writing on every page, then the Bangla rewrite above.
+   - Design pass on the other pages (samples first).
 
 ## Who and how to work
 
