@@ -11,8 +11,9 @@
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2" />
   <link rel="stylesheet" href="../css/glass.css" />
   <link rel="stylesheet" href="../css/account.css" />
+  <link rel="stylesheet" href="../css/account-sections.css" />
 </head>
-<body class="theme-glass">
+<body class="theme-glass acctx">
   <main id="main" class="acct-wrap">
 
     <!-- Loading -->
@@ -32,6 +33,7 @@
     <!-- Log in / create account -->
     <section data-view="auth" hidden>
       <p class="acct-label" data-t="authLabel">Player account</p>
+      <span class="acctx-art acctx-art-dig" aria-hidden="true"></span>
       <h1 class="acct-title" id="authTitle" data-t="authTitleLogin">Log in</h1>
       <p class="acct-intro" data-t="authIntro">One account for every Obsidian Cup season.</p>
 
@@ -225,6 +227,7 @@
       </div>
 
       <div class="acct-card acct-playercard" id="playerCard">
+        <span class="acctx-art acctx-art-vb" aria-hidden="true"></span>
         <div class="acct-live" id="liveBox" aria-live="off" hidden>
           <div class="acct-live-mark" id="liveMark" aria-hidden="true">
             <span class="acct-live-ring"></span>
@@ -280,9 +283,10 @@
       <form class="acct-card" id="profileForm" novalidate autocomplete="on">
         <h2 data-t="profileTitle">Your profile</h2>
         <p class="acct-muted" data-t="autosaveNote">Everything saves automatically as you type.</p>
+        <nav class="acctx-jump" aria-label="Sections"><a href="#x-basics" data-t="secBasics"></a><a href="#x-contact" data-t="secContact"></a><a href="#x-sports" data-t="secSports"></a><a href="#x-emergency" data-t="secEmergency"></a><a href="#x-prefs" data-t="secPrefs"></a><a href="#deleteCard" data-t="deleteTitle"></a></nav>
         <div id="lockedNote"></div>
 
-        <h3 data-t="secBasics">Basic details</h3>
+        <h3 id="x-basics" data-t="secBasics">Basic details</h3>
         <div class="acct-field">
           <label for="f_legal_name" data-t="legalName">Full name (as on your ID)</label>
           <input class="acct-input" id="f_legal_name" name="legal_name" autocomplete="name" maxlength="120" />
@@ -315,7 +319,7 @@
         </div>
 
         <div id="extended">
-          <h3 data-t="secContact">Contact</h3>
+          <h3 id="x-contact" data-t="secContact">Contact</h3>
           <div class="acct-row">
             <div class="acct-field">
               <label for="f_phone" data-t="phone">Phone number</label>
@@ -342,7 +346,7 @@
           <div class="acct-mysports" id="mySports"></div>
           <span class="acct-err" data-err="sports"></span>
 
-          <h3 data-t="secSports">Sports profile</h3>
+          <h3 id="x-sports" data-t="secSports">Sports profile</h3>
           <p class="acct-hint" style="margin-bottom:1rem;" data-t="sportsIntro"></p>
           <div class="acct-row">
             <div class="acct-field">
@@ -460,7 +464,7 @@
             <span data-t="showStats"></span>
           </label>
 
-          <h3 data-t="secEmergency">Emergency contact</h3>
+          <h3 id="x-emergency" data-t="secEmergency">Emergency contact</h3>
           <div class="acct-row">
             <div class="acct-field">
               <label for="f_emergency_name" data-t="emergencyName">Contact name</label>
@@ -482,7 +486,7 @@
             <span class="acct-err" data-err="emergency_phone"></span>
           </div>
 
-          <h3 data-t="secPrefs">Preferences</h3>
+          <h3 id="x-prefs" data-t="secPrefs">Preferences</h3>
           <div class="acct-field">
             <label for="f_language" data-t="language">Language for emails</label>
             <select class="acct-select" id="f_language" name="language">
@@ -539,5 +543,6 @@
   <script src="../js/main.js"></script>
   <script src="../js/oc-accounts.js"></script>
   <script src="../js/account.js"></script>
+  <script src="../js/account-sections.js"></script>
 </body>
 </html>

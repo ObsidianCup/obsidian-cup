@@ -4065,5 +4065,243 @@
   "en": "Jersey {n}",
   "bn": "",
   "placeholder": false
+ },
+ {
+  "id": "acct.secOverview",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Overview",
+  "bn": "সারসংক্ষেপ",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secProfile",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Profile",
+  "bn": "প্রোফাইল",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secTeam",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Team",
+  "bn": "দল",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secSettings",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Settings",
+  "bn": "সেটিংস",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secPrivacy",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Privacy and data",
+  "bn": "গোপনীয়তা ও তথ্য",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secSoon",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Soon",
+  "bn": "শিগগির",
+  "placeholder": false
+ },
+ {
+  "id": "acct.secNavLabel",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Account sections",
+  "bn": "অ্যাকাউন্টের অংশগুলো",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamBadge",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Coming soon",
+  "bn": "শিগগির আসছে",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Teams",
+  "bn": "দল",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamLead",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Soon you will create a team or join one right here, from your account.",
+  "bn": "শিগগির এখান থেকেই নতুন দল গড়া বা কোনো দলে যোগ দেওয়া যাবে।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamStep1Title",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Create or join.",
+  "bn": "দল গড়া বা যোগ দেওয়া।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamStep1",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Start a team, or open the link your captain shares.",
+  "bn": "নতুন দল শুরু করা যাবে, অথবা অধিনায়কের পাঠানো লিংক খুলে দলে যোগ দেওয়া যাবে।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamStep2Title",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Captain and vice-captain.",
+  "bn": "অধিনায়ক ও সহ-অধিনায়ক।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamStep2",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Every team has both, and both play on the team.",
+  "bn": "প্রতিটি দলে দুজনই থাকবেন, আর দুজনকেই দলের হয়ে খেলতে হবে।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamStep3Title",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Nothing to fill in twice.",
+  "bn": "একই তথ্য দুবার নয়।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamStep3",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Your details come straight from your profile.",
+  "bn": "দরকারি সব তথ্য সরাসরি প্রোফাইল থেকে নেওয়া হবে।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamUntil",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Until then, a complete profile means you are ready the moment registration opens.",
+  "bn": "ততদিন প্রোফাইল সম্পূর্ণ থাকলে নিবন্ধন খোলার সঙ্গে সঙ্গেই অংশ নেওয়ার প্রস্তুতি তৈরি।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.teamGo",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Go to my profile",
+  "bn": "প্রোফাইলে যান",
+  "placeholder": false
+ },
+ {
+  "id": "acct.langTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Language",
+  "bn": "ভাষা",
+  "placeholder": false
+ },
+ {
+  "id": "acct.langNote",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Shows the whole site in this language on this device.",
+  "bn": "এই ডিভাইসে পুরো সাইট এই ভাষায় দেখাবে।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.logoutTitle",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Log out",
+  "bn": "লগ আউট",
+  "placeholder": false
+ },
+ {
+  "id": "acct.logoutNote",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Logs you out on this device only. Your profile stays saved.",
+  "bn": "শুধু এই ডিভাইস থেকে লগ আউট হবে। প্রোফাইলের সব তথ্য সংরক্ষিত থাকবে।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privWho",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Who sees what",
+  "bn": "কোন তথ্য কে দেখতে পান",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privPhotoT",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Your photo:",
+  "bn": "প্রোফাইলের ছবি:",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privPhoto",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "only you and Obsidian Cup organisers.",
+  "bn": "শুধু খেলোয়াড় নিজে এবং Obsidian Cup-এর আয়োজকেরা।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privIdT",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "A photo of your ID,",
+  "bn": "পরিচয়পত্রের ছবি,",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privId",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "when an event asks for it: private, and deleted 30 days after the event.",
+  "bn": "কোনো টুর্নামেন্টে চাওয়া হলে: গোপন থাকে, আর টুর্নামেন্ট শেষ হওয়ার ৩০ দিন পর মুছে ফেলা হয়।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privPublicT",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "What shows publicly",
+  "bn": "সবার সামনে কী দেখা যাবে,",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privPublicA",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "is up to you: change it under",
+  "bn": "তা খেলোয়াড়ের নিজের সিদ্ধান্ত:",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privPublicB",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": ", in Preferences.",
+  "bn": "-এর ‘পছন্দসমূহ’ অংশে বদলানো যায়।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privMoreA",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "The full details are in the",
+  "bn": "বিস্তারিত পাওয়া যাবে",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privMoreLink",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "Terms and Privacy notice",
+  "bn": "শর্তাবলি ও গোপনীয়তা নীতিতে",
+  "placeholder": false
+ },
+ {
+  "id": "acct.privMoreB",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": ".",
+  "bn": "।",
+  "placeholder": false
+ },
+ {
+  "id": "acct.myAccount",
+  "section": "Player account pages (log in, profile, admin)",
+  "en": "My account",
+  "bn": "অ্যাকাউন্ট",
+  "placeholder": false
  }
 ]

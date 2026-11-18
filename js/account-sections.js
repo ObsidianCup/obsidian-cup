@@ -1,4 +1,4 @@
-// SAMPLE ONLY (not live): the account page in sections.
+// Account page in sections (owner approved 18 Nov 2026).
 // Overview, Profile, Team (coming soon), Settings, Privacy and data.
 // It only moves the existing cards into sections and shows one section at a
 // time, so js/account.js keeps working exactly as before. The address keeps the
@@ -7,13 +7,15 @@
 // plays (the owner's own drawings).
 (function () {
   'use strict';
+  // labels are text keys in js/oc-accounts.js (English and Bangla)
   var SECTIONS = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'profile', label: 'Profile' },
-    { id: 'team', label: 'Team' },
-    { id: 'settings', label: 'Settings' },
-    { id: 'privacy', label: 'Privacy and data' }
+    { id: 'overview', key: 'secOverview' },
+    { id: 'profile', key: 'secProfile' },
+    { id: 'team', key: 'secTeam' },
+    { id: 'settings', key: 'secSettings' },
+    { id: 'privacy', key: 'secPrivacy' }
   ];
+  function T(key) { return '<span data-t="' + key + '"></span>'; }
 
   function $(q, root) { return (root || document).querySelector(q); }
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
@@ -25,9 +27,9 @@
 
     // ---------- section links ----------
     var nav = el('nav', 'acctx-tabs');
-    nav.setAttribute('aria-label', 'Account sections');
+    nav.setAttribute('aria-label', t('secNavLabel'));
     SECTIONS.forEach(function (s) {
-      var a = el('a', null, s.label + (s.id === 'team' ? ' <span class="acctx-soon">Soon</span>' : ''));
+      var a = el('a', null, T(s.key) + (s.id === 'team' ? ' <span class="acctx-soon" data-t="secSoon"></span>' : ''));
       a.href = '#' + s.id; a.dataset.section = s.id;
       nav.appendChild(a);
     });
@@ -36,7 +38,7 @@
     var panels = {};
     SECTIONS.forEach(function (s) {
       var p = el('section', 'acctx-panel');
-      p.id = 'p-' + s.id; p.dataset.panel = s.id; p.setAttribute('aria-label', s.label); p.tabIndex = -1;
+      p.id = 'p-' + s.id; p.dataset.panel = s.id; p.setAttribute('aria-label', t(s.key)); p.tabIndex = -1;
       panels[s.id] = p;
     });
     function move(id, ids) { ids.forEach(function (q) { var n = typeof q === 'string' ? $(q) : q; if (n) panels[id].appendChild(n); }); }
@@ -46,41 +48,41 @@
 
     panels.team.appendChild(el('div', 'acct-card acctx-team', [
       '<span class="acctx-art acctx-art-set" aria-hidden="true"></span>',
-      '<p class="acctx-badge">Coming soon</p>',
-      '<h2>Teams</h2>',
-      '<p class="acctx-lead">Soon you will create a team or join one right here, from your account.</p>',
+      '<p class="acctx-badge" data-t="teamBadge"></p>',
+      '<h2 data-t="teamTitle"></h2>',
+      '<p class="acctx-lead" data-t="teamLead"></p>',
       '<ol class="acctx-steps">',
-      '<li><strong>Create or join.</strong> Start a team, or open the link your captain shares.</li>',
-      '<li><strong>Captain and vice-captain.</strong> Every team has both, and both play on the team.</li>',
-      '<li><strong>Nothing to fill in twice.</strong> Your details come straight from your profile.</li>',
+      '<li><strong data-t="teamStep1Title"></strong> ' + T('teamStep1') + '</li>',
+      '<li><strong data-t="teamStep2Title"></strong> ' + T('teamStep2') + '</li>',
+      '<li><strong data-t="teamStep3Title"></strong> ' + T('teamStep3') + '</li>',
       '</ol>',
-      '<p class="acct-muted">Until then, a complete profile means you are ready the moment registration opens.</p>',
-      '<a class="acct-btn acct-btn-small" href="#profile">Go to my profile</a>'
+      '<p class="acct-muted" data-t="teamUntil"></p>',
+      '<a class="acct-btn acct-btn-small" href="#profile" data-t="teamGo"></a>'
     ].join('')));
 
-    panels.settings.appendChild(el('h2', 'acctx-panel-title', 'Settings'));
+    panels.settings.appendChild(el('h2', 'acctx-panel-title', T('secSettings')));
     move('settings', [codeCard]);
     panels.settings.appendChild(el('div', 'acct-card', [
-      '<h2>Language</h2>',
-      '<p class="acct-muted">Shows the whole site in this language on this device.</p>',
+      '<h2 data-t="langTitle"></h2>',
+      '<p class="acct-muted" data-t="langNote"></p>',
       '<div class="acctx-langs"><button type="button" class="acct-btn acct-btn-ghost acct-btn-small" data-acctx-lang="en">English</button>',
       '<button type="button" class="acct-btn acct-btn-ghost acct-btn-small" data-acctx-lang="bn" lang="bn">বাংলা</button></div>'
     ].join('')));
     panels.settings.appendChild(el('div', 'acct-card', [
-      '<h2>Log out</h2>',
-      '<p class="acct-muted">Logs you out on this device only. Your profile stays saved.</p>',
-      '<button type="button" class="acct-btn acct-btn-ghost acct-btn-small" data-acctx-signout>Log out</button>'
+      '<h2 data-t="logoutTitle"></h2>',
+      '<p class="acct-muted" data-t="logoutNote"></p>',
+      '<button type="button" class="acct-btn acct-btn-ghost acct-btn-small" data-acctx-signout data-t="signOut"></button>'
     ].join('')));
 
-    panels.privacy.appendChild(el('h2', 'acctx-panel-title', 'Privacy and data'));
+    panels.privacy.appendChild(el('h2', 'acctx-panel-title', T('secPrivacy')));
     panels.privacy.appendChild(el('div', 'acct-card', [
-      '<h2>Who sees what</h2>',
+      '<h2 data-t="privWho"></h2>',
       '<ul class="acctx-facts">',
-      '<li><strong>Your photo:</strong> only you and Obsidian Cup organisers.</li>',
-      '<li><strong>A photo of your ID</strong>, when an event asks for it: private, and deleted 30 days after the event.</li>',
-      '<li><strong>What shows publicly</strong> is up to you: change it under <a href="#profile">Profile</a>, in Preferences.</li>',
+      '<li><strong data-t="privPhotoT"></strong> ' + T('privPhoto') + '</li>',
+      '<li><strong data-t="privIdT"></strong> ' + T('privId') + '</li>',
+      '<li><strong data-t="privPublicT"></strong> ' + T('privPublicA') + ' <a href="#profile" data-t="secProfile"></a>' + T('privPublicB') + '</li>',
       '</ul>',
-      '<p class="acct-muted">The full details are in the <a href="legal.html">Terms and Privacy notice</a>.</p>'
+      '<p class="acct-muted">' + T('privMoreA') + ' <a href="legal.html" data-t="privMoreLink"></a>' + T('privMoreB') + '</p>'
     ].join('')));
     move('privacy', ['#deleteCard']);
 
@@ -90,6 +92,8 @@
     var holder = el('div', 'acctx-panels');
     SECTIONS.forEach(function (s) { holder.appendChild(panels[s.id]); });
     nav.insertAdjacentElement('afterend', holder);
+    ocApplyText(nav); ocApplyText(holder);
+    document.addEventListener('oc:language', function () { nav.setAttribute('aria-label', t('secNavLabel')); SECTIONS.forEach(function (s) { panels[s.id].setAttribute('aria-label', t(s.key)); }); });
 
     // ---------- show one section ----------
     function current() { var h = (location.hash || '').slice(1); return panels[h] ? h : 'overview'; }
@@ -112,11 +116,16 @@
       var h = (location.hash || '').slice(1);
       if (panels[h]) { showSection(h, true); window.scrollTo(0, Math.max(0, app.getBoundingClientRect().top + window.scrollY - 80)); }
       else if (h) {   // a link to something inside a section, e.g. #x-contact
-        var t = document.getElementById(h), p = t && t.closest('.acctx-panel');
+        var target = document.getElementById(h), p = target && target.closest('.acctx-panel');
         if (p) showSection(p.dataset.panel, false);
       }
     });
     showSection(current(), false);
+
+    // logging out forgets the initial shown in the menu bar
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-action="signout"]')) { try { localStorage.removeItem('oc_initial'); } catch (x) { /* private mode */ } }
+    }, true);
 
     // "Finish my profile" and the checklist lead into Profile first
     document.addEventListener('click', function (e) {
@@ -127,21 +136,18 @@
     panels.settings.addEventListener('click', function (e) {
       var l = e.target.closest('[data-acctx-lang]');
       if (l) { var b = document.querySelector('.lang-btn[data-lang="' + l.dataset.acctxLang + '"]'); if (b) b.click(); }
-      if (e.target.closest('[data-acctx-signout]')) { var s = app.querySelector('[data-action="signout"]'); if (s) s.click(); }
+      if (e.target.closest('[data-acctx-signout]')) { try { localStorage.removeItem('oc_initial'); } catch (x) { /* private mode */ } var s = app.querySelector('[data-action="signout"]'); if (s) s.click(); }
     });
 
     // ---------- menu bar: the player's initial instead of "Account" ----------
     function initialBadge() {
       var letter = ($('#pcInitials') && $('#pcInitials').textContent.trim().charAt(0)) || '';
-      var btn = document.querySelector('.g-header .g-login');
-      if (!letter || !btn || app.hidden) return false;
-      btn.textContent = letter.toUpperCase();
-      btn.classList.add('acctx-initial');
-      btn.setAttribute('aria-label', 'My account');
-      btn.title = 'My account';
+      if (!letter || app.hidden) return false;
+      try { localStorage.setItem('oc_initial', letter.toUpperCase()); } catch (e) { /* private mode */ }
+      if (typeof ocHeaderInitial === 'function') ocHeaderInitial();
       return true;
     }
-    var tries = 0, t = setInterval(function () { if (initialBadge() || ++tries > 40) clearInterval(t); }, 250);
+    var tries = 0, timer = setInterval(function () { if (initialBadge() || ++tries > 40) clearInterval(timer); }, 250);
 
     // ---------- line art on the player card, by sport ----------
     var art = $('#playerCard .acctx-art');

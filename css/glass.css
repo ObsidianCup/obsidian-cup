@@ -467,3 +467,7 @@ body.theme-glass:not(:has(> .g-header)) { padding-top: 73px; }
   .g-quote { max-width: none; margin-left: calc((100% - var(--s16)) / 3 + var(--s16)); }
   .g-about-body { display: block; }
 }
+
+/* Menu bar when logged in on this device: the player's initial in a circle (js/components.js) */
+.g-login.g-initial { display: inline-grid; place-items: center; width: 44px; height: 44px; min-height: 44px; padding: 0; border-radius: 50%;
+  font-family: var(--font-display); font-size: 1rem; line-height: 1; }

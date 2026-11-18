@@ -47,11 +47,16 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
    সুগন্ধি পার্টনার sounds cheap). Rewrite all Bangla in `docs/translation/`
    (581 strings, 306 empty), then `python3 scripts/build_bn.py`.
 5. **Open work she asked for on 18 Nov** (do in this order, samples first for design):
-   - Account page design: sample on branch `account-sample`
-     (`pages/account-sample.html`, `css/account-sample.css`): her own drawings as
-     line art (`assets/lineart/dig|set|jump.svg`, traced from her sketches, she
-     allowed it; use only as line art), film-look player card, section links,
-     14px help text, player card first on phones. Waiting for her yes.
+   - Account page design: LIVE 18 Nov. Sections (Overview, Profile, Team "coming
+     soon", Settings, Privacy and data; `js/account-sections.js`,
+     `css/account-sections.css`, hash links #profile etc.), Google-style tabs, her own
+     drawings as line art (`assets/lineart/`, all drawn by her incl. the two pose
+     sheets; use only as line art): volleyball card = jump, futsal = fb-strike,
+     both = both; login wallpaper `wall.svg`. Player code in the display face.
+     Menu bar shows the player's initial when logged in (`ocHeaderInitial` in
+     components.js, letter saved as `oc_initial`). New texts EN+BN in OC_TEXT.
+     Note: `scripts/site-tests/account-flows.js` now stalls (expects the form
+     visible on load; it is in the Profile section): update that test.
    - Audit all English writing on every page, then the Bangla rewrite above.
    - Design pass on the other pages (samples first).
 

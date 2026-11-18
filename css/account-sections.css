@@ -1,4 +1,4 @@
-/* SAMPLE ONLY (not live): account page design pass, 18 Nov 2026.
+/* Account page design (owner approved 18 Nov 2026).
    - the owner's own drawings as quiet line art (assets/lineart/*.svg, drawn by her)
    - the player card gets the home page's film look: soft light, fine grain, a big name
    - section links at the top of the long profile form
@@ -29,11 +29,13 @@
   border-color: rgba(215, 233, 236, 0.32); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
 .acctx .acct-playercard::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image: url("../assets/photos/grain.png"); background-size: 96px 96px; opacity: 0.12; mix-blend-mode: overlay; }
-/* the drawing follows the sport: volleyball = the jump, futsal = a kick (waiting for the owner's drawing), both = side by side */
+/* the drawing follows the sport: volleyball = the jump, futsal = a strike, both = side by side (all drawn by the owner) */
 .acctx #playerCard .acctx-art { position: absolute; z-index: -1; right: 20px; top: 8px; width: 56%; max-width: 250px; aspect-ratio: 3 / 4; opacity: 0.14; }
 .acctx #playerCard .acctx-art-vb { --art: url("../assets/lineart/jump.svg"); }
-.acctx #playerCard .acctx-art-fb { display: none; }
-.acctx #playerCard .acctx-art-both { --art: url("../assets/lineart/jump.svg"); }
+.acctx #playerCard .acctx-art-fb { --art: url("../assets/lineart/fb-strike.svg"); aspect-ratio: 6 / 5; width: 62%; max-width: 280px; }
+.acctx #playerCard .acctx-art-both { aspect-ratio: 3 / 2; width: 78%; max-width: 340px;
+  -webkit-mask: url("../assets/lineart/jump.svg") left center / 46% auto no-repeat, url("../assets/lineart/fb-strike.svg") right 60% / 54% auto no-repeat;
+          mask: url("../assets/lineart/jump.svg") left center / 46% auto no-repeat, url("../assets/lineart/fb-strike.svg") right 60% / 54% auto no-repeat; }
 .acctx .acct-pc-name { font-size: clamp(1.9rem, 4vw, 2.5rem); letter-spacing: -0.01em; line-height: 1.05; }
 .acctx .acct-pc-photo { width: 84px; height: 84px; box-shadow: 0 0 0 2px rgba(215, 233, 236, 0.35), 0 0 0 6px rgba(215, 233, 236, 0.06); }
 .acctx .acct-playercard { animation: acctx-forward 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
@@ -125,8 +127,6 @@ html { scroll-behavior: smooth; }
   .acctx [data-view="app"] > :first-child [data-action="signout"] { display: none; }   /* Log out lives in Settings on phones */
 }
 
-/* ---------- menu bar: the player's initial instead of "Account" ---------- */
-.acctx .acctx-initial { display: inline-grid; place-items: center; width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 50%;
-  font-family: var(--font-display); font-size: 1rem; line-height: 1; }
+
 .acctx .acct-card .acct-muted + .acct-btn, .acctx .acct-card .acct-muted + .acctx-langs { margin-top: 12px; }
 .acctx .acctx-tabs { position: relative; }

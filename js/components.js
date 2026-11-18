@@ -131,6 +131,21 @@ function glassLinks() {
 // login library, so read what it keeps in the browser: a saved session with a
 // refresh token means the account page will open logged in. Nothing is sent
 // anywhere; this only changes the words on the menu button.
+// Logged in on this device: the menu bar shows the player's initial in a circle
+// instead of "My account". The account page saves just that one letter.
+function ocHeaderInitial() {
+  const btn = document.querySelector('.g-header .g-login');
+  if (!btn || !ocSignedIn()) return;
+  let letter = '';
+  try { letter = (localStorage.getItem('oc_initial') || '').trim().charAt(0); } catch (e) { /* private mode */ }
+  if (!letter) return;
+  const long = btn.querySelector('.g-login-long');
+  btn.setAttribute('aria-label', long ? long.textContent : 'My account');
+  btn.title = btn.getAttribute('aria-label');
+  btn.classList.add('g-initial');
+  btn.innerHTML = '<span aria-hidden="true">' + letter.replace(/[<>&"]/g, '') + '</span>';
+}
+
 function ocSignedIn() {
   try {
     if (!SITE_CONFIG.supabaseUrl) return false;
@@ -178,6 +193,7 @@ function injectGlassChrome() {
       </div>
     </div>`;
   document.body.insertBefore(header, document.body.firstChild);
+  ocHeaderInitial();
 
   // Phone menu: slides in from the right over a dimmed page. Escape, the close
   // button or tapping outside closes it; focus stays inside while it is open.
