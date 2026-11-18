@@ -17,25 +17,17 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
 
 ## Where we stopped (18 Nov, 02:00)
 
-1. **"Glimpse of us" and the opening photo: waiting for her.** She said the
-   slideshow proportions are off and the opening photo looks low quality, and
-   asked for something "sharper", inspired by https://lusion.co. Then she said
-   **"stop, first show me a sample, then commit"**. Nothing of that is live.
-   - The sample work is on the branch **`glimpse-sample`** (pushed, not merged):
-     `sample.html`, `sample-a.html` (editorial grid of same-shape crisp photos),
-     `sample-b.html` (moving strip, same-shape crisp photos), `css/sample.css`
-     (very large headline, opening photo in a sharp 21:9 frame under the text),
-     plus two fixes she asked for before "stop": the opening uses the **original
-     photo file** (`assets/photos/hero-spike.jpg`, no recompression; the live
-     `.webp` was recompressed and colour-boosted, which made it look soft) and
-     every slideshow photo sits in the same frame.
-   - Claude cannot watch videos and cannot open lusion.co from the session
-     (blocked). What is known from articles: real-time 3D scenes, cinematic,
-     consistent; their own lesson: consistency matters more than flashy moments.
-   - **Next step:** ask her for 3 to 5 screenshots of the lusion.co parts she
-     likes, then show sample images (send screenshots first), and only merge
-     after her yes. Do not push design changes to `main` without her approval.
-2. **Emails: in test mode.** All GitHub secrets and the variable exist (see
+1. **Opening photo and "Glimpse of us": LIVE since 18 Nov.** She chose "Cinema":
+   full-screen spike photo (original `hero-spike.jpg` / `-tall.jpg`, only 1280 wide,
+   no bigger copy exists), darker film grade + grain (`assets/photos/grain.png`),
+   fades to black beyond 1440px, photo moves slower than the words on scroll
+   (showy mode only, `js/hero.js`); phones: photo shifted so the jumping player is
+   further right. "Glimpse of us" = straight 3D cards (no tilt, her wish): front
+   card centred, others wait further back, caption under the row (`js/gallery.js`).
+   Styles in `css/home.css` (body classes `hd sc`). Samples A to E stay on branch
+   `glimpse-sample`. She wants the site **flashy, a big project**: next design
+   ideas need a sample first.
+2. **Emails: LIVE since 18 Nov** (job run by hand, log said `EMAIL_MODE: live`). Old note: All GitHub secrets and the variable exist (see
    "Emails" below). A test email arrived on 17 Nov ("Sent 1, failed 0"). She
    has **not yet** switched `EMAIL_MODE` from `test` to `live`. Last instruction
    given: GitHub → Settings → Secrets and variables → Actions → Variables →

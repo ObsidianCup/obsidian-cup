@@ -17,7 +17,8 @@ for(const lang of ['en','bn']) for(const w of [375,1280]) for(const pg of pages)
  for(let y=0;y<H;y+=600){await p.mouse.wheel(0,600);await p.waitForTimeout(120);}
  await p.waitForTimeout(1400);
  const r=await p.evaluate(()=>({left:document.querySelectorAll('[data-m]').length,over:document.documentElement.scrollWidth-innerWidth,
-   dim:[...document.querySelectorAll('main *')].filter(e=>e.getClientRects().length&&+getComputedStyle(e).opacity<1&&!e.closest('.m-arc,.m-facets,.g-gallery-track')).map(e=>e.tagName+'.'+e.className).slice(0,4)}));
+// the home opening's words fade on purpose as the opening scrolls away (js/hero.js)
+   dim:[...document.querySelectorAll('main *')].filter(e=>e.getClientRects().length&&+getComputedStyle(e).opacity<1&&!e.closest('.m-arc,.m-facets,.g-gallery-track,.hd .g-hero2-grid')).map(e=>e.tagName+'.'+e.className).slice(0,4)}));
  say(r.left===0,`${pg} ${lang} ${w}: ${r.left} still tagged`);say(r.over<=0,`${pg} ${lang} ${w}: overflow ${r.over}`);say(r.dim.length===0,`${pg} ${lang} ${w}: dim ${r.dim}`);say(errs.length===0,`${pg} ${lang} ${w}: ${errs}`);
  await c.close();}
 // showy is the default; ?motion=calm leaves the page untouched

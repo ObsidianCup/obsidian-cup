@@ -1,0 +1,119 @@
+/* Home page only: the opening photo ("Cinema") and the "Glimpse of us" 3D cards.
+   Body classes: .hd = cinema opening, .sc = 3D photo cards.
+
+   Opening: the spike photo fills the first screen with a darker film grade and
+   fine grain. The photo file is only 1280 wide, so it is never stretched much:
+   on wide screens it stops at 1440px and fades to black at the sides. In the
+   showy mode the photo moves slower than the words while you scroll (js/hero.js).
+
+   Glimpse of us: every photo in the same straight card. The one you are looking
+   at stands in the middle; the others wait further back in the dark and come
+   forward when their turn comes (js/gallery.js). Reduced motion: a flat row. */
+
+/* ---------- Opening ---------- */
+/* ---------- shared: film grain on the photo ---------- */
+.hd .g-hero-full::after {
+  content: ""; position: absolute; inset: -50%; pointer-events: none;
+  background-image: url("../assets/photos/grain.png"); background-size: 96px 96px;
+  opacity: 0.22; mix-blend-mode: overlay; }
+html.m-on .hd .g-hero-full::after { animation: hx-grain 900ms steps(3) infinite; }   /* the grain flickers only in the showy mode */
+@keyframes hx-grain {
+  0% { transform: translate(0, 0); } 33% { transform: translate(-7%, 4%); }
+  66% { transform: translate(5%, -6%); } 100% { transform: translate(0, 0); } }
+
+/* ===================== A. Cinema ===================== */
+.hd .g-hero-full { min-height: min(94svh, 980px); padding: var(--s24) 0 var(--s16); background: #050708; }
+.hd .g-hero-full::after { z-index: -1; }
+.hd .g-herobg { position: absolute; inset: 0; z-index: -3; overflow: hidden;
+  transform: translate3d(0, calc(var(--hp, 0) * 18%), 0) scale(calc(1 + var(--hp, 0) * 0.06)); transform-origin: 50% 0; }
+.hd .g-herobg img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 38%;
+  filter: contrast(1.12) saturate(0.82) brightness(0.86); }
+/* phones: the photo sits further left in its frame, so the jumping player is further right */
+@media (max-width: 700px) { .hd .g-herobg img { object-position: 22% 38%; } }
+/* wide screens: the photo stops at 1440px and fades into the dark at the sides */
+@media (min-width: 1441px) {
+  .hd .g-herobg { left: 50%; right: auto; width: 1440px; margin-left: -720px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
+}
+.hd .g-hero-full::before { z-index: -2;
+  background:
+    linear-gradient(to top, #050708 0%, rgba(5, 7, 8, 0.82) 22%, rgba(5, 7, 8, 0.25) 55%, rgba(5, 7, 8, 0.1) 78%, rgba(5, 7, 8, 0.5) 100%),
+    linear-gradient(90deg, rgba(5, 7, 8, 0.7) 0%, rgba(5, 7, 8, 0.15) 52%, rgba(5, 7, 8, 0) 72%); }
+.hd .g-hero-full .g-hero2-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); column-gap: var(--s12); row-gap: 0; }
+.hd .g-hero-full .g-hero2-grid > div:first-child { display: contents; }
+.hd .g-hero-full h1 { grid-column: 1 / -1; }
+.hd .g-hero-full .g-lead { grid-column: 1; align-self: end; }
+.hd .g-hero-full .g-actions { grid-column: 1; align-self: start; }
+.hd .g-hero-full .g-next2 { grid-column: 2; grid-row: 2 / span 2; align-self: end; }
+@media (max-width: 900px) {
+  .hd .g-hero-full .g-hero2-grid { grid-template-columns: 1fr; }
+  .hd .g-hero-full .g-next2 { grid-column: 1; grid-row: auto; margin-top: var(--s12); }
+}
+.hd .g-hero-full .g-hero2-grid { transform: translate3d(0, calc(var(--hp, 0) * -70px), 0); opacity: calc(1 - var(--hp, 0) * 0.9); }
+.hd .g-hero-full h1 { font-size: clamp(2.75rem, 6.6vw, 7.5rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; text-shadow: 0 2px 30px rgba(5, 7, 8, 0.55); }
+
+@media (prefers-reduced-motion: reduce) {
+  html.m-on .hd .g-hero-full::after { animation: none; }
+  .hd .g-herobg, .hd .g-hero-full .g-hero2-grid { transform: none; opacity: 1; }
+}
+
+/* ---------- Glimpse of us ---------- */
+
+.sc .g-gallery { --cw: min(60vw, 820px, calc((100svh - 400px) * 1.5)); background: #070a0b; border-block: 1px solid var(--line); padding-block: var(--s16) var(--s12); overflow: hidden; }
+.sc .g-gallery .g-section-head { margin-bottom: var(--s6); align-items: center; }
+
+/* the row: native swipe and scroll, every card stops exactly in the middle */
+.sc .g-gallery-track { list-style: none; margin: 0; display: flex; align-items: center; gap: calc(var(--cw) * 0.14 + 24px);
+  height: auto; padding: var(--s8) calc((100vw - var(--cw)) / 2); scroll-padding-inline: calc((100vw - var(--cw)) / 2);
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  perspective: 1600px; perspective-origin: 50% 50%; }
+.sc .g-gallery-track::-webkit-scrollbar { display: none; }
+.sc .g-gallery-track:focus-visible { outline: 2px solid var(--ice); outline-offset: -2px; }
+
+/* one card shape for every photo */
+.sc .g-gallery-track > li { position: relative; flex: 0 0 var(--cw); width: var(--cw); height: auto; aspect-ratio: 3 / 2;
+  scroll-snap-align: center; scroll-snap-stop: always; overflow: hidden; border-radius: 20px;
+  background: var(--facet); opacity: 1; transform: none; transition: none;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); transform-origin: 50% 50%; backface-visibility: hidden; }
+.sc .g-gallery-track > li:hover { opacity: 1; }
+.sc .g-gl-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+/* a thin light edge on the card in front */
+.sc .g-gallery-track > li::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  border: 1px solid rgba(215, 233, 236, 0); transition: border-color 300ms ease-out; }
+.sc .g-gallery-track > li.is-active::after { border-color: rgba(215, 233, 236, 0.28); }
+
+/* tall photos: keep heads in the card */
+.sc .g-gl-photo[src*="champion.webp"], .sc .g-gl-photo[src*="huddle"], .sc .g-gl-photo[src*="champions-team"] { object-position: 50% 30%; }
+
+/* 3D only when motion is allowed: the script sets these per card on every frame */
+.sc .g3-on .g-gallery-track > li { will-change: transform, opacity; }
+.sc .g3-on .g-gl-photo { width: 116%; max-width: none; left: -8%; right: auto; will-change: transform; }
+
+/* under the row: what the front photo shows, and the timing line */
+.sc .g3-foot { display: flex; flex-direction: column; gap: var(--s4); margin-top: var(--s4); }
+.sc .g3-caption { margin: 0 auto; max-width: 60ch; min-height: 3em; text-align: center; color: var(--soft); font-size: 1rem; line-height: 1.5; }
+.sc .g-gallery-time { margin-top: 0; }
+
+@media (max-width: 700px) {
+  .sc .g-gallery { --cw: calc(100vw - 2 * var(--gutter) - 32px); padding-block: var(--s12) var(--s8); }
+  .sc .g-gallery-track > li { aspect-ratio: 1 / 1; border-radius: 16px; }
+  .sc .g-gallery .g-h2 { font-size: 1.75rem; }
+  .sc .g-gallery .g-section-head { flex-direction: row; flex-wrap: nowrap; align-items: baseline; justify-content: space-between; gap: var(--s4); }
+  .sc .g-gallery [data-gallery] { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc .g-gallery-track { perspective: none; gap: var(--s4); }
+  .sc .g-gallery-track > li::after { transition: none; }
+}
+
+/* heading size, and the thin line that fills while the next photo is on its way */
+.sc .g-gallery .g-h2 { font-size: clamp(2rem, 4.6vw, 3.5rem); line-height: 1.05; }
+.sc .g-gallery-tools .g-meta { white-space: nowrap; }
+.g-gallery-time { height: 2px; background: var(--line); overflow: hidden; }
+.g-gallery-time span { display: block; height: 100%; width: 100%; background: var(--ice); transform: scaleX(0); transform-origin: left; }
+.g-gallery-time.is-running span { animation: g-gallery-fill var(--gallery-every, 4000ms) linear both; }
+@keyframes g-gallery-fill { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .g-gallery-time { display: none; } }
+@media (max-width: 700px) { .sc .g-gallery .g-h2 { font-size: 1.75rem; } }
