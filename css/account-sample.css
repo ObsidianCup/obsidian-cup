@@ -1,0 +1,132 @@
+/* SAMPLE ONLY (not live): account page design pass, 18 Nov 2026.
+   - the owner's own drawings as quiet line art (assets/lineart/*.svg, drawn by her)
+   - the player card gets the home page's film look: soft light, fine grain, a big name
+   - section links at the top of the long profile form
+   - help text one step bigger (14px) so it is easy to read on phones
+   Line art is a mask, so its colour comes from the CSS (Ice, faint). */
+
+.acctx .acctx-art { display: block; pointer-events: none; background: var(--ice, #d7e9ec);
+  -webkit-mask: var(--art) center / contain no-repeat; mask: var(--art) center / contain no-repeat; }
+.acctx .acctx-art-dig  { --art: url("../assets/lineart/dig.svg"); }
+.acctx .acctx-art-set  { --art: url("../assets/lineart/set.svg"); }
+.acctx .acctx-art-jump { --art: url("../assets/lineart/jump.svg"); }
+
+/* ---------- log in and the other signed-out screens: a wallpaper of the owner's drawings ---------- */
+.acctx .acctx-art-dig { display: none; }
+.acctx #main:has(> [data-view="auth"]:not([hidden]), > [data-view="forgot"]:not([hidden]), > [data-view="newpass"]:not([hidden]), > [data-view="checkemail"]:not([hidden]))::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: url("../assets/lineart/wall.svg") center / cover no-repeat; opacity: 0.075;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, transparent 0, transparent 28%, #000 70%);
+          mask-image: radial-gradient(ellipse at 50% 45%, transparent 0, transparent 28%, #000 70%); }
+.acctx [data-view="auth"] .acct-card, .acctx [data-view="forgot"] .acct-card, .acctx [data-view="newpass"] .acct-card, .acctx [data-view="checkemail"] .acct-card { background: #11171a; }
+@media (max-width: 700px) { .acctx #main::before { background-size: auto 100%; } }
+
+/* ---------- player card: film look ---------- */
+.acctx .acct-playercard { position: relative; overflow: hidden; isolation: isolate;
+  background:
+    radial-gradient(120% 80% at 85% 0%, rgba(215, 233, 236, 0.10), rgba(215, 233, 236, 0) 60%),
+    linear-gradient(180deg, #161e21 0%, #101618 100%);
+  border-color: rgba(215, 233, 236, 0.32); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
+.acctx .acct-playercard::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("../assets/photos/grain.png"); background-size: 96px 96px; opacity: 0.12; mix-blend-mode: overlay; }
+/* the drawing follows the sport: volleyball = the jump, futsal = a kick (waiting for the owner's drawing), both = side by side */
+.acctx #playerCard .acctx-art { position: absolute; z-index: -1; right: 20px; top: 8px; width: 56%; max-width: 250px; aspect-ratio: 3 / 4; opacity: 0.14; }
+.acctx #playerCard .acctx-art-vb { --art: url("../assets/lineart/jump.svg"); }
+.acctx #playerCard .acctx-art-fb { display: none; }
+.acctx #playerCard .acctx-art-both { --art: url("../assets/lineart/jump.svg"); }
+.acctx .acct-pc-name { font-size: clamp(1.9rem, 4vw, 2.5rem); letter-spacing: -0.01em; line-height: 1.05; }
+.acctx .acct-pc-photo { width: 84px; height: 84px; box-shadow: 0 0 0 2px rgba(215, 233, 236, 0.35), 0 0 0 6px rgba(215, 233, 236, 0.06); }
+.acctx .acct-playercard { animation: acctx-forward 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes acctx-forward { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+
+/* ---------- long form: links to each part ---------- */
+.acctx .acctx-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
+.acctx .acctx-jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line-strong);
+  border-radius: 999px; color: var(--soft, #c9cfd0); text-decoration: none; font-size: 0.9375rem; }
+.acctx .acctx-jump a:hover { border-color: var(--ice, #d7e9ec); color: var(--bone); }
+.acctx .acctx-jump a:focus-visible { outline: 2px solid var(--ice, #d7e9ec); outline-offset: 2px; }
+.acctx #profileForm h3, .acctx #deleteCard { scroll-margin-top: 96px; }
+
+/* ---------- easier reading ---------- */
+.acctx .acct-hint, .acctx .acct-muted { font-size: 0.875rem; line-height: 1.5; }
+
+@media (prefers-reduced-motion: reduce) { .acctx .acct-playercard { animation: none; } }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+/* ---------- player code: in the display face, like jersey lettering ---------- */
+.acctx .acct-code-value, .acctx .acct-pc-code, .acctx .acct-codepick-prefix, .acctx #codeDigits {
+  font-family: var(--font-display); font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+.acctx .acct-code-value { font-size: clamp(1.75rem, 5vw, 2.25rem); letter-spacing: 0.02em; }
+.acctx .acct-pc-code { font-size: 0.9375rem; color: var(--soft); }
+
+/* ---------- sections ---------- */
+.acctx .acctx-tabs { display: flex; gap: 0; margin: 24px 0 32px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.acctx .acctx-tabs::-webkit-scrollbar { display: none; }
+.acctx .acctx-tabs a { position: relative; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px;
+  color: var(--soft); text-decoration: none; font-size: 0.9375rem; white-space: nowrap; border-radius: 8px 8px 0 0; transition: background-color 150ms ease-out, color 150ms ease-out; }
+.acctx .acctx-tabs a:hover { color: var(--bone); background: rgba(215, 233, 236, 0.05); }
+.acctx .acctx-tabs a[aria-current="page"] { color: var(--ice); font-weight: 500; }
+.acctx .acctx-tabs a[aria-current="page"]::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--ice); }
+.acctx .acctx-tabs a:focus-visible { outline: 2px solid var(--ice); outline-offset: -2px; }
+.acctx .acctx-soon { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor; opacity: 0.8; }
+.acctx .acctx-panel:focus { outline: none; }
+.acctx .acctx-panel > * + * { margin-top: 24px; }
+.acctx .acctx-panel-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 8px; }
+
+/* overview on wide screens: player card on the left, the rest beside it */
+.acctx [data-view="app"]:not([hidden]) { display: block; }
+.acctx #playerCard { order: 0; margin-bottom: 0; }
+@media (min-width: 1000px) {
+  .acctx #p-overview:not([hidden]) { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); column-gap: 32px; row-gap: 24px; align-items: start; }
+  .acctx #p-overview > *, .acctx #p-overview > * + * { grid-column: 2; margin-top: 0; }
+  .acctx #p-overview > #playerCard { grid-column: 1; grid-row: 1 / span 10; position: sticky; top: 160px; margin-top: 0; }
+  .acctx #p-overview > [hidden] { display: none; }
+}
+@media (max-width: 999px) { .acctx #p-overview > #playerCard { order: -1; position: static; grid-row: auto; } .acctx #p-overview:not([hidden]) { display: flex; flex-direction: column; } .acctx #p-overview > * + * { margin-top: 0; } .acctx #p-overview { gap: 24px; } }
+
+/* team: coming soon */
+.acctx .acctx-team { position: relative; overflow: hidden; padding-right: clamp(24px, 30%, 280px); }
+.acctx .acctx-team .acctx-art-set { position: absolute; right: 16px; bottom: 16px; width: min(26%, 220px); aspect-ratio: 3 / 4; opacity: 0.22; }
+.acctx .acctx-badge { display: inline-block; margin: 0 0 12px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--soft); font-size: 0.875rem; }
+.acctx .acctx-lead { font-size: 1.125rem; color: var(--bone); max-width: 46ch; }
+.acctx .acctx-steps { margin: 16px 0; padding-left: 1.25rem; display: grid; gap: 12px; max-width: 52ch; color: var(--soft); }
+.acctx .acctx-steps strong, .acctx .acctx-facts strong { color: var(--bone); font-weight: 500; }
+.acctx .acctx-facts { margin: 12px 0; padding-left: 1.25rem; display: grid; gap: 12px; color: var(--soft); max-width: 60ch; }
+.acctx .acctx-langs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+@media (max-width: 600px) { .acctx .acctx-team { padding-right: 24px; } .acctx .acctx-team .acctx-art-set { width: 72px; opacity: 0.16; top: 16px; right: 16px; bottom: auto; transform: none; } }
+
+
+/* buttons that are links keep the button look */
+.acctx a.acct-btn { display: inline-flex; align-items: center; justify-content: center; color: #0b1012; text-decoration: none; margin-top: 16px; }
+.acctx .acctx-team .acctx-art-set { top: 50%; bottom: auto; transform: translateY(-50%); width: min(28%, 240px); }
+/* phones: one row that slides sideways, faded at the edge so more is clearly there */
+@media (max-width: 600px) {
+  .acctx .acctx-tabs { margin: 16px calc(-1 * var(--gutter)) 24px; padding: 0 var(--gutter);
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  .acctx .acctx-tabs a { padding: 0 14px; font-size: 0.875rem; }
+}
+@media (max-width: 600px) { .acctx .acctx-team .acctx-art-set { width: 72px; top: 16px; right: 16px; transform: none; } }
+
+/* ---------- phones: slimmer ---------- */
+@media (max-width: 600px) {
+  .acctx [data-view="app"] .acct-title { font-size: 1.75rem; }
+  .acctx [data-view="app"] .acct-card { padding: 20px; border-radius: 14px; }
+  .acctx [data-view="app"] .acct-card h2 { font-size: 1.25rem; }
+  .acctx .acctx-panel-title { font-size: 1.375rem; }
+  .acctx .acct-pc-name { font-size: 1.75rem; }
+  .acctx .acct-pc-photo { width: 64px; height: 64px; }
+  .acctx .acct-pc-facts, .acctx .acct-pc-stats { margin-top: 12px; }
+  .acctx .acct-code-value { font-size: 1.625rem; }
+  .acctx #p-overview { gap: 16px; }
+  .acctx .acctx-panel > * + * { margin-top: 16px; }
+  .acctx [data-view="app"] > :first-child [data-action="signout"] { display: none; }   /* Log out lives in Settings on phones */
+}
+
+/* ---------- menu bar: the player's initial instead of "Account" ---------- */
+.acctx .acctx-initial { display: inline-grid; place-items: center; width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 50%;
+  font-family: var(--font-display); font-size: 1rem; line-height: 1; }
+.acctx .acct-card .acct-muted + .acct-btn, .acctx .acct-card .acct-muted + .acctx-langs { margin-top: 12px; }
+.acctx .acctx-tabs { position: relative; }
