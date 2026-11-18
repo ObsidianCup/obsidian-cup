@@ -98,7 +98,13 @@
         var on = s.id === id;
         panels[s.id].hidden = !on;
         var a = nav.querySelector('[data-section="' + s.id + '"]');
-        if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+        if (on) {
+          a.setAttribute('aria-current', 'page');
+          // phones: slide the tab row so the chosen tab is fully in view
+          var l = a.offsetLeft - nav.offsetLeft, r = l + a.offsetWidth;
+          if (l < nav.scrollLeft + 16) nav.scrollLeft = Math.max(0, l - 24);
+          else if (r > nav.scrollLeft + nav.clientWidth - 40) nav.scrollLeft = r - nav.clientWidth + 48;
+        } else a.removeAttribute('aria-current');
       });
       if (focus) panels[id].focus({ preventScroll: true });
     }
@@ -123,6 +129,19 @@
       if (l) { var b = document.querySelector('.lang-btn[data-lang="' + l.dataset.acctxLang + '"]'); if (b) b.click(); }
       if (e.target.closest('[data-acctx-signout]')) { var s = app.querySelector('[data-action="signout"]'); if (s) s.click(); }
     });
+
+    // ---------- menu bar: the player's initial instead of "Account" ----------
+    function initialBadge() {
+      var letter = ($('#pcInitials') && $('#pcInitials').textContent.trim().charAt(0)) || '';
+      var btn = document.querySelector('.g-header .g-login');
+      if (!letter || !btn || app.hidden) return false;
+      btn.textContent = letter.toUpperCase();
+      btn.classList.add('acctx-initial');
+      btn.setAttribute('aria-label', 'My account');
+      btn.title = 'My account';
+      return true;
+    }
+    var tries = 0, t = setInterval(function () { if (initialBadge() || ++tries > 40) clearInterval(t); }, 250);
 
     // ---------- line art on the player card, by sport ----------
     var art = $('#playerCard .acctx-art');

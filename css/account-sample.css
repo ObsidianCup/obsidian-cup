@@ -11,12 +11,15 @@
 .acctx .acctx-art-set  { --art: url("../assets/lineart/set.svg"); }
 .acctx .acctx-art-jump { --art: url("../assets/lineart/jump.svg"); }
 
-/* ---------- log in: the digging player beside the form ---------- */
-.acctx [data-view="auth"] { position: relative; }
-.acctx .acctx-art-dig { position: absolute; top: 96px; left: calc(100% + 40px); width: 240px; height: 400px; opacity: 0.5; }
-@media (max-width: 1180px) {
-  .acctx .acctx-art-dig { position: static; float: right; width: 96px; height: 150px; margin: -8px 0 0 16px; opacity: 0.55; }
-}
+/* ---------- log in and the other signed-out screens: a wallpaper of the owner's drawings ---------- */
+.acctx .acctx-art-dig { display: none; }
+.acctx #main:has(> [data-view="auth"]:not([hidden]), > [data-view="forgot"]:not([hidden]), > [data-view="newpass"]:not([hidden]), > [data-view="checkemail"]:not([hidden]))::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: url("../assets/lineart/wall.svg") center / cover no-repeat; opacity: 0.075;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, transparent 0, transparent 28%, #000 70%);
+          mask-image: radial-gradient(ellipse at 50% 45%, transparent 0, transparent 28%, #000 70%); }
+.acctx [data-view="auth"] .acct-card, .acctx [data-view="forgot"] .acct-card, .acctx [data-view="newpass"] .acct-card, .acctx [data-view="checkemail"] .acct-card { background: #11171a; }
+@media (max-width: 700px) { .acctx #main::before { background-size: auto 100%; } }
 
 /* ---------- player card: film look ---------- */
 .acctx .acct-playercard { position: relative; overflow: hidden; isolation: isolate;
@@ -27,7 +30,7 @@
 .acctx .acct-playercard::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image: url("../assets/photos/grain.png"); background-size: 96px 96px; opacity: 0.12; mix-blend-mode: overlay; }
 /* the drawing follows the sport: volleyball = the jump, futsal = a kick (waiting for the owner's drawing), both = side by side */
-.acctx #playerCard .acctx-art { position: absolute; z-index: -1; right: -16px; top: 8px; width: 56%; max-width: 250px; aspect-ratio: 3 / 4; opacity: 0.14; }
+.acctx #playerCard .acctx-art { position: absolute; z-index: -1; right: 20px; top: 8px; width: 56%; max-width: 250px; aspect-ratio: 3 / 4; opacity: 0.14; }
 .acctx #playerCard .acctx-art-vb { --art: url("../assets/lineart/jump.svg"); }
 .acctx #playerCard .acctx-art-fb { display: none; }
 .acctx #playerCard .acctx-art-both { --art: url("../assets/lineart/jump.svg"); }
@@ -60,14 +63,14 @@ html { scroll-behavior: smooth; }
 .acctx .acct-pc-code { font-size: 0.9375rem; color: var(--soft); }
 
 /* ---------- sections ---------- */
-.acctx .acctx-tabs { display: flex; gap: 8px; margin: 24px 0 24px; padding: 4px; border: 1px solid var(--line); border-radius: 999px;
-  overflow-x: auto; scrollbar-width: none; background: rgba(11, 16, 18, 0.92); width: max-content; max-width: 100%; }
+.acctx .acctx-tabs { display: flex; gap: 0; margin: 24px 0 32px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
 .acctx .acctx-tabs::-webkit-scrollbar { display: none; }
-.acctx .acctx-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px;
-  color: var(--soft); text-decoration: none; font-size: 0.9375rem; white-space: nowrap; transition: background-color 150ms ease-out, color 150ms ease-out; }
-.acctx .acctx-tabs a:hover { color: var(--bone); }
-.acctx .acctx-tabs a[aria-current="page"] { background: var(--ice); color: #0b1012; }
-.acctx .acctx-tabs a:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+.acctx .acctx-tabs a { position: relative; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px;
+  color: var(--soft); text-decoration: none; font-size: 0.9375rem; white-space: nowrap; border-radius: 8px 8px 0 0; transition: background-color 150ms ease-out, color 150ms ease-out; }
+.acctx .acctx-tabs a:hover { color: var(--bone); background: rgba(215, 233, 236, 0.05); }
+.acctx .acctx-tabs a[aria-current="page"] { color: var(--ice); font-weight: 500; }
+.acctx .acctx-tabs a[aria-current="page"]::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--ice); }
+.acctx .acctx-tabs a:focus-visible { outline: 2px solid var(--ice); outline-offset: -2px; }
 .acctx .acctx-soon { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor; opacity: 0.8; }
 .acctx .acctx-panel:focus { outline: none; }
 .acctx .acctx-panel > * + * { margin-top: 24px; }
@@ -94,14 +97,36 @@ html { scroll-behavior: smooth; }
 .acctx .acctx-facts { margin: 12px 0; padding-left: 1.25rem; display: grid; gap: 12px; color: var(--soft); max-width: 60ch; }
 .acctx .acctx-langs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 @media (max-width: 600px) { .acctx .acctx-team { padding-right: 24px; } .acctx .acctx-team .acctx-art-set { width: 72px; opacity: 0.16; top: 16px; right: 16px; bottom: auto; transform: none; } }
-@media (max-width: 960px) { .acctx .acctx-tabs { border-radius: 16px; width: auto; } }
+
 
 /* buttons that are links keep the button look */
 .acctx a.acct-btn { display: inline-flex; align-items: center; justify-content: center; color: #0b1012; text-decoration: none; margin-top: 16px; }
 .acctx .acctx-team .acctx-art-set { top: 50%; bottom: auto; transform: translateY(-50%); width: min(28%, 240px); }
-/* phones: all five section links visible, in two or three rows */
+/* phones: one row that slides sideways, faded at the edge so more is clearly there */
 @media (max-width: 600px) {
-  .acctx .acctx-tabs { flex-wrap: wrap; overflow: visible; position: static; padding: 6px; }
-  .acctx .acctx-tabs a { padding: 0 14px; }
+  .acctx .acctx-tabs { margin: 16px calc(-1 * var(--gutter)) 24px; padding: 0 var(--gutter);
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  .acctx .acctx-tabs a { padding: 0 14px; font-size: 0.875rem; }
 }
 @media (max-width: 600px) { .acctx .acctx-team .acctx-art-set { width: 72px; top: 16px; right: 16px; transform: none; } }
+
+/* ---------- phones: slimmer ---------- */
+@media (max-width: 600px) {
+  .acctx [data-view="app"] .acct-title { font-size: 1.75rem; }
+  .acctx [data-view="app"] .acct-card { padding: 20px; border-radius: 14px; }
+  .acctx [data-view="app"] .acct-card h2 { font-size: 1.25rem; }
+  .acctx .acctx-panel-title { font-size: 1.375rem; }
+  .acctx .acct-pc-name { font-size: 1.75rem; }
+  .acctx .acct-pc-photo { width: 64px; height: 64px; }
+  .acctx .acct-pc-facts, .acctx .acct-pc-stats { margin-top: 12px; }
+  .acctx .acct-code-value { font-size: 1.625rem; }
+  .acctx #p-overview { gap: 16px; }
+  .acctx .acctx-panel > * + * { margin-top: 16px; }
+  .acctx [data-view="app"] > :first-child [data-action="signout"] { display: none; }   /* Log out lives in Settings on phones */
+}
+
+/* ---------- menu bar: the player's initial instead of "Account" ---------- */
+.acctx .acctx-initial { display: inline-grid; place-items: center; width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 50%;
+  font-family: var(--font-display); font-size: 1rem; line-height: 1; }
+.acctx .acct-card .acct-muted + .acct-btn, .acctx .acct-card .acct-muted + .acctx-langs { margin-top: 12px; }
+.acctx .acctx-tabs { position: relative; }
