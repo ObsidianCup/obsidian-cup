@@ -60,8 +60,8 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
    - 18 Nov fixes done from docs/WEBSITE-AUDIT-2026-11.md: OFC/OVC abbreviations
      gone in English, Season 5 text says accounts are open + "Create your player
      account" link, Player stories kicker, sign-up says one email per player.
-     Still needs HER decisions (ask one at a time): slot rule (Rules page vs payment
-     policy), forfeit timing, futsal rules text, refund rules confirmed, Silhoutte
+     Slot rule decided 18 Nov: first to pay gets the slot (Rules page fixed).
+     Still needs HER decisions (ask one at a time): forfeit timing, futsal rules text, refund rules confirmed, Silhoutte
      spelling, "Team 01" futsal runner-up, spectators in photo consent.
    - NEXT (her request 18 Nov 16:50): make My account look and work like Google's
      account settings page (left side menu with icons on laptop, rows you tap to

@@ -3166,7 +3166,7 @@
  {
   "id": "rules-17",
   "section": "Rules page",
-  "en": "Registration is only confirmed after payment via bKash is received and verified by the tournament committee. Slots are allocated on a first-come, first-served basis. Teams must pay within 48 hours of submitting their registration, or the slot will be released. Once payment is verified, we confirm the slot and issue an invoice within 3 days.",
+  "en": "Registration is only confirmed after payment via bKash is received and verified by the tournament committee. Slots are given in order of verified payment: the first team to pay gets the slot. Teams must pay within 48 hours of submitting their registration, or the slot will be released. Once payment is verified, we confirm the slot and issue an invoice within 3 days.",
   "bn": "",
   "placeholder": false
  },
