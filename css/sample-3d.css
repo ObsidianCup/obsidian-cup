@@ -1,14 +1,14 @@
 /* SAMPLE ONLY (not live): "Glimpse of us" as 3D photo cards.
-   Every photo sits in the same card. The card you are looking at stands flat
-   in the middle; the others turn away and sink back into the dark. The cards
-   turn smoothly while the row moves, and the front one tilts a little under
-   the mouse. Without motion (reduced motion) it is a plain flat row. */
+   Every photo sits in the same card. Cards never tilt: the one you are
+   looking at stands straight in the middle, the others wait further back in
+   the dark and come forward when their turn comes. Without motion (reduced
+   motion) it is a plain flat row. ?angle=1 shows the earlier angled version. */
 
 .sc .g-gallery { --cw: min(60vw, 820px, calc((100svh - 400px) * 1.5)); background: #070a0b; border-block: 1px solid var(--line); padding-block: var(--s16) var(--s12); overflow: hidden; }
 .sc .g-gallery .g-section-head { margin-bottom: var(--s6); align-items: center; }
 
 /* the row: native swipe and scroll, every card stops exactly in the middle */
-.sc .g-gallery-track { list-style: none; margin: 0; display: flex; align-items: center; gap: 0;
+.sc .g-gallery-track { list-style: none; margin: 0; display: flex; align-items: center; gap: calc(var(--cw) * 0.14 + 24px);
   height: auto; padding: var(--s8) calc((100vw - var(--cw)) / 2); scroll-padding-inline: calc((100vw - var(--cw)) / 2);
   overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
   perspective: 1600px; perspective-origin: 50% 50%; }

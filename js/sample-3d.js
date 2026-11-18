@@ -3,7 +3,8 @@
 // far it is from the middle, on every frame while the row moves. The card in
 // the middle is flat and bright, the others turn away and sink back. It also
 // moves to the next photo every 4 seconds (waits 8 seconds after a manual
-// move), and tilts the front card a little under the mouse.
+// move). Cards never tilt: the one in front is straight and centred, the
+// others wait further back and come forward when their turn comes.
 // Reduced motion: no 3D, no automatic change. Without this script the row
 // still works by hand.
 (function () {
@@ -20,7 +21,7 @@
     var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var EVERY = 4000, REST = 8000;
     var index = -1, onScreen = false, held = false, restUntil = 0;
-    var tiltX = 0, tiltY = 0;   // mouse tilt on the front card, in degrees
+    var ANGLED = /[?&]angle=1/.test(location.search);
 
     if (!calm) box.classList.add('g3-on');
 
@@ -47,7 +48,7 @@
     // Turn every card by its distance from the middle (d = 0 in front, 1 = one card away).
     function paint() {
       var c = centre();
-      var w = slides[0].offsetWidth || 1;
+      var w = (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : slides[0].offsetWidth) || 1;   // one step, card plus gap
       slides.forEach(function (s, i) {
         var d = (slideCentre(s) - c) / w;
         var a = Math.min(Math.abs(d), 4);
@@ -57,12 +58,16 @@
         if (a > 2.6) { s.style.visibility = 'hidden'; return; }
         s.style.visibility = '';
         var sign = d < 0 ? -1 : 1;
-        var turn = -sign * Math.min(a, 1) * 42 - sign * Math.max(a - 1, 0) * 8;    // degrees
-        var back = a * 260;                                                       // px into the screen
-        var pull = -sign * (Math.min(a, 1) * 0.30 + Math.max(a - 1, 0) * 0.42) * w; // closer to the middle
-        var front = Math.max(0, 1 - a);                                           // 1 only for the card in front
-        var rx = tiltX * front, ry = tiltY * front;
-        s.style.transform = 'translateX(' + pull.toFixed(1) + 'px) translateZ(' + (-back).toFixed(1) + 'px) rotateY(' + (turn + ry).toFixed(2) + 'deg) rotateX(' + rx.toFixed(2) + 'deg)';
+        var back, pull, turn = 0;
+        if (ANGLED) {   // the earlier version: side cards turn away (only with ?angle=1)
+          turn = -sign * Math.min(a, 1) * 42 - sign * Math.max(a - 1, 0) * 8;
+          back = a * 260;
+          pull = -sign * (Math.min(a, 1) * 0.30 + Math.max(a - 1, 0) * 0.42) * w;
+        } else {        // straight cards: the ones waiting stand further back, never tilted
+          back = Math.min(a, 1) * 420 + Math.max(a - 1, 0) * 260;
+          pull = -sign * Math.max(a - 1, 0) * 0.30 * w;
+        }
+        s.style.transform = 'translateX(' + pull.toFixed(1) + 'px) translateZ(' + (-back).toFixed(1) + 'px)' + (turn ? ' rotateY(' + turn.toFixed(2) + 'deg)' : '');
         s.style.opacity = (1 - Math.min(a, 2) * 0.34).toFixed(3);
         s.style.zIndex = String(100 - Math.round(a * 10));
         s.style.filter = a > 0.02 ? 'brightness(' + (1 - Math.min(a, 1.5) * 0.4).toFixed(3) + ')' : '';
@@ -119,21 +124,6 @@
     slides.forEach(function (s, i) {
       s.addEventListener('click', function () { if (i !== index) { rest(); go(i); } });
     });
-
-    // Mouse tilt on the front card (mouse only, not touch).
-    if (!calm) {
-      track.addEventListener('pointermove', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        var s = slides[index];
-        if (!s) return;
-        var r = s.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        if (Math.abs(x) > 0.6 || Math.abs(y) > 0.6) { x = 0; y = 0; }
-        tiltY = x * 10; tiltX = -y * 8;
-        queue();
-      });
-      track.addEventListener('pointerleave', function () { tiltX = 0; tiltY = 0; queue(); });
-    }
 
     box.addEventListener('mouseenter', function () { held = true; if (line) line.classList.remove('is-running'); });
     box.addEventListener('mouseleave', function () { held = false; });
