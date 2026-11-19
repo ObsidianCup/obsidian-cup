@@ -328,3 +328,10 @@ Print and put at every entrance (A4 or bigger):
 > **এই আয়োজনে ছবি তোলা ও ভিডিও করা হচ্ছে।**
 > দর্শকসহ পুরো আয়োজনের ছবি, ভিডিও ও লাইভ সম্প্রচার করা হতে পারে।
 > ছবিতে থাকতে না চাইলে আয়োজক দলকে জানান; স্পষ্টভাবে দেখা যায় এমন ছবি সরিয়ে ফেলা বা ঝাপসা করা হবে।
+
+## Team fees (owner, 19 Nov 2026)
+
+Per team, by when the team pays: **early bird 3,500 BDT**, **regular 3,800 BDT**, **late 4,000 BDT**.
+Deadlines for each price: not set yet (they go on the event page). Payment can come from any
+bKash number (for example a parent's); only a valid transaction ID is needed. Written into the
+Payment Policy version 1.2 (`legal/en/payment-1.2.md`).

@@ -63,6 +63,12 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
      Slot rule decided 18 Nov: first to pay gets the slot (Rules page fixed).
      Forfeit decided 19 Nov: under 6 players → 15-minute wait → first set lost → another
      15 minutes → walkover (Rules page fixed).
+     Payment Policy 1.2 written 19 Nov (her decisions): any bKash number, valid
+     transaction ID only; three prices per event (Season 5: early 3,500 / regular
+     3,800 / late 4,000 BDT); hartal for everyone → reschedule; only some teams
+     can't come, genuine reason → 50% refund. Not on the public site (shown in team
+     registration later). When teams are built: she must run
+     `supabase/seed/legal_documents.sql` again to register Payment 1.2.
      Still needs HER decisions (ask one at a time): futsal rules text, refund rules confirmed, Silhoutte
      spelling. Photos decided 19 Nov: cover EVERYONE at the venue (FAQ updated EN+BN,
      venue sign text in SEASON-5-LAUNCH-PLAN.md); player Media Consent unchanged.

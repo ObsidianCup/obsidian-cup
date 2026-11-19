@@ -197,17 +197,16 @@ This agreement is governed by the laws of Bangladesh, and disputes will be handl
 
 The captain agrees to this when registering a team; it is also linked from every event page.
 
-**Obsidian Cup Payment, Refund and Event Change Policy — version 1.1**
+**Obsidian Cup Payment, Refund and Event Change Policy — version 1.2**
 
 **Paying**
 
-1. The fee, late fee, deadline and bKash number for each event are shown on the event page. The fee is per team.
+1. The fee is per team. Each event has three prices, depending on when the team pays: an early-bird price, a regular price and a late price. The prices, the deadlines and the bKash number for each event are shown on the event page.
 2. Submitting a registration does not reserve a slot. A slot is confirmed only when Obsidian Cup has received and verified the payment and issued a confirmation.
 3. The team must pay within 48 hours of submitting its registration, or the registration may be cancelled and the slot given to another team.
-4. The captain enters the bKash transaction ID in the team's registration. Each transaction ID can be used for one team only.
-5. Payment must come from a bKash number linked to the team's captain or vice-captain, so refunds can be returned safely.
-6. We confirm verified payments within 3 days.
-7. Slots are given in order of verified payment. When a category is full, further teams join a waitlist and are refunded in full if no slot opens.
+4. The captain enters the bKash transaction ID in the team's registration. The payment can come from any bKash number, for example a parent's, as long as the transaction ID is valid. Each transaction ID can be used for one team only.
+5. We confirm verified payments within 3 days.
+6. Slots are given in order of verified payment: the first team to pay gets the slot. When a category is full, further teams join a waitlist and are refunded in full if no slot opens.
 
 **If your team withdraws**
 
@@ -227,7 +226,8 @@ Cancellations must be emailed by the captain to obsidiancup.official@gmail.com.
 | Date, venue or format changed by us | Keep your slot for the new date or venue, or withdraw within 7 days of our notice for a full refund |
 | Start time changed on the same day, or a match moved to another court at the same venue | No refund; the event continues as planned |
 | Event stopped after it has started, for safety, weather, government orders, unrest or other reasons outside our control | The tournament committee decides results from matches played. If fewer than half of the scheduled matches were played and the event is not completed later, teams receive a 50% refund |
-| Your team cannot reach the venue because of a general strike, hartal or government restriction on the event day | Treated the same as the event being stopped, if we postpone; otherwise no refund |
+| A general strike, hartal or government restriction stops teams from reaching the venue on the event day | We reschedule the event |
+| Only some teams cannot reach the venue, for a genuine reason the tournament committee accepts | 50% refund for those teams; otherwise no refund |
 
 **How refunds are paid**
 
