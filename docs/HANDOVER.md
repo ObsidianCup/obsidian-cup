@@ -61,7 +61,8 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
      gone in English, Season 5 text says accounts are open + "Create your player
      account" link, Player stories kicker, sign-up says one email per player.
      Slot rule decided 18 Nov: first to pay gets the slot (Rules page fixed).
-     Still needs HER decisions (ask one at a time): forfeit timing, futsal rules text, refund rules confirmed, Silhoutte
+     Forfeit decided 19 Nov: under 6 players → 15-minute wait → first set lost (Rules page fixed).
+     Still needs HER decisions (ask one at a time): what happens after the first set is lost, futsal rules text, refund rules confirmed, Silhoutte
      spelling, "Team 01" futsal runner-up, spectators in photo consent.
    - NEXT (her request 18 Nov 16:50): make My account look and work like Google's
      account settings page (left side menu with icons on laptop, rows you tap to

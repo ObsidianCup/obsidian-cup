@@ -3152,8 +3152,8 @@
  {
   "id": "rules-15",
   "section": "Rules page",
-  "en": "Teams must be present at the venue at least 30 minutes before their scheduled match. Failure to appear within 15 minutes of the scheduled match time will result in a forfeit.",
-  "bn": "",
+  "en": "Teams should arrive at the venue at least 30 minutes before their match. A team needs at least 6 players to start. If a team has fewer than 6 players at the scheduled time, we wait 15 minutes. If it still has fewer than 6 after that, it loses the first set.",
+  "bn": "ম্যাচ শুরুর অন্তত ৩০ মিনিট আগে দলকে ভেন্যুতে উপস্থিত থাকতে হবে। খেলা শুরু করতে একটি দলে কমপক্ষে ৬ জন খেলোয়াড় লাগবে। নির্ধারিত সময়ে ৬ জনের কম থাকলে ১৫ মিনিট অপেক্ষা করা হবে। এরপরও ৬ জনের কম থাকলে প্রথম সেটে হার ধরা হবে।",
   "placeholder": false
  },
  {
