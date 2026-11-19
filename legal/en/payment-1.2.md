@@ -7,7 +7,7 @@
 3. The team must pay within 48 hours of submitting its registration, or the registration may be cancelled and the slot given to another team.
 4. The captain enters the bKash transaction ID in the team's registration. The payment can come from any bKash number, for example a parent's, as long as the transaction ID is valid. Each transaction ID can be used for one team only.
 5. We confirm verified payments within 3 days.
-6. Slots are given in order of verified payment: the first team to pay gets the slot. When a category is full, further teams join a waitlist and are refunded in full if no slot opens.
+6. Slots are given in order of verified payment: the first team to pay gets the slot. When a category is full, further teams can join a waitlist without paying. If a slot opens, the next team on the waitlist is offered it and has 24 hours to pay; otherwise the slot goes to the next team.
 
 **If your team withdraws**
 
@@ -32,7 +32,7 @@ Cancellations must be emailed by the captain to obsidiancup.official@gmail.com.
 
 **How refunds are paid**
 
-1. Refunds are sent by bKash to the number the payment came from, within 14 days of being approved.
+1. Refunds are sent by bKash to the number the payment came from, within 5 days of being approved.
 2. bKash charges for sending the payment are not refunded.
 3. Refunds go to the team, not to individual players. Sharing a refund among players is the captain's responsibility.
 

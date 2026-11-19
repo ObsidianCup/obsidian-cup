@@ -10,7 +10,7 @@ insert into public.legal_documents (key, version, lang, title, sha256, url) valu
   ('privacy', '1.3', 'en', 'Obsidian Cup Privacy Notice', '6f506262567cf3d4384a4e5e3bb605006479128ae411035562d27bcbc81db379', '/legal/en/privacy-1.3.md'),
   ('media', '1.0', 'en', 'Obsidian Cup Media Consent', '8f2a9764914b9fd81872ce89314c27d85f877c55eff0b7812f502a5b6ad65fe3', '/legal/en/media-1.0.md'),
   ('participation', '1.0', 'en', 'Obsidian Cup Event Participation Agreement', '7e7ec520bc7890d1575552617ec68e02b41147432e609bc8fe0564643c5a4f9c', '/legal/en/participation-1.0.md'),
-  ('payment', '1.2', 'en', 'Obsidian Cup Payment, Refund and Event Change Policy', '5c2dc374f4d1fc03115802b3185634e668fe554f517692e837cb2ee83662ba52', '/legal/en/payment-1.2.md'),
+  ('payment', '1.2', 'en', 'Obsidian Cup Payment, Refund and Event Change Policy', '5560ea8ca6dac744fd9cded4a848449769de6a82df70d00566887971832bab77', '/legal/en/payment-1.2.md'),
   ('payment', '1.0', 'en', 'Obsidian Cup Payment, Refund and Event Change Policy', '6ebc3b07e976cbd7547e2acf45374bba31cbcc63df3f7b88e3ae953c533de9d0', '/legal/en/payment-1.0.md'),
   ('payment', '1.1', 'en', 'Obsidian Cup Payment, Refund and Event Change Policy', 'bdf8c6c04eb4ca1d6970a02153ae6b3382d4b809f37fd38696b5ed83487ca04f', '/legal/en/payment-1.1.md'),
   ('guardian', '1.0', 'en', 'Obsidian Cup Parent / Guardian Consent', 'a83fb27d1fc7fe2a25c90d78290959247aed353b63c9c1d52c7e4669576d789f', '/legal/en/guardian-1.0.md'),

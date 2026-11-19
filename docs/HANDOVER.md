@@ -66,7 +66,7 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
      Payment Policy 1.2 written 19 Nov (her decisions): any bKash number, valid
      transaction ID only; three prices per event (Season 5: early 3,500 / regular
      3,800 / late 4,000 BDT); hartal for everyone → reschedule; only some teams
-     can't come, genuine reason → 50% refund. Not on the public site (shown in team
+     can't come, genuine reason → 50% refund; refunds within 5 days; waitlist teams pay only when offered a slot (24 hours). Not on the public site (shown in team
      registration later). When teams are built: she must run
      `supabase/seed/legal_documents.sql` again to register Payment 1.2.
      Still needs HER decisions (ask one at a time): futsal rules text, refund rules confirmed, Silhoutte
