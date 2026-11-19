@@ -64,7 +64,8 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
      Forfeit decided 19 Nov: under 6 players → 15-minute wait → first set lost → another
      15 minutes → walkover (Rules page fixed).
      Still needs HER decisions (ask one at a time): futsal rules text, refund rules confirmed, Silhoutte
-     spelling, spectators in photo consent.
+     spelling. Photos decided 19 Nov: cover EVERYONE at the venue (FAQ updated EN+BN,
+     venue sign text in SEASON-5-LAUNCH-PLAN.md); player Media Consent unchanged.
    - NEXT (her request 18 Nov 16:50): make My account look and work like Google's
      account settings page (left side menu with icons on laptop, rows you tap to
      edit, clean cards), sample first; UI must be perfect before launch. Team

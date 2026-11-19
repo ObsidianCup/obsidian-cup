@@ -316,3 +316,15 @@ The system is built in the order players will use it, and each stage is tested b
 - [Resend account quotas and limits](https://resend.com/docs/knowledge-base/account-quotas-and-limits)
 - [Supabase: email template changes on the free tier](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier)
 - [Supabase: project pausing](https://supabase.com/docs/guides/platform/free-project-pausing)
+
+## Venue sign: photos and filming (decided 19 Nov 2026: covers everyone)
+
+Print and put at every entrance (A4 or bigger):
+
+> **Photos and videos are taken at this event.**
+> Obsidian Cup photographs, films and may live-stream this event, including the crowd.
+> Prefer not to appear? Tell our team, and a photo that clearly shows you will be removed or blurred.
+>
+> **এই আয়োজনে ছবি তোলা ও ভিডিও করা হচ্ছে।**
+> দর্শকসহ পুরো আয়োজনের ছবি, ভিডিও ও লাইভ সম্প্রচার করা হতে পারে।
+> ছবিতে থাকতে না চাইলে আয়োজক দলকে জানান; স্পষ্টভাবে দেখা যায় এমন ছবি সরিয়ে ফেলা বা ঝাপসা করা হবে।
