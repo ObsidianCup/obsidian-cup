@@ -229,7 +229,7 @@ The handbook becomes one page on the website in English and Bangla, plus a downl
 3. **Eligibility** — age limits counted from date of birth, school and amateur rules, who is not eligible (national team, defence services teams).
 4. **ID requirements** — accepted documents, photo rule, supporting documents when an ID has no photo.
 5. **Squad rules** — 6 to 12 players, up to 2 liberos, captain and vice-captain, unique numbers, matching jerseys, libero contrasting colour.
-6. **Format and scoring** — groups and knockouts, sets and points, tie-breaks, forfeits (decided 18 Nov: fewer than 6 players at the scheduled time → wait 15 minutes; still fewer than 6 → the first set is lost).
+6. **Format and scoring** — groups and knockouts, sets and points, tie-breaks, forfeits (decided 18 Nov: fewer than 6 players at the scheduled time → wait 15 minutes; still fewer than 6 → the first set is lost and another 15-minute wait; still fewer than 6 → walkover, the match is lost).
 7. **Match day** — arrival time, check-in with the player code QR, warm-up, what to bring, venue map, parking, food stalls.
 8. **Code of conduct** — respect for officials, banned behaviour (abuse, fighting, smoking, vaping, alcohol, drugs, match fixing), penalties.
 9. **Safety and first aid** — where first aid is, what happens if someone is injured, heat and hydration.
