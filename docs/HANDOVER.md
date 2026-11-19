@@ -38,7 +38,9 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
    return a number, not "function does not exist". If missing, give her the raw
    link to `015_signup_name_and_cleanup.sql`. The nightly clean-up needs the
    `pg_cron` extension (Database → Extensions).
-4. **Bangla: UNBLOCKED 18 Nov.** Owner's decisions: style like Prothom Alo sports
+4. **Bangla rework IN PROGRESS (19 Nov)**: rules in `docs/translation/BANGLA-VOICE.md`
+   (read it first). Home page done.
+   Older note: **Bangla: UNBLOCKED 18 Nov.** Owner's decisions: style like Prothom Alo sports
    (Bangla, everyday English words in Bangla letters: টুর্নামেন্ট, চ্যাম্পিয়ন), and
    **no pronouns**: write sentences so they need neither আপনি nor তুমি (impersonal
    forms, e.g. "অ্যাকাউন্টে লগ ইন করুন" is out; prefer "লগ ইন" / noun phrases /

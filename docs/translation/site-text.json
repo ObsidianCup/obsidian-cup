@@ -136,273 +136,273 @@
   "id": "home-01",
   "section": "Home page",
   "en": "A stage for players from every corner of Bangladesh, at every level. Carved by legacy, crowned in obsidian.",
-  "bn": "ঢাকায় সব পর্যায়ের খেলোয়াড়দের জন্য, খেলোয়াড়দের পরিচালনায় আয়োজিত ভলিবল ও ফুটসাল টুর্নামেন্ট। ঐতিহ্যে গড়া, অবসিডিয়ানে মুকুট পরা।",
+  "bn": "বাংলাদেশের যেকোনো প্রান্তের, যেকোনো পর্যায়ের খেলোয়াড়ের জন্য একটা আসল মঞ্চ।",
   "placeholder": false
  },
  {
   "id": "home-02",
   "section": "Home page",
   "en": "See Season 4 results",
-  "bn": "৪র্থ আসরের ফলাফল দেখুন",
+  "bn": "৪র্থ আসরের ফলাফল",
   "placeholder": false
  },
  {
   "id": "home-03",
   "section": "Home page",
   "en": "Season 4 champions",
-  "bn": "৪র্থ আসরের চ্যাম্পিয়নরা",
+  "bn": "৪র্থ আসরের চ্যাম্পিয়ন",
   "placeholder": false
  },
  {
   "id": "home-04",
   "section": "Home page",
   "en": "Volleyball, Obsidian Volleyball Cup, 1 to 4 July 2026, 17 teams, supported by the Bangladesh Volleyball Federation",
-  "bn": "",
+  "bn": "ভলিবল, Obsidian Volleyball Cup, ১–৪ জুলাই ২০২৬, ১৭টি দল, বাংলাদেশ ভলিবল ফেডারেশনের সহযোগিতায়",
   "placeholder": false
  },
  {
   "id": "home-05",
   "section": "Home page",
   "en": "U19 boys",
-  "bn": "অনূর্ধ্ব-১৯ বালক",
+  "bn": "অনূর্ধ্ব-১৯ ছেলে",
   "placeholder": false
  },
  {
   "id": "home-06",
   "section": "Home page",
   "en": "Runner-up",
-  "bn": "রানার্স-আপ",
+  "bn": "রানার্সআপ",
   "placeholder": false
  },
  {
   "id": "home-07",
   "section": "Home page",
   "en": "Runner-up Fearless Flyers",
-  "bn": "রানার্স-আপ Fearless Flyers",
+  "bn": "রানার্সআপ Fearless Flyers",
   "placeholder": false
  },
  {
   "id": "home-08",
   "section": "Home page",
   "en": "Boys, open age",
-  "bn": "বালক, উন্মুক্ত বয়স বিভাগ",
+  "bn": "ছেলে, উন্মুক্ত বয়স",
   "placeholder": false
  },
  {
   "id": "home-09",
   "section": "Home page",
   "en": "Runner-up Legend Hunters",
-  "bn": "রানার্স-আপ Legend Hunters",
+  "bn": "রানার্সআপ Legend Hunters",
   "placeholder": false
  },
  {
   "id": "home-10",
   "section": "Home page",
   "en": "Girls, open age",
-  "bn": "বালিকা, উন্মুক্ত বয়স বিভাগ",
+  "bn": "মেয়ে, উন্মুক্ত বয়স",
   "placeholder": false
  },
  {
   "id": "home-11",
   "section": "Home page",
   "en": "Runner-up Panthers",
-  "bn": "রানার্স-আপ Panthers",
+  "bn": "রানার্সআপ Panthers",
   "placeholder": false
  },
  {
   "id": "home-12",
   "section": "Home page",
   "en": "Season 5 is next",
-  "bn": "এরপর ৫ম আসর",
+  "bn": "সামনে ৫ম আসর",
   "placeholder": false
  },
  {
   "id": "home-13",
   "section": "Home page",
   "en": "Volleyball returns. Dates and venue will be announced on Instagram first. Player accounts are open now, so your team can sign up in minutes when registration starts.",
-  "bn": "আবার ফিরছে ভলিবল। তারিখ ও ভেন্যুর ঘোষণা আসবে প্রথমে ইনস্টাগ্রামে। খেলোয়াড় অ্যাকাউন্ট এখনই খোলা যায়, তাই নিবন্ধন শুরু হলে কয়েক মিনিটেই দল সাইন আপ করা যাবে।",
+  "bn": "আবার ফিরছে ভলিবল। তারিখ আর ভেন্যুর খবর আগে আসবে ইনস্টাগ্রামে। খেলোয়াড় অ্যাকাউন্ট এখনই খোলা যাচ্ছে, তাই নিবন্ধন শুরু হলে কয়েক মিনিটেই দল সাইন আপ হয়ে যাবে।",
   "placeholder": false
  },
  {
   "id": "home-14",
   "section": "Home page",
   "en": "Follow @obsidian.volleyball",
-  "bn": "",
+  "bn": "ইনস্টাগ্রামে @obsidian.volleyball",
   "placeholder": false
  },
  {
   "id": "home-15",
   "section": "Home page",
   "en": "Every season so far",
-  "bn": "এ পর্যন্ত প্রতিটি আসর",
+  "bn": "এখন পর্যন্ত সব আসর",
   "placeholder": false
  },
  {
   "id": "home-16",
   "section": "Home page",
   "en": "Five events, 48 teams and more than 575 players since Obsidian Volleyball Cup, January 2026",
-  "bn": "",
+  "bn": "২০২৬ সালের জানুয়ারিতে Obsidian Volleyball Cup দিয়ে শুরু। এরপর পাঁচটি আয়োজন, ৪৮টি দল, ৫৭৫-এর বেশি খেলোয়াড়।",
   "placeholder": false
  },
  {
   "id": "home-17",
   "section": "Home page",
   "en": "Volleyball Season 4",
-  "bn": "",
+  "bn": "ভলিবল, ৪র্থ আসর",
   "placeholder": false
  },
  {
   "id": "home-18",
   "section": "Home page",
   "en": "Obsidian Volleyball Cup, 1 to 4 July 2026",
-  "bn": "",
+  "bn": "Obsidian Volleyball Cup, ১–৪ জুলাই ২০২৬",
   "placeholder": false
  },
  {
   "id": "home-19",
   "section": "Home page",
   "en": "Three categories and 17 teams, with support from the Bangladesh Volleyball Federation.",
-  "bn": "",
+  "bn": "তিনটি বিভাগে ১৭টি দল, বাংলাদেশ ভলিবল ফেডারেশনের সহযোগিতায়।",
   "placeholder": false
  },
  {
   "id": "home-20",
   "section": "Home page",
   "en": "Futsal Season 1",
-  "bn": "",
+  "bn": "ফুটসাল, ১ম আসর",
   "placeholder": false
  },
  {
   "id": "home-21",
   "section": "Home page",
   "en": "Obsidian Futsal Cup, 23 June 2026",
-  "bn": "",
+  "bn": "Obsidian Futsal Cup, ২৩ জুন ২০২৬",
   "placeholder": false
  },
  {
   "id": "home-22",
   "section": "Home page",
   "en": "Our first futsal tournament, girls only, won by Thaelor at JAFF Arena and Academy, Bashundhara.",
-  "bn": "",
+  "bn": "প্রথম ফুটসাল টুর্নামেন্ট, শুধু মেয়েদের। চ্যাম্পিয়ন Thaelor, ভেন্যু বসুন্ধরার JAFF Arena and Academy।",
   "placeholder": false
  },
  {
   "id": "home-23",
   "section": "Home page",
   "en": "Volleyball Season 3",
-  "bn": "",
+  "bn": "ভলিবল, ৩য় আসর",
   "placeholder": false
  },
  {
   "id": "home-24",
   "section": "Home page",
   "en": "Obsidian Volleyball Super Cup, April 2026",
-  "bn": "",
+  "bn": "Obsidian Volleyball Super Cup, এপ্রিল ২০২৬",
   "placeholder": false
  },
  {
   "id": "home-25",
   "section": "Home page",
   "en": "Champions: Pythons (girls) and Pagla Baburchi (boys). Runners-up: Net Ninjas and Zenith.",
-  "bn": "",
+  "bn": "চ্যাম্পিয়ন: Pythons (মেয়ে) ও Pagla Baburchi (ছেলে)। রানার্সআপ: Net Ninjas ও Zenith।",
   "placeholder": false
  },
  {
   "id": "home-26",
   "section": "Home page",
   "en": "Volleyball Season 2",
-  "bn": "",
+  "bn": "ভলিবল, ২য় আসর",
   "placeholder": false
  },
  {
   "id": "home-27",
   "section": "Home page",
   "en": "Obsidian Volleyball All Stars Cup, February 2026",
-  "bn": "",
+  "bn": "Obsidian Volleyball All Stars Cup, ফেব্রুয়ারি ২০২৬",
   "placeholder": false
  },
  {
   "id": "home-28",
   "section": "Home page",
   "en": "Champions: Fearless Flyers. Runners-up: Dhaka Colonizers.",
-  "bn": "",
+  "bn": "চ্যাম্পিয়ন: Fearless Flyers। রানার্সআপ: Dhaka Colonizers।",
   "placeholder": false
  },
  {
   "id": "home-29",
   "section": "Home page",
   "en": "Volleyball Season 1",
-  "bn": "",
+  "bn": "ভলিবল, ১ম আসর",
   "placeholder": false
  },
  {
   "id": "home-30",
   "section": "Home page",
   "en": "Obsidian Volleyball Cup, January 2026",
-  "bn": "",
+  "bn": "Obsidian Volleyball Cup, জানুয়ারি ২০২৬",
   "placeholder": false
  },
  {
   "id": "home-31",
   "section": "Home page",
   "en": "Where it started. Champions: Galactic Ganjas (interschool boys) and Pythons (open age girls).",
-  "bn": "",
+  "bn": "যেখান থেকে শুরু। চ্যাম্পিয়ন: Galactic Ganjas (আন্তঃস্কুল ছেলে) ও Pythons (উন্মুক্ত বয়স, মেয়ে)।",
   "placeholder": false
  },
  {
   "id": "home-32",
   "section": "Home page",
   "en": "Partners who believed early",
-  "bn": "শুরুর দিকেই যারা পাশে ছিল",
+  "bn": "শুরু থেকেই যারা পাশে",
   "placeholder": false
  },
  {
   "id": "home-33",
   "section": "Home page",
   "en": "Stall partner, Volleyball Season 4",
-  "bn": "",
+  "bn": "স্টল পার্টনার, ভলিবল ৪র্থ আসর",
   "placeholder": false
  },
  {
   "id": "home-34",
   "section": "Home page",
   "en": "Gifting partner, Volleyball Season 4",
-  "bn": "",
+  "bn": "গিফটিং পার্টনার, ভলিবল ৪র্থ আসর",
   "placeholder": false
  },
  {
   "id": "home-35",
   "section": "Home page",
   "en": "Fragrance partner, Volleyball Season 4",
-  "bn": "",
+  "bn": "ফ্র্যাগ্রান্স পার্টনার, ভলিবল ৪র্থ আসর",
   "placeholder": false
  },
  {
   "id": "home-36",
   "section": "Home page",
   "en": "Support, Volleyball Season 4",
-  "bn": "",
+  "bn": "সহযোগিতায়, ভলিবল ৪র্থ আসর",
   "placeholder": false
  },
  {
   "id": "home-37",
   "section": "Home page",
   "en": "Hydration partner, Volleyball Season 2",
-  "bn": "",
+  "bn": "হাইড্রেশন পার্টনার, ভলিবল ২য় আসর",
   "placeholder": false
  },
  {
   "id": "home-38",
   "section": "Home page",
   "en": "Apparel partner, Volleyball Season 2",
-  "bn": "",
+  "bn": "অ্যাপারেল পার্টনার, ভলিবল ২য় আসর",
   "placeholder": false
  },
  {
   "id": "home-39",
   "section": "Home page",
   "en": "Performance partner, Volleyball Season 3",
-  "bn": "",
+  "bn": "পারফরম্যান্স পার্টনার, ভলিবল ৩য় আসর",
   "placeholder": false
  },
  {
@@ -2817,7 +2817,7 @@
   "id": "stories-06",
   "section": "Player stories page",
   "en": "Volleyball Season 2",
-  "bn": "",
+  "bn": "ভলিবল, ২য় আসর",
   "placeholder": false
  },
  {
@@ -2831,7 +2831,7 @@
   "id": "stories-08",
   "section": "Player stories page",
   "en": "Volleyball Season 1",
-  "bn": "",
+  "bn": "ভলিবল, ১ম আসর",
   "placeholder": false
  },
  {
@@ -3748,196 +3748,196 @@
   "id": "home-40",
   "section": "Home page",
   "en": "A stage for players from every corner of Bangladesh",
-  "bn": "",
+  "bn": "বাংলাদেশের সব প্রান্তের খেলোয়াড়দের মঞ্চ",
   "placeholder": false
  },
  {
   "id": "home-41",
   "section": "Home page",
   "en": "Volleyball and futsal tournaments at every level, from school teams to open age.",
-  "bn": "",
+  "bn": "স্কুল দল থেকে উন্মুক্ত বয়স, সব পর্যায়ের ভলিবল আর ফুটসাল টুর্নামেন্ট।",
   "placeholder": false
  },
  {
   "id": "home-42",
   "section": "Home page",
   "en": "Create your player account",
-  "bn": "",
+  "bn": "খেলোয়াড় অ্যাকাউন্ট খুলুন",
   "placeholder": false
  },
  {
   "id": "home-43",
   "section": "Home page",
   "en": "Next up",
-  "bn": "",
+  "bn": "পরের আয়োজন",
   "placeholder": false
  },
  {
   "id": "home-44",
   "section": "Home page",
   "en": "Season 5",
-  "bn": "",
+  "bn": "৫ম আসর",
   "placeholder": false
  },
  {
   "id": "home-45",
   "section": "Home page",
   "en": "Two sports, one stage",
-  "bn": "",
+  "bn": "দুই খেলা, এক মঞ্চ",
   "placeholder": false
  },
  {
   "id": "home-46",
   "section": "Home page",
   "en": "Where Obsidian Cup started. Four volleyball tournaments since Obsidian Volleyball Cup, January 2026, for school, under-19 and open-age teams.",
-  "bn": "",
+  "bn": "Obsidian Cup-এর শুরু ভলিবল দিয়ে। ২০২৬ সালের জানুয়ারি থেকে স্কুল, অনূর্ধ্ব-১৯ আর উন্মুক্ত বয়সের দল নিয়ে চারটি টুর্নামেন্ট।",
   "placeholder": false
  },
  {
   "id": "home-47",
   "section": "Home page",
   "en": "Volleyball results",
-  "bn": "",
+  "bn": "ভলিবলের ফলাফল",
   "placeholder": false
  },
  {
   "id": "home-48",
   "section": "Home page",
   "en": "Latest",
-  "bn": "",
+  "bn": "সর্বশেষ",
   "placeholder": false
  },
  {
   "id": "home-49",
   "section": "Home page",
   "en": "Dates",
-  "bn": "",
+  "bn": "তারিখ",
   "placeholder": false
  },
  {
   "id": "home-50",
   "section": "Home page",
   "en": "Teams",
-  "bn": "",
+  "bn": "দল",
   "placeholder": false
  },
  {
   "id": "home-51",
   "section": "Home page",
   "en": "17, in three categories",
-  "bn": "",
+  "bn": "১৭টি, তিন বিভাগে",
   "placeholder": false
  },
  {
   "id": "home-52",
   "section": "Home page",
   "en": "Instagram",
-  "bn": "",
+  "bn": "ইনস্টাগ্রাম",
   "placeholder": false
  },
  {
   "id": "home-53",
   "section": "Home page",
   "en": "Our first futsal tournament was girls only, won by Thaelor at JAFF Arena and Academy, Bashundhara.",
-  "bn": "",
+  "bn": "প্রথম ফুটসাল টুর্নামেন্ট ছিল শুধু মেয়েদের। চ্যাম্পিয়ন Thaelor, ভেন্যু বসুন্ধরার JAFF Arena and Academy।",
   "placeholder": false
  },
  {
   "id": "home-54",
   "section": "Home page",
   "en": "Futsal results",
-  "bn": "",
+  "bn": "ফুটসালের ফলাফল",
   "placeholder": false
  },
  {
   "id": "home-55",
   "section": "Home page",
   "en": "Date",
-  "bn": "",
+  "bn": "তারিখ",
   "placeholder": false
  },
  {
   "id": "home-56",
   "section": "Home page",
   "en": "Champions",
-  "bn": "",
+  "bn": "চ্যাম্পিয়ন",
   "placeholder": false
  },
  {
   "id": "home-57",
   "section": "Home page",
   "en": "From sign-up to match day",
-  "bn": "",
+  "bn": "সাইন আপ থেকে ম্যাচের দিন",
   "placeholder": false
  },
  {
   "id": "home-58",
   "section": "Home page",
   "en": "Fill in your profile once. It stays ready for every season.",
-  "bn": "",
+  "bn": "প্রোফাইল একবার পূরণ করলেই হলো। প্রতি আসরে সেটাই কাজে লাগবে।",
   "placeholder": false
  },
  {
   "id": "home-59",
   "section": "Home page",
   "en": "Join your team",
-  "bn": "",
+  "bn": "দলে যোগ দিন",
   "placeholder": false
  },
  {
   "id": "home-60",
   "section": "Home page",
   "en": "Your captain shares one link in the team's group. Tap it to join.",
-  "bn": "",
+  "bn": "অধিনায়ক দলের গ্রুপে একটা লিংক দেবেন। সেটায় চাপ দিলেই দলে যোগ দেওয়া হয়ে যাবে।",
   "placeholder": false
  },
  {
   "id": "home-61",
   "section": "Home page",
   "en": "Play on match day",
-  "bn": "",
+  "bn": "ম্যাচের দিন খেলুন",
   "placeholder": false
  },
  {
   "id": "home-62",
   "section": "Home page",
   "en": "Bring your ID. Your name is already on the gate list.",
-  "bn": "",
+  "bn": "সঙ্গে আইডি আনতে হবে। গেটের তালিকায় নাম আগে থেকেই থাকবে।",
   "placeholder": false
  },
  {
   "id": "home-gallery1",
   "section": "Home page",
   "en": "Glimpse of us",
-  "bn": "",
+  "bn": "মাঠের কিছু মুহূর্ত",
   "placeholder": false
  },
  {
   "id": "home-talk1",
   "section": "Home page",
   "en": "Were you there?",
-  "bn": "",
+  "bn": "সেদিন মাঠে ছিলেন?",
   "placeholder": false
  },
  {
   "id": "home-talk2",
   "section": "Home page",
   "en": "Tell us how it went, or write to us with a question.",
-  "bn": "",
+  "bn": "অভিজ্ঞতার কথা জানান, অথবা কোনো প্রশ্ন থাকলে লিখে পাঠান।",
   "placeholder": false
  },
  {
   "id": "home-talk3",
   "section": "Home page",
   "en": "Share your experience",
-  "bn": "",
+  "bn": "অভিজ্ঞতা শেয়ার করুন",
   "placeholder": false
  },
  {
   "id": "home-myacct",
   "section": "Home page",
   "en": "Open my account",
-  "bn": "",
+  "bn": "অ্যাকাউন্ট দেখুন",
   "placeholder": false
  },
  {
@@ -4309,6 +4309,41 @@
   "section": "Player account pages (log in, profile, admin)",
   "en": "Each player needs their own email address, so brothers and sisters cannot share one account.",
   "bn": "প্রত্যেক খেলোয়াড়ের জন্য আলাদা ইমেইল ঠিকানা লাগবে, তাই ভাইবোনেরা একটি অ্যাকাউন্ট ভাগাভাগি করতে পারবেন না।",
+  "placeholder": false
+ },
+ {
+  "id": "home-63",
+  "section": "Home page",
+  "en": "Obsidian Volleyball Cup, Season 5",
+  "bn": "Obsidian Volleyball Cup, ৫ম আসর",
+  "placeholder": false
+ },
+ {
+  "id": "home-64",
+  "section": "Home page",
+  "en": "Where Obsidian Cup started. Four volleyball tournaments since January 2026, for school, under-19 and open-age teams.",
+  "bn": "Obsidian Cup-এর শুরু ভলিবল দিয়ে। ২০২৬ সালের জানুয়ারি থেকে স্কুল, অনূর্ধ্ব-১৯ আর উন্মুক্ত বয়সের দল নিয়ে চারটি টুর্নামেন্ট।",
+  "placeholder": false
+ },
+ {
+  "id": "home-65",
+  "section": "Home page",
+  "en": "1 to 4 July 2026",
+  "bn": "১–৪ জুলাই ২০২৬",
+  "placeholder": false
+ },
+ {
+  "id": "home-66",
+  "section": "Home page",
+  "en": "23 June 2026",
+  "bn": "২৩ জুন ২০২৬",
+  "placeholder": false
+ },
+ {
+  "id": "home-67",
+  "section": "Home page",
+  "en": "Results",
+  "bn": "ফলাফল",
   "placeholder": false
  }
 ]
