@@ -64,7 +64,7 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
      Forfeit decided 19 Nov: under 6 players → 15-minute wait → first set lost → another
      15 minutes → walkover (Rules page fixed).
      Still needs HER decisions (ask one at a time): futsal rules text, refund rules confirmed, Silhoutte
-     spelling, "Team 01" futsal runner-up, spectators in photo consent.
+     spelling, spectators in photo consent.
    - NEXT (her request 18 Nov 16:50): make My account look and work like Google's
      account settings page (left side menu with icons on laptop, rows you tap to
      edit, clean cards), sample first; UI must be perfect before launch. Team
@@ -137,7 +137,7 @@ or say: "read docs/HANDOVER.md in ObsidianCup/obsidian-cup and continue".
   individual awards (MVP, best spiker, setter, receiver; she approved showing
   these names) and team lists (S1–S3; **Season 4 team lists missing**: she has
   to send U19 boys (5) and girls open age (6) team names).
-- Team spellings she confirmed: **Silhoutte, Zenith, Dhaka Colonizers.**
+- Team spellings she confirmed: **Silhoutte, Zenith, Dhaka Colonizers, Team 01** (futsal runner-up, real name, 19 Nov).
 - Analytics: Google Analytics **off** (`analyticsEnabled: false`); the public
   site sets no cookies and makes no outside requests. Turning it on needs a
   Privacy notice update and a cookie choice first.
